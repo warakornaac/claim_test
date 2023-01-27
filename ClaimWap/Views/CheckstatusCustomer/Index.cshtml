@@ -1,0 +1,1949 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutindex.cshtml";
+    var user = ViewBag.UserId;
+    var usertype = ViewBag.UserType;
+    var usercode = ViewBag.UsrCode;
+}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Check Ststus Claim</title>
+    <link href="~/Content/css/sb-admin-A.css" rel="stylesheet" />
+
+    @*<link href="~/Content/css/TableFixedColandHeader.css" rel="stylesheet" />*@
+    <link href="~/Scripts/JSautocomplete/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/JSautocomplete/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/JSautocomplete/jquery-ui.js"></script>
+    <script src="~/Content/fixed-table-master/fixed-table.js"></script>
+    <link href="~/Content/fixed-table-master/fixed-table.css" rel="stylesheet" />
+    <link href="~/Content/css/popover.css" rel="stylesheet" />
+    <style>
+        #myImg {
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            #myImg:hover {
+                opacity: 0.7;
+            }
+
+        /* The Modal (background) */
+        .modalx {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+        }
+
+        /* Modal Content (Image) */
+        .modal-contentx {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        /* Caption of Modal Image (Image Text) - Same Width as the Image */
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+        }
+
+        /* Add Animation - Zoom in the Modal */
+        .modal-content, #caption {
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+        /* The Close Button */
+        .close {
+            position: absolute;
+            top: 56px;
+            right: 20px;
+            color: #f1f1f1;
+            font-size: 57px;
+            font-weight: bold;
+            /* transition: 0.3s; */
+            left: 1656px;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #bbb;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .gi-4x {
+            font-size: 1.5em;
+        }
+
+        input[type=checkbox] {
+            /* Double-sized Checkboxes */
+            -ms-transform: scale(2); /* IE */
+            -moz-transform: scale(2); /* FF */
+            -webkit-transform: scale(2); /* Safari and Chrome */
+            -o-transform: scale(2); /* Opera */
+        }
+
+        button.print-button {
+            width: 75px;
+            height: 55px;
+        }
+
+            span.print-icon, span.print-icon::before, span.print-icon::after, button.print-button:hover .print-icon::after {
+                border: solid 2px #333;
+            }
+
+                span.print-icon::after {
+                    border-width: 2px;
+                }
+
+        button.print-button {
+            position: relative;
+            padding: 0;
+            border: 0;
+            border: none;
+            background: transparent;
+        }
+
+            span.print-icon, span.print-icon::before, span.print-icon::after, button.print-button:hover .print-icon::after {
+                box-sizing: border-box;
+                background-color: #fff;
+            }
+
+        span.print-icon {
+            position: relative;
+            display: inline-block;
+            padding: 0;
+            margin-top: 20%;
+            width: 55%;
+            height: 30%;
+            background: #fff;
+            border-radius: 20% 20% 0 0;
+        }
+
+            span.print-icon::before {
+                content: " ";
+                position: absolute;
+                bottom: 100%;
+                left: 12%;
+                right: 12%;
+                height: 110%;
+                transition: height .2s .15s;
+            }
+
+            span.print-icon::after {
+                content: " ";
+                position: absolute;
+                top: 55%;
+                left: 12%;
+                right: 12%;
+                height: 0%;
+                background: #fff;
+                background-repeat: no-repeat;
+                background-size: 70% 90%;
+                background-position: center;
+                background-image: linear-gradient( to top, #fff 0, #fff 14%, #333 14%, #333 28%, #fff 28%, #fff 42%, #333 42%, #333 56%, #fff 56%, #fff 70%, #333 70%, #333 84%, #fff 84%, #fff 100% );
+                transition: height .2s, border-width 0s .2s, width 0s .2s;
+            }
+
+        button.print-button:hover {
+            cursor: pointer;
+        }
+
+            button.print-button:hover .print-icon::before {
+                height: 0px;
+                transition: height .2s;
+            }
+
+            button.print-button:hover .print-icon::after {
+                height: 120%;
+                transition: height .2s .15s, border-width 0s .16s;
+            }
+
+        .pip {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .popover-all {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1010;
+            display: none;
+            padding: 5px;
+        }
+
+            .popover-all.bottom {
+                margin-top: 5px;
+            }
+
+                .popover-all.bottom .popover-arrow {
+                    top: 0;
+                    left: 50%;
+                    margin-left: -5px;
+                    border-left: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                    border-bottom: 5px solid #000000;
+                }
+
+            .popover-all .popover-arrow {
+                position: absolute;
+                width: 0;
+                height: 0;
+            }
+
+        .popover-inner {
+            padding: 3px;
+            width: 200px;
+            overflow: hidden;
+            background: #000000;
+            background: rgba(0, 0, 0, 0.8);
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            border-radius: 6px;
+            -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        }
+
+        .popover-title {
+            padding: 8px 14px;
+            margin: 0;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 18px;
+            background-color: #f7f7f7;
+            border-bottom: 1px solid #ebebeb;
+            -webkit-border-radius: 5px 5px 0 0;
+            -moz-border-radius: 5px 5px 0 0;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .popover-content {
+            padding: 9px 14px;
+            background-color: #ffffff;
+            -webkit-border-radius: 0 0 3px 3px;
+            -moz-border-radius: 0 0 3px 3px;
+            border-radius: 0 0 3px 3px;
+            -webkit-background-clip: padding-box;
+            -moz-background-clip: padding-box;
+            background-clip: padding-box;
+        }
+        
+    </style>
+
+
+</head>
+<body>
+    <div class="card mb-12">
+        <div class="card-header">
+            <i class="fa fa-table"></i> ตรวจสอบสถานะใบคำขอเคลม
+        </div>
+        <div class="card-body">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>เลขทีใบคำขอเคลม:</span>
+                            <span>
+                                <input type="text" id="_cliamno">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Customer:</span>
+                            <span><input type="text" id="_cusno" value="@usercode" disabled="disabled"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+
+                            <input type="text" required id="_cusname" disabled="disabled" placeholder="Customer Name">
+                        </div>
+                        <div class="input-group-btn">
+                            <span class=" fa fa-user">Customer.:</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Company.:</span>
+                            <span>
+                                <select id="_company" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;float:inherit;">
+                                    <option value="0" disabled>Choose option</option>
+                                    <option value="TAC" selected>TAC</option>
+                                    <option value="AAC">AAC</option>
+                                    <option value="ALL">ALL</option>
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Part No.:</span>
+                            <span><input type="text" required id="_itemno"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Stk Group.:</span>
+                            <span><select id="_stkgrp"></select></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Request start date:</span>
+                            <span><input type="date" data-date-format="dd/mm/yy" id="_statdate"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Request end date:</span>
+                            <span><input type="date" data-date-format="dd/mm/yy" id="_enddate"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="display:none">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Sales Man:</span>
+                            <span><input type="text" id="slmcod" disabled="disabled"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Status.:</span>
+                            <span>
+                                <select id="_status" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;"></select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>สถานะรับของเคลม:</span>
+                            <span>
+                                <select id="_statusclaimdisplay" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;"></select>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-info" id="refresh">Refresh</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-success" id="_btnsearch">Search</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" style="float: left;display:none;" id="_btnprint" class="badge-primary"><i class="fa fa-print"></i>  พิมพ์ใบสั่งรถไปรับของ</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div id="fixed-table-container-2" class="fixed-table-container" style="display:block;z-index:1">
+            <table>
+                <thead>
+                    <tr>
+                        <th>เลขที่เคลม</th>
+                        <th>Print</th>
+                        <th>line no</th>
+                        <th>Request date</th>
+                        @*<th>Due date</th>*@
+                        <th>Invoice No</th>
+                        <th>Customer</th>
+                        <th>Sales Man</th>
+                        <th>Item No.</th>
+                        <th>Description</th>
+                        <th>UOM</th>
+                        <th>Claim Qty.</th>
+                        <th>Receive Qty.</th>
+                        <th>CN/สินค้าทดแทน</th>
+                        @*<th>สถานะเคลม</th>*@
+                        @*<th>last update date</th>
+                            <th>last update by</th>*@
+                        <th>สถานะเคลม</th>
+                        <th>สถานะ<br />รับของเคม</th>
+                        @*<th>Claim<br /> supplier</th>*@
+                        @*<th>สินค้าหลังเคลม</th>*@
+                        <th>ยกเลิกเคลม</th>
+                        @*<th>Edit</th>
+                            <th>Tech staff</th>*@
+                        <th>ตรวจสอบ<br />รับสินค้า</th>
+                        <th>Tech1</th>
+                        <th>Tech2</th>
+                        <th>PM</th>
+                        <th>CS No.</th>
+                        @*<th>Log</th>*@
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+
+        </div>
+
+    </div>
+    <div class="card mb-12">
+        <div class="card-header">
+            <i class="fa fa-table"></i>รายละเอียดสินค้าเคลม <li id="clickme" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+        </div>
+        <div class="card-body" id="myDIV">
+            <div class="col-md-12">
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span>  <i class="fa fa-paint-brush"></i>เลขที่เคลม:</span>   <p id="textclaimno" style="font-weight: 400;"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <p id="textclaimno_sub" style="font-weight: 400;"></p>
+                        </div>
+                    </div>
+
+                </div>
+                <div><span id="Nospankey" style="color: blue;text-decoration: underline;font-weight: bold"></span> </div>
+                <div><span id="subNospan" style="color: blue;text-decoration: underline;font-weight: bold"></span> </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i> Item No.:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_itemnotex"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i> Description:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_description"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i> Uom:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_uom"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i> Invoice No.:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoiceno"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-calendar"></i> Invoice Date:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_psdate"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i> Invoice Qty:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoiceqty"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" style="display:none">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i> Line amount.:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoicelineamt"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" style="display:none">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i> Line Discount %:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoicelinedis"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="display:none">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i> Line discount Amount:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoicelinedisamt"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>แผนก:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimsec"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i> Stock Group:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_stkgup"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-clock-o"></i> ระยะการใช้งาน Y/M/D/hh:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_workda"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i> Claim Qty.:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i> Type.:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_foc"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i> สาเหตุการ Claim:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="causeclaim"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i> ดำเนินการ:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_proceedto"></span>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i> สถานะรับของเคลม:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_statusclaim"></span>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-xs-6">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <span class="fa fa-image">Video By Customer:</span>
+                                <div class="py-4" id="appvideosales">
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6"  style="display:none">
+                            <div class="form-group">
+                                <span class="fa fa-image">Video By Technic:</span>
+                                <div class="py-4" id="appvideotech">
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span class="fa fa-image">Image By Customer:</span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="boximage">
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4" style="display:none">
+                            <div class="form-group">
+                                <span class="fa fa-image">Image By Technic:</span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="boximagetechnic">
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="card-header">
+            <i class="fa fa-table"></i>ข้อมูลเคลมสำหรับรุ่นรถ <li id="clickme1" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+        </div>
+        <div class="card-body" id="myDIV1">
+            <div id="fixed-table-container-4" class="fixed-table-container" style="overflow-x: auto;">
+                <table id="_tbvehcar">
+
+                    <tbody>
+                        <tr>
+                            <td style="background: white;">1.สำหรับรถ Vehicle/Machine:<input type="text" id="_vemac" /></td>
+                            <td>2.รุ่น Model/Type:<input type="text" id="_moty" /></td>
+                            <td>3.ปีผลิต Model Year:<input type="text" id="_modyear" /></td>
+                        </tr>
+                        <tr>
+                            <td style="background: white;">4.รหัสเครื่องยนต์ Engine Code:<input type="text" id="_encod" /></td>
+                            <td>5.หมายเลขตัวถังรถ Chassis No.:<input type="text" id="_chno" /></td>
+                            <td>6.รหัสปั้มเชื้อเพลิง Pump:<input type="text" id="_pump" /></td>
+                        </tr>
+                        <tr>
+                            <td style="background: white;">7.ประเภทสินค้า Type of Product:<input type="text" id="_typpro" /></td>
+                            <td>8.ใบรับประกันเลขที่เคลม Warranty Card No.:<input type="text" id="_warcarno" /></td>
+                            <td>9.ระยะทางการใช้งาน Milage(Km./Mile):<input type="text" id="_milage" /></td>
+                        </tr>
+                        <tr>
+                            <td style="background: white;">10.วันที่ชำรุด Date of Damage:<input type="date" id="_datofdam" /></td>
+                            <td>
+                                11.ชั่วโมงการทำงาน Hour of Operation:<br />
+                                <div style="float: left;">
+                                    ปี:<select id="_workdacar" style="width: 70px;">
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                        <option>11</option>
+                                        <option>12</option>
+
+                                    </select>
+                                </div>
+                                <div style="float: left;">
+                                    เดือน:<select id="_workmonth" style="width: 70px;">
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                        <option>11</option>
+                                        <option>12</option>
+                                    </select>
+                                </div>
+                                <div style="float: left;">
+                                    วัน:<select id="_workday" style="width: 70px;">
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                        <option>11</option>
+                                        <option>12</option>
+                                        <option>13</option>
+                                        <option>14</option>
+                                        <option>15</option>
+                                        <option>16</option>
+                                        <option>17</option>
+                                        <option>18</option>
+                                        <option>19</option>
+                                        <option>20</option>
+                                        <option>21</option>
+                                        <option>22</option>
+                                        <option>23</option>
+                                        <option>24</option>
+                                        <option>25</option>
+                                        <option>26</option>
+                                        <option>27</option>
+                                        <option>28</option>
+                                        <option>29</option>
+                                        <option>30</option>
+                                        <option>31</option>
+                                    </select>
+                                </div>
+                                <div style="float: left;">
+                                    ชม.:<input type="time" id="_worktime" style="width: 70px;height: 31px;" />
+                                </div>
+                            </td>
+                            <td>12.รหัสการผลิต Batch Code:<input type="text" id="_batcod" /></td>
+                        </tr>
+                        <tr>
+                            <td style="background: white;">13.วันที่ติดตั้ง: <input type="date" id="_installdate" disabled="disabled"  /></td>
+                            <td>14.ชื่อผู้ติดต่อรับสินค้าเคลม <input type="text" id="_claimcontact" disabled="disabled" /></td>
+                            <td>15.เบอร์ติดต่อ <input type="text" id="_contact" disabled="disabled" /></td>
+                        </tr>
+                        <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Modalsuccess -->
+    <div class="modal fade" id="myModalSucces" role="dialog">
+        <div class="modal-dialog">
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="modal" aria-label=" close"><span aria-hidden="true">&times;</span></button>
+                <strong>Succes</strong>
+                <div class="modal-body">
+                    <div id="textAlertSucces">Save success</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- EndModalsuccess -->
+    <!-- ModalWarning -->
+    <div id="myModalWarning" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+        <div class="modal-dialog" role="document">
+
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="modal" aria-label=" close"><span aria-hidden="true">&times;</span></button>
+                <strong>Warning!</strong>
+                <div class="modal-body">
+                    <div id="textAlertWarningmes">Some text in the modal.</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    ยืนยันยกเลิกเคลม
+                </div>
+                <div class="modal-body">
+                    คุณต้องการยกเลิกเคลมหรือไม่
+                </div>
+                <div class="modal-footer">
+
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" id="del" class="btn btn-danger btn-ok" data-dismiss="modal">ยกเลิกเคลม</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--ส่วนของ Modal สังเกตุ id myModal ครับ ส่วนนี้แหละจะถูกเรียกด้วย Java Script -->
+    <div class="modal fade" id="Modalcontent" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- เนือหาของ Modal ทั้งหมด -->
+            <div class="modal-content">
+                <!-- ส่วนหัวของ Modal  -->
+                <div class="modal-header">
+                    <!-- ปุ่มกดปิด (X) ตรงส่วนหัวของ Modal  -->
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><div id="ctitle">หัวข้อ</div></h4>
+                </div>
+                <!-- ส่วนเนื้อหาของ Modal  -->
+                <div class="modal-body">
+                    <div id="textcubtent">Some text in the modal.</div>
+                </div>
+                <div class="modal-footer">
+                    <!-- ปุ่มกดปิด (Close) ตรงส่วนล่างของ Modal  -->
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="myModalzoom" class="modalx" style="z-index: 11;">
+
+        <!-- The Close Button -->
+        @*<span class="close">&times;</span>*@
+
+        <!-- Modal Content (The Image) -->
+        <img class="modal-contentx" id="img01">
+        <div class="modal-contentx" id="img01" style="background-color: #191919;"><button class="btn btn-secondary" type="button" data-dismiss="modal" id="closeimg" style="margin-left: 91%;">Close</button></div>
+        <!-- Modal Caption (Image Text) -->
+        <div id="caption"></div>
+
+    </div>
+            <input type="hidden" id="_uderlogin" value="@user" />
+            <input type="hidden" id="_udertype" value="@usertype" />
+            <input type="hidden" id="_udercode" value="@usercode" />
+    @*<script src="~/Scripts/notview.js"></script>*@
+            <script type="text/javascript">
+                $("#_itemno").autocomplete({
+                    selectFirst: true,
+                    autoFocus: true,
+                    timeout: 100000,
+                    source: function (request, response) {
+                        var param = {
+                            Name: $('#_itemno').val(),
+                            XvalCompany: $("#_company").val()
+                        };
+                        $.ajax({
+                            url: '@Url.Action("GetdateStockCode", "GetdataCenter")',
+                            data: JSON.stringify(param),
+                            dataType: "json",
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            dataFilter: function (data) { return data; },
+                            success: function (data) {
+                                response($.map(data.slice(0, 20), function (item) {
+                                    return {
+                                        value: item
+                                    }
+                                }))
+                            },
+                            error: function (XMLhttpsRequest, textStatus, errorThrown) {
+                                alert(textStatus);
+                            }
+                        });
+                    },
+                    minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
+                });
+                $(document).ready(function () {
+                    $('#SrcCheckstatus_Sc').css("background-color", "rgb(9, 183, 9)");
+                    var udertype = $("#_udertype").val();
+                    var Userlogin = $("#_uderlogin").val();
+                    var fixedTable2 = fixTable(document.getElementById('fixed-table-container-2'));
+                    $("#clickme").on("click", function (e) {
+
+                        myFunction();
+                    });
+                    function myFunction() {
+                        var x = document.getElementById("myDIV");
+                        if (x.style.display === "none") {
+                            x.style.display = "block";
+                        } else {
+                            x.style.display = "none";
+                        }
+                    }
+
+                    $("#clickme1").on("click", function (e) {
+
+                        myFunction1();
+                    });
+                    function myFunction1() {
+                        var x = document.getElementById("myDIV1");
+                        if (x.style.display === "none") {
+                            x.style.display = "block";
+                        } else {
+                            x.style.display = "none";
+                        }
+                    }
+                    var udercode = $("#_udercode").val();
+                    $.ajax({
+                        url: '@Url.Action("GetdateByCusCode", "GetdataCenter")',
+                        data: {
+                            CusCode: udercode,
+                            Slm: "ALL"
+                        },
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function (data) {
+
+                            $("#_cusname").val(data.Cusname);
+                            $("#slmcod").val(data.CusSlmcode);
+
+                        }
+                    });
+                    $.ajax({
+                        url: '@Url.Action("Getdatastkgrp", "GetdataCenter")',
+                        data: {
+                        },
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function (data) {
+                            console.log(data)
+                            var select = $("#_stkgrp");
+                            select.children().remove();
+                            select.append($("<option>").val("ALL").text("ALL"));
+                            $(data).each(function (index, item) {
+                                select.append($("<option>").val(item.STKGRP).text(item.STKGRP + "/" + item.GRPNAM));
+                            });
+                        }
+                    });
+                    $.ajax({
+                        url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
+                        data: {
+                            Name: 2
+                        },
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function (data) {
+                            var select = $("#_statusclaimdisplay");
+                            select.children().remove();
+
+                            $(data).each(function (index, item) {
+                                //  if (item.CODE == "1" || item.CODE == "2" || item.CODE == "3") {
+                                select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                                //  }
+                            });
+
+                        }
+                    });
+
+                    $.ajax({
+                        url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
+                        data: {
+                            Name: 6
+                        },
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function (data) {
+                            var selectudertype = $("#_udertype").val();
+                            //alert(selectudertype)
+                            var select = $("#_status");
+                            select.children().remove();
+                            // select.append($("<option>").val("0").text("เลือกCUSCOD"));
+                            $(data).each(function (index, item) {
+
+                                select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                            });
+                            if (selectudertype == "1") {
+                                $("#_status").val("1");
+
+                            } else if (selectudertype == "2") {
+                                $("#_status").val("3");
+
+                            } else if (selectudertype == "4") {
+                                $("#_status").val("1");
+
+                            } else if (selectudertype == "5") {
+                                $("#_status").val("1");
+
+                            } else if (selectudertype == "7") {
+                                $("#_status").val("1");
+
+                            }
+                           
+                        }
+                    });
+                    
+                    $("table").on("click", "tr #_btnPrintclim", function () {
+
+                        var nokey = $(this).attr('req_no');
+                        var nosubkey = $(this).attr('clm_no_sub');
+                        var UserId = $("#_uderlogin").val();
+                        var _udertype;
+                        var _uderTd;
+                        $.ajax({
+                            url: '@Url.Action("GetdataDepartment", "GetdataCenter")',
+                            data: { User: UserId },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                // $("#_udertype").val(data.Usetpye);
+                                _udertype = data.Department;
+                                //  alert(data.Department)
+                                _uderTd = data.Usetpye;
+                                if (_uderTd == "1") {
+                                    $.ajax({
+                                        url: '@Url.Action("CountPrint", "Checkstatus_Sc")',
+                                        data: { User: UserId, clm_no_sub: nosubkey },
+                                        type: "POST",
+                                        dataType: "JSON",
+                                        success: function (data) {
+
+                                        }
+                                    });
+
+                                }
+                                if (_udertype == "Technical") {
+                                    udertype = 'TECH';
+
+
+                                } else if (_udertype == "Product") {
+                                    udertype = 'PM';
+                                } else if (_udertype == "SalesCo") {
+                                    udertype = 'SALES';
+                                } else if (_udertype == "Sales") {
+                                    udertype = 'SALES';
+                                }
+                                else if (_udertype == "Customer Service") {
+                                    udertype = 'CS';
+                                } else if (_udertype == "Log") {
+                                    udertype = 'LOG';
+                                } else if (_udertype == "Customer") {
+                                    udertype = 'SALES';
+                                }
+
+
+                                if (nokey != "" && nosubkey != "") {
+                                    var wi = window.open("../Report/frmClaim.aspx?ClmNUM=" + btoa(nokey) + "/" + btoa(nosubkey) + "/" + btoa(udertype));
+                                    wi.focus();
+                                } else {
+                                    $("#textAlertWarning").empty();
+                                    $("#textAlertWarning").text("กรุณาเลือกรายการสำหรับปริ้น");
+                                    $("#myModalWarning").modal();
+                                    return false;
+                                }
+
+                                $("#PrintModal").modal('hide');
+                                var claimnokey = nokey;
+                                GetClimtemp(claimnokey);
+                                // $("#_btnsearchclaimno").click();
+                                // $("table tr #xxx").click();
+                            }
+                        });
+
+                    });
+            
+                    $("#_btnsearch").click(function () {
+
+                        var claimnokey = $("#_cliamno").val();
+                        var company = $("#_company").val();
+                        var status = $("#_status").val();
+                        var cusno = $("#_cusno").val();
+                        var statusrec = $("#_statusclaimdisplay").val();
+                        if (cusno != "") {
+                            cusno = splitval(cusno);
+                        } else {
+                            cusno = "";
+                        }
+                        var itemno = $("#_itemno").val();
+                        if (itemno != "") {
+                            itemno = splitval(itemno);
+                        } else {
+                            itemno = "";
+                        }
+                        var slmcod = $("#slmcod").val();
+
+                        var statdate = $("#_statdate").val();
+                        var enddate = $("#_enddate").val();
+                        var statusclaimafter = "";
+                        var cktyp = $("#_udertype").val();
+                        var stkgrp = $("#_stkgrp").val();
+                        var proceedtofter = "";
+                        var statusprint = "";
+                        if (cktyp == "7") {
+                            GetClimline(claimnokey, company, status, cusno, itemno, statdate, enddate, slmcod, statusrec, statusclaimafter, stkgrp, "0", "2")
+                        }
+
+                    });
+                    var cusno = $("#_cusno").val();
+                    var slmcod = $("#slmcod").val();
+                    //GetClimline("", "", "1", cusno, "", "", "", "ALL", "0", "0", "ALL", "0", "2")
+                    function GetClimline(claimnokey, company, status, cusno, itemno, statdate, enddate, slmcod, statusrec, statusclaimafter, stkgrp, proceedtofter, statusprint) {
+
+                        var _user = $("#_uderlogin").val();
+                        var valclim = claimnokey;
+                        var valcompany = company;
+                        var valstatus = status;
+                        var valcusno = cusno;
+                        var valitemno = itemno;
+                        var valstatdate = statdate;
+                        var valenddate = enddate;
+                        var valslm = "";
+                        var cktyp = $("#_udertype").val();
+                        valslm = slmcod;
+
+                        // waitingDialog.show();
+                        $.ajax({
+                            url: '@Url.Action("GetClimcheckdata", "Checkstatus_Sc")',
+                            data: {
+                                inCLM_ID: valclim,
+                                incompany: valcompany,
+                                instatus: valstatus,
+                                incusno: valcusno,
+                                initemno: valitemno,
+                                instatdate: valstatdate,
+                                inenddate: valenddate,
+                                insales: valslm,
+                                instatusrec: statusrec,
+                                instatusclaimafter: statusclaimafter,
+                                instkgrp: stkgrp,
+                                proceedtofter: proceedtofter,
+                                statusprint: statusprint
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                waitingDialog.hide();
+                                // $('table  tbody:last-child').html("");
+                                if (data.Getdata.length > 0) {
+                                    waitingDialog.hide();
+                                    var SubmithtmlPage = '';
+                                    var ADMIN_ANLYS_STATUS = '';
+                                    var TECH1_PROCESS_STATUS = '';
+                                    var TECH2_PROCESS_STATUS = '';
+                                    var TECH2_ANLYS_STATUS = '';
+                                    var PM_PROCESS_STATUS = '';
+                                    var CLM_STATUS = '';
+                                    $("#fixed-table-container-2").css("display", "block");
+                                    $('#fixed-table-container-2  tbody:last-child').html("");
+                                    for (var i = 0; i < data.Getdata.length; i++) {
+                                        ADMIN_ANLYS_STATUS = data.Getdata[i].val.ADMIN_ANLYS_STATUS;
+                                        TECH1_PROCESS_STATUS = data.Getdata[i].val.TECH1_PROCESS_STATUS;
+                                        //TECH2_PROCESS_STATUS = data.Getdata[i].val.TECH2_PROCESS_STATUS;
+                                        TECH2_ANLYS_STATUS = data.Getdata[i].val.TECH2_ANLYS_STATUS;
+                                        PM_PROCESS_STATUS = data.Getdata[i].val.PM_PROCESS_STATUS;
+                                        CLM_STATUS = data.Getdata[i].val.CLM_STATUS;
+                                        if (CLM_STATUS != "8") {
+                                            SubmithtmlPage = '<tr  fax="1"  foc="' + data.Getdata[i].val.CLM_FOC + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '" anlyafretori="' + data.Getdata[i].val.ANLYS_AFTERPROCESSTEXT + '" statuclm="' + data.Getdata[i].val.CLM_STATUS + '" statustext="' + data.Getdata[i].val.STATUSTEXT + '"supstatus="' + data.Getdata[i].val.CLM_FRMSUP_STATUS + '"supno="' + data.Getdata[i].val.CLM_FRMSUP_NO + '" supdate="' + data.Getdata[i].val.CLM_FRMSUP_DATE + '"  tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '" afterprocess="' + data.Getdata[i].val.ANLYS_AFTERPROCESS + '" cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_QTY + '" worktimeup="' + data.Getdata[i].val.CLM_USEDAY + '"invoicenoeup="' + data.Getdata[i].val.CLM_INVNO + '" invoicedete = "' + data.Getdata[i].val.CLM_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '">';
+                                        } else {
+                                            SubmithtmlPage = '<tr class="table-warning" fax="1"  foc="' + data.Getdata[i].val.CLM_FOC + '"perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '" anlyafretori="' + data.Getdata[i].val.ANLYS_AFTERPROCESSTEXT + '"  statuclm="' + data.Getdata[i].val.CLM_STATUS + '" statustext="' + data.Getdata[i].val.STATUSTEXT + '" supstatus="' + data.Getdata[i].val.CLM_FRMSUP_STATUS + '"supno="' + data.Getdata[i].val.CLM_FRMSUP_NO + '" supdate="' + data.Getdata[i].val.CLM_FRMSUP_DATE + '"  tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '" afterprocess="' + data.Getdata[i].val.ANLYS_AFTERPROCESS + '" cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_QTY + '" worktimeup="' + data.Getdata[i].val.CLM_USEDAY + '"invoicenoeup="' + data.Getdata[i].val.CLM_INVNO + '" invoicedete = "' + data.Getdata[i].val.CLM_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '" >';
+                                        }
+                                        SubmithtmlPage += '<td   style="cursor: pointer; color: darkorchid; text-decoration: underline; width: 117px; position: absolute; left: 0px;"  foc="' + data.Getdata[i].val.CLM_FOC + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" statuclm="' + data.Getdata[i].val.CLM_STATUS + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '" company="' + data.Getdata[i].val.CLM_COMPANY + '" claimno="' + data.Getdata[i].val.REQ_NO + '"  claimsupno="' + data.Getdata[i].val.CLM_NO_SUB + '"  invoiceno="' + data.Getdata[i].val.CLM_INVNO + '" afterprocess="' + data.Getdata[i].val.ANLYS_AFTERPROCESS + '" cuscod="' + data.Getdata[i].val.Customer + '" itemno="' + data.Getdata[i].val.STKCOD + '" anlyafretori="' + data.Getdata[i].val.ANLYS_AFTERPROCESSTEXT + '" statustext="' + data.Getdata[i].val.STATUSTEXT + '" id="_btnview" style="cursor: pointer;">' + data.Getdata[i].val.REQ_NO + '</td>';
+                                        SubmithtmlPage += '<td style="text-align: center;">  <button type="button" id="_btnPrintclim" class="print-button"   req_no="' + data.Getdata[i].val.REQ_NO + '"  clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '"><span class="print-icon"></span></button></td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_NO_SUB + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.REQ_DATE + '</td>';
+                                        //SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_DUEDATE + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_INVNO + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.Customer + '/<br>' + data.Getdata[i].val.CUSNAM + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.SLMCOD + '/<br>' + data.Getdata[i].val.SLMNAM + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STKDES + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UOM + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.FCLM_QTY + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_PERFORMTEXT + '</td>';
+                                        //SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UPDATE_DATE + '</td>';
+                                        //SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UPDATE_BY + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STATUSTEXT + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '</td>';
+                                        //SubmithtmlPage += '<td>' + data.Getdata[i].val.ANLYS_AFTERPROCESSTEXT + '</td>';
+                                        
+                                        if (CLM_STATUS != "7") {
+                                            if (TECH2_ANLYS_STATUS == "0") {
+                                                SubmithtmlPage += '<td>  <button type="button" id="_btndelclaim" class="btn btn-default"  req_no="' + data.Getdata[i].val.REQ_NO + '"  clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '">ยกเลิก</button></td>';
+                                            } else if (TECH2_ANLYS_STATUS != "0") {
+                                                SubmithtmlPage += '<td>  <button type="button" id="_btndelclaim" class="btn btn-default" disabled="disabled"  req_no="' + data.Getdata[i].val.REQ_NO + '"  clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '">ยกเลิก</button></td>';
+                                            }
+
+                                            if (ADMIN_ANLYS_STATUS == "0") {
+                                                SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;"   data-toggle="popover" data-trigger="click" title="รอการตรวจรับสินค้า"  id="commentreceive"  req_no="' + data.Getdata[i].val.REQ_NO + '" clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '" ></span></td>';
+                                            } else if (ADMIN_ANLYS_STATUS == "1") {
+                                                SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"  data-toggle="popover" data-trigger="click" title="ตรวจรับสินค้าเรียบร้อย" id="commentreceive"  req_no="' + data.Getdata[i].val.REQ_NO + '" clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '"></span></td>';
+                                            }
+                                            if (TECH1_PROCESS_STATUS == "0") {
+                                                SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รอการตรวจสอบ " id="tech1process"  req_no="' + data.Getdata[i].val.REQ_NO + '" clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '"></span></td>';
+                                            } else if (TECH1_PROCESS_STATUS == "1") {
+                                                SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="ตรวจสอบเรียบร้อย" id="tech1process"  req_no="' + data.Getdata[i].val.REQ_NO + '" clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '"></span></td>';
+                                            } if (TECH2_ANLYS_STATUS == "0") {
+                                                SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รอการพิจารณา" id="tech2process"  req_no="' + data.Getdata[i].val.REQ_NO + '" clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '"></span></td>';
+                                            }
+                                            else if (TECH2_ANLYS_STATUS == "1") {
+                                                SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="พิจารณาเรียบร้อย" id="tech2process"  req_no="' + data.Getdata[i].val.REQ_NO + '" clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '"></span></td>';
+                                            }
+                                            else if (TECH2_ANLYS_STATUS == "2") {
+                                                SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่ผ่านการพิจารณา" id="tech2process"  req_no="' + data.Getdata[i].val.REQ_NO + '" clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '"></span></td>';
+                                            }
+                                            else if (TECH2_ANLYS_STATUS == "3") {
+                                                SubmithtmlPage += '<td><span class="fa fa-hourglass-half gi-4x" style="color: blue;" title="รอประสานงานกับsupplier" id="tech2process"  req_no="' + data.Getdata[i].val.REQ_NO + '" clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '"></span></td>';
+                                            }
+                                            if (PM_PROCESS_STATUS == "0") {
+                                                SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รอการอนุมัติ" id="pmprocess"  req_no="' + data.Getdata[i].val.REQ_NO + '" clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '"></span></td>';
+                                            } else if (PM_PROCESS_STATUS == "1") {
+                                                SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย" id="pmprocess"  req_no="' + data.Getdata[i].val.REQ_NO + '" clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '"></span></td>';
+
+                                            } else if (PM_PROCESS_STATUS == "2") {
+                                                SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ" id="pmprocess"  req_no="' + data.Getdata[i].val.REQ_NO + '" clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '"></span></td>';
+                                            } else if (PM_PROCESS_STATUS == "3") {
+                                                SubmithtmlPage += '<td><span class="fa fa-refresh gi-4x" style="color: red;"title="ตรวจสอบใหม่" id="pmprocess"  req_no="' + data.Getdata[i].val.REQ_NO + '" clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '"></span></td>';
+                                            }
+                                        }
+                                        else {
+                                            SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
+                                            SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
+                                            SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
+                                            SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
+                                            SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
+                                        }
+
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.CS_No + '</td>';
+                                        //SubmithtmlPage += '<td>' + data.Getdata[i].val.Log_No + '</td>';
+                                        SubmithtmlPage += '</tr>';
+                                        $('#fixed-table-container-2  tbody:last-child').append(SubmithtmlPage);
+                                        waitingDialog.hide();
+                                    }
+
+                                } else {
+                                    var _status = $("#_status :selected").text();
+                                    $("#textAlertWarningmes").empty();
+                                    $("#textAlertWarningmes").text("ไม่มีข้อมูล" + _status);
+                                    $("#myModalWarning").modal();
+                                    $("#_btnprint").css("display", "none");
+                                    // $('#fixed-table-container-1  tbody:last-child').html("");
+                                    $('#fixed-table-container-2  tbody:last-child').html("");
+                                }
+                                var fixedTable2 = fixTable(document.getElementById('fixed-table-container-2'));
+                            }
+                        });
+                    }
+
+                    //$("table").on("click", "tr td", function () {
+                    //    var clm_no_sub = "";
+                    //    clm_no_sub = $(this).attr('clm_no_sub');
+                    //    //alert(clm_no_sub)
+                    //    $('[data-toggle="popover"]').popover({
+                    //        title: "ตรวจสอบรับสินค้า",
+                    //        content: clm_no_sub + "I'm fairly new to JQuery and I'm struggling with something: I'm trying to assign a click handler to a table but it's not working. Here's my code:"
+                    //        , placement: "top"
+                    //    });
+
+                    //});
+                    $("table").on("click", "tr #commentreceive", function () {
+                        var req_no = $(this).attr('req_no');
+                        var clm_no_sub = $(this).attr('clm_no_sub');
+                        $.ajax({
+                            url: '@Url.Action("GetdataClamline", "GetdataCenter")',
+                            data: {
+                                CLM_No: req_no,
+                                CLM_SUB: clm_no_sub,
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                if (data.Getdata.length > 0) {
+                                    var _dtx = data.Getdata[0].val.CLM_REMARK;
+                                    $("#ctitle").empty();
+                                    $("#ctitle").text("Comment ตรวจสอบรับสินค้า");
+                                    $("#textcubtent").empty();
+                                    if (_dtx != "") {
+                                        $("#textcubtent").text(_dtx);
+                                    } else {
+                                        $("#textcubtent").text("เทคนิครอรับสินค้าเคลม");
+                                    }
+                                    $('#Modalcontent').modal('show');
+                                 }
+                               }
+                            });
+                    });
+                    $("table").on("click", "tr #tech1process", function () {
+                        var req_no = $(this).attr('req_no');
+                        var clm_no_sub = $(this).attr('clm_no_sub');
+                        $.ajax({
+                            url: '@Url.Action("GetdataClamline", "GetdataCenter")',
+                            data: {
+                                CLM_No: req_no,
+                                CLM_SUB: clm_no_sub,
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                if (data.Getdata.length > 0) {
+                                    var _dtx = data.Getdata[0].val.TECH1_ANLYS_RESULT;
+                                    $("#ctitle").empty();
+                                    $("#ctitle").text("Comment ช่างเทคนิควิเคราะห์สินค้าเคลม");
+                                    $("#textcubtent").empty();
+                                    if (_dtx != "") {
+                                        $("#textcubtent").text(_dtx);
+                                    } else {
+                                        $("#textcubtent").text("รอช่างเทคนิควิเคราะห์สินค้าเคลม");
+                                    }
+                                    $('#Modalcontent').modal('show');
+
+                                }
+                            }
+                        });
+                    });
+                    $("table").on("click", "tr #tech2process", function () {
+                        var req_no = $(this).attr('req_no');
+                        var clm_no_sub = $(this).attr('clm_no_sub');
+                        $.ajax({
+                            url: '@Url.Action("GetdataClamline", "GetdataCenter")',
+                            data: {
+                                CLM_No: req_no,
+                                CLM_SUB: clm_no_sub,
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                if (data.Getdata.length > 0) {
+                                    var _dtx = data.Getdata[0].val.TECH2_REMARK;
+                                    $("#ctitle").empty();
+                                    $("#ctitle").text("Comment พิจารณาผลวิเคราะห์สินค้าเคลม");
+                                    $("#textcubtent").empty();
+                                    if (_dtx != "") {
+                                        $("#textcubtent").text(_dtx);
+                                    } else {
+                                        $("#textcubtent").text("รอ พิจารณาผลวิเคราะห์สินค้าเคลม");
+                                    }
+                                    $('#Modalcontent').modal('show');
+
+                                }
+                            }
+                        });
+                    });
+                    $("table").on("click", "tr #pmprocess", function () {
+                        var req_no = $(this).attr('req_no');
+                        var clm_no_sub = $(this).attr('clm_no_sub');
+                        $.ajax({
+                            url: '@Url.Action("GetdataClamline", "GetdataCenter")',
+                            data: {
+                                CLM_No: req_no,
+                                CLM_SUB: clm_no_sub,
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                if (data.Getdata.length > 0) {
+                                    var _dtx = data.Getdata[0].val.PM_REMARK;
+                                    $("#ctitle").empty();
+                                    $("#ctitle").text("Comment ผลการอนุมัติ Product Manager");
+                                    $("#textcubtent").empty();
+                                    if (_dtx != "") {
+                                        $("#textcubtent").text(_dtx);
+                                    } else {
+                                        $("#textcubtent").text("รอ การอนุมัติจาก Product Manager");
+                                    }
+                                    $('#Modalcontent').modal('show');
+
+                                }
+                            }
+                        });
+                    });
+                    $("table").on("click", "tr #_btnview", function () {
+                        var req_no = $(this).attr('claimno');
+                        var statuclm = $(this).attr('statuclm');
+                        var clm_no_sub = $(this).attr('claimsupno');
+                        $("#linkprocess").attr('claimno', req_no);
+                        $("#linkprocess").attr('statuclm', statuclm);
+                        $("#linkprocess").attr('claimsupno', clm_no_sub);
+                        var afterprocess = $(this).attr('afterprocess');
+                        var company = $(this).attr('company');
+                        var invoiceno = $(this).attr('invoiceno');
+                        var cuscod = $(this).attr('cuscod');
+                        var itemno = $(this).attr('itemno');
+                        var anlyafretori = $(this).attr('anlyafretori');
+                        var statustext = $(this).attr('statustext');
+                        var proceedtoupdes = $(this).attr('perfromdes');
+                        var statusclaimupdes = $(this).attr('recstades');
+                        var statuclm = $(this).attr('statuclm');
+                        var foc = $(this).attr('foc');
+                        var _user = $("#_uderlogin").val();
+                        var _usertype = $("#_udertype").val();
+                        $("#textclaimno").text(req_no);
+                        $("#textclaimno_sub").text(clm_no_sub);
+                        $("#linkdetail").attr("req_no", req_no);
+                        $("#linkdetail").attr("clm_no_sub", clm_no_sub);
+                        if (_usertype != "4" && _usertype != "5") {
+                            if (_usertype != "3") {
+                                if (statuclm != "7") {
+                                    $("#modalconfirmProcess").modal();
+                                } else {
+                                    $("#textAlertWarningmes").empty();
+                                    $("#textAlertWarningmes").text("รายการ No." + clm_no_sub + " ยกเลิกรายการเคลม");
+                                    $("#myModalWarning").modal();
+                                }
+                            }
+                        }
+                        if (_usertype == "1") {
+                            if (afterprocess == "1" && statuclm == "5") {
+
+                                $("#displ").css("display", "none");
+                                $.ajax({
+                                    url: '@Url.Action("Getafterdateprocess", "Checkstatus_Sc")',
+                                    data: {
+
+                                        req_no: req_no,
+                                        clm_no_sub: clm_no_sub
+
+                                    },
+                                    type: "POST",
+                                    dataType: "JSON",
+                                    success: function (data) {
+                                        console.log(data);
+                                        $("#_scrapdatetec1").val(data.afterprocess);
+                                    }
+                                });
+                            } else {
+                                $("#displ").css("display", "none");
+                            }
+                        } else {
+                            $("#displ").css("display", "none");
+                        }
+                        var _valtec = $('#_tecwork').val();
+
+                        if (_valtec != "") {
+                            if (_valtec != null) {
+                                $.ajax({
+                                    url: '@Url.Action("GetTechLocation", "GetdataCenter")',
+                                    data: {
+                                        Name: _valtec
+                                    },
+                                    type: "POST",
+                                    dataType: "JSON",
+                                    success: function (data) {
+                                        console.log(data)
+                                        var select = $("#_shelfloctec");
+                                        select.children().remove();
+
+                                        $(data).each(function (index, item) {
+
+                                            select.append($("<option>").val(item.Location).text(item.Location));
+                                        });
+
+
+
+                                    }
+                                });
+                            }
+                        }
+                        function addCommas(nStr) {
+                            nStr += '';
+                            x = nStr.split('.');
+                            x1 = x[0];
+                            x2 = x.length > 1 ? '.' + x[1] : '';
+                            var rgx = /(\d+)(\d{3})/;
+                            while (rgx.test(x1)) {
+                                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+                            }
+                            return x1 + x2;
+                        }
+                        ///His Invoice////
+                        $.ajax({
+                            url: '@Url.Action("GetdataInvoicestatud", "GetdataCenter")',
+                            data: {
+                                _cusno: cuscod,
+                                _itemno: itemno,
+                                _invoiceno: invoiceno,
+                                _com: company,
+                                _statdate: "",
+                                _enddate: "",
+                                _foc: foc
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                // $("#Nospankey").text(nokey);
+                                //  $("#subNospan").text(clmnoup);
+                                $("#_itemnotex").text(data.Getdata[0].val.STKCOD);
+                                $("#_description").text(data.Getdata[0].val.STKDES);
+                                $("#_uom").text(data.Getdata[0].val.Uom);
+                                $("#_invoiceno").text(data.Getdata[0].val.DOCNUM);
+                                $("#_psdate").text(data.Getdata[0].val.PSTDAT);
+                                $("#_invoiceqty").text(addCommas(data.Getdata[0].val.Qty));
+                                $("#_invoicelineamt").text(addCommas(parseFloat(data.Getdata[0].val.Amt).toFixed(2)));
+                                $("#_invoicelinedis").text(addCommas(parseFloat(data.Getdata[0].val.DiscountPer).toFixed(2)));
+                                $("#_invoicelinedisamt").text(addCommas(parseFloat(data.Getdata[0].val.DiscountAmt).toFixed(2)));
+                                $("#_stkgup").text(data.Getdata[0].val.STKGRP);
+                                $("#_claimsec").text(data.Getdata[0].val.SEC);
+                                $("#_foc").text(foc);
+                            }
+                        });
+
+                        $.ajax({
+                            url: '@Url.Action("GetdataClamline", "GetdataCenter")',
+                            data: {
+                                CLM_No: req_no,
+                                CLM_SUB: clm_no_sub,
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                if (data.Getdata.length > 0) {
+                                    ////Get input display ///////
+
+                                    $("#_claimqty").text(data.Getdata[0].val.CLM_REQQTY);//Qty//
+                                    $("#_workda").text(data.Getdata[0].val.CLM_USEDAY);//ระยะใช้งาน//
+                                    $("#causeclaim").text(data.Getdata[0].val.CLM_CAUSE);//เหตุผลเคลม//
+                                    $("#_proceedto").text(proceedtoupdes);//ดำเนินการ//
+                                    $("#_statusclaim").text(statusclaimupdes); //Status///
+                                    //$("#_claimnosub").text(clmnoup);
+                                    // $("#_proceedtotec").val(statusclaimup);  ///สถานะการรับสินค้า
+                                    // $("#_perfromtec1").val(proceedtoup);  ///ดำเนินการ:
+
+                                    ///ข้อมูลเคลมสำหรับรุ่นรถ///
+                                    $("#_vemac").val(data.Getdata[0].val.CLM_Machine);
+                                    $("#_moty").val(data.Getdata[0].val.CLM_Model);
+                                    $("#_modyear").val(data.Getdata[0].val.CLM_ModelYear);
+                                    $("#_encod").val(data.Getdata[0].val.CLM_EngineCode);
+                                    $("#_chno").val(data.Getdata[0].val.CLM_ChassisNo);
+                                    $("#_pump").val(data.Getdata[0].val.CLM_InjecPump);
+                                    $("#_typpro").val(data.Getdata[0].val.CLM_TypeProduct);
+                                    $("#_warcarno").val(data.Getdata[0].val.CLM_WarrantyNo);
+                                    $("#_milage").val(data.Getdata[0].val.CLM_Milage);
+                                    var dateof;
+                                    var dateofsp;
+                                    dateof = data.Getdata[0].val.CLM_USEDAY;
+                                    dateofsp = dateof.split("/");
+                                    console.log(dateofsp[0])
+                                    $("#_workdacar").val(dateofsp[0]);
+                                    $("#_workmonth").val(dateofsp[1]);
+                                    $("#_workday").val(dateofsp[2]);
+                                    $("#_worktime").val(dateofsp[3]);
+                                    $("#_datofdam").val(data.Getdata[0].val.CLM_DateDamage);
+                                    $("#_batcod").val(data.Getdata[0].val.CLM_BatchCode);
+                                    $("#_installdate").val(data.Getdata[0].val.CLM_Installdate);
+                                    $("#_claimcontact").val(data.Getdata[0].val.CLM_Contact);
+                                    $("#_contact").val(data.Getdata[0].val.CLM_ContactTel);
+                                  
+                                    ///lock Display///
+                                    $("#_vemac").attr("disabled", "disabled");
+                                    $("#_moty").attr("disabled", "disabled");
+                                    $("#_modyear").attr("disabled", "disabled");
+                                    $("#_encod").attr("disabled", "disabled");
+                                    $("#_chno").attr("disabled", "disabled");
+                                    $("#_pump").attr("disabled", "disabled");
+                                    $("#_typpro").attr("disabled", "disabled");
+                                    $("#_warcarno").attr("disabled", "disabled");
+                                    $("#_milage").attr("disabled", "disabled");
+                                    $("#_workdacar").attr("disabled", "disabled");
+                                    $("#_workmonth").attr("disabled", "disabled");
+                                    $("#_workday").attr("disabled", "disabled");
+                                    $("#_worktime").attr("disabled", "disabled");
+                                    $("#_datofdam").attr("disabled", "disabled");
+                                    $("#_batcod").attr("disabled", "disabled");
+
+                                    // ตรวจสอบรับสินค้าเคลม//
+                                    $("#_proceedtotec").val(data.Getdata[0].val.CLM_RCVSTATUS);  ///สถานะการรับสินค้า
+                                    $("#_rcvbyte").val(data.Getdata[0].val.CLM_RCVBY);      //ผู้รับสินค้าเคลม
+                                    $("#_rcvdatetec").val(data.Getdata[0].val.CLM_RCVDATE);//วันที่รับสินค้าเคลม:
+                                    $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY); //จำนวนที่รับเคลม:
+                                    // $("#_rcuom").val(data.Getdata[0].val.CLM_UOM); //UOM
+                                    $("#_clmdatetec").val(data.Getdata[0].val.CLM_DATE);//Claim date:
+                                    $("#_duedatetec").val(data.Getdata[0].val.CLM_DUEDATE); //Due date
+                                    $("#_admintec").val(data.Getdata[0].val.CLM_ADMIN);//Admin:
+                                    //$("#_datechecktec").val(data.Getdata[0].val.CLM_DATE); //วันที่ตรวจสอบ
+
+                                    $("#_shelfloctec").val(data.Getdata[0].val.CLM_SHELF_LOCATION);//Shelf Location
+                                    $("#_tecwork").val(data.Getdata[0].val.Technician);//ช่างที่รับผิดชอบ:
+                                    $("#causeclaimtec").val(data.Getdata[0].val.CLM_REMARK);//หมายเหตุการรับเคลม
+                                    // lock Display ตรวจสอบรับสินค้าเคลม//
+                                    $("#_proceedtotec").attr("disabled", "disabled");  ///สถานะการรับสินค้า
+                                    $("#_rcvbyte").attr("disabled", "disabled");      //ผู้รับสินค้าเคลม
+                                    $("#_rcvdatetec").attr("disabled", "disabled");//วันที่รับสินค้าเคลม:
+                                    $("#_rvqtytec").attr("disabled", "disabled"); //จำนวนที่รับเคลม:
+                                    // $("#_rcuom").val(data.Getdata[0].val.CLM_UOM); //UOM
+                                    $("#_clmdatetec").attr("disabled", "disabled");//Claim date:
+                                    $("#_duedatetec").attr("disabled", "disabled"); //Due date
+                                    $("#_admintec").attr("disabled", "disabled");//Admin:
+                                    //$("#_datechecktec").val(data.Getdata[0].val.CLM_DATE); //วันที่ตรวจสอบ
+                                    $("#_shelfloctec").attr("disabled", "disabled");//Shelf Location
+                                    $("#_tecwork").attr("disabled", "disabled");//ช่างที่รับผิดชอบ:
+                                    $("#causeclaimtec").attr("disabled", "disabled");//หมายเหตุการรับเคลม
+
+
+                                    ///Technic 1 : วิเคราะห์สินค้าเคลม///
+                                    $("#_nametec1").val(data.Getdata[0].val.TECH1_NAME);//ตรวจสอบโดย
+                                    $("#_anlysdatetec1").val(data.Getdata[0].val.TECH1_ANLYS_DATE);    //วันที่วิเคราะห์ปัญหา
+                                    $("#_perfromtec1").val(data.Getdata[0].val.CLM_PERFORM); //ดำเนินการ
+                                    $("#_anlysstatustec1").val(data.Getdata[0].val.TECH1_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
+                                    var _val = data.Getdata[0].val.ANLYS_AFTERPROCESS;
+                                    $("#_anlysafterprotec1").val(_val); //หลังเสร็จสิ้นกระบวนการเคลม
+                                    var anlysafterprotec1 = $("#_anlysafterprotec1").val();
+                                    if (anlysafterprotec1 == "1") {
+                                        $("#_anlysafterprotec1").val(_val);
+                                        $("#displdisplay").css("display", "block")
+                                        $("#_scrapdatetec1display").val(data.Getdata[0].val.SCRAP_DATE);     //วันที่ทำลาย:
+                                    } else {
+                                        crapdatetec1 = null;
+                                        $("#displdisplay").css("display", "none")
+                                    }
+                                    $("#remaketec1").val(data.Getdata[0].val.TECH1_ANLYS_RESULT);  //ผลการตรวจสอบ
+                                    ///lock Display Technic 1 : วิเคราะห์สินค้าเคลม///
+                                    $("#_nametec1").attr("disabled", "disabled");//ตรวจสอบโดย
+                                    $("#_anlysdatetec1").attr("disabled", "disabled");   //วันที่วิเคราะห์ปัญหา
+                                    $("#_perfromtec1").attr("disabled", "disabled"); //ดำเนินการ
+                                    $("#_anlysstatustec1").attr("disabled", "disabled"); //สถานะการวิเคราะห์ WR,WE,WF
+                                    $("#_anlysafterprotec1").attr("disabled", "disabled"); //หลังเสร็จสิ้นกระบวนการเคลม
+                                    $("#_scrapdatetec1display").attr("disabled", "disabled");//วันที่ทำลาย:
+                                    $("#remaketec1").attr("disabled", "disabled"); //ผลการตรวจสอบ
+
+                                    //Technic 2 : ผลการพิจารณา//
+                                    $("#_name2tec").val(data.Getdata[0].val.TECH2_NAME); //รับรองการตรวจสอบโดย
+                                    $("#_appdatetec").val(data.Getdata[0].val.TECH2_ANLYS_DATE);  //วันที่เทคนิคพิจารณา
+                                    $("#_apprvststus").val(data.Getdata[0].val.TECH2_ANLYS_STATUS); // สถานะ
+                                    $("#remaketec2").val(data.Getdata[0].val.TECH2_REMARK);   //หมายเหตุ
+
+                                    // lock Display Technic 2 : ผลการพิจารณา//
+                                    $("#_name2tec").attr("disabled", "disabled"); //รับรองการตรวจสอบโดย
+                                    $("#_appdatetec").attr("disabled", "disabled"); //วันที่เทคนิคพิจารณา
+                                    $("#_apprvststus").attr("disabled", "disabled"); // สถานะ
+                                    $("#remaketec2").attr("disabled", "disabled");  //หมายเหตุ
+
+                                    //Product Manager Approval //
+
+                                    $("#_PM").val(data.Getdata[0].val.PROD);  // Product Manager
+                                    $("#_pmdate").val(data.Getdata[0].val.PM_APPRV_DATE); //วันที่PM พิจารณา
+                                    $("#_pmtstus").val(data.Getdata[0].val.PM_APPRV_STATUS); //สถานะอนุมัติ
+                                    $("#remakepm").val(data.Getdata[0].val.PM_REMARK);
+                                    $("#_pmnewpn").val(data.Getdata[0].val.PM_Replacemen);
+
+                                    // lock Display Product Manager Approval //
+                                    $("#_PM").attr("disabled", "disabled");   // Product Manager
+                                    $("#_pmdate").attr("disabled", "disabled");  //วันที่PM พิจารณา
+                                    $("#_pmtstus").attr("disabled", "disabled");  //สถานะอนุมัติ
+                                    $("#remakepm").attr("disabled", "disabled");
+                                    $("#_pmnewpn").attr("disabled", "disabled");
+                                }
+                            }
+                        });
+
+                        $.ajax({
+                            url: '@Url.Action("GetfileVideo", "GetdataCenter")',
+                            data: {
+                                inCLM_ID: req_no,
+                                CLM_NO: clm_no_sub,
+                                Im_No: "01"
+
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (result) {
+                                console.log(result.videolist)
+                                if (result.videolist.length > 0) {
+                                    $('#appvideo').html("");
+                                    for (var i = 0; i < resultObj.length; i++) {
+                                        SubmithtmlPage = '<video controls="controls" style="width: 600px; max-width: 100%;">';
+                                        SubmithtmlPage += '<source src="' + result.videolist[0].FilePath + '.mp4" + " type="video/mp4" videomode="720p"/>';
+                                        SubmithtmlPage += '</video>';
+                                        $('#appvideo').append(SubmithtmlPage);
+                                        // HTMLbuilder = HTMLbuilder + imgHtml;
+                                    }
+
+
+                                } else {
+
+                                }
+                            },
+                        });
+                        $.ajax({
+                            url: '@Url.Action("GetfileVideo", "GetdataCenter")',
+                            data: {
+                                inCLM_ID: req_no,
+                                CLM_NO: clm_no_sub,
+                                Im_No: "01"
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (result) {
+                                console.log(result.videolist)
+                                if (result.videolist.length > 0) {
+                                    $('#appvideosales').html("");
+                                    for (var i = 0; i < result.videolist.length; i++) {
+                                        SubmithtmlPage = '<video controls="controls" style="width: 600px; max-width: 100%;">';
+                                        SubmithtmlPage += '<source src="' + result.videolist[0].FilePath + '.mp4" + " type="video/mp4" videomode="720p"/>';
+                                        SubmithtmlPage += '</video>';
+                                        $('#appvideosales').append(SubmithtmlPage);
+                                        // HTMLbuilder = HTMLbuilder + imgHtml;
+                                    }
+
+
+                                } else {
+
+                                }
+                            },
+                        });
+                        $.ajax({
+                            url: '@Url.Action("GetfileVideo", "GetdataCenter")',
+                            data: {
+                                inCLM_ID: req_no,
+                                CLM_NO: clm_no_sub,
+                                Im_No: "TEC01"
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (result) {
+                                console.log(result.videolist)
+                                if (result.videolist.length > 0) {
+                                    $('#appvideotech').html("");
+                                    for (var i = 0; i < result.videolist.length; i++) {
+                                        SubmithtmlPage = '<video controls="controls" style="width: 600px; max-width: 100%;">';
+                                        SubmithtmlPage += '<source src="' + result.videolist[0].FilePath + '.mp4" + " type="video/mp4" videomode="720p"/>';
+
+                                        SubmithtmlPage += '</video>';
+                                       // $('#appvideotech').append(SubmithtmlPage);
+                                        // HTMLbuilder = HTMLbuilder + imgHtml;
+                                    }
+
+
+                                } else {
+
+                                }
+
+
+                            },
+                        });
+                        //Getimage//
+                        $.ajax({
+                            url: '@Url.Action("GetPathImage", "GetdataCenter")',
+                            data: {
+                                inCLM_ID: req_no,
+                                CLM_NO: clm_no_sub
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (result) {
+                                console.log(result);
+                                if (result.Getdata.length > 0) {
+                                    //$("#myModalimage").modal();
+                                    $('#boximage').html("");
+                                    if (result.Getdata) {
+                                        resultObj = eval(result.Getdata);
+                                        var SubmithtmlPage = "";
+                                        for (var i = 0; i < resultObj.length; i++) {
+                                            var str = resultObj[i].val.IMAGE_NO;
+                                            var res = str.substring(0, 3);
+                                            if (res != "TEC") {
+                                                SubmithtmlPage = '<div class="col-sm-3">';
+                                                SubmithtmlPage += '<img src="' + resultObj[i].val.PATH + '"  class="img-responsive img-thumbnail" id="myImg">';
+                                                SubmithtmlPage += '</div>';
+                                                $('#boximage').append(SubmithtmlPage);
+                                                // HTMLbuilder = HTMLbuilder + imgHtml;
+                                            }
+                                        }
+                                    } else {
+
+                                        $("#myModalimage").modal();
+                                    }
+                                } else {
+                                    $('#boximage').html("");
+                                    SubmithtmlPage = '<div class="col-sm-3" style="color: red;">';
+                                    SubmithtmlPage += 'ไม่มีภาพประกอบการเคลมสินค้า';
+                                    SubmithtmlPage += '</div>';
+                                    $('#boximage').append(SubmithtmlPage);
+                                }
+                            }
+                        });
+                        $("#boximagetechnic").html("");
+                        $.ajax({
+                            url: '@Url.Action("GetPathImage", "GetdataCenter")',
+                            data: {
+                                inCLM_ID: req_no,
+                                CLM_NO: clm_no_sub
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (result) {
+                                console.log(result);
+                                if (result.Getdata.length > 0) {
+                                    //$("#myModalimage").modal();
+                                    $('#boximagetechnic').html("");
+                                    if (result.Getdata) {
+                                        resultObj = eval(result.Getdata);
+                                        var SubmithtmlPage = "";
+                                        for (var i = 0; i < resultObj.length; i++) {
+                                            var str = resultObj[i].val.IMAGE_NO;
+                                            var res = str.substring(0, 3);
+                                            if (res == "TEC") {
+                                                SubmithtmlPage = '<div class="col-sm-3">';
+                                                SubmithtmlPage += '<img src="' + resultObj[i].val.PATH + '"  class="img-responsive img-thumbnail" id="myImg">';
+                                                SubmithtmlPage += '</div>';
+                                               // $('#boximagetechnic').append(SubmithtmlPage);
+                                            }
+                                            // HTMLbuilder = HTMLbuilder + imgHtml;
+                                        }
+                                    } else {
+
+                                        //  $("#myModalimage").modal();
+                                    }
+                                }
+                            }
+                        });
+                    });
+                    $(document).on('click', '#myImg', function () {
+                        var modal = document.getElementById('myModalzoom');
+                        var img = document.getElementById('myImg');
+                        var modalImg = document.getElementById("img01");
+                        var captionText = document.getElementById("caption");
+                        modal.style.display = "block";
+                        modalImg.src = this.src;
+                        captionText.innerHTML = this.alt;
+                    });
+                    $(document).on('click', '.close', function () {
+                        var modal = document.getElementById('myModalzoom');
+                        modal.style.display = "none";
+                    });
+                    $(document).on('click', '#closeimg', function () {
+                        var modal = document.getElementById('myModalzoom');
+                        modal.style.display = "none";
+                    });
+                    $(document).on('click', '#myModalzoom div', function () {
+                        var modal = document.getElementById('myModalzoom');
+                        modal.style.display = "none";
+                    });
+                    $("table").on("click", "tr #_btndelclaim", function () {
+
+                        var _user = $("#_uderlogin").val();
+
+                        var req_no = $(this).attr('req_no');
+                        var clm_no_sub = $(this).attr('clm_no_sub');
+
+                        $("#confirm-delete").modal();
+                        var row_d = $(this).attr('cartid');
+
+                        $('#del').attr("req_no", req_no);
+                        $('#del').attr("clm_no_sub", clm_no_sub);
+                        $('#del').attr("user", _user);
+                    });
+                    $("#del").on("click", function () {
+                        var _user = $("#_uderlogin").val();
+                        var req_no = $(this).attr('req_no');
+                        var clm_no_sub = $(this).attr('clm_no_sub');
+                        $.ajax({
+                            url: '@Url.Action("Cancelclaim", "Checkstatus_Sc")',
+                            data: {
+                                User: _user,
+                                req_no: req_no,
+                                clm_no_sub: clm_no_sub
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                if (data.message == "true") {
+
+                                    $("#textAlertSucces").empty();
+                                    $("#textAlertSucces").text("ยกเลิกรายการเคลมสำเร็จ");
+                                    $("#myModalSucces").modal();
+                                    GetClimline("", "TAC", "4", "", "", "", "", slmcod, "0", "0", "ALL")
+                                    //$("#_btnsearch").click();
+                                } else {
+                                    $("#textAlertSucces").empty();
+                                    $("#textAlertSucces").text(data.message);
+                                    $("#myModalSucces").modal();
+                                }
+                            }
+                        });
+                    });
+                    var waitingDialog = waitingDialog || (function ($) {
+                        'use strict';
+
+                        // Creating modal dialog's DOM
+                        var $dialog = $(
+                            '<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">' +
+                            '<div class="modal-dialog modal-m">' +
+                            '<div class="modal-content">' +
+                                '<div class="modal-header"><h3 style="margin:0;"></h3></div>' +
+                                '<div class="modal-body">' +
+                                    '<div class="progress progress-striped active" style="margin-bottom:0;"><div class="progress-bar" style="width: 100%"></div></div>' +
+                                '</div>' +
+                            '</div></div></div>');
+
+                        return {
+
+                            show: function (message, options) {
+                                // Assigning defaults
+                                if (typeof options === 'undefined') {
+                                    options = {};
+                                }
+                                if (typeof message === 'undefined') {
+                                    message = 'Loading...';
+                                }
+                                var settings = $.extend({
+                                    dialogSize: 'm',
+                                    progressType: '',
+                                    onHide: null // This callback runs after the dialog was hidden
+                                }, options);
+
+                                // Configuring dialog
+                                $dialog.find('.modal-dialog').attr('class', 'modal-dialog').addClass('modal-' + settings.dialogSize);
+                                $dialog.find('.progress-bar').attr('class', 'progress-bar');
+                                if (settings.progressType) {
+                                    $dialog.find('.progress-bar').addClass('progress-bar-' + settings.progressType);
+                                }
+                                $dialog.find('h3').text(message);
+                                // Adding callbacks
+                                if (typeof settings.onHide === 'function') {
+                                    $dialog.off('hidden.bs.modal').on('hidden.bs.modal', function (e) {
+                                        settings.onHide.call($dialog);
+                                    });
+                                }
+                                // Opening dialog
+                                $dialog.modal();
+                            },
+                            /**
+                             * Closes dialog
+                             */
+                            hide: function () {
+                                $dialog.modal('hide');
+                            }
+                        };
+
+                    })(jQuery);
+                    function splitval(_val) {
+                        var _splito = "";
+                        _splito = _val.split('|');
+
+                        return _splito[0];
+                    }
+                });
+            </script>
+</body>
+
+</html>

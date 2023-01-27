@@ -1,0 +1,1060 @@
+﻿@{
+    ViewBag.Title = "_LayoutindexRT";
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11,chrome=1" />
+    <!-- Bootstrap core CSS-->
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom fonts for this template-->
+    <link href="~/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Page level plugin CSS-->
+    <link href="~/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
+    <!-- Custom styles for this template-->
+    <link href="~/Content/css/sb-admin.css" rel="stylesheet" />
+</head>
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <a class="navbar-brand" href="">TRW Auto Service  System</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                @if (Session["UserType"].ToString() == "1")
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="สร้างใบเคลม">
+                        <a class="nav-link" href="~/Createclaim_Sc/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">สร้างใบเคลม</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="รายการค้างส่งตรวจสอบ">
+                        <a class="nav-link" href="~/CreatecfreezesRt/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">รายการค้างส่งตรวจสอบ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ตรวจสอบ&พิจารณา">
+                        <a class="nav-link" href="~/Process_Sc/Index">
+                            <i class="fa fa-fw fa-wrench"></i>
+                            <span class="nav-link-text">ตรวจสอบ&พิจรณา</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ตรวจสอบสถานะเคลม">
+                        <a class="nav-link" href="~/Checkstatus_Sc/Index">
+                            <i class="fa fa-fw fa-dashboard"></i>
+                            <span class="nav-link-text">ตรวจสอบสถานะเคลม</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ตรวจสอบประวัติ">
+                        <a class="nav-link" href="~/InvoiceHistory_Sc/Index">
+                            <i class="fa fa-fw fa-file"></i>
+                            <span class="nav-link-text">ตรวจสอบประวัติการซื้อ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Admin">
+                        <a class="nav-link" href="~/AdminContro/Index">
+                            <i class="fa fa-fw fa-file"></i>
+                            <span class="nav-link-text">Admin</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Disposal">
+                        <a class="nav-link" href="~/Disposal/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">Disposal</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Supplier">
+                        <a class="nav-link" href="~/Process_Supplier/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">Supplier</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Status Supplier">
+                        <a class="nav-link" href="~/Checkstatus_Supplier/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">Status Supplier</span>
+                        </a>
+                    </li>
+                }
+                else if (Session["UserType"].ToString() == "2")
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="สร้างใบเคลม">
+                        <a class="nav-link" href="~/Createclaim_Sc/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">สร้างใบเคลม</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ตรวจสอบ&พิจารณา">
+                        <a class="nav-link" href="~/Process_Sc/Index">
+                            <i class="fa fa-fw fa-wrench"></i>
+                            <span class="nav-link-text">ตรวจสอบ&พิจรณา</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ตรวจสอบสถานะเคลม">
+                        <a class="nav-link" href="~/Checkstatus_Sc/Index">
+                            <i class="fa fa-fw fa-dashboard"></i>
+                            <span class="nav-link-text">ตรวจสอบสถานะเคลม</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ตรวจสอบประวัติ">
+                        <a class="nav-link" href="~/InvoiceHistory_Sc/Index">
+                            <i class="fa fa-fw fa-file"></i>
+                            <span class="nav-link-text">ตรวจสอบประวัติการซื้อ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Disposal">
+                        <a class="nav-link" href="~/Disposal/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">Disposal</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Supplier">
+                        <a class="nav-link" href="~/Process_Supplier/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">Supplier</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Status Supplier">
+                        <a class="nav-link" href="~/Checkstatus_Supplier/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">Status Supplier</span>
+                        </a>
+                    </li>
+                }
+                else if (Session["UserType"].ToString() == "3")
+                {
+
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="กลับสู่เมนูหลัก">
+                        <a class="nav-link" href="~/ProcessApprove/Index">
+                            <i class="fa fa-fw fa-table"></i>
+                            <span class="nav-link-text">กลับสู่เมนูหลัก</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ตรวจสอบประวัติ">
+                        <a class="nav-link" href="~/InvoiceHistory_Sc/Index">
+                            <i class="fa fa-fw fa-file"></i>
+                            <span class="nav-link-text">ตรวจสอบประวัติการซื้อ</span>
+                        </a>
+                    </li>
+
+                }
+                else if (@Session["UserType"].ToString() == "4")
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="สร้างใบเคลม">
+                        <a class="nav-link" href="~/Createclaim_Sc/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">สร้างใบเคลม</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="รายการค้างส่งตรวจสอบ">
+                        <a class="nav-link" href="~/CreatecfreezesRt/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">รายการค้างส่งตรวจสอบ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ตรวจสอบสถานะเคลม">
+                        <a class="nav-link" href="~/Checkstatus_Sc/Index">
+                            <i class="fa fa-fw fa-dashboard"></i>
+                            <span class="nav-link-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ตรวจสอบประวัติ">
+                        <a class="nav-link" href="~/InvoiceHistory_Sc/Index">
+                            <i class="fa fa-fw fa-file"></i>
+                            <span class="nav-link-text">ตรวจสอบประวัติการซื้อ</span>
+                        </a>
+                    </li>
+                }
+                else if (@Session["UserType"].ToString() == "4")
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="สร้างใบเคลม">
+                        <a class="nav-link" href="~/Createclaim_Sc/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">สร้างใบเคลม</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="รายการค้างส่งตรวจสอบ">
+                        <a class="nav-link" href="~/Createcfreezes/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">รายการค้างส่งตรวจสอบ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ตรวจสอบสถานะเคลม">
+                        <a class="nav-link" href="~/Checkstatus_Sc/Index">
+                            <i class="fa fa-fw fa-dashboard"></i>
+                            <span class="nav-link-text">Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ตรวจสอบประวัติ">
+                        <a class="nav-link" href="~/InvoiceHistory_Sc/Index">
+                            <i class="fa fa-fw fa-file"></i>
+                            <span class="nav-link-text">ตรวจสอบประวัติการซื้อ</span>
+                        </a>
+                    </li>
+                }
+                else if (@Session["UserType"].ToString() == "7")
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="สร้างใบเคลม">
+                        <a class="nav-link" href="~/Createclaim_Sc/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">สร้างใบเคลม</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="รายการค้างส่งตรวจสอบ">
+                        <a class="nav-link" href="~/Createcfreezes/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">รายการค้างส่งตรวจสอบ</span>
+                        </a>
+                    </li>
+                }
+                else if (@Session["UserType"].ToString() == "8" || @Session["UserType"].ToString() == "9")
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Disposal">
+                        <a class="nav-link" href="~/Disposal/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">Disposal</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Status Supplier">
+                        <a class="nav-link" href="~/Checkstatus_Supplier/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">Status Supplier</span>
+                        </a>
+                    </li>
+                }
+
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+                <li class="nav-item">
+                    <a class="nav-link text-center" id="sidenavToggler">
+                        <i class="fa fa-fw fa-angle-left"></i>
+                    </a>
+                </li>
+            </ul>
+            <a class="navbar-brand">
+                <i class="fa fa-user-circle-o" style="color:white">   @Session["UserID"]</i>
+                @if (Session["UserType"].ToString() == "1")
+                {
+                    <i class="fa fa-area-chart" style="color:white">
+                        Technical Admin  >>>@Session["DatetoExpire"]
+                    </i>
+                }
+                else if (Session["UserType"].ToString() == "2")
+                {
+                    <i class="fa fa-area-chart" style="color:white">
+                        technical2  >>>@Session["DatetoExpire"]
+                    </i>
+                }
+                else if (Session["UserType"].ToString() == "3")
+                {
+                    <i class="fa fa-area-chart" style="color:white">
+                        Product  >>>@Session["DatetoExpire"]
+                    </i>
+                }
+                else if (Session["UserType"].ToString() == "4")
+                {
+                    <i class="fa fa-area-chart" style="color:white">
+                        Sales Man  >>>@Session["DatetoExpire"]
+                    </i>
+                }
+                else if (Session["UserType"].ToString() == "5")
+                {
+                    <i class="fa fa-area-chart" style="color:white">
+                        SalesCo  >>>@Session["DatetoExpire"]
+                    </i>
+                }
+            </a>
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-fw fa-envelope"></i>
+                        <span class="d-lg-none">
+                            Messages
+                            <span class="badge badge-pill badge-primary" id="countaactac"></span>
+                        </span>
+                        <span class="indicator text-primary d-none d-lg-block">
+                            <i class="fa fa-fw fa-circle"></i>
+                        </span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="messagesDropdown">
+                        <h6 class="dropdown-header">จำนวนงานคงค้าง:</h6>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">
+                            <strong id="tile"></strong>
+                            <span class="small float-right text-muted"></span>
+                            <div class="dropdown-message small" id="countadmin" style="color: blue;font-weight: bolder;font-size: medium;"></div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">
+                            <strong id="tile1"></strong>
+                            <span class="small float-right text-muted"></span>
+                            <div class="dropdown-message small" id="counttec1" style="color: blue;font-weight: bolder;font-size: medium;"></div>
+                        </a>
+
+
+                    </div>
+
+                </li>
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0 mr-lg-2">
+                        <div class="input-group" style="color: #343a40;">
+                            >>>>>>>>>
+                        </div>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0 mr-lg-2">
+                        <div class="input-group">
+
+                        </div>
+                    </form>
+                </li>
+
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0 mr-lg-2">
+                        <div class="input-group">
+
+                        </div>
+                    </form>
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-sign-out"></i>Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <!--  <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">My Dashboard</li>
+            </ol>-->
+            <!-- Icon Cards-->
+            @*<div class="row">*@
+            @if (Session["UserType"].ToString() == "1")
+            {
+                <div class="row">
+                    <div class="col-xl-2 col-sm-6 mb-3">
+                        @* <div class="card text-white bg-warning o-hidden h-100">
+
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fa fa-fw fa-list"></i>
+                                </div>
+                                <div class="mr-5">Create  Claim document!</div>
+                            </div>*@
+                        <div class="card text-white bg-primary o-hidden">
+                            <a class="card-footer text-white clearfix small z-1" id="Sccreateclaim" href="~/Createsalesreturn_sales/Index">
+                                <span class="float-left">สร้าง Sales Return</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-sm-6 mb-3">
+                        @* <div class="card text-white bg-warning o-hidden h-100">
+
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fa fa-fw fa-list"></i>
+                                </div>
+                                <div class="mr-5">Create  Claim document!</div>
+                            </div>*@
+                        <div class="card text-white bg-primary o-hidden">
+                            <a class="card-footer text-white clearfix small z-1" id="Createcfreezes" href="~/Createcfreezes/Index">
+                                <span class="float-left">รายการค้างส่งตรวจสอบ</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-sm-6 mb-3">
+                        @*<div class="card text-white bg-success o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fa fa-fw fa-shopping-cart"></i>
+                                </div>
+                                <div class="mr-5">Orders Claim!</div>
+                            </div>*@
+                        <div class="card text-white bg-primary o-hidden">
+                            <a class="card-footer text-white clearfix small z-1" id="ScrProcess_Sc" href="~/Process_Sc/Index">
+                                <span class="float-left">ตรวจสอบ & พิจารณา</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-sm-6 mb-3">
+                        <div class="card text-white bg-primary o-hidden">
+                            @*<div class="card text-white bg-warning o-hidden h-100">
+                                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-comments"></i>
+                                    </div>
+                                    <div class="mr-5">Status Claim</div>
+                                </div>*@
+                            <a class="card-footer text-white clearfix small z-1" id="SrcCheckstatus_Sc" href="~/Checkstatus_Sc/Index">
+                                <span class="float-left">ตรวจสอบสถานะเคลม</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-sm-6 mb-3">
+                        @*<div class="card text-white bg-danger o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fa fa-fw fa-support"></i>
+                                </div>
+                                <div class="mr-5">Invoice History!</div>
+                            </div>*@
+                        <div class="card text-white bg-primary o-hidden">
+                            <a class="card-footer text-white clearfix small z-1" id="SrcInvoiceHistory_Sc" href="~/InvoiceHistory_Sc/Index">
+                                <span class="float-left">ตรวจสอบประวัติการซื้อ</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-sm-6 mb-3">
+                        @*<div class="card text-white bg-danger o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fa fa-fw fa-support"></i>
+                                </div>
+                                <div class="mr-5">Invoice History!</div>
+                            </div>*@
+                        <div class="card text-white bg-primary o-hidden">
+                            <a class="card-footer text-white clearfix small z-1" id="SelectDisplay_Sc" href="~/SelectDisplay/Index">
+                                <span class="float-left">กลับสู่เมนูหลัก</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            else if (@Session["UserType"].ToString() == "2")
+            {
+                <div class="row">
+                    <div class="col-xl-2 col-sm-6 mb-3">
+                        @* <div class="card text-white bg-warning o-hidden h-100">
+
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fa fa-fw fa-list"></i>
+                                </div>
+                                <div class="mr-5">Create  Claim document!</div>
+                            </div>*@
+                        <div class="card text-white bg-primary o-hidden">
+                            <a class="card-footer text-white clearfix small z-1" id="Sccreateclaim" href="~/Createclaim_Sc/Index">
+                                <span class="float-left">สร้างใบเคลม</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-sm-6 mb-3">
+                        @*<div class="card text-white bg-success o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fa fa-fw fa-shopping-cart"></i>
+                                </div>
+                                <div class="mr-5">Orders Claim!</div>
+                            </div>*@
+                        <div class="card text-white bg-primary o-hidden">
+                            <a class="card-footer text-white clearfix small z-1" id="ScrProcess_Sc" href="~/Process_Sc/Index">
+                                <span class="float-left">ตรวจสอบ & พิจารณา</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-sm-6 mb-3">
+                        <div class="card text-white bg-primary o-hidden">
+                            @*<div class="card text-white bg-warning o-hidden h-100">
+                                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-comments"></i>
+                                    </div>
+                                    <div class="mr-5">Status Claim</div>
+                                </div>*@
+                            <a class="card-footer text-white clearfix small z-1" id="SrcCheckstatus_Sc" href="~/Checkstatus_Sc/Index">
+                                <span class="float-left">ตรวจสอบสถานะเคลม</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-sm-6 mb-3">
+                        @*<div class="card text-white bg-danger o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fa fa-fw fa-support"></i>
+                                </div>
+                                <div class="mr-5">Invoice History!</div>
+                            </div>*@
+                        <div class="card text-white bg-primary o-hidden">
+                            <a class="card-footer text-white clearfix small z-1" id="SrcInvoiceHistory_Sc" href="~/InvoiceHistory_Sc/Index">
+                                <span class="float-left">ตรวจสอบประวัติการซื้อ</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-sm-6 mb-3">
+                        @*<div class="card text-white bg-danger o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fa fa-fw fa-support"></i>
+                                </div>
+                                <div class="mr-5">Invoice History!</div>
+                            </div>*@
+                        @* <div class="card text-white bg-primary o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" href="~/ProcessApprove/Index">
+                                    <span class="float-left">Approve By PM</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>*@
+                    </div>
+                </div>
+
+            }
+
+            else if (@Session["UserType"].ToString() == "3")
+            {
+                <div class="row">
+                    <div class="col-xl-2 col-sm-6 mb-3">
+
+                        <div class="card text-white bg-primary o-hidden">
+                            <a class="card-footer text-white clearfix small z-1" id="SrcProcessApprove" href="~/ProcessApprove/Index">
+                                <span class="float-left">กลับสู่เมนูหลัก</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-sm-6 mb-3">
+
+                        <div class="card text-white bg-info o-hidden">
+                            <a class="card-footer text-white clearfix small z-1" id="ProcessApproveRT" href="~/ProcessApproveRT/Index">
+                                <span class="float-left">Approve SalesReturn By PM</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-2 col-sm-6 mb-3">
+
+                        <div class="card text-white bg-info o-hidden">
+                            <a class="card-footer text-white clearfix small z-1" id="SrcInvoiceHistory_Sc" href="~/InvoiceHistory_Sc/Index">
+                                <span class="float-left">ตรวจสอบประวัติการซื้อ</span>
+                                <span class="float-right">
+                                    @*<i class="fa fa-angle-right"></i>*@
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (@Session["UserType"].ToString() == "4")
+            {
+                if (@Session["ISApprover"].ToString() == "1")
+                {
+                    //SAlessup//
+                    <div class="row">
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            @* <div class="card text-white bg-warning o-hidden h-100">
+
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-list"></i>
+                                    </div>
+                                    <div class="mr-5">Create  Claim document!</div>
+                                </div>*@
+                            <div class="card text-white bg-info o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="Sccreateclaim" href="~/Createsalesreturn_sales/Index">
+                                    <span class="float-left">สร้างใบคำขอคืนสินค้า</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            <div class="card text-white bg-info o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="Createcfreezes" href="~/CreatecfreezesRT/Index">
+                                    <span class="float-left">รายการค้างส่งตรวจสอบขอคืนสินค้า</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            <div class="card text-white bg-info o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="ProcessApproveSup" href="~/ProcessApproveSmSup/Index">
+                                    <span class="float-left">อนุมัติขอคืนสินค้า</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            <div class="card text-white bg-info o-hidden">
+
+                                <a class="card-footer text-white clearfix small z-1" id="SrcCheckstatus_Sc" href="~/CheckstatusRT/Index">
+                                    <span class="float-left">ตรวจสอบสถานะขอคืนสินค้า</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            <div class="card text-white bg-info o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="SrcInvoiceHistory_Sc" href="~/InvoiceHistory_Sc/Index">
+                                    <span class="float-left">ตรวจสอบประวัติการซื้อ</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            @*<div class="card text-white bg-danger o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-support"></i>
+                                    </div>
+                                    <div class="mr-5">Invoice History!</div>
+                                </div>*@
+                            <div class="card text-white bg-primary o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="SelectDisplay_Sc" href="~/SelectDisplay/Index">
+                                    <span class="float-left">กลับสู่เมนูหลัก</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    //SAles//
+                    <div class="row">
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            @* <div class="card text-white bg-warning o-hidden h-100">
+
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-list"></i>
+                                    </div>
+                                    <div class="mr-5">Create  Claim document!</div>
+                                </div>*@
+                            <div class="card text-white bg-info o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="Sccreateclaim" href="~/Createsalesreturn_sales/Index">
+                                    <span class="float-left">สร้างใบคำขอคืนสินค้า</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            <div class="card text-white bg-info o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="Createcfreezes" href="~/CreatecfreezesRT/Index">
+                                    <span class="float-left">รายการค้างส่งตรวจสอบขอคืนสินค้า</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            <div class="card text-white bg-info o-hidden">
+
+                                <a class="card-footer text-white clearfix small z-1" id="SrcCheckstatus_Sc" href="~/CheckstatusRT/Index">
+                                    <span class="float-left">ตรวจสอบสถานะขอคืนสินค้า</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            <div class="card text-white bg-info o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="SrcInvoiceHistory_Sc" href="~/InvoiceHistory_Sc/Index">
+                                    <span class="float-left">ตรวจสอบประวัติการซื้อ</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            @*<div class="card text-white bg-danger o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-support"></i>
+                                    </div>
+                                    <div class="mr-5">Invoice History!</div>
+                                </div>*@
+                            <div class="card text-white bg-primary o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="SelectDisplay_Sc" href="~/SelectDisplay/Index">
+                                    <span class="float-left">กลับสู่เมนูหลัก</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else if (@Session["UserType"].ToString() == "5")
+            {
+
+                if (@Session["ISApprover"].ToString() == "1")
+                {
+                    //SAlessup//
+                    <div class="row">
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            @* <div class="card text-white bg-warning o-hidden h-100">
+
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-list"></i>
+                                    </div>
+                                    <div class="mr-5">Create  Claim document!</div>
+                                </div>*@
+                            <div class="card text-white bg-info o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="Sccreateclaim" href="~/Createsalesreturn_sales/Index">
+                                    <span class="float-left">สร้างใบคำขอคืนสินค้า</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            <div class="card text-white bg-info o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="Createcfreezes" href="~/CreatecfreezesRT/Index">
+                                    <span class="float-left">รายการค้างส่งตรวจสอบขอคืนสินค้า</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            <div class="card text-white bg-info o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="ProcessApproveSup" href="~/ProcessApproveSmSup/Index">
+                                    <span class="float-left">อนุมัติขอคืนสินค้า</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            <div class="card text-white bg-info o-hidden">
+
+                                <a class="card-footer text-white clearfix small z-1" id="SrcCheckstatus_Sc" href="~/CheckstatusRT/Index">
+                                    <span class="float-left">ตรวจสอบสถานะขอคืนสินค้า</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            <div class="card text-white bg-info o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="SrcInvoiceHistory_Sc" href="~/InvoiceHistory_Sc/Index">
+                                    <span class="float-left">ตรวจสอบประวัติการซื้อ</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            @*<div class="card text-white bg-danger o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-support"></i>
+                                    </div>
+                                    <div class="mr-5">Invoice History!</div>
+                                </div>*@
+                            <div class="card text-white bg-primary o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="SelectDisplay_Sc" href="~/SelectDisplay/Index">
+                                    <span class="float-left">กลับสู่เมนูหลัก</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    //SAles//
+                    <div class="row">
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            @* <div class="card text-white bg-warning o-hidden h-100">
+
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-list"></i>
+                                    </div>
+                                    <div class="mr-5">Create  Claim document!</div>
+                                </div>*@
+                            <div class="card text-white bg-info o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="Sccreateclaim" href="~/Createsalesreturn_sales/Index">
+                                    <span class="float-left">สร้างใบคำขอคืนสินค้า</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            <div class="card text-white bg-info o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="Createcfreezes" href="~/CreatecfreezesRT/Index">
+                                    <span class="float-left">รายการค้างส่งตรวจสอบขอคืนสินค้า</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            <div class="card text-white bg-info o-hidden">
+
+                                <a class="card-footer text-white clearfix small z-1" id="SrcCheckstatus_Sc" href="~/CheckstatusRT/Index">
+                                    <span class="float-left">ตรวจสอบสถานะขอคืนสินค้า</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            <div class="card text-white bg-info o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="SrcInvoiceHistory_Sc" href="~/InvoiceHistory_Sc/Index">
+                                    <span class="float-left">ตรวจสอบประวัติการซื้อ</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 mb-3">
+                            @*<div class="card text-white bg-danger o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-support"></i>
+                                    </div>
+                                    <div class="mr-5">Invoice History!</div>
+                                </div>*@
+                            <div class="card text-white bg-primary o-hidden">
+                                <a class="card-footer text-white clearfix small z-1" id="SelectDisplay_Sc" href="~/SelectDisplay/Index">
+                                    <span class="float-left">กลับสู่เมนูหลัก</span>
+                                    <span class="float-right">
+                                        <!-- <i class="fa fa-angle-right"></i>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            }
+            else if (@Session["UserType"].ToString() == "7")
+            {
+                <div class="row">
+                    <div class="col-xl-2 col-sm-6 mb-3">
+                        <div class="card text-white bg-primary o-hidden">
+                            <a class="card-footer text-white clearfix small z-1" id="Sccreateclaim" href="~/Create_Customer/Index">
+                                <span class="float-left">สร้างใบเคลม</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-sm-6 mb-3">
+                        <div class="card text-white bg-primary o-hidden">
+                            <a class="card-footer text-white clearfix small z-1" id="Createcfreezes" href="~/CreatecfreezesCustomer/Index">
+                                <span class="float-left">รายการค้างส่งตรวจสอบ</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-sm-6 mb-3">
+                        <div class="card text-white bg-primary o-hidden">
+                            <a class="card-footer text-white clearfix small z-1" id="SrcCheckstatus_Sc" href="~/CheckstatusCustomer/Index">
+                                <span class="float-left">ตรวจสอบสถานะเคลม</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-2 col-sm-6 mb-3">
+                        <div class="card text-white bg-primary o-hidden">
+                            <a class="card-footer text-white clearfix small z-1" id="SrcInvoiceHistory_Sc" href="~/Account/ChangePassword">
+                                <span class="float-left">เปลี่ยนรหัสผ่าน</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (@Session["UserType"].ToString() == "8" || @Session["UserType"].ToString() == "9")
+            {
+                <div class="row">
+                    <div class="col-xl-2 col-sm-6 mb-3">
+                        <div class="card text-white bg-primary o-hidden">
+                            <a class="card-footer text-white clearfix small z-1" id="Sccreisposal" href="~/Disposal/Index">
+                                <span class="float-left">Disposal</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-sm-6 mb-3">
+                        <div class="card text-white bg-primary o-hidden">
+                            <a class="card-footer text-white clearfix small z-1" id="CreatecSupplier" href="~/Checkstatus_Supplier/Index">
+                                <span class="float-left">Status Supplier</span>
+                                <span class="float-right">
+                                    <!-- <i class="fa fa-angle-right"></i>-->
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+            @*</div>*@
+
+            <!-- Example DataTables Card-->
+            <div class="card mb-3">
+
+
+                @RenderBody()
+
+                <div class="card-footer small text-muted">@DateTime.Now </div>
+
+            </div>
+        </div>
+
+        <!-- /.container-fluid-->
+        <!-- /.content-wrapper-->
+        <footer class="sticky-footer">
+            <div>
+                <div class="text-center">
+                    <small>Claim System © Your Website @DateTime.Now.Year</small>
+                </div>
+            </div>
+        </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="~/Account/LogIn" id="logou">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript-->
+        <script src="~/vendor/jquery/jquery.min.js"></script>
+        <script src="~/vendor/popper/popper.min.js"></script>
+        <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Page level plugin JavaScript-->
+        @*<script src="~/vendor/chart.js/Chart.min.js"></script>*@
+        <script src="~/vendor/datatables/jquery.dataTables.js"></script>
+        <script src="~/vendor/datatables/dataTables.bootstrap4.js"></script>
+        <!-- Custom scripts for all pages-->
+
+        <script src="~/Scripts/js/sb-admin.min.js"></script>
+        <!-- Custom scripts for this page-->
+        <script src="~/Scripts/js/sb-admin-datatables.min.js"></script>
+        @*<script src="~/Scripts/js/sb-admin-charts.min.js"></script>*@
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,1331 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutindexRT.cshtml";
+    var user = ViewBag.UserId;
+    var userType = ViewBag.UserType;
+    var Cusno = ViewBag.Cusno;
+    var Invno = ViewBag.Invno;
+    var Comy = ViewBag.Com;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title></title>
+    <!-- Custom fonts for this template-->
+
+    <script src="~/Content/fixed-table-master/fixed-table.js"></script>
+    <link href="~/Content/fixed-table-master/fixed-table.css" rel="stylesheet" />
+
+    <link href="~/Scripts/JSautocomplete/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/JSautocomplete/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/JSautocomplete/jquery-ui.js"></script>
+    <script src="~/Scripts/signaturepad-master/js/signature_pad.umd.js"></script>
+    <style>
+        img {
+            /*position: absolute;*/
+            left: 0;
+            top: 0;
+        }
+
+        .imageThumb {
+            max-height: 75px;
+            border: 2px solid;
+            padding: 1px;
+            cursor: pointer;
+        }
+
+        .removevideo {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .removevideo:hover {
+                background: white;
+                color: black;
+            }
+
+        .pip {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .pip1 {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove1 {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .remove1:hover {
+                background: white;
+                color: black;
+            }
+
+        .pip2 {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove2 {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .remove2:hover {
+                background: white;
+                color: black;
+            }
+
+        .pip3 {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove3 {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .remove3:hover {
+                background: white;
+                color: black;
+            }
+
+        .pip4 {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .pip {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove4 {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .remove4:hover {
+                background: white;
+                color: black;
+            }
+
+        .zoom {
+            transition: transform .2s; /* Animation */
+            margin: 0 auto;
+        }
+
+            .zoom:hover {
+                transform: scale(4.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+            }
+
+        .video-frame {
+            width: 100%;
+            height: 195px;
+            border: 4px solid #dc3545;
+            box-shadow: 1px 2px 3px #dc3545;
+            border-radius: 3px;
+        }
+
+        .signature-pad {
+            /*position: absolute;*/
+            left: 0;
+            top: 0;
+            width: 416px;
+            height: 200px;
+            background-color: white;
+        }
+    </style>
+    <style>
+        /*Copied from bootstrap to handle input file multiple*/
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        /*Also */
+        .btn-success {
+            border: 1px solid #c5dbec;
+            background: #D0E5F5;
+            font-weight: bold;
+            color: #2e6e9e;
+        }
+        /* This is copied from https://github.com/blueimp/jQuery-File-Upload/blob/master/css/jquery.fileupload.css */
+        .fileinput-button {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .fileinput-button input {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0;
+                opacity: 0;
+                -ms-filter: 'alpha(opacity=0)';
+                font-size: 200px;
+                direction: ltr;
+                cursor: pointer;
+            }
+
+        .thumb {
+            height: 80px;
+            width: 100px;
+            border: 1px solid #000;
+        }
+
+        ul.thumb-Images li {
+            width: 120px;
+            float: left;
+            display: inline-block;
+            vertical-align: top;
+            height: 120px;
+        }
+
+        .img-wrap {
+            position: relative;
+            display: inline-block;
+            font-size: 0;
+        }
+
+            .img-wrap .close {
+                position: absolute;
+                top: 2px;
+                right: 2px;
+                z-index: 100;
+                background-color: #D0E5F5;
+                padding: 5px 2px 2px;
+                color: #000;
+                font-weight: bolder;
+                cursor: pointer;
+                opacity: .5;
+                font-size: 23px;
+                line-height: 10px;
+                border-radius: 50%;
+            }
+
+            .img-wrap:hover .close {
+                opacity: 1;
+                background-color: #ff0000;
+            }
+
+        .FileNameCaptionStyle {
+            font-size: 12px;
+        }
+    </style>
+</head>
+    <body>
+        <!-- ModalWarning -->
+        <div id="myModalWarning" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+            <div class="modal-dialog" role="document">
+
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="modal" aria-label=" close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Warning!</strong>
+                    <div class="modal-body">
+                        <div id="textAlertWarningmes">Some text in the modal.</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">สาเหตุการคืนสินค้า</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="row" style="display:none">
+                    <div class="col-md-4">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">สาเหตุการคืนสินค้า</div>
+                        <select class="custom-select custom-select form-control form-control" id="causedrop" style="border-bottom: 5px solid #b33c0f;">
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">สาเหตุการคืนสินค้า</div>
+                        Please enter data,at most 50 characters
+                        <textarea class="form-control form-control-sm" id="causeclaim" maxlength="50" style="border-bottom: 5px solid #b33c0f; height: 100px;"></textarea>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>                   
+                    <div class="col-md-4">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">ต้องการให้ดำเนินการ</div>
+                        <select class="custom-select custom-select form-control form-control" id="_proceedto" style="border-bottom: 5px solid #b33c0f;">
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">สถานะรับสินค้า</div>
+                        <select class="custom-select custom-select form-control form-control" id="_statusclaim" style="border-bottom: 5px solid #b33c0f;">
+                            <option></option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">รายการคืนสินค้า</h6>
+            </div>
+           
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+
+
+                    </div>
+                    <div class="col-md-4">
+
+
+                    </div>
+
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn btn-success" id="_btnsave" style="display:none">บันทึกลงตระกร้า</button>
+                        <button type="button" class="btn btn btn-primary" id="_btnsenclim">ส่งให้ หัวหน้า อนุมัติ</button>
+                        <button type="button" class="btn btn-secondary" id="refresh">Refresh</button>
+                    </div>
+                </div>
+                <input type="text" required id="_claimno" disabled="disabled" class="form-control">
+                <div id="fixed-table-container-3" class="fixed-table-container">
+                    <table id="receclaimbefor">
+                        <thead>
+                            <tr>
+                                @*<th style="background-color: antiquewhite;">X</th>*@  
+                                <th>No.</th>                            
+                                <th>Item No.</th>
+                                <th style="text-align:center">Description.</th>
+                                <th>Stock<br /> Group.</th>
+                                <th>UOM</th>
+                                <th>Qty.</th>
+                                <th>จำนวน<br /> ที่คืนได้</th>
+                                <th style="text-align:center">Invoice No</th>
+                                <th style="text-align:center">Customer</th>
+                                <th style="text-align:center">Sales Man.</th>
+                                <th>Net<br>Unit Price</th>
+                                <th>Net<br>Line Amount </th>
+                                <th style="text-align:center">Foc</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+           
+            </div>
+           
+        </div>
+        <!-- ModalShipping -->
+        <div id="ModalShipping" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+            <div class="modal-dialog modal-lg" style="overflow-y: scroll;height: 750px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h4 class="modal-title">เลือก สถานที่รับสินค้า</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body" @*style="overflow-x:scroll"*@>
+                        <input type="text" required id="_cusnoship" placeholder="Search Customer" style="border-bottom: 5px solid #b33c0f;">
+                        <div id="modal-message"></div>
+                        <div id="fixed-table-container-5" class="fixed-table-container" style="overflow: auto; position: relative; height: 300px;">
+                            <table id="shipping">
+                                <thead>
+                                    <tr>
+                                        <th>Customer</th>
+                                        <th>Code</th>
+                                        <th>Name</th>
+                                        <th>Name2</th>
+                                        <th>Address</th>
+                                        <th>Address2</th>
+                                        <th>City</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-12">
+
+                        <div id="openShipping" style="display:block;">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">ระบุจำนวนกล่องที่จะให้รถไปรับ<span class="glyphicon glyphicon-hand-right"></span></span>
+                                        <select id="qtybox" style="border-bottom: 1px solid #c51717;">
+                                            <option>0</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                            <option>19</option>
+                                            <option>20</option>
+                                            <option>21</option>
+                                            <option>22</option>
+                                            <option>23</option>
+                                            <option>24</option>
+                                            <option>25</option>
+                                            <option>26</option>
+                                            <option>27</option>
+                                            <option>28</option>
+                                            <option>29</option>
+                                            <option>30</option>
+                                            <option>31</option>
+                                            <option>32</option>
+                                            <option>33</option>
+                                            <option>34</option>
+                                            <option>35</option>
+                                            <option>36</option>
+                                            <option>37</option>
+                                            <option>38</option>
+                                            <option>39</option>
+                                            <option>40</option>
+                                            <option>41</option>
+                                            <option>42</option>
+                                            <option>43</option>
+                                            <option>44</option>
+                                            <option>45</option>
+                                            <option>46</option>
+                                            <option>47</option>
+                                            <option>48</option>
+                                            <option>49</option>
+                                            <option>50</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">CustomerCode<span class="glyphicon glyphicon-hand-right"></span></span>
+                                            <input type="text" id="CustomerShipping" class="form-control" disabled="disabled" /><span id="clval" style="background-color: #484343;font-size: x-large;color: white;width: 40px;border-bottom-right-radius: 50px;border-top-right-radius: 47px;text-align: center;cursor: pointer;">X</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            @*<span class="input-group-addon" id="btnok" style="background-color: #7FC1A9;cursor: pointer;color: white;">Ship To Code<span class=" glyphicon glyphicon-hand-right"></span></span>*@
+                                            @*<input type="button" id="btnok" class="btn-default" name="example" value="ส่งอนุมัติ" style="background-color: aqua;">*@
+                                            <button type="button" class="btn btn btn-primary" id="btnok" style="width:50%">ส่งพิจารณา</button>
+                                            <span class="input-group-addon "><span id="scs" style="color: cyan;display:none"></span><span></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Name<span class="glyphicon glyphicon-hand-right"></span></span>
+                                            <input type="text" id="NameShipping" class="form-control" disabled="disabled" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Code<span class="glyphicon glyphicon-hand-right"></span></span>
+                                            <input type="text" id="codeShipping" class="form-control" disabled="disabled" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Address<span class="glyphicon glyphicon-hand-right"></span></span>
+                                            <input type="text" id="AddressShipping" class="form-control" disabled="disabled" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <textarea rows="4" cols="80" id="remakeclaim" placeholder="Comment สำหรับสั่งให้รถไปรับ"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="button" class="btn btn-default" data-dismiss="modal">Cancel Ship To Code</button>*@
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <!-- EndModalShipping -->
+        <!-- Modalconfirm-Shipto-->
+        <div id="myModalsignature" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+            <div class="modal-dialog" role="document">
+
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="modal" aria-label=" close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Signature Customer!</strong>
+                    <div class="modal-body">
+
+                        <div class="wrapper">
+
+                            <canvas id="signature-pad" class="signature-pad" width=400 height=200></canvas>
+                        </div>
+                        <strong>Signature Sales Man!</strong>
+                        <div class="wrapper">
+
+                            <canvas id="signature-pad-man" class="signature-pad" width=400 height=200></canvas>
+                        </div>
+                        @*<div>
+                            <button id="save">Save</button>
+                            <button id="clear">Clear</button>
+                        </div>*@
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">ระบุจำนวนกล่องที่รับมา<span class="glyphicon glyphicon-hand-right"></span></span>
+                                    <select id="qtyboxsend" style="border-bottom: 1px solid #c51717; border-top: 1px solid cornsilk;">
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                        <option>11</option>
+                                        <option>12</option>
+                                        <option>13</option>
+                                        <option>14</option>
+                                        <option>15</option>
+                                        <option>16</option>
+                                        <option>17</option>
+                                        <option>18</option>
+                                        <option>19</option>
+                                        <option>20</option>
+                                        <option>21</option>
+                                        <option>22</option>
+                                        <option>23</option>
+                                        <option>24</option>
+                                        <option>25</option>
+                                        <option>26</option>
+                                        <option>27</option>
+                                        <option>28</option>
+                                        <option>29</option>
+                                        <option>30</option>
+                                        <option>31</option>
+                                        <option>32</option>
+                                        <option>33</option>
+                                        <option>34</option>
+                                        <option>35</option>
+                                        <option>36</option>
+                                        <option>37</option>
+                                        <option>38</option>
+                                        <option>39</option>
+                                        <option>40</option>
+                                        <option>41</option>
+                                        <option>42</option>
+                                        <option>43</option>
+                                        <option>44</option>
+                                        <option>45</option>
+                                        <option>46</option>
+                                        <option>47</option>
+                                        <option>48</option>
+                                        <option>49</option>
+                                        <option>50</option>
+
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        @*<span class="input-group-addon" id="btnok" style="background-color: #7FC1A9;cursor: pointer;color: white;">Ship To Code<span class=" glyphicon glyphicon-hand-right"></span></span>*@
+                                        <input type="button" id="save" class="btn-default" name="example" value="ส่งพิจารณา" style="background-color: aqua;">
+                                        <span class="input-group-addon "><span id="scs" style="color: cyan;display:none"></span><span></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <button id="clear">Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <img id="imgCapture" alt="" style="display:none;border:1px solid #ccc" />
+        <img id="imgCaptureman" alt="" style="display:none;border:1px solid #ccc" />
+        <input type="hidden" id="_uderlogin" value="@user" />
+        <input type="hidden" id="_udertype" value="@userType" />
+        <input type="hidden" id="_cusno" value="@Cusno" />
+        <input type="hidden" id="_invno" value="@Invno" />
+        <input type="hidden" id="_Comy" value="@Comy" />
+        <input type="hidden" id="_slmcod"  />
+        <script type="text/javascript">
+            var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
+                backgroundColor: 'rgba(255, 255, 255, 0)',
+                penColor: 'rgb(0, 0, 0)'
+            });
+            var signaturePadman = new SignaturePad(document.getElementById('signature-pad-man'), {
+                backgroundColor: 'rgba(255, 255, 255, 0)',
+                penColor: 'rgb(0, 0, 0)'
+            });
+            var cancelButton = document.getElementById('clear');
+
+            cancelButton.addEventListener('click', function (event) {
+                signaturePad.clear();
+                signaturePadman.clear();
+            });
+            $("#_cusnoship").autocomplete({
+                selectFirst: true,
+                autoFocus: true,
+                source: function (request, response) {
+                    var param = { Name: $('#_cusnoship').val(), Slm: $("#_slmcod").val() };
+                    $.ajax({
+                        url: '@Url.Action("GetdateCusAdd", "GetdataCenter")',
+                        data: JSON.stringify(param),
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataFilter: function (data) { return data; },
+                        success: function (data) {
+                            response($.map(data.slice(0, 50), function (item) {
+                                return {
+                                    value: item
+                                }
+                            }))
+                        },
+                        error: function (XMLhttpsRequest, textStatus, errorThrown) {
+                            alert(textStatus);
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    var _val = ui.item.value;
+                    var _splito = "";
+                    _splito = _val.split('|');
+                    var splitval = _splito;
+                    _scus = _splito[0].trim();
+                    //$("#_cusno").val(_splito[0].trim());
+                    //$("#_cusname").val(_splito[1].trim());
+
+                    $.ajax({
+                        url: '@Url.Action("GetdataCusMasterAdd", "GetdataCenter")',
+                        data: {
+                            XXcus: _scus
+
+                        },
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function (data) {
+                            $('#fixed-table-container-5 tbody:last-child').html("");
+                            $("#scs").text(data.length)
+                            var SubmithtmlPage = "";
+                            var crt = "";
+                            //for (var i = 0; i < data.length; i++) {
+                            for (var i = 0; i < data.Getdata.length; i++) {
+                                crt = data.Getdata[i].val.customer
+                                SubmithtmlPage += '<tr style="cursor: pointer;" cus="' + data.Getdata[i].val.customer + '"  Code="' + data.Getdata[i].val.code + '"  Namecus="' + data.Getdata[i].val.name + '" Address="' + data.Getdata[i].val.address + '" Address_2="' + data.Getdata[i].val.address2 + '">';
+                                //if (_splitocus == crt) {
+                                //    SubmithtmlPage += '<td style="background-color: red;color: bisque;">' + data.Getdata[i].val.customer + '</td>';
+                                //  } else {
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.customer + '</td>';
+                                //  }
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.code + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.name + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.name2 + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.address + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.address2 + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.city + '</td>';
+                                SubmithtmlPage += '</tr>';
+
+                            }
+                            $('#fixed-table-container-5  tbody:last-child').append(SubmithtmlPage);
+
+                        }
+                    });
+                },
+
+                minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
+            });
+    $(document).ready(function () {
+        var UserId = $("#_uderlogin").val();
+        var Udertype = $("#_udertype").val();
+        var Cusno = $("#_cusno").val();
+        var Invno = $("#_invno").val();
+        var Invcom = $("#_Comy").val();
+        $.ajax({
+            url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
+            data: {
+                Name: 20
+            },
+            type: "POST",
+            dataType: "JSON",
+            success: function (data) {
+
+                var select = $("#_proceedto");
+                select.children().remove();
+                // select.append($("<option>").val("0").text("เลือกCUSCOD"));
+                $(data).each(function (index, item) {
+
+                    select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+
+                });
+                //  var CUSCODt = $("#CUSCOD option:selected").text();
+            }
+        });
+        $.ajax({
+            url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
+            data: {
+                Name: 21
+            },
+            type: "POST",
+            dataType: "JSON",
+            success: function (data) {
+
+                var select = $("#_statusclaim");
+                select.children().remove();
+
+                select.append($("<option>").val("0").text("สถานะรับคืนสินค้า"));
+                $(data).each(function (index, item) {
+                    if (item.CODE == "1" || item.CODE == "2" || item.CODE == "4" || item.CODE == "6") {
+                        select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                    }
+
+                });
+                //  var CUSCODt = $("#CUSCOD option:selected").text();
+            }
+        });
+        $.ajax({
+            url: '@Url.Action("GetdataInvoicestatudRT", "GetdataCenter")',
+            data: {
+                _cusno: Cusno,
+                _itemno: "",
+                _invoiceno: Invno,
+                _com: Invcom,
+                _statdate: "",
+                _enddate: "",
+                _foc: "",
+                _slmcod: "",
+                _flength: "0"
+            },
+            type: "POST",
+            dataType: "JSON",
+            success: function (data) {
+                console.log(data);
+                var No = 1;
+                var SubmithtmlPage = '';
+                for (var i = 0; i < data.Getdata.length; i++) {
+                    var chkremqty = data.Getdata[i].val.QTY_Remaining;
+                    $("#_slmcod").val(data.Getdata[0].val.SLMCOD);
+                    if (chkremqty > 0) {
+                        SubmithtmlPage = '<tr fax="2" invno="' + data.Getdata[i].val.DOCNUM + '" invqty="' + data.Getdata[i].val.Qty + '"  invdat="' + data.Getdata[i].val.PSTDAT + '"  netprice="' + data.Getdata[i].val.NetAmt + '" stkcod="' + data.Getdata[i].val.STKCOD + '" stkdes="' + data.Getdata[i].val.STKDES + '" uom="' + data.Getdata[i].val.Uom + '" reqty="' + data.Getdata[i].val.QTY_Remaining + '" cuscod="' + data.Getdata[i].val.PEOPLE + '" foc="' + data.Getdata[i].val.FOC + '">';
+                        //SubmithtmlPage += '<td><button type="reset" id="delclmtemp" style="min-width: 50px;" >Delete</td>';
+                        SubmithtmlPage += '<td>' + (No + i) + '</td>';
+                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
+                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STKDES + '</td>';
+                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STKGRP + '</td>';
+                        SubmithtmlPage += '<td>' + data.Getdata[i].val.Uom + '</td>';
+                        SubmithtmlPage += '<td>' + data.Getdata[i].val.Qty + '</td>';
+                        SubmithtmlPage += '<td>' + data.Getdata[i].val.QTY_Remaining + '</td>';
+                        SubmithtmlPage += '<td>' + data.Getdata[i].val.DOCNUM + '</td>';
+                        SubmithtmlPage += '<td>' + data.Getdata[i].val.PEOPLE + '/' + data.Getdata[i].val.CUSNAM + '</td>';
+                        SubmithtmlPage += '<td>' + data.Getdata[i].val.SLMCOD + '</td>';
+                        SubmithtmlPage += '<td>' + data.Getdata[i].val.Net_Price + '</td>';
+                        SubmithtmlPage += '<td>' + data.Getdata[i].val.NetAmt + '</td>';
+                        SubmithtmlPage += '<td>' + data.Getdata[i].val.FOC + '</td>';
+                        SubmithtmlPage += '</tr>';
+                        $('#receclaimbefor > tbody:last-child').append(SubmithtmlPage);
+                    }
+                }
+                var fixedTable3 = fixTable(document.getElementById('fixed-table-container-3'));
+            }
+        });
+        $('#myModalsignature').on('hidden.bs.modal', function (e) {
+            signaturePad.clear();
+            signaturePadman.clear();
+            $('#qtyboxsend').val("0");
+        })
+        function GetClimtemp(claimnokey) {
+            var valclim = claimnokey
+            $.ajax({
+                url: '@Url.Action("GetClimtemp", "Createsalesreturn_sales")',
+                        data: {
+                            inCLM_ID: valclim
+                        },
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function (data) {
+                            console.log(data);
+                            // var SubmithtmlPage = '';
+                            $('#receclaim > tbody:last-child').html("");
+                            if (data.Getdata.length > 0) {
+                                $("#_cusno").attr('disabled', 'disabled');
+                                $("#_company").attr('disabled', 'disabled');
+                                $("#slmcod").attr('disabled', 'disabled');
+                                $("#_invoiceno").attr('disabled', 'disabled');
+                                var sta = data.Getdata[0].val.Status
+
+                                if (sta != "1") {
+
+                                    $("#_claimno").val(data.Getdata[0].val.STMP_ID);
+                                    $("#_cusno").val(data.Getdata[0].val.CUSCOD);
+                                    $("#_cusname").val(data.Getdata[0].val.CUSNAM);
+                                    $("#slmcod").val(data.Getdata[0].val.SLMCOD);
+                                    $("#sslmnam").val(data.Getdata[0].val.SLMNAM);
+                                    $("#requestby").val(data.Getdata[0].val.STMP_REQUESTBY);
+                                    $("#requestdate").val(data.Getdata[0].val.CLM_RCVDATE);
+                                    $("#_company").val(data.Getdata[0].val.COMPANY);
+                                    $("#_invcustomer").val(data.Getdata[0].val.CUSCOD);
+                                    $("#_invoiceno").val(data.Getdata[0].val.STMP_INVNO);
+                                    $("#causedrop").val(data.Getdata[0].val.STMP_ReasonCodes);
+                                    //GetShipto()
+                                    //$("#_focdis").val(data.Getdata[0].val.FOC);
+                                    var SubmithtmlPage = '';
+                                    for (var i = 0; i < data.Getdata.length; i++) {
+                                        SubmithtmlPage = '<tr  fax="2" Price="' + data.Getdata[i].val.Price + '" foc="' + data.Getdata[i].val.FOC + '" cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.COMPANY + '" clmnoup="' + data.Getdata[i].val.STMP_ID_SUB + '"  proceedtoup = "' + data.Getdata[i].val.STMP_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.STMP_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.UOM + '" claimqtyup="' + data.Getdata[i].val.STMP_QTY + '" invoicenoeup="' + data.Getdata[i].val.STMP_INVNO + '" invoicedete = "' + data.Getdata[i].val.STMP_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.STMP_CASE + '" clmmachine="' + data.Getdata[i].val.CLM_Machine + '" >';
+                                        SubmithtmlPage += '<td><button type="reset" id="delclmtemp" style="min-width: 50px;" Price="' + data.Getdata[i].val.Price + '" foc="' + data.Getdata[i].val.FOC + '"  clmID="' + data.Getdata[0].val.STMP_ID + '" clmnoup="' + data.Getdata[i].val.STMP_ID_SUB + '">X</button></td>';
+                                        SubmithtmlPage += '<td  id="btngetshowdata" style="color: darkorchid; width: 110px;" fax="2"  Price="' + data.Getdata[i].val.Price + '"  foc="' + data.Getdata[i].val.FOC + '"  prodnam="' + data.Getdata[i].val.PRODNAM + '" prode="' + data.Getdata[i].val.PROD + '"  cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.COMPANY + '" clmnoup="' + data.Getdata[i].val.STMP_ID_SUB + '"  proceedtoup = "' + data.Getdata[i].val.STMP_PERFORM + '" resoncod="' + data.Getdata[i].val.STMP_ReasonCodes + '" statusclaimup = "' + data.Getdata[i].val.STMP_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.UOM + '" claimqtyup="' + data.Getdata[i].val.STMP_QTY + '" invoicenoeup="' + data.Getdata[i].val.STMP_INVNO + '" invoicedete = "' + data.Getdata[i].val.STMP_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.STMP_CASE + '">' + data.Getdata[i].val.STMP_ID_SUB + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STKDES + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STKGRP + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.UOM + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STMP_QTY + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STMP_INVNO + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STMP_CASE + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.PERFORMDESCRIPTION + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '</td>';
+                                        SubmithtmlPage += '</tr>';
+                                        $('#receclaim > tbody:last-child').append(SubmithtmlPage);
+                                    }
+                                } else {
+                                    alert("สถานะอยู่ระหว่างพิจารณาผล");
+                                }
+                            } else {
+                                $("#_cusno").removeAttr('disabled');
+                                //clearval();
+                                //clearimage();
+                                $("#_invcustomer").val("");
+                                $("#_invcustomer").removeAttr('disabled');
+                                $("#slmcod").removeAttr('disabled');
+                                $("#_invoiceno").removeAttr('disabled');
+
+                                // gettypeprocess(valclim)
+
+                            }
+                            var fixedTable2 = fixTable(document.getElementById('fixed-table-container-2'));
+                        }
+                    });
+                }
+                $("#_btnsenclim").on("click", function (e) {
+                    var data = [];
+                    var isValid = true;
+                    if (navigator.onLine) {
+                        var xcause = $("#causeclaim").val();
+                        if (xcause == "") {
+                            $("#textAlertWarningmes").empty();
+                            $("#textAlertWarningmes").text("กรุณาระบุ สาเหตุการคืนสินค้าเพื่อง่ายต่อการอนุมัติ");
+                            $("#myModalWarning").modal();
+                            return false;
+                        }
+                        var xproceedto = $("#_proceedto").val();
+                        if (xproceedto == "0") {
+                            $("#textAlertWarningmes").empty();
+                            $("#textAlertWarningmes").text("กรุณาระบุ ต้องการให้ดำเนินการ");
+                            $("#myModalWarning").modal();
+                            return false;
+                        }
+                        var xstatusclaim = $("#_statusclaim").val();
+                        if (xstatusclaim == "0") {
+                            $("#textAlertWarningmes").empty();
+                            $("#textAlertWarningmes").text("กรุณาระบุ สถานะรับสินค้า");
+                            $("#myModalWarning").modal();
+                            return false;
+                        }
+                        var nokey = $("#_claimno").val();
+                        var data = $('#receclaimbefor').find('tbody').find('tr').length
+                        var sumamt = 0;
+                        var data = [];
+                        if (data == "0") {
+                            $("#textAlertWarningmes").empty();
+                            $("#textAlertWarningmes").text("ไม่มีรายการสำหรับส่งตรวจสอบ");
+                            $("#myModalWarning").modal();
+                            return false;
+                        }
+                        $('#receclaimbefor').find('tbody').find('tr').each(function () {
+                            sumamt += parseFloat($(this).attr('netprice'));
+                        });
+                        if (sumamt == 0) {
+                            $("#textAlertWarningmes").empty();
+                            $("#textAlertWarningmes").text("ไม่สามารถทำรายการคืนสินค้า เนื่องจาก ไม่มีมูลค่าสินค้า(ของแถม) กรุณาทำรายการใหม่");
+                            $("#myModalWarning").modal();
+                            return false;
+                        }
+                 
+                        var _splitocus = $("#_cusno").val();
+                        var _slm = $("#_slmcod").val();
+                        if (xstatusclaim != "2") {
+                            $.ajax({
+                                url: '@Url.Action("GetdataCusShipping", "GetdataCenter")',
+                                data: {
+                                    XXcus: _splitocus,
+                                    XXslm: _slm
+                                },
+                                type: "POST",
+                                dataType: "JSON",
+                                success: function (data) {
+                                    console.log(data);
+                                    $("#ModalShipping").modal();
+                                     $('#openShipping').css("display", "block");
+
+                                    $('#fixed-table-container-5 tbody:last-child').html("");
+                                    $("#scs").text(data.length)
+                                    var SubmithtmlPage = "";
+                                    var crt = "";
+                                    //for (var i = 0; i < data.length; i++) {
+                                    for (var i = 0; i < data.Getdata.length; i++) {
+                                        crt = data.Getdata[i].val.customer
+                                        SubmithtmlPage += '<tr style="cursor: pointer;" cus="' + data.Getdata[i].val.customer + '"  Code="' + data.Getdata[i].val.code + '"  Namecus="' + data.Getdata[i].val.name + '" Address="' + data.Getdata[i].val.address + '" Address_2="' + data.Getdata[i].val.address2 + '">';
+                                        if (_splitocus == crt) {
+                                            SubmithtmlPage += '<td style="background-color: red;color: bisque;">' + data.Getdata[i].val.customer + '</td>';
+                                        } else {
+                                            SubmithtmlPage += '<td>' + data.Getdata[i].val.customer + '</td>';
+                                        }
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.code + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.name + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.name2 + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.address + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.address2 + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.city + '</td>';
+                                        SubmithtmlPage += '</tr>';
+
+                                    }
+                                    $('#fixed-table-container-5  tbody:last-child').append(SubmithtmlPage);
+                                   
+                                }
+
+                            });
+
+                        } else {
+                            //$("#save").click();
+                            $("#myModalsignature").modal();
+                        }
+                              
+                     }//online
+                });
+        $("#save").on("click", function () {
+
+            $("#btnok").click();
+        });
+        $('#ModalShipping').on('hidden.bs.modal', function () {
+            $('#CancalShippto').click();
+            $('#clval').click();
+            $("#qtybox").val("0");
+            $("#_cusnoship").val("");
+            $("#remakeclaim").val("");
+        });
+        $("#btnok").on("click", function () {
+          //  var claimno = $("#_claimno").val();
+            var RCVBY = $("#_uderlogin").val();
+            var data = $('#receclaimbefor').find('tbody').find('tr').length
+
+            var qtybox;
+            var qtyboxreq = $("#qtybox").val();//รถไปรับ
+            var qtyboxsend = $("#qtyboxsend").val(); //พนงรับเอง
+            //alert(RCVBY + '/////' + data + '/////' + qtyboxreq)
+            var remakecar = $("#remakeclaim").val();
+            var req = $("#_statusclaim").val();
+            if (req == "2") {
+
+                var data = signaturePad.toDataURL('image/png');
+                //console.log(signaturePad)
+                var imgsignature;
+                if (signaturePad.isEmpty()) {
+                    alert("กรุณาให้ลูกค้าเซ็นยืนยันรับสินค้า");
+                    return false;
+                } else {
+
+                    $("#imgCapture").attr("src", data);
+                    imgsignature = $('#imgCapture').attr('src');
+                }
+
+
+                // $("#imgCapture").attr("src", data);
+                var dataman = signaturePadman.toDataURL('image/png');
+                var imgsignatureman;
+                if (signaturePadman.isEmpty()) {
+                    alert("กรุณาเซ็นยืนยันรับสินค้าจากลูกค้า");
+                    return false;
+                } else {
+
+                    $("#imgCaptureman").attr("src", dataman);
+                    imgsignatureman = $('#imgCaptureman').attr('src');
+                }
+
+                if (qtyboxreq != "0") {
+                    qtybox = qtyboxreq;
+                } else if (qtyboxreq == "0") {
+                    if (qtyboxsend != "0") {
+                        qtybox = qtyboxsend;
+                    } else {
+                        qtybox = "0";
+                    }
+                }
+            } else if (req == "6") {
+
+                if (qtyboxreq == "0") {
+                    alert("กรุณาให้ระบุจำนวนกล่อง");
+                    return false;
+                } else {
+                    if (remakecar == "") {
+                        alert("กรุณาระบุชื่อขนส่ง ที่ช่อง Comment สำหรับสั่งให้รถไปรับ");
+                        return false;
+                    }
+
+                    qtybox = qtyboxreq;
+
+                }
+
+                imgsignature = "";
+                imgsignatureman = "";
+            } else if (req == "1" || req == "4") {
+
+                if (qtyboxreq != "0") {
+                    qtybox = qtyboxreq;
+                } else if (qtyboxreq == "0") {
+                    if (qtyboxsend != "0") {
+                        qtybox = qtyboxsend;
+                    } else {
+                        qtybox = "0";
+                    }
+                }
+                imgsignature = "";
+                imgsignatureman = "";
+            }
+            if (req == "1") {
+                if (qtybox == "0") {
+                    //$("#textAlertWarningmes").empty();
+                    //$("#textAlertWarningmes").text("กรุณาระบุจำนวนกล่องที่จะให้รถไปรับ");
+                    //$("#myModalWarning").modal();
+                    alert("กรุณาระบุจำนวนกล่องที่จะให้รถไปรับ");
+                    return false;
+                }
+            } else if (req == "2") {
+                if (qtybox == "0") {
+                    //$("#textAlertWarningmes").empty();
+                    //$("#textAlertWarningmes").text("กรุณาระบุจำนวนกล่องที่จะให้รถไปรับ");
+                    //$("#myModalWarning").modal();
+                    alert("กรุณาระบุจำนวนกล่องที่จะคืนสินค้า");
+                    return false;
+                }
+            }
+      
+            if (data == "0") {
+                $("#textAlertWarningmes").empty();
+                $("#textAlertWarningmes").text("ไม่มีรายการสำหรับส่งพิจารณา");
+                $("#myModalWarning").modal();
+                return false;
+            }
+            var nokey = $("#_claimno").val();
+        
+            if (nokey == "") {
+                var Gendoc;
+                var Clno = nokey;
+                var Com = $("#_Comy").val();
+                if (Com == "TAC") {
+                    Gendoc = 'RTT';
+                } else if (Com == "AAC") {
+                    Gendoc = 'RTA';
+                } else if (Com == "OMP") {
+                    Gendoc = 'RTO';
+                }
+                var xcause = $("#causeclaim").val();
+              
+                var xproceedto = $("#_proceedto").val();
+               
+                var xstatusclaim = $("#_statusclaim").val();
+             
+              
+                var data = $('#receclaimbefor').find('tbody').find('tr').length
+                var sumamt = 0;
+                var data = [];
+                if (data == "0") {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("ไม่มีรายการสำหรับส่งตรวจสอบ");
+                    $("#myModalWarning").modal();
+                    return false;
+                }
+                $('#receclaimbefor').find('tbody').find('tr').each(function () {
+                    sumamt += parseFloat($(this).attr('netprice'));
+                });
+                if (sumamt == 0) {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("ไม่สามารถทำรายการคืนสินค้า เนื่องจาก ไม่มีมูลค่าสินค้า(ของแถม) กรุณาทำรายการใหม่");
+                    $("#myModalWarning").modal();
+                    return false;
+                }
+
+                var requestby = $("#_uderlogin").val();
+                var CusShipping = $('#CustomerShipping').val();
+                var codeShipping = $('#codeShipping').val();
+                var remakeclaim = $('#remakeclaim').val();
+                $('#receclaimbefor').find('tbody').find('tr').each(function () {
+                    var netprice = $(this).attr('netprice');
+                    var stkcod = $(this).attr('stkcod');
+                    var stkdes = $(this).attr('stkdes');
+                    var uom = $(this).attr('uom');
+                    var reqty = $(this).attr('reqty');
+                    var cuscod = $(this).attr('cuscod');
+                    var invno = $(this).attr('invno');
+                    var invdat = $(this).attr('invdat');
+                    var invqty = $(this).attr('invqty');
+                    var valfoc = $(this).attr('foc');
+                    var sefoc;
+                    if (valfoc == "0") {
+                        sefoc = "";
+                    } else {
+                        sefoc = "FOC";
+                    }
+                    var ItemList = {
+                        CUSCOD: cuscod,
+                        inSTKCOD: stkcod,
+                        inSTKDES: stkdes,
+                        inCLM_UOM: uom,
+                        inCLM_INVNO: invno,
+                        inINV_QTY: invqty,
+                        inCLM_INVDATE: invdat,
+                        inCLM_QTY: reqty,
+                        inCLM_CAUSE: xcause,
+                        inCLM_PERFORM: xproceedto,
+                        inCLM_RCVSTATUS: xstatusclaim,
+                        inCLM_RCVBY: requestby,
+                        inCLM_RCVDATE: "",
+                        InCom: Com,
+                        innet_price: netprice,
+                        incasebec: "",
+                        infoc: sefoc,
+                    }
+                    data.push(ItemList);
+                });
+                //console.log(data);
+                //alert(Gendoc);
+                var DataSend = JSON.stringify(data);
+                $.ajax({
+                    url: '@Url.Action("SaveClimtemp", "Createsalereturn_salesall")',
+                    data: {
+                        data: DataSend,
+                        Gendoc: Gendoc,
+                        Clno: Clno,
+                        Com: Com,
+                        Inclmno: nokey
+
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+                        if (data.message == "true") {
+                            //alert("สร้างรายการสำเร็จ");
+                            $("#_claimno").val(data.subno);
+
+
+                            $.ajax({
+                                url: '@Url.Action("SaveClim", "Createsalereturn_salesall")',
+                                data: {
+                                    inCLM_ID: data.subno,
+                                    inCLM_RCVBY: requestby,
+                                    inCusShipping: CusShipping,
+                                    incodeShipping: codeShipping,
+                                    inremakeclaim: remakeclaim,
+                                    inqtybox: qtybox,
+                                    imgsignature: imgsignature,
+                                    imgsignatureman: imgsignatureman
+
+                                },
+                                type: "POST",
+                                dataType: "JSON",
+                                success: function (data) {
+                                    console.log(data);
+                                    //return false;
+                                    if (data.cmid != "ERROR") {
+                                        $("#myModalsignature").hide();
+                                        $("#ModalShipping").hide();
+                                        $("#textAlertSucces").empty();
+                                        $("#textAlertSucces").text("ส่งพิจจารณาสำเร็จ");
+                                        $("#myModalSucces").modal();
+                                        var valclim = data.cmid;
+                                        //alert(imgsignature)
+                                        //if(imgsignature != ""){
+                                        // var claimnopr = claimnosend;
+                                        var wi = window.open("../Report/frmRequestRT.aspx?ClmNUM=" + btoa(valclim));
+                                        // var wi = window.open("../Report/frmReceiveproductRT.aspx?ClmNUM=" + btoa(valclim));
+                                        wi.focus();
+                                        //}else{
+                                        //    var wi = window.open("../Report/frmRequestRT.aspx?ClmNUM=" + btoa(valclim));
+                                        //    wi.focus();
+
+                                        location.reload();
+
+                                        //  }
+
+                                    } else {
+                                        $("#textAlertWarningmes").empty();
+                                        $("#textAlertWarningmes").text("บันทึกไม่สำเร็จ กรุณา ทำรายการใหม่");
+                                        $("#myModalWarning").modal();
+
+                                    }
+
+                                    $("#receclaim > tbody").empty();
+                                    $("#_cusno").removeAttr('disabled');
+                                    location.reload();
+                                    $("#_claimno").val("");
+
+                                    clearval();
+
+
+                                }
+                            });
+                            //$('#receclaimbefor > tbody:last-child').html("");
+                            // GetClimtemp(data.subno)
+                        } else {
+                            alert(data.message)
+                        }
+                    }
+                });
+            }
+
+        });
+        $('#CancalShippto').click(function () {
+            $('#codeShipping').val("");
+            $('#CustomerShipping').val("");
+            $('#NameShipping').val("");
+            $('#AddressShipping').val("");
+
+        });
+      
+        $('#clval').click(function () {
+
+            $('#codeShipping').val("");
+            $('#CustomerShipping').val("");
+            $('#NameShipping').val("");
+            $('#AddressShipping').val("");
+
+        });
+        //var fixedTable5 = fixTable(document.getElementById('fixed-table-container-5'));
+        $("#shipping").on("click", "tr", function () {
+            var cus = $(this).attr('cus');
+            var code = $(this).attr('code');
+            var name = $(this).attr('namecus');
+            //var name = $(this).attr('name');
+            var address = $(this).attr('address');
+            var Address_2 = $(this).attr('Address_2');
+            $('#CustomerShipping').val(cus);
+            $('#codeShipping').val(code);
+            $('#NameShipping').val(name);
+            $('#AddressShipping').val(address + " " + Address_2);
+            // $("#ModalShipping").modal('hide');
+        });
+
+    });
+        </script>
+    </body>
+</html>

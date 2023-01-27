@@ -1,0 +1,569 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutindex.cshtml";
+    var user = ViewBag.UserId;
+    var usertype = ViewBag.UserType;
+    var noclaim = ViewBag.Claimno;
+
+}
+<html>
+    <head> 
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Check Ststus Sales Return</title>
+        <link href="~/Content/css/sb-admin-A.css" rel="stylesheet" />
+        <link href="~/Scripts/JSautocomplete/jquery-ui.css" rel="stylesheet" />
+        <script src="~/Scripts/JSautocomplete/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/JSautocomplete/jquery-ui.js"></script>
+        <script src="~/Content/fixed-table-master/fixed-table.js"></script>
+        <link href="~/Content/fixed-table-master/fixed-table.css" rel="stylesheet" />
+        <style>
+            #myImg {
+                border-radius: 5px;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+                #myImg:hover {
+                    opacity: 0.7;
+                }
+
+            /* The Modal (background) */
+            .modalx {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+            }
+
+            /* Modal Content (Image) */
+            .modal-contentx {
+                margin: auto;
+                display: block;
+                width: 80%;
+                max-width: 700px;
+            }
+
+            /* Caption of Modal Image (Image Text) - Same Width as the Image */
+            #caption {
+                margin: auto;
+                display: block;
+                width: 80%;
+                max-width: 700px;
+                text-align: center;
+                color: #ccc;
+                padding: 10px 0;
+                height: 150px;
+            }
+
+            /* Add Animation - Zoom in the Modal */
+            .modal-content, #caption {
+                animation-name: zoom;
+                animation-duration: 0.6s;
+            }
+            /* The Close Button */
+            .close {
+                position: absolute;
+                top: 56px;
+                right: 20px;
+                color: #f1f1f1;
+                font-size: 57px;
+                font-weight: bold;
+                /* transition: 0.3s; */
+                left: 1656px;
+            }
+
+                .close:hover,
+                .close:focus {
+                    color: #bbb;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+
+            .gi-4x {
+                font-size: 1.5em;
+            }
+
+            input[type=checkbox] {
+                /* Double-sized Checkboxes */
+                -ms-transform: scale(2); /* IE */
+                -moz-transform: scale(2); /* FF */
+                -webkit-transform: scale(2); /* Safari and Chrome */
+                -o-transform: scale(2); /* Opera */
+            }
+
+            button.print-button {
+                width: 75px;
+                height: 55px;
+            }
+
+                span.print-icon, span.print-icon::before, span.print-icon::after, button.print-button:hover .print-icon::after {
+                    border: solid 2px #333;
+                }
+
+                    span.print-icon::after {
+                        border-width: 2px;
+                    }
+
+            button.print-button {
+                position: relative;
+                padding: 0;
+                border: 0;
+                border: none;
+                background: transparent;
+            }
+
+                span.print-icon, span.print-icon::before, span.print-icon::after, button.print-button:hover .print-icon::after {
+                    box-sizing: border-box;
+                    background-color: #fff;
+                }
+
+            span.print-icon {
+                position: relative;
+                display: inline-block;
+                padding: 0;
+                margin-top: 20%;
+                width: 55%;
+                height: 30%;
+                background: #fff;
+                border-radius: 20% 20% 0 0;
+            }
+
+                span.print-icon::before {
+                    content: " ";
+                    position: absolute;
+                    bottom: 100%;
+                    left: 12%;
+                    right: 12%;
+                    height: 110%;
+                    transition: height .2s .15s;
+                }
+
+                span.print-icon::after {
+                    content: " ";
+                    position: absolute;
+                    top: 55%;
+                    left: 12%;
+                    right: 12%;
+                    height: 0%;
+                    background: #fff;
+                    background-repeat: no-repeat;
+                    background-size: 70% 90%;
+                    background-position: center;
+                    background-image: linear-gradient( to top, #fff 0, #fff 14%, #333 14%, #333 28%, #fff 28%, #fff 42%, #333 42%, #333 56%, #fff 56%, #fff 70%, #333 70%, #333 84%, #fff 84%, #fff 100% );
+                    transition: height .2s, border-width 0s .2s, width 0s .2s;
+                }
+
+            button.print-button:hover {
+                cursor: pointer;
+            }
+
+                button.print-button:hover .print-icon::before {
+                    height: 0px;
+                    transition: height .2s;
+                }
+
+                button.print-button:hover .print-icon::after {
+                    height: 120%;
+                    transition: height .2s .15s, border-width 0s .16s;
+                }
+
+            .pip {
+                display: inline-block;
+                margin: 10px 10px 0 0;
+            }
+        </style>
+    </head>
+<body>
+    <div class="modal fade" id="modalconfirmProcess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">คุณต้องการเข้าไปยืนยันรับสินค้าหรือไม่</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" id="linkprocess">OK</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-12">
+        <div class="card-header">
+            <i class="fa fa-table"></i>Admin WH ตรวจสอบรับสินค้า: <li id="clickme1" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+        </div>
+        <div class="card-body" id="myDIV1">
+            <div class="row">
+            <div class="col-md-4">
+                    <div class="form-group">
+                        <span> <i class="fa fa-user"></i>เลขที่/Document:</span>
+                        <span><input type="text" id="keyone" disabled="disabled" value="@noclaim" /></span>
+
+                    </div>
+            </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <span> <i class="fa fa-pencil"></i> สถานะ Sales Return:</span>
+                        <span><input type="text" id="statuscenter" disabled="disabled"  /></span>
+
+                    </div>
+
+                </div>
+            </div>
+           
+                <div class="col-md-12">
+                    <div class="row">
+                       
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-user"></i> ผู้รับสินค้า:</span>
+                                <span>
+                                    <select class="bar" id="_rcvbyte"></select>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> วันที่รับสินค้า:</span>
+                                <span>
+
+                                    <input type="date" id="_rcvdatetec" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4" style="display:none">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> สถานะการรับสินค้า:</span>
+                                <span>
+                                    <select class="bar" id="_proceedtowh" style="display:none"></select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <span><textarea rows="6" cols="100" id="causeclaimtec" placeholder="หมายเหตุ รับสินค้า"></textarea></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span> <i class="fa fa-user"></i> รับเรื่องโดย:</span>
+                                <span>
+                                    <input type="text" id="_adminwh" style="background: border-box border-box; color: blue;" disabled="disabled">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                               
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" data-dismiss="modal" id="btnconfimwh">ยืนยันรับสินค้า</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div id="fixed-table-container-3" class="fixed-table-container" style="display:block">
+                            <table id="exampletb">
+                                <thead>
+                                    <tr>
+                                        <th>RT No.</th>
+                                        <th>Item No.</th>
+                                        <th>Description</th>
+                                        <th>Quantity</th>
+                                        <th>Act<br />Qty</th>
+                                        <th>UOM</th>
+                                        <th>REMARK</th>
+                                        <th>สถานะ<br />Sales Return</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <input type="text" hidden id="_cmno" value="@noclaim" />
+    <input type="hidden" id="_uderlogin" value="@user" />
+    <input type="hidden" id="_udertype" value="@usertype" />
+    <script>
+        $(document).ready(function () {
+            $('#Sccreateclaim').css("background-color", "");
+            $('#Createcfreezes').css("background-color", "");
+            $('#ProcessApproveSup').css("background-color", "");
+            $('#ProcessApproveRT').css("background-color", "");
+            $('#SrcCheckstatus_Sc').css("background-color", "");
+            $('#SrcInvoiceHistory_Sc').css("background-color", "");
+            $('#Process_Rt').css("background-color", "rgb(9, 183, 9)");
+        function addCommas(nStr) {
+            nStr += '';
+            x = nStr.split('.');
+            x1 = x[0];
+            x2 = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            }
+            return x1 + x2;
+        }
+        var today = new Date();
+        $("#_rcvdatetec").val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));//วันที่รับสินค้าเข้าคลัง
+        $.ajax({
+            url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
+            data: {
+                Name: 21
+            },
+            type: "POST",
+            dataType: "JSON",
+            success: function (data) {
+                var select = $("#_proceedtowh");
+                select.children().remove();
+                select.append($("<option>").val("99").text("---เลือก Status ที่ต้องการ---"));
+                $(data).each(function (index, item) {
+                    select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                });
+            }
+        });
+        $.ajax({
+            url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
+            data: {
+                Name: 26
+            },
+            type: "POST",
+            dataType: "JSON",
+            success: function (data) {
+                var select = $("#_rcvbyte");
+                select.children().remove();
+                //select.append($("<option>").val("99").text("---เลือก Status ที่ต้องการ---"));
+                $(data).each(function (index, item) {
+                    select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                });
+            }
+        });
+            
+        var uderlogin = $("#_uderlogin").val();
+        $("#_adminwh").val(uderlogin);
+        var No = $("#_cmno").val();
+        if (typeof No != 'undefined' || No != null) {         
+            $.ajax({
+                url: '@Url.Action("Getsalesreturndetail", "Process_Rt")',
+                data: {
+                    indoc: No
+
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data.Getdata)
+                    if (data.Getdata.length > 0) {
+                       
+                        var STMP_STATUS = "";
+                        //var STMP_STATUS_PM = "";
+                        var check = data.Getdata[0].val.STMP_STATUS_CENTER;
+                       
+                        $('#causeclaimtec').val(data.Getdata[0].val.Remake_Admin);
+                        $('#statuscenter').val(data.Getdata[0].val.STMP_STATUS);
+                        if (check == "3") {
+                            $('#btnconfimwh').css('display', 'block');
+                        } else {
+                          //  $('#btnconfimwh').css('display', 'none');
+                        }
+                        var rowCount = $('#fixed-table-container-3  tbody:last-child').length;
+                        $('#myDIV').css('display', 'none');
+                        var SubmithtmlPage = '';
+                        $('#fixed-table-container-3  tbody:last-child').html("");
+                        for (var i = 0; i < data.Getdata.length; i++) {
+                            STMP_STATUS = data.Getdata[i].val.STMP_STATUS_CENTER;
+                           // STMP_STATUS_PM=  data.Getdata[i].val.STMP_STATUS_CENTER;
+                            SubmithtmlPage += '<tr>';
+                            if (STMP_STATUS == "3") {
+                                SubmithtmlPage += '<td ><div class="rownoid">' + data.Getdata[i].val.STMP_ID_SUB + '</div></td>';
+                                SubmithtmlPage += '<td ><div class="rowstock">' + data.Getdata[i].val.STKCOD + '</div></td>';
+                                SubmithtmlPage += '<td ><div class="rowstkdes">' + data.Getdata[i].val.STKDES + '</div></td>';
+                                SubmithtmlPage += '<td><div class="rowqtyreq">' + data.Getdata[i].val.STMP_REQQTY + '</div></td>';
+                                SubmithtmlPage += '<td><input type="text" class="textb" id="qtyinv' + (i + rowCount) + '"  name="s_qtyinv" value="' + data.Getdata[i].val.STMP_ADMIN_REQQTY + '"/></td>';
+                                SubmithtmlPage += '<td><div class="invsup">' + data.Getdata[i].val.STMP_UOM + '</div></td>';
+                                SubmithtmlPage += '<td><input type="text" class="texreline" id="reline' + (i + rowCount) + '"  name="s_reline" value="' + data.Getdata[i].val.ADMIN_REMARK + '"/></td>';
+                                SubmithtmlPage += '<td><div class="rowsta">' + data.Getdata[i].val.STMP_STATUS + '</div></td>';
+                            } else {
+                                SubmithtmlPage += '<td ><div class="rownoid">' + data.Getdata[i].val.STMP_ID_SUB + '</div></td>';
+                                SubmithtmlPage += '<td ><div class="rowstock">' + data.Getdata[i].val.STKCOD + '</div></td>';
+                                SubmithtmlPage += '<td ><div class="rowstkdes">' + data.Getdata[i].val.STKDES + '</div></td>';
+                                SubmithtmlPage += '<td><div class="rowqtyreq">' + data.Getdata[i].val.STMP_REQQTY + '</div></td>';
+                                SubmithtmlPage += '<td><input type="text" class="textb" id="qtyinv' + (i + rowCount) + '"  name="s_qtyinv" value="' + data.Getdata[i].val.STMP_ADMIN_REQQTY + '" disabled="disabled"/></td>';
+                                SubmithtmlPage += '<td><div class="invsup">' + data.Getdata[i].val.STMP_UOM + '</div></td>';
+                                SubmithtmlPage += '<td><input type="text" class="texreline" id="reline' + (i + rowCount) + '"  name="s_reline" value="' + data.Getdata[i].val.ADMIN_REMARK + '" disabled="disabled"/></td>';
+                                SubmithtmlPage += '<td><div class="rowsta">' + data.Getdata[i].val.STMP_STATUS + '</div></td>';
+                            }
+                            SubmithtmlPage += '</tr>';
+                        }
+                        $('#fixed-table-container-3  tbody:last-child').append(SubmithtmlPage);
+
+                        
+                    } else {
+                        waitingDialog.hide();
+                        $('#myDIV').css('display', 'block');
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("ไม่มีข้อมูล");
+                        $("#myModalWarning").modal();
+                    }
+                    var fixedTable3 = fixTable(document.getElementById('fixed-table-container-3'));
+                }
+            });
+        }
+
+       //$("#exampletb").on('keyup', "input[name='s_qtyinv']", function () {
+
+       //     // skip for arrow keys
+       //     if (event.which >= 37 && event.which <= 40) {
+       //         event.preventDefault();
+       //     }
+
+       //     $(this).val(function (index, value) {
+       //         value = value.replace(/,/g, '');
+       //         return numberWithCommas(value);
+       //     });
+       // });
+
+       //     function numberWithCommas(x) {
+       //         var parts = x.toString().split(".");
+       //         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+       //         return parts.join(".");
+            //     }
+         
+            $("#exampletb").on('keyup', "input[name='s_qtyinv']", function () {
+           
+                var actQty = $(this).val();
+                var Seqvalst = $(this).parents("tr").find(".rowqtyreq").html();
+                if (parseFloat(actQty) > parseFloat(Seqvalst)) {
+                   
+                    alert("กรุณาใส่จำนวนใหม่ จำนวนห้ามมากกว่าจำนวน Quantity: " + Seqvalst);
+                    $(this).val("");
+                    return false;
+                    
+                }
+                if (parseFloat(actQty) < 0) {
+
+                    alert("กรุณาใส่จำนวนใหม่ จำนวนห้ามติดลบ");
+                    return false;
+                }
+               
+         });
+        $("#btnconfimwh").click(function () {
+            var data = new Array();
+            var datachk = new Array();
+            var  keyone= $('#keyone').val();
+            var MyRows = $('#exampletb').find('tbody').find('tr');
+            for (var i = 0; i < MyRows.length; i++) {
+
+                var noid = $(MyRows[i]).find('td .rownoid').html();
+                var nostkcod = $(MyRows[i]).find('td .rowstock').html();
+                var nostkdes = $(MyRows[i]).find('td .rowstkdes').html();
+                var noqtyreq = $(MyRows[i]).find('td .rowqtyreq').html();
+                var Qtycon = "";
+                Qtycon = $(MyRows[i]).find('td .textb').val().replace(',', '').replace(' ', '');
+
+                if (Qtycon != "") {
+                    Qtycon = $(MyRows[i]).find('td .textb').val().replace(',', '').replace(' ', '');
+                } else {
+                    alert("กรุณาใส่จำนวนที่ต้องการรับสินค้า");
+
+                    Qtycon = "0";
+                    return false;
+                }
+                var comline = $(MyRows[i]).find('td .texreline').val();
+                var ItemList = {
+                    STMP_ID: keyone,
+                    STMP_ID_SUB: noid,
+                    STMP_STKCOD: nostkcod,
+                    STMP_STKDES: nostkdes,
+                    STMP_SALES_REQQTY: noqtyreq,
+                    STMP_ADMIN_REQQTY: Qtycon,
+                    userlogin: uderlogin,
+                    ADMIN_REMARK: comline
+                }
+                  data.push(ItemList);
+
+                  
+                
+                  
+            }
+            
+           
+            var DataSend = JSON.stringify(data);
+            var stmp_whadmin = $("#_rcvbyte").val();
+            var stmp_whreqdate = $("#_rcvdatetec").val();
+            var stmp_whremark = $("#causeclaimtec").val();
+            var stmp_insertby = $("#_adminwh").val();
+            $.ajax({
+                url: '@Url.Action("SaveProcessSalesReturnAdminWh", "Process_Rt")',
+                data: {
+                    DataSend: DataSend,
+                    stmp_whadmin: stmp_whadmin,
+                    stmp_whreqdate: stmp_whreqdate,
+                    stmp_whremark: stmp_whremark,
+                    stmp_insertby: stmp_insertby
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (resp) {
+                      console.log(resp);
+                    if (resp.message == "true") {
+                        alert("ยืนยันรับสินค้าสำเร็จ");
+                        var wi = window.open("../Report/frmRequestConfirmRT.aspx?ClmNUM=" + btoa(keyone));
+                        wi.focus();
+                        location.reload();
+                    } else {
+                        alert(resp.message);
+                    }
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>

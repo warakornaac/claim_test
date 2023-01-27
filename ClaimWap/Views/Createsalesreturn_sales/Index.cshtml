@@ -1,0 +1,3934 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutindexRT.cshtml";
+    var user = ViewBag.UserId;
+    var userType = ViewBag.UserType;
+    var Srtno = ViewBag.Srtno;
+    var claimno = ViewBag.Claimno;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title></title>
+    <!-- Custom fonts for this template-->
+
+    <script src="~/Content/fixed-table-master/fixed-table.js"></script>
+    <link href="~/Content/fixed-table-master/fixed-table.css" rel="stylesheet" />
+
+    <link href="~/Scripts/JSautocomplete/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/JSautocomplete/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/JSautocomplete/jquery-ui.js"></script>
+    <script src="~/Scripts/signaturepad-master/js/signature_pad.umd.js"></script>
+    <style>
+        img {
+            /*position: absolute;*/
+            left: 0;
+            top: 0;
+        }
+
+        .imageThumb {
+            max-height: 75px;
+            border: 2px solid;
+            padding: 1px;
+            cursor: pointer;
+        }
+
+        .removevideo {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .removevideo:hover {
+                background: white;
+                color: black;
+            }
+
+        .pip {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .pip1 {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove1 {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .remove1:hover {
+                background: white;
+                color: black;
+            }
+
+        .pip2 {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove2 {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .remove2:hover {
+                background: white;
+                color: black;
+            }
+
+        .pip3 {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove3 {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .remove3:hover {
+                background: white;
+                color: black;
+            }
+
+        .pip4 {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .pip {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove4 {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .remove4:hover {
+                background: white;
+                color: black;
+            }
+
+        .zoom {
+            transition: transform .2s; /* Animation */
+            margin: 0 auto;
+        }
+
+            .zoom:hover {
+                transform: scale(4.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+            }
+
+        .video-frame {
+            width: 100%;
+            height: 195px;
+            border: 4px solid #dc3545;
+            box-shadow: 1px 2px 3px #dc3545;
+            border-radius: 3px;
+        }
+
+        .signature-pad {
+            /*position: absolute;*/
+            left: 0;
+            top: 0;
+            width: 416px;
+            height: 200px;
+            background-color: white;
+        }
+    </style>
+    <style>
+        /*Copied from bootstrap to handle input file multiple*/
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        /*Also */
+        .btn-success {
+            border: 1px solid #c5dbec;
+            background: #D0E5F5;
+            font-weight: bold;
+            color: #2e6e9e;
+        }
+        /* This is copied from https://github.com/blueimp/jQuery-File-Upload/blob/master/css/jquery.fileupload.css */
+        .fileinput-button {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .fileinput-button input {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0;
+                opacity: 0;
+                -ms-filter: 'alpha(opacity=0)';
+                font-size: 200px;
+                direction: ltr;
+                cursor: pointer;
+            }
+
+        .thumb {
+            height: 80px;
+            width: 100px;
+            border: 1px solid #000;
+        }
+
+        ul.thumb-Images li {
+            width: 120px;
+            float: left;
+            display: inline-block;
+            vertical-align: top;
+            height: 120px;
+        }
+
+        .img-wrap {
+            position: relative;
+            display: inline-block;
+            font-size: 0;
+        }
+
+            .img-wrap .close {
+                position: absolute;
+                top: 2px;
+                right: 2px;
+                z-index: 100;
+                background-color: #D0E5F5;
+                padding: 5px 2px 2px;
+                color: #000;
+                font-weight: bolder;
+                cursor: pointer;
+                opacity: .5;
+                font-size: 23px;
+                line-height: 10px;
+                border-radius: 50%;
+            }
+
+            .img-wrap:hover .close {
+                opacity: 1;
+                background-color: #ff0000;
+            }
+
+        .FileNameCaptionStyle {
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <div class="col-xl-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">ค้นหาประวัติลูกค้า</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Company</div>
+                            <select class="custom-select custom-select-sm form-control form-control" id="_company">
+                                <option value="0" disabled="">Choose option</option>
+                                <option value="TAC" selected="">TAC</option>
+                                <option value="AAC">AAC</option>
+                                <option value="OMP">OMP</option>
+                                <!-- <option value="ALL">ALL</option>-->
+
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Sales Man</div>
+                            <select class="custom-select custom-select-sm form-control form-control" id="slmcod">
+
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Search Customer</div>
+                            <input type="text" class="form-control form-control-sm" id="_cusno" placeholder="Search Customer" style="border-bottom: 5px solid #b33c0f;">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Customer Name</div>
+                            <input type="text" class="form-control form-control-sm" id="_cusname" placeholder="Customer Name" disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Search item</div>
+                            <input type="text" class="form-control form-control-sm" id="_itemno" placeholder="Search Customer" style="border-bottom: 5px solid #b33c0f;">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Parts No Cus</div>
+                            <input type="text" class="form-control form-control-sm" id="_partnocus">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Description</div>
+                            <input type="text" class="form-control form-control-sm" id="_description" disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Invoice No</div>
+                            <input type="text" class="form-control form-control-sm" id="_invoiceno" style="border-bottom: 5px solid #b33c0f;">
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+
+                                <button type="button" class="btn btn btn-primary" id="btnmol">ค้นหาประวัติ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">รายละเอียดสินค้า</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-4 text-lg font-weight-bold text-primary text-uppercase mb-1"><span id="_claimnosub"></span></div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Customer Invoice</div>
+                            <input type="text" class="form-control form-control-sm" id="_invcustomer" disabled="disabled">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Item No</div>
+                            <input type="text" class="form-control form-control-sm" id="_itemnodes" disabled="disabled">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Description</div>
+                            <input type="text" class="form-control form-control-sm" id="_descriptiondes" disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Uom:</div>
+                            <input type="text" class="form-control form-control-sm" id="_uom" disabled="disabled">
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Type</div>
+                            <input type="text" class="form-control form-control-sm" id="_focdis" disabled="disabled">
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Invoice No</div>
+                            <input type="text" class="form-control form-control-sm" id="_invoicenodes" disabled="disabled">
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Invoice Qty</div>
+                            <input type="text" class="form-control form-control-sm" id="_intqtyor" disabled="disabled">
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Price</div>
+                            <input type="text" class="form-control form-control-sm" id="_netprice" disabled="disabled">
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Amout</div>
+                            <input type="text" class="form-control form-control-sm" id="_amt" disabled="disabled">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Invoice Date</div>
+                            <input type="text" class="form-control form-control-sm" id="_psdate" disabled="disabled">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Pm</div>
+                            <input type="text" class="form-control form-control-sm" id="_prd" disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Request by</div>
+                            <input type="text" class="form-control form-control-sm" id="requestby" disabled="disabled">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Request Date</div>
+                            <input type="text" class="form-control form-control-sm" id="requestdate" disabled="disabled">
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">สาเหตุการคืนสินค้า</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row" style="display:none">
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">สาเหตุการคืนสินค้า</div>
+                            <select class="custom-select custom-select form-control form-control" id="causedrop" style="border-bottom: 5px solid #b33c0f;">
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">สาเหตุการคืนสินค้า</div>
+                             Please enter data,at most 50 characters
+                            <textarea class="form-control form-control-sm" id="causeclaim" maxlength="50" style="border-bottom: 5px solid #b33c0f; height: 100px;"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                           
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">สาเหตุการคืนสินค้าเพิ่มเติม</div>
+                             สามารถใส่สาเหตุการเพิ่มเติมจากช่องนี้ได้
+                            <textarea class="form-control form-control-sm" id="causeclaimremar" style="border-bottom: 5px solid; height: 100px;"></textarea>
+                        </div>
+                        <div class="col-md-4">
+
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">จำนวนสินค้าที่ต้องการคืน</div>
+                            <input type="number" class="form-control form-control allownumericwithoutdecimal" id="_claimqty"  style="border-bottom: 5px solid #b33c0f;">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">มูลค่าที่คืนสินค้า:</div>
+
+                                <span style="color: #dc3545; text-decoration: underline; font-weight: bold" id="_amtreturn"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">ต้องการให้ดำเนินการ</div>
+                            <select class="custom-select custom-select form-control form-control" id="_proceedto" style="border-bottom: 5px solid #b33c0f;">
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">สถานะรับสินค้า</div>
+                            <select class="custom-select custom-select form-control form-control" id="_statusclaim" style="border-bottom: 5px solid #b33c0f;">
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="col-md-8">
+                        <h6 class="m-0 font-weight-bold text-primary">Uploade image </h6><br />
+                        <h6 class="m-0 font-weight-bold text-danger">***กรุณา Uploade image ประกอบการอนุมัติคืนสินค้า***</h6>
+                        <form id="uploader">
+                            <div class="row">
+                                <div class="col-sm-6">
+
+                                    <br />            <br />
+                                    <input id="fileInput" type="file" multiple>
+                                    <br />            <br />
+
+                                    <table class="table" id="FilesList" style="visibility:hidden">
+                                        <tr>
+                                            <th>
+                                                Attachment(s)
+                                            </th>
+                                            <th>
+                                                Action
+                                            </th>
+                                        </tr>
+                                    </table>
+                                    <input type="button" id="btnuploadsales" value="Upload" style="float:right;display:none" />
+
+                                </div>
+                            </div>
+                        </form>
+                        @*<input type='file' class="form-control form-control-sm" id="FileUpload1" accept="image/*" /><span id="ststus1" style="color: brown; font-size: larger;"></span>
+
+                            <input type='file' class="form-control form-control-sm" id="FileUpload2" accept="image/*" /><span id="ststus2" style="color: brown; font-size: larger;"></span>
+                            <input type="button" class="form-control form-control-sm" id="btnUpload1" value="Upload Files" style="display:none" />
+                            <input type="button" class="form-control form-control-sm" id="btnUpload2" value="Upload Files" style="display:none" />*@
+                    </div>
+                    <div class="col-md-8">
+
+                        @*<input type='file' class="form-control form-control-sm" id="FileUpload3" accept="image/*" /><span id="ststus3" style="color: brown; font-size: larger;"></span>
+                            <input type='file' class="form-control form-control-sm" id="FileUpload4" accept="image/*" /><span id="ststus4" style="color: brown; font-size: larger;"></span>
+                            <input type="button" class="form-control form-control-sm" id="btnUpload3" value="Upload Files" style="display:none" />
+                            <input type="button" class="form-control form-control-sm" id="btnUpload4" value="Upload Files" style="display:none" />*@
+
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="card-header bg-danger text-white">UPLOAD VIDEO ไม่เกิน 50 MB</h6>
+                    </div>
+                    <div class="container py-4" id="appvideo">
+                        <input type="file" id="fileupload" name="fileupload" @*class="custom-file-input"*@ accept="video/*" />
+                        <input type="submit" id="btnUpload" class="btn btn-secondary" value="Upload" style="display:none" />
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-md-4">
+
+
+                    </div>
+                    <div class="col-md-4">
+
+
+                    </div>
+
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn btn-success" id="_btnsave">บันทึกลงตระกร้า</button>
+                        <button type="button" class="btn btn btn-primary" id="_btnsenclim">ส่งให้ หัวหน้า อนุมัติ</button>
+                        <button type="button" class="btn btn-secondary" id="refresh">Refresh</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">รายการคืนสินค้า</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <input type="text" required id="_claimno" disabled="disabled" class="form-control">
+                    <div id="fixed-table-container-2" class="fixed-table-container">
+                        <table id="receclaim">
+                            <thead>
+                                <tr>
+                                    <th style="background-color: antiquewhite;">X</th>
+                                    <th style="text-align:center">line no</th>
+                                    <th>Item No.</th>
+                                    <th style="text-align:center">Description.</th>
+                                    <th>Stock<br /> Group.</th>
+                                    <th>UOM</th>
+                                    <th> Qty.</th>
+                                    @*<th style="text-align:center">ระยะ<br />การใช้งาน<br /> /Y/M/D/H</th>*@
+                                    <th style="text-align:center">Invoice No</th>
+                                    <th style="text-align:center">สาเหตุคืนสินค้า</th>
+                                    <th style="text-align:center">ดำเนินการ</th>
+                                    @*<th>รูปภาพ</th>*@
+                                    <th>สถานะส่งคืนสินค้า</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+
+        <div id="myModal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+            <div class="modal-dialog modal-lg" style=" max-width: 1200px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h4 class="modal-title">Invoice History</h4> <span id="meeee" style="font-size:larger;color:red"></span>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body" @*style="overflow-x:scroll"*@>
+                        <div id="modal-message"></div>
+                        <div id="fixed-table-container-1" class="fixed-table-container">
+                            <table id="_tbinvoicehiscx">
+                                <thead>
+                                    <tr>
+                                        <th style=" min-width: 115px; height: 60px; border: 1px solid #222;">Invoice No</th>
+                                        @*<th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Sel</th>*@
+                                        <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Customer</th>
+                                        <th style=" min-width: 85px; height: 60px; border: 1px solid #222;">Invoice Date</th>
+                                        <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Item No.</th>
+                                        <th style=" min-width: 200px; height: 60px; border: 1px solid #222;">Description</th>
+                                        <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">UOM</th>
+                                        <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Qty</th>
+                                        <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">จำนวน<br />ที่คืนได้</th>
+                                        <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Unit Price</th>
+                                        <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Line <br />Amount</th>
+                                        <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Line <br />Discount %</th>
+                                        <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Line <br />discount Amount</th>
+                                        <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Net<br />Unit Price</th>
+                                        <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Net<br />Line Amount</th>
+                                        <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Sale Man</th>
+
+                                        <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Foc</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-content">
+                        <button type="button" class="btn btn btn-primary" data-dismiss="modal" id="btngetinall" style="display:none">คืนทั้งบิล</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <!-- ModalWarning -->
+        <div id="myModalWarning" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+            <div class="modal-dialog" role="document">
+
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="modal" aria-label=" close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Warning!</strong>
+                    <div class="modal-body">
+                        <div id="textAlertWarningmes">Some text in the modal.</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- ModalWarning -->
+        <!-- ModalShipping -->
+        <div id="ModalShipping" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+            <div class="modal-dialog modal-lg" style="overflow-y: scroll;height: 750px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h4 class="modal-title">เลือก สถานที่รับสินค้า</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body" @*style="overflow-x:scroll"*@>
+                        <input type="text" required id="_cusnoship" placeholder="Search Customer" style="border-bottom: 5px solid #b33c0f;">
+                        <div id="modal-message"></div>
+                        <div id="fixed-table-container-5" class="fixed-table-container" style="overflow: auto; position: relative; height: 300px;">
+                            <table id="shipping">
+                                <thead>
+                                    <tr>
+                                        <th>Customer</th>
+                                        <th>Code</th>
+                                        <th>Name</th>
+                                        <th>Name2</th>
+                                        <th>Address</th>
+                                        <th>Address2</th>
+                                        <th>City</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-12">
+
+                        <div id="openShipping" style="display:block;">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">ระบุจำนวนกล่องที่จะให้รถไปรับ<span class="glyphicon glyphicon-hand-right"></span></span>
+                                        <select id="qtybox" style="border-bottom: 1px solid #c51717;">
+                                            <option>0</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                            <option>19</option>
+                                            <option>20</option>
+                                            <option>21</option>
+                                            <option>22</option>
+                                            <option>23</option>
+                                            <option>24</option>
+                                            <option>25</option>
+                                            <option>26</option>
+                                            <option>27</option>
+                                            <option>28</option>
+                                            <option>29</option>
+                                            <option>30</option>
+                                            <option>31</option>
+                                            <option>32</option>
+                                            <option>33</option>
+                                            <option>34</option>
+                                            <option>35</option>
+                                            <option>36</option>
+                                            <option>37</option>
+                                            <option>38</option>
+                                            <option>39</option>
+                                            <option>40</option>
+                                            <option>41</option>
+                                            <option>42</option>
+                                            <option>43</option>
+                                            <option>44</option>
+                                            <option>45</option>
+                                            <option>46</option>
+                                            <option>47</option>
+                                            <option>48</option>
+                                            <option>49</option>
+                                            <option>50</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">CustomerCode<span class="glyphicon glyphicon-hand-right"></span></span>
+                                            <input type="text" id="CustomerShipping" class="form-control" disabled="disabled" /><span id="clval" style="background-color: #484343;font-size: x-large;color: white;width: 40px;border-bottom-right-radius: 50px;border-top-right-radius: 47px;text-align: center;cursor: pointer;">X</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            @*<span class="input-group-addon" id="btnok" style="background-color: #7FC1A9;cursor: pointer;color: white;">Ship To Code<span class=" glyphicon glyphicon-hand-right"></span></span>*@
+                                            @*<input type="button" id="btnok" class="btn-default" name="example" value="ส่งอนุมัติ" style="background-color: aqua;">*@
+                                            <button type="button" class="btn btn btn-primary" id="btnok" style="width:50%">ส่งพิจารณา</button>
+                                            <span class="input-group-addon "><span id="scs" style="color: cyan;display:none"></span><span></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Name<span class="glyphicon glyphicon-hand-right"></span></span>
+                                            <input type="text" id="NameShipping" class="form-control" disabled="disabled" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Code<span class="glyphicon glyphicon-hand-right"></span></span>
+                                            <input type="text" id="codeShipping" class="form-control" disabled="disabled" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Address<span class="glyphicon glyphicon-hand-right"></span></span>
+                                            <input type="text" id="AddressShipping" class="form-control" disabled="disabled" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <textarea rows="4" cols="80" id="remakeclaim" placeholder="Comment สำหรับสั่งให้รถไปรับ"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="button" class="btn btn-default" data-dismiss="modal">Cancel Ship To Code</button>*@
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <!-- EndModalShipping -->
+        <!-- Modalconfirm-Shipto-->
+        <div class="modal fade" id="confirm-Shipto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                    </div>
+                    <div class="modal-body">
+                        คุณต้องการเลือก Ship To Code หรือไม่  <i class="fa fa-truck fa-3x"></i> <i class="fa fa-truck fa-2x"></i>
+
+                    </div>
+                    <div class="modal-footer">
+
+
+
+                        <button type="button" id="btnnext" class="btn btn-default" data-dismiss="modal">เลือก</button>
+                        <button type="button" id="btnconfirm" class="btn btn-success btn-ok" data-dismiss="modal">ไม่เลือก ส่งพิจารณาเลย</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Modalconfirm-Shipto-->
+        <div id="myModalsignature" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+            <div class="modal-dialog" role="document">
+
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="modal" aria-label=" close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Signature Customer!</strong>
+                    <div class="modal-body">
+
+                        <div class="wrapper">
+
+                            <canvas id="signature-pad" class="signature-pad" width=400 height=200></canvas>
+                        </div>
+                        <strong>Signature Sales Man!</strong>
+                        <div class="wrapper">
+
+                            <canvas id="signature-pad-man" class="signature-pad" width=400 height=200></canvas>
+                        </div>
+                        @*<div>
+                                <button id="save">Save</button>
+                                <button id="clear">Clear</button>
+                            </div>*@
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">ระบุจำนวนกล่องที่รับมา<span class="glyphicon glyphicon-hand-right"></span></span>
+                                    <select id="qtyboxsend" style="border-bottom: 1px solid #c51717; border-top: 1px solid cornsilk;">
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                        <option>11</option>
+                                        <option>12</option>
+                                        <option>13</option>
+                                        <option>14</option>
+                                        <option>15</option>
+                                        <option>16</option>
+                                        <option>17</option>
+                                        <option>18</option>
+                                        <option>19</option>
+                                        <option>20</option>
+                                        <option>21</option>
+                                        <option>22</option>
+                                        <option>23</option>
+                                        <option>24</option>
+                                        <option>25</option>
+                                        <option>26</option>
+                                        <option>27</option>
+                                        <option>28</option>
+                                        <option>29</option>
+                                        <option>30</option>
+                                        <option>31</option>
+                                        <option>32</option>
+                                        <option>33</option>
+                                        <option>34</option>
+                                        <option>35</option>
+                                        <option>36</option>
+                                        <option>37</option>
+                                        <option>38</option>
+                                        <option>39</option>
+                                        <option>40</option>
+                                        <option>41</option>
+                                        <option>42</option>
+                                        <option>43</option>
+                                        <option>44</option>
+                                        <option>45</option>
+                                        <option>46</option>
+                                        <option>47</option>
+                                        <option>48</option>
+                                        <option>49</option>
+                                        <option>50</option>
+                                        
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        @*<span class="input-group-addon" id="btnok" style="background-color: #7FC1A9;cursor: pointer;color: white;">Ship To Code<span class=" glyphicon glyphicon-hand-right"></span></span>*@
+                                        <input type="button" id="save" class="btn-default" name="example" value="ส่งพิจารณา" style="background-color: aqua;">
+                                        <span class="input-group-addon "><span id="scs" style="color: cyan;display:none"></span><span></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <button id="clear">Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <img id="imgCapture" alt="" style="display:none;border:1px solid #ccc" />
+        <img id="imgCaptureman" alt="" style="display:none;border:1px solid #ccc" />
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="spinnerModal">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <span class="fa fa-spinner fa-spin fa-3x w-100"></span>
+        </div>
+    </div>
+    <input type="hidden" id="_cmno" value="@Srtno" />
+    <input type="hidden" id="_uderlogin" value="@user" />
+    <input type="hidden" id="_udertype" value="@userType" />
+    <input type="hidden" id="_cmno" value="@claimno" />
+    <input type="text" hidden id="_hqty" />
+    <input type="hidden" id="_reminqty">
+
+    <input type="hidden" id="img1" />
+    <input type="hidden" id="img2" />
+    <input type="hidden" id="img3" />
+    <input type="hidden" id="img4" />
+    <script type="text/javascript">
+        var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
+            backgroundColor: 'rgba(255, 255, 255, 0)',
+            penColor: 'rgb(0, 0, 0)'
+        });
+        var signaturePadman = new SignaturePad(document.getElementById('signature-pad-man'), {
+            backgroundColor: 'rgba(255, 255, 255, 0)',
+            penColor: 'rgb(0, 0, 0)'
+        });
+        var cancelButton = document.getElementById('clear');
+
+        cancelButton.addEventListener('click', function (event) {
+            signaturePad.clear();
+            signaturePadman.clear();
+        });
+        var _scus = "";
+        $("#_cusno").autocomplete({
+            selectFirst: true,
+            autoFocus: true,
+            source: function (request, response) {
+                var param = { Name: $('#_cusno').val(), Slm: $('#slmcod').val() };
+                $.ajax({
+                    url: '@Url.Action("GetdateCusCode", "GetdataCenter")',
+                    data: JSON.stringify(param),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.slice(0, 50), function (item) {
+                            return {
+                                value: item
+                            }
+                        }))
+                    },
+                    error: function (XMLhttpsRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                    }
+                });
+            },
+            select: function (event, ui) {
+                var _val = ui.item.value;
+                var _splito = "";
+                _splito = _val.split('|');
+                var splitval = _splito;
+                _scus = _splito[0].trim();
+                $("#_cusno").val(_splito[0].trim());
+                $("#_cusname").val(_splito[1].trim());
+
+                $.ajax({
+                    url: '@Url.Action("GetdataSlmbycus","GetdataCenter")',
+                    data: {
+                        Cus: _scus
+
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        $("#slmcod").val(data.Slm);
+                        $("#sslmnam").val(data.Slmcodname);
+
+                    }
+                });
+            },
+
+            minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
+        });
+        $("#_cusnoship").autocomplete({
+            selectFirst: true,
+            autoFocus: true,
+            source: function (request, response) {
+                var param = { Name: $('#_cusnoship').val(), Slm: $('#slmcod').val() };
+                $.ajax({
+                    url: '@Url.Action("GetdateCusAdd", "GetdataCenter")',
+                    data: JSON.stringify(param),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.slice(0, 50), function (item) {
+                            return {
+                                value: item
+                            }
+                        }))
+                    },
+                    error: function (XMLhttpsRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                    }
+                });
+            },
+            select: function (event, ui) {
+                var _val = ui.item.value;
+                var _splito = "";
+                _splito = _val.split('|');
+                var splitval = _splito;
+                _scus = _splito[0].trim();
+                //$("#_cusno").val(_splito[0].trim());
+                //$("#_cusname").val(_splito[1].trim());
+
+                $.ajax({
+                    url: '@Url.Action("GetdataCusMasterAdd", "GetdataCenter")',
+                    data: {
+                        XXcus: _scus
+
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        $('#fixed-table-container-5 tbody:last-child').html("");
+                        $("#scs").text(data.length)
+                        var SubmithtmlPage = "";
+                        var crt = "";
+                        //for (var i = 0; i < data.length; i++) {
+                        for (var i = 0; i < data.Getdata.length; i++) {
+                            crt = data.Getdata[i].val.customer
+                            SubmithtmlPage += '<tr style="cursor: pointer;" cus="' + data.Getdata[i].val.customer + '"  Code="' + data.Getdata[i].val.code + '"  Namecus="' + data.Getdata[i].val.name + '" Address="' + data.Getdata[i].val.address + '" Address_2="' + data.Getdata[i].val.address2 + '">';
+                            //if (_splitocus == crt) {
+                            //    SubmithtmlPage += '<td style="background-color: red;color: bisque;">' + data.Getdata[i].val.customer + '</td>';
+                            //  } else {
+                            SubmithtmlPage += '<td>' + data.Getdata[i].val.customer + '</td>';
+                            //  }
+                            SubmithtmlPage += '<td>' + data.Getdata[i].val.code + '</td>';
+                            SubmithtmlPage += '<td>' + data.Getdata[i].val.name + '</td>';
+                            SubmithtmlPage += '<td>' + data.Getdata[i].val.name2 + '</td>';
+                            SubmithtmlPage += '<td>' + data.Getdata[i].val.address + '</td>';
+                            SubmithtmlPage += '<td>' + data.Getdata[i].val.address2 + '</td>';
+                            SubmithtmlPage += '<td>' + data.Getdata[i].val.city + '</td>';
+                            SubmithtmlPage += '</tr>';
+
+                        }
+                        $('#fixed-table-container-5  tbody:last-child').append(SubmithtmlPage);
+
+                    }
+                });
+            },
+
+            minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
+        });
+        $("#_itemno").autocomplete({
+            selectFirst: true,
+            autoFocus: true,
+            timeout: 100000,
+            source: function (request, response) {
+                var param = {
+                    Name: $('#_itemno').val(),
+                    XvalCompany: $('#_company').val()
+                };
+                $.ajax({
+                    url: '@Url.Action("GetdateStockCode", "GetdataCenter")',
+                    data: JSON.stringify(param),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.slice(0, 20), function (item) {
+                            return {
+                                value: item
+                            }
+                        }))
+                    },
+                    error: function (XMLhttpsRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                    }
+                });
+
+            },
+            select: function (event, ui) {
+                var _val = ui.item.value;
+                var _splito = "";
+                _splito = _val.split('|');
+                var splitval = _splito;
+                $("#_description").val(_splito[1].trim());
+                $("#_uom").val(_splito[2].trim());
+                $("#_itemno").val(_splito[0].trim());
+                var _itemno = _splito[0].trim();
+                var _com = $("#_company").val();
+                var _cusno = $("#_cusno").val();
+                var _invoiceno = "";
+                // getHisInvoice(_cusno, _itemno, _com, _invoiceno);
+
+
+            },
+
+            minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
+        });
+        $("#_partnocus").autocomplete({
+            selectFirst: true,
+            autoFocus: true,
+            timeout: 100000,
+            source: function (request, response) {
+                var param = {
+                    Name: $('#_partnocus').val(),
+                    XvalCompany: $('#_company').val(),
+                    XvalCus: $('#_cusno').val().split('|')[0],
+                    fix: "1"
+                };
+                $.ajax({
+                    url: '@Url.Action("GetdateitemCrossRef", "GetdataCenter")',
+                    data: JSON.stringify(param),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.slice(0, 20), function (item) {
+                            return {
+                                value: item
+                            }
+                        }))
+                    },
+                    error: function (XMLhttpsRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                    }
+                });
+            },
+            select: function (event, ui) {
+                var _val = ui.item.value;
+                var _splito = "";
+                _splito = _val.split('|');
+                var splitval = _splito;
+                $("#_description").val(_splito[1].trim());
+                $("#_itemno").val(_splito[2].trim());
+                $("#_partnocus").val(_splito[0].trim());
+                var _itemno = _splito[0].trim();
+                var _com = $("#_company").val();
+                var _cusno = $("#_cusno").val();
+                var _invoiceno = "";
+                // getHisInvoice(_cusno, _itemno, _com, _invoiceno);
+
+                //getpastnocus(_com, _itemno, 3)
+            },
+
+            minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
+        });
+        $(document).ready(function () {
+            var UserId = $("#_uderlogin").val();
+            $("#requestby").val(UserId);
+            $('#Sccreateclaim').css("background-color", "rgb(9, 183, 9)");
+            $('#Createcfreezes').css("background-color", "");
+            $('#ProcessApproveSup').css("background-color", "");
+            $('#ProcessApproveRT').css("background-color", "");
+            $('#SrcCheckstatus_Sc').css("background-color", "");
+            $('#SrcInvoiceHistory_Sc').css("background-color", "");
+            $.ajax({
+                url: '@Url.Action("Getdateslm","GetdataCenter")',
+
+                data: {
+                    UserId: UserId
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    var select = $("#slmcod");
+                    select.children().remove();
+
+                    $(data).each(function (index, item) {
+
+                        select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
+                    });
+
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
+                data: {
+                    Name: 20
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+
+                    var select = $("#_proceedto");
+                    select.children().remove();
+                    // select.append($("<option>").val("0").text("เลือกCUSCOD"));
+                    $(data).each(function (index, item) {
+
+                        select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+
+                    });
+                    //  var CUSCODt = $("#CUSCOD option:selected").text();
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("GetReasonCodes", "GetdataCenter")',
+                data: {
+
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data)
+                    var select = $("#causedrop");
+                    select.children().remove();
+                    select.append($("<option>").val("99").text("เลือกสาเหตุการคืนสินค้า"));
+                    $(data).each(function (index, item) {
+
+                        select.append($("<option custyp=" + item.PROD + ">").val(item.PROD).text(item.PROD + '/' + item.PRODNAM));
+
+                    });
+                    //  var CUSCODt = $("#CUSCOD option:selected").text();
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
+                data: {
+                    Name: 21
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+
+                    var select = $("#_statusclaim");
+                    select.children().remove();
+
+                    select.append($("<option>").val("0").text("สถานะรับคืนสินค้า"));
+                    $(data).each(function (index, item) {
+                        if (item.CODE == "1" || item.CODE == "2" || item.CODE == "4" || item.CODE == "6") {
+                            select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                        }
+
+                    });
+                    //  var CUSCODt = $("#CUSCOD option:selected").text();
+                }
+            });
+            var waitingDialog = waitingDialog || (function ($) {
+                'use strict';
+
+                // Creating modal dialog's DOM
+                var $dialog = $(
+                    '<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">' +
+                    '<div class="modal-dialog modal-m">' +
+                    '<div class="modal-content">' +
+                        '<div class="modal-header"><h3 style="margin:0;"></h3></div>' +
+                        '<div class="modal-body">' +
+                            '<div class="progress progress-striped active" style="margin-bottom:0;"><div class="progress-bar" style="width: 100%"></div></div>' +
+                        '</div>' +
+                    '</div></div></div>');
+
+                return {
+
+                    show: function (message, options) {
+                        // Assigning defaults
+                        if (typeof options === 'undefined') {
+                            options = {};
+                        }
+                        if (typeof message === 'undefined') {
+                            message = 'Loading';
+                        }
+                        var settings = $.extend({
+                            dialogSize: 'm',
+                            progressType: '',
+                            onHide: null // This callback runs after the dialog was hidden
+                        }, options);
+
+                        // Configuring dialog
+                        $dialog.find('.modal-dialog').attr('class', 'modal-dialog').addClass('modal-' + settings.dialogSize);
+                        $dialog.find('.progress-bar').attr('class', 'progress-bar');
+                        if (settings.progressType) {
+                            $dialog.find('.progress-bar').addClass('progress-bar-' + settings.progressType);
+                        }
+                        $dialog.find('h3').text(message);
+                        // Adding callbacks
+                        if (typeof settings.onHide === 'function') {
+                            $dialog.off('hidden.bs.modal').on('hidden.bs.modal', function (e) {
+                                settings.onHide.call($dialog);
+                            });
+                        }
+                        // Opening dialog
+                        $dialog.modal();
+                    },
+                    /**
+                     * Closes dialog
+                     */
+                    hide: function () {
+                        $dialog.modal('hide');
+                    }
+                };
+
+            })(jQuery);
+            var fixedTable2 = fixTable(document.getElementById('fixed-table-container-2'));
+            var fixedTable1 = fixTable(document.getElementById('fixed-table-container-1'));
+            //function//
+
+            n = new Date();
+            y = n.getFullYear();
+            m = n.getMonth() + 1;
+            mm = ("0" + (n.getMonth() + 1)).slice(-2);
+            dd = ("0" + (n.getDate())).slice(-2);
+            d = n.getDate();
+            $("#_tempreq").val(d + "/" + m + "/" + y);
+            $("#requestdate").val(d + "/" + m + "/" + y);
+            $("#receiveddate").val(d + "/" + m + "/" + y);
+            function splitval(_val) {
+                var _splito = "";
+                _splito = _val.split('|');
+
+                return _splito[0];
+            }
+            function addCommas(nStr) {
+                nStr += '';
+                x = nStr.split('.');
+                x1 = x[0];
+                x2 = x.length > 1 ? '.' + x[1] : '';
+                var rgx = /(\d+)(\d{3})/;
+                while (rgx.test(x1)) {
+                    x1 = x1.replace(rgx, '$1' + ',' + '$2');
+                }
+                return x1 + x2;
+            }
+
+            function GetShipto() {
+                var cusno = $("#_invcustomer").val();
+                var _splitocus = "";
+                if (cusno != "") {
+                    _splitocus = cusno.split('|');
+                    var splitvalcus = _splitocus;
+                    var _splitocus = splitvalcus[0].trim();
+                } else {
+                    _splitocus = "";
+                }
+                var _slmcod = $("#slmcod").val();
+                $.ajax({
+                    url: '@Url.Action("GetdataCusShipping", "GetdataCenter")',
+                    data: {
+                        XXcus: _splitocus,
+                        XXslm: _slmcod
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+
+                        $("#scs").text(data.length)
+                    }
+                });
+            }
+            function getHisInvoice(_cusno, _itemno, _com, _invoiceno, _flength) {
+                var _splito = "";
+                _splito = _itemno.split('|');
+                var splitval = _splito;
+                var _itemnosp = _splito[0].trim();
+                var _slmcod = $("#slmcod").val();
+                GetShipto()
+                //waitingDialog.show();
+                // waitingDialog.hide();
+                $("#btngetinall").css("display", "none");
+                $("#meeee").text('กำลังค้นหาประวัติ');
+                $.ajax({
+                    url: '@Url.Action("GetdataInvoicestatudRT", "GetdataCenter")',
+                    data: {
+                        _cusno: _cusno,
+                        _itemno: _itemnosp,
+                        _invoiceno: _invoiceno,
+                        _com: _com,
+                        _statdate: "",
+                        _enddate: "",
+                        _foc: "",
+                        _slmcod: _slmcod,
+                        _flength: _flength
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        $("#meeee").text('');
+                        waitingDialog.hide();
+                        $('#_tbinvoicehiscx > tbody:last-child').html("");
+                        if (data.Getdata.length > 0) {
+                            var _cusnosp = $("#_cusno").val();
+                            var _cusno = "";
+                            if (_cusnosp != "") {
+                                _splito = _cusnosp.split('|');
+                                var splitval = _splito;
+                                _cusno = _splito[0].trim();
+                            } else {
+                                _cusno = "";
+                            }
+                            //if (_cusno == "") {
+                            //    alert("กรุณาระบุลูกค้า");
+                            //    return false;
+                            //}
+                            var _invoiceno = $("#_invoiceno").val();
+                            var datalen = $('#receclaim').find('tbody').find('tr').length
+                            if (datalen == 0) {
+                                if (_cusno != "" && _invoiceno != "" && _itemnosp == "") {
+                                    $("#btngetinall").css("display", "block");
+                                } else {
+                                    $("#btngetinall").css("display", "none");
+                                }
+                            } else {
+                                $("#btngetinall").css("display", "none");
+                            }
+                            $("#modal-message").text("");
+                            var SubmithtmlPage = '';
+                            for (var i = 0; i < data.Getdata.length; i++) {
+                                var xx = data.Getdata[i].val.STKDES;
+
+                                SubmithtmlPage = '<tr style="cursor: pointer;" netPrice="' + data.Getdata[i].val.Net_Price + '"stkcod="' + data.Getdata[i].val.STKCOD + '" stkdes="' + data.Getdata[i].val.STKDES + '" uom="' + data.Getdata[i].val.Uom + '" people="' + data.Getdata[i].val.PEOPLE + "|" + data.Getdata[i].val.CUSNAM + '" docno="' + data.Getdata[i].val.DOCNUM + '" pstdat ="' + data.Getdata[i].val.PSTDAT + '" qtyinv ="' + data.Getdata[i].val.Qty + '">';
+                                SubmithtmlPage += '<td style="background-color: #bbc;min-width: 115px;border: 1px solid #222;cursor: pointer;" id="clickno"  amt="' + data.Getdata[i].val.Amt + '" netPrice="' + data.Getdata[i].val.Net_Price + '" people="' + data.Getdata[i].val.PEOPLE + "|" + data.Getdata[i].val.CUSNAM + '" remainqty="' + data.Getdata[i].val.QTY_Remaining + '"  foc="' + data.Getdata[i].val.FOC + '" stkcod="' + data.Getdata[i].val.STKCOD + '" stkdes="' + data.Getdata[i].val.STKDES + '" uom="' + data.Getdata[i].val.Uom + '" docno="' + data.Getdata[i].val.DOCNUM + '" pstdat ="' + data.Getdata[i].val.PSTDAT + '" qtyinv ="' + data.Getdata[i].val.Qty + '" qtyinv ="' + data.Getdata[i].val.Qty + '"  GrpName="' + data.Getdata[i].val.GrpName + '" ProdName ="' + data.Getdata[i].val.ProdName + '" Prod ="' + data.Getdata[i].val.Prod + '">' + data.Getdata[i].val.DOCNUM + '</td>';
+                                //   SubmithtmlPage += '<td style="text-align: -webkit-center;padding-top: 4px;background-color: #bbc;min-width: 80px;border: 1px solid #222;"><input type="checkbox" id="blahA" value="1"/></td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;min-width: 80px;border: 1px solid #222;">' + data.Getdata[i].val.PEOPLE + "<br>|" + data.Getdata[i].val.CUSNAM + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;min-width: 85px;border: 1px solid #222;">' + data.Getdata[i].val.PSTDAT + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;min-width: 80px;border: 1px solid #222;">' + data.Getdata[i].val.STKCOD + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;min-width: 200px;border: 1px solid #222;"><div  class="preserveLineBreaks">' + data.Getdata[i].val.STKDES + '</div></td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;min-width: 80px;border: 1px solid #222;">' + data.Getdata[i].val.Uom + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;min-width: 80px;border: 1px solid #222;">' + addCommas(data.Getdata[i].val.Qty) + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;min-width: 80px;border: 1px solid #222;background-color: aqua;">' + addCommas(data.Getdata[i].val.QTY_Remaining) + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + addCommas(parseFloat(data.Getdata[i].val.Price).toFixed(2)) + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + addCommas(parseFloat(data.Getdata[i].val.Amt).toFixed(2)) + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + addCommas(parseFloat(data.Getdata[i].val.DiscountPer).toFixed(2)) + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + addCommas(parseFloat(data.Getdata[i].val.DiscountAmt).toFixed(2)) + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + addCommas(parseFloat(data.Getdata[i].val.Net_Price).toFixed(2)) + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + addCommas(parseFloat(data.Getdata[i].val.NetAmt).toFixed(2)) + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;min-width: 80px;border: 1px solid #222;">' + data.Getdata[i].val.SLMCOD + '</td>';
+
+                                SubmithtmlPage += '<td style="background-color: #bbc;min-width: 80px;border: 1px solid #222;">' + data.Getdata[i].val.FOC + '</td>';
+
+                                SubmithtmlPage += '</tr>';
+                                $('#_tbinvoicehiscx > tbody:last-child').append(SubmithtmlPage);
+
+                            }
+                            var fixedTable1 = fixTable(document.getElementById('fixed-table-container-1'));
+                        } else {
+                            if (data.message != "true") {
+                                alert("กรุณากด refresh หน้าจอ อีกรอบ  " + data.message);
+                            }
+                            $("#myModal").modal('hide');
+                            $("#textAlertWarningmes").empty();
+                            $("#textAlertWarningmes").text("No Data.....");
+                            $("#myModalWarning").modal();
+                            $("#_invcustomer").val("");
+                            $("#_itemnodes").val("");
+                            $("#_descriptiondes").val("");
+                            $("#_uom").val("");
+                            $("#_invoicenodes").val("");
+                            $("#_psdate").val("");
+                            $("#_prd").val("");
+                            $("#_typpro").val("");
+                            $("#_claimqty").val("");
+
+                            $("#_vemac").val("");
+                            $("#_moty").val("");
+                            $("#_modyear").val("");
+                            $("#_encod").val("");
+                            $("#_chno").val("");
+                            $("#_pump").val("");
+                            $("#_typpro").val("");
+                            $("#_warcarno").val("");
+                            $("#_milage").val("");
+                            $("#_datofdam").val("");
+                            $("#_workda").val("0");
+                            $("#_workmonth").val("0");
+                            $("#_workmonth").val("0");
+                            $("#_workday").val("0");
+                            $("#_worktime").val("");
+                            $("#_batcod").val("");
+                            $("#causedrop").val("99");
+                            $("#causeclaim").val("");
+                            $('#_tbinvoicehiscx > tbody:last-child').html("");
+                            var claimno = $("#_claimno").val();
+                            //alert(claimno)
+                            if (claimno != "") {
+                                gettypeprocess(claimno);
+                            } else {
+                                $("#_proceedto").val("1");
+                                $("#_statusclaim").val("0");
+                            }
+                        }
+                        var fixedTable1 = fixTable(document.getElementById('fixed-table-container-1'));
+                    }
+                });
+            } 
+            $("#btngetinall").on("click", function () {
+                var _cusnosp = $("#_cusno").val();
+                var _cusno = "";
+                if (_cusnosp != "") {
+                    _splito = _cusnosp.split('|');
+                    var splitval = _splito;
+                    _cusno = _splito[0].trim();
+                } else {
+                    _cusno = "";
+                }
+                var company = $("#_company").val();
+                //if (_cusno == "") {
+                //    alert("กรุณาระบุลูกค้า");
+                //    return false;
+                //}
+                var _invoiceno = $("#_invoiceno").val();
+                if (_cusno != "" && _invoiceno != "") {
+                    var wi = window.open("../Createsalereturn_salesall/Index?no=" + btoa(_cusno) + "/" + btoa(_invoiceno) + "/" + btoa(company));
+               
+                    wi.focus();
+                } else {
+                    alert("กรุณาระบุลูกค้าและเลขที่ Invoice No...");
+                }
+            });
+            $(".allownumericwithoutdecimal").on("keypress keyup blur", function (event) {
+                $(this).val($(this).val().replace(/[^\d].+/, ""));
+                if ((event.which < 48 || event.which > 57)) {
+
+                    event.preventDefault();
+
+                } else {
+                    // $(this).val("");
+                }
+            });
+            $("#_claimqty").on("keyup blur", function (event) {
+                $(this).val($(this).val().replace(/[^\d].+/, ""));
+                if ((event.which < 48 || event.which > 57)) {
+
+                    event.preventDefault();
+
+                } else {
+                    //$(this).val("");
+                }
+            });
+            $("#_claimqty").on("click", function () {
+                var ids = $(this).val();
+
+                if (parseInt(ids) < 0) {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("จำนวนที่สามารถคืนได้ห้ามติดลบ");
+                    $("#myModalWarning").modal();
+                    $(this).val("");
+                }
+                if (parseInt(ids) == 0) {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("จำนวนที่คืนสินค้าต้องมากกว่า 0");
+                    $("#myModalWarning").modal();
+                    $(this).val("");
+                }
+                var _cqty = $('#_reminqty').val();
+                if (parseInt(ids) > parseInt(_cqty)) {
+                    $(this).val("");
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("จำนวนที่สามารถคืนได้:" + _cqty);
+                    $("#myModalWarning").modal();
+                    // alert("ใส่จำนวนเกินจำนวนเปิดInvoice " + _cqty);
+                    return false;
+                }
+            });
+            $("#_claimqty").on("keyup", function () {
+                var ids = $(this).val();
+                // var _cqty = $('#_hqty').val();
+
+
+                if (parseInt(ids) < 0) {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("จำนวนที่สามารถคืนได้ห้ามติดลบ");
+                    $("#myModalWarning").modal();
+                    $(this).val("");
+                }
+                if (parseInt(ids) == 0) {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("จำนวนที่คืนสินค้าต้องมากกว่า 0");
+                    $("#myModalWarning").modal();
+                    $(this).val("");
+                }
+                var _cqty = $('#_reminqty').val();
+                if (parseInt(ids) > parseInt(_cqty)) {
+                    $(this).val("");
+                    $("#_amtreturn").text("");
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("จำนวนที่สามารถคืนได้:" + _cqty);
+                    $("#myModalWarning").modal();
+                    // alert("ใส่จำนวนเกินจำนวนเปิดInvoice " + _cqty);
+                    return false;
+                }
+                if (parseInt(ids) != 0) {
+                    var price = $("#_netprice").val();
+                    $("#_amtreturn").text(addCommas(parseInt(ids) * parseFloat(price)));
+                } else if (ids == "") {
+                    $("#_amtreturn").text(parseFloat(0));
+                }
+            });
+            //function//
+            $("#refresh").on("click", function () {
+                location.reload();
+            });
+            $("#btnmol").on("click", function () {
+                clearvalsearch()
+                clearimage()
+                var _cusnosp = $("#_cusno").val();
+                var _cusno = "";
+                if (_cusnosp != "") {
+                    _splito = _cusnosp.split('|');
+                    var splitval = _splito;
+                    _cusno = _splito[0].trim();
+                } else {
+                    _cusno = "";
+                }
+                if (_cusno == "") {
+
+                    alert("กรุณาระบุลูกค้า");
+                    return false;
+                }
+                var _itemno = $("#_itemno").val();
+                if (_itemno == "") {
+
+                    // alert("กรุณาระบุ P/N สำหรับการเคลม");
+                    // return false;
+                }
+                var _invoiceno = $("#_invoiceno").val();
+                var _com = $("#_company").val();
+
+                // $("#_itemno").val("");
+                //  $("#_description").val("");
+                $("#_uom").val("");
+                //$("#_invoiceno").val("");
+                $("#_psdate").val("");
+                $("#_claimqty").val("");
+                //$("#_workda").val(worktimeup);
+                //$("#causeclaim").val("");
+                //$("#causedrop").val("99");
+                var claimno = $("#_claimno").val();
+                //alert(claimno)
+                if (claimno != "") {
+                    gettypeprocess(claimno);
+                } else {
+                    $("#_proceedto").val("1");
+                    $("#_statusclaim").val("0");
+                }
+                $("#_workda").val("0"); //ระยะใช้งาน//
+                $("#_workmonth").val("0"); //ระยะใช้งาน//
+                $("#_workday").val("0");//ระยะใช้งาน//
+                $("#_worktime").val("00:00");//ระยะใช้งาน//
+                //$("#_workda").val(worktimeup);//ระยะใช้งาน//
+                //$("#_vemac").val("");
+                //$("#_moty").val("");
+                //$("#_modyear").val("");
+                //$("#_encod").val("");
+                //$("#_chno").val("");
+                //$("#_pump").val("");
+                //$("#_typpro").val("");
+                //$("#_warcarno").val("");
+                //$("#_milage").val("");
+                //$("#_datofdam").val("");
+                //$("#_batcod").val("");
+                // waitingDialog.show();
+                var _flength = $('#receclaim').find('tbody').find('tr').length
+                // alert(_flength)
+                $("#myModal").modal('show');
+                $('#_tbinvoicehiscx > tbody:last-child').html("");
+                getHisInvoice(_cusno, _itemno, _com, _invoiceno, _flength);
+            });
+            $("#_tbinvoicehiscx").on("click", "tr #clickno", function () {
+                $('#_invcustomer').val("");
+                $('#_itemno').val("");
+                $('#_description').val("");
+                $('#_uom').val("");
+                $('#_hqty').val("");
+                $('#_invoiceno').val("");
+                $('#_psdate').val("");
+                $('#_claimqty').val("");
+                $('#_workda').val("");
+                $('#causeclaim').val("");
+                $('#causedrop').val("99");
+                //$('#_proceedto').val("1");
+                //$('#_statusclaim').val("0");
+                var claimno = $("#_claimno").val();
+                //alert(claimno)
+                if (claimno != "") {
+                    gettypeprocess(claimno);
+                } else {
+                    $("#_proceedto").val("1");
+                    $("#_statusclaim").val("0");
+                }
+                $('#_netprice').val("");
+                var stkcod = $(this).attr('stkcod');
+                var stkcdes = $(this).attr('stkdes');
+                var uom = $(this).attr('uom');
+                var docno = $(this).attr('docno');
+                var pstdat = $(this).attr('pstdat');
+                var qtyinv = $(this).attr('qtyinv');
+                var grpname = $(this).attr('grpname');
+                var prod = $(this).attr('prod');
+                var prodname = $(this).attr('prodname');
+                var foc = $(this).attr('foc');
+                var people = $(this).attr('people');
+                var net_price = $(this).attr('netPrice');
+                var qtyinv = $(this).attr('qtyinv');
+                var remainqty = $(this).attr('remainqty');
+                var amt = $(this).attr('amt');
+                if (remainqty == "0") {
+
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("จำนวนไม่เพียงพอ");
+                    $("#myModalWarning").modal();
+                    return false;
+                }
+                if (foc != '0') {
+
+                    $('#_focdis').val("FOC");
+                } else {
+
+                    $('#_focdis').val("");
+                }
+                //if (foc != '0') {
+                //$("#textAlertWarningmes").empty();
+                //$("#textAlertWarningmes").text("สินค้าประเภท FOC ไม่สามารถทำSales Return ได้กรุณาทำรายการใหม่");
+                //$("#myModalWarning").modal();
+                //return false;
+                // } else {
+                $('#_proceedto').val("1");
+                //$('#_proceedto').removeAttr('disabled');
+                //$('#_focdis').val("");
+                //}
+                $('#_cusno').val(people);
+                $('#_invcustomer').val(people);
+                $('#_reminqty').val(remainqty);
+                $('#_foc').val(foc);
+                $('#_itemno').val(stkcod);
+                $('#_description').val(stkcdes);
+                $('#_itemnodes').val(stkcod);
+                $('#_descriptiondes').val(stkcdes);
+                $('#_uom').val(uom);
+                $('#_hqty').val(qtyinv);
+                $('#_invoiceno').val(docno);
+                $('#_psdate').val(pstdat);
+                $('#_invoicenodes').val(docno);
+                $('#_psdatedes').val(pstdat);
+                $('#_typpro').val(grpname);
+                $('#_prd').val(prod + "/" + prodname);
+                $('#_netprice').val(net_price);
+                $('#_intqtyor').val(qtyinv);
+                $('#_amt').val(amt);
+                $("#myModal").modal('hide');
+
+            });
+            function gettypeprocess(claimno) {
+                var valclim = claimno;
+                $.ajax({
+                    url: '@Url.Action("GetClimtemp", "Createsalesreturn_sales")',
+                    data: {
+                        inCLM_ID: valclim
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data);
+                        if (data.Getdata.length > 0) {
+                            //alert(data.Getdata[0].val.STMP_RCVSTATUS)
+                            $("#_proceedto").val(data.Getdata[0].val.STMP_PERFORM);
+                            $("#_statusclaim").val(data.Getdata[0].val.STMP_RCVSTATUS);
+                            $("#causedrop").val(data.Getdata[0].val.STMP_ReasonCodes);
+                            $("#causeclaim").val(data.Getdata[0].val.STMP_CASE);
+                            $("#_proceedto").attr('disabled', 'disabled');
+                            $("#_statusclaim").attr('disabled', 'disabled');
+                            $("#causedrop").attr('disabled', 'disabled');
+                            $("#causeclaim").attr('disabled', 'disabled');
+                        } else {
+                            $("#_proceedto").removeAttr('disabled');
+                            $("#_statusclaim").removeAttr('disabled');
+                            $("#_proceedto").val("1");
+                            $("#_statusclaim").val("0");
+                            $("#causedrop").removeAttr('disabled');
+                            $("#causeclaim").removeAttr('disabled');
+                            $("#causedrop").val("99");
+                            $("#causeclaim").val("");
+                        }
+                    }
+                });
+            }
+            function modal() {
+                $('#spinnerModal').modal('show');
+                setTimeout(function () {
+                    console.log('hejsan');
+                    $('#spinnerModal').modal('hide');
+                }, 3000);
+            }
+            $("#_btnsave").on("click", function (e) {
+                var isValid = true;
+                if (navigator.onLine) {
+                    var xcusno = $("#_cusno").val();
+                    if (xcusno == "") {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณาระบุลูกค้า");
+                        $("#myModalWarning").modal();
+                        return false;
+                    }
+                    // var xitemno = $("#_itemno").val();
+                    var xitemno = $("#_itemnodes").val();
+                    if (xitemno == "") {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณาระบุเบอร์สินค้า");
+                        $("#myModalWarning").modal();
+                        return false;
+                    }
+                    //var xinvoiceno = $("#_invoiceno").val();
+                    var xinvoiceno = $("#_invoicenodes").val();
+                    if (xinvoiceno == "") {
+
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณาระบุเลขที่ Invoice");
+                        $("#myModalWarning").modal();
+                        return false;
+                    }
+                    var cusno = $("#_invcustomer").val();
+                    var _splitocus = "";
+                    if (cusno != "") {
+                        _splitocus = cusno.split('|');
+                        var splitvalcus = _splitocus;
+                        var _splitocus = splitvalcus[0].trim();
+                    } else {
+                        _splitocus = "";
+                    }
+                    if (_splitocus == "") {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อระบุรายละเอียดสินค้า");
+                        $("#myModalWarning").modal();
+                        return false;
+                    }
+                    if (_splitocus == 'undefined') {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อระบุรายละเอียดสินค้า");
+                        $("#myModalWarning").modal();
+                        return false;
+                    };
+                    if (_splitocus == null) {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อระบุรายละเอียดสินค้า");
+                        $("#myModalWarning").modal();
+                        return false;
+                    };
+                    if (_splitocus == "null") {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อระบุรายละเอียดสินค้า");
+                        $("#myModalWarning").modal();
+                        return false;
+                    };
+                    var slmcod = $("#slmcod").val();
+
+                    if (slmcod == "") {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณาระบุ SalesMan");
+                        $("#myModalWarning").modal();
+                        return false;
+                    }
+                    if (slmcod == null) {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณาระบุ SalesMan");
+                        $("#myModalWarning").modal();
+                        return false;
+                    }
+                    if (slmcod == "null") {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณาระบุ SalesMan");
+                        $("#myModalWarning").modal();
+                        return false;
+                    }
+                    if (slmcod == 'undefined') {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณาระบุ SalesMan");
+                        $("#myModalWarning").modal();
+                        return false;
+                    }
+                    var _itemno = $("#_itemnodes").val();
+                    if (_itemno == "") {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อเลือกรายละเอียดสินค้า");
+                        $("#myModalWarning").modal();
+                        return false;
+                    }
+                    if (_itemno == "null") {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อเลือกรายละเอียดสินค้า");
+                        $("#myModalWarning").modal();
+                        return false;
+                    }
+                    var invoiceno = $("#_invoicenodes").val();
+                    if (invoiceno == "") {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อเลือกรายละเอียดสินค้า");
+                        $("#myModalWarning").modal();
+                        return false;
+                    }
+                    //var xcauseclaim = $("#causeclaim").val();
+                    //if (xcauseclaim == "") {
+                    //    $("#textAlertWarningmes").empty();
+                    //    $("#textAlertWarningmes").text("กรุณาระบุ สาเหตุการคืนสินค้า");
+                    //    $("#myModalWarning").modal();
+                    //    return false;
+                    //}
+
+                    //if (xcasebec == "99") {
+                    //    $("#textAlertWarningmes").empty();
+                    //    $("#textAlertWarningmes").text("กรุณาระบุ สาเหตุการคืนสินค้า");
+                    //    $("#myModalWarning").modal();
+                    //    return false;
+                    //}
+                    var xcasebec = $("#causedrop").val();
+                    var xcauseclaim = $("#causeclaim").val();
+                    if (xcauseclaim == "") {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณาระบุ สาเหตุการคืนสินค้าเพื่อง่ายต่อการอนุมัติ");
+                        $("#myModalWarning").modal();
+                        return false;
+                    }
+                    // var xcasebec = $("#causeclaim").val();
+                     var xclaimqty = $("#_claimqty").val();
+                    
+                    if (xclaimqty == "") {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณาระบุจำนวนที่ต้องการคืนสินค้า");
+                        $("#myModalWarning").modal();
+                        return false;
+                    } else if (xclaimqty == "0") {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("จำนวนที่คืนสินค้าต้องมากว่า 0 กรุณา ระบุจำนวนคืนสินค้าใหม่");
+                        $("#myModalWarning").modal();
+                        return false;
+                    }
+                    
+                    var xproceedto = $("#_proceedto").val();
+                    if (xproceedto == "0") {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณาระบุ ต้องการให้ดำเนินการ");
+                        $("#myModalWarning").modal();
+                        return false;
+                    }
+                    var xstatusclaim = $("#_statusclaim").val();
+                    if (xstatusclaim == "0") {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณาระบุ สถานะรับสินค้า");
+                        $("#myModalWarning").modal();
+                        return false;
+                    }
+                    var refinv = $("#_invoicenodes").val();
+                    var leng = $('#receclaim > tbody:last-child').children().length;
+
+                    if (leng >= 1) {
+                        var req = "";
+                        var proceed = "";
+                        var invoiceche = "";
+                        $('#receclaim tr').each(function () {
+                            req = $(this).attr('statusclaimup');
+                            proceed = $(this).attr('proceedtoup');
+                            invoiceche = $(this).attr('invoicenoeup');
+                        });
+                        //alert(invoiceche + "/////" + xinvoiceno)
+                        //aps//
+                        if (invoiceche != refinv) {
+                            $("#textAlertWarningmes").empty();
+                            $("#textAlertWarningmes").text("เลขที่บิล(Invoice No) ไม่ตรงกัน กรุณา กดปุ่มค้นหาปรัะวัติใหม่");
+                            $("#myModalWarning").modal();
+                            return false;
+                        }
+                       
+                        if (proceed != xproceedto) {
+                            $("#textAlertWarningmes").empty();
+                            $("#textAlertWarningmes").text("กรุณาระบุ ต้องการให้ดำเนินการ ให้เหมือนกันทุกรายการ");
+                            $("#myModalWarning").modal();
+                            return false;
+                        }
+                        if (req != xstatusclaim) {
+                            $("#textAlertWarningmes").empty();
+                            $("#textAlertWarningmes").text("กรุณาระบุ สถานะรับของให้เหมือนกันทุกรายการ");
+                            $("#myModalWarning").modal();
+                            return false;
+                        }
+                    }
+                    var leng = $('#FilesList > tbody:last-child').children().length;
+
+
+                    if (leng <= 1) {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณา Upload image สองรูปขึ้นไป เพื่อประกอบพิจารณาคืนสินค้า");
+                        $("#myModalWarning").modal();
+                        return false;
+                    }
+                    
+                    var nokey = $("#_claimno").val();
+                    if (nokey == "") {
+                        var Gendoc;
+                        var Clno = nokey;
+                        var Com = $("#_company").val();
+                        if (Com == "TAC") {
+                            Gendoc = 'RTT';
+                        } else if (Com == "AAC") {
+                            Gendoc = 'RTA';
+                        } else if (Com == "OMP") {
+                            Gendoc = 'RTO';
+                        }
+                        $.ajax({
+                            url: '@Url.Action("Gendocno", "Createsalesreturn_sales")',
+                            data: {
+                                Gendoc: Gendoc,
+                                Clno: Clno,
+                                Com: Com
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                $("#_claimno").val(data.Docnocm);
+                                var claimnokey = $("#_claimno").val();
+                                if (claimnokey == "") {
+                                    $("#textAlertWarningmes").empty();
+                                    $("#textAlertWarningmes").text("กรุณากดสร้างรายการอีกรอบ");
+                                    $("#myModalWarning").modal();
+                                    return false;
+                                } else {
+                                    var claimno = $("#_claimno").val();
+
+                                    var cusno = $("#_invcustomer").val();
+                                    var _splitocus = "";
+                                    if (cusno != "") {
+                                        _splitocus = cusno.split('|');
+                                        var splitvalcus = _splitocus;
+                                        var _splitocus = splitvalcus[0].trim();
+                                    } else {
+                                        _splitocus = "";
+                                    }
+
+                                    var _itemno = $("#_itemnodes").val();
+                                    var _splito = "";
+                                    if (_itemno != "") {
+                                        _splito = _itemno.split('|');
+                                        var splitval = _splito;
+                                        var _itemnosp = _splito[0].trim();
+                                    } else {
+                                        _itemnosp = "";
+                                    }
+                                    var com = $("#_company").val();
+                                    var slmcod = $("#slmcod").val();
+
+
+                                    //var requestby = $("#requestby").val();
+                                    var requestby = $("#_uderlogin").val();
+                                    var requestdate = $("#requestdate").val();
+
+                                    var itemnosp = _itemnosp;
+                                    // var invoiceno = $("#_invoiceno").val();
+                                    var invoiceno = $("#_invoicenodes").val();
+                                    var uom = $("#_uom").val();
+                                    var description = $("#_description").val();
+                                    var claimqty = $("#_claimqty").val();
+                                    var claimnosub = $("#_claimnosub").text();
+                                    var _cqty = $('#_hqty').val();
+                                    var invoicedate = $("#_psdate").val();
+                                    var causeclaim = $("#causeclaim").val();
+                                    var causeclaim2 = $("#causeclaimremar").val();
+                                    var proceedto = $("#_proceedto").val();
+                                    var proceedtotext = $("#_proceedto option:selected").text();
+                                    var statusclaim = $("#_statusclaim").val();
+                                    var requestby = $("#requestby").val();
+                                    var requestdate = $("#requestdate").val();
+                                    var net_price = $('#_netprice').val();
+                                    var chleng = $('#FilesList > tbody:last-child').children().length;
+                                    //alert(chleng)
+
+                                    //if (chleng < 2) {
+                                    //    // down.innerHTML = "No files selected";
+                                    //    alert("กรุณาแนบไฟล์ รูป เพื่อประกาารพิจารณาผล อย่างน้อย2รูป");
+                                    //    return false;
+                                    //}
+                                    var valfoc = $('#_focdis').val();
+                                    var sefoc;
+                                    if (valfoc != "") {
+                                        sefoc = "FOC";
+                                    } else {
+                                        sefoc = "";
+                                    }
+                                    $.ajax({
+                                        url: '@Url.Action("SaveClimtemp", "Createsalesreturn_sales")',
+                                        data: {
+                                            inCLM_ID: claimno,
+                                            CLM_NO: claimnosub,
+                                            CUSCOD: _splitocus,
+                                            inSTKCOD: _itemnosp,
+                                            inSTKDES: description,
+                                            inCLM_UOM: uom,
+                                            inCLM_INVNO: invoiceno,
+                                            inINV_QTY: _cqty,
+                                            inCLM_INVDATE: invoicedate,
+                                            inCLM_QTY: claimqty,
+                                            inCLM_CAUSE: causeclaim,
+                                            inCLM_CAUSE2:causeclaim2,
+                                            inCLM_PERFORM: proceedto,
+                                            inCLM_RCVSTATUS: statusclaim,
+                                            inCLM_RCVBY: requestby,
+                                            inCLM_RCVDATE: requestdate,
+                                            InCom: com,
+                                            innet_price: net_price,
+                                            incasebec: xcasebec,
+                                            infoc: sefoc,
+                                        },
+                                        type: "POST",
+                                        dataType: "JSON",
+                                        success: function (data) {
+                                            console.log(data);
+                                            //  alert(data.message)
+                                            if (data.message == "true") {
+                                                alert("สร้างรายการสำเร็จ");
+
+
+                                                $("#_claimnosub").text(data.subno);
+                                                if (chleng > 1) {
+                                                    $("#btnuploadsales").click();
+                                                }
+                                                // $("#btnuploadsales").click();
+                                                //$("#btnUpload1").click();
+                                                //$("#btnUpload2").click();
+                                                //$("#btnUpload3").click();
+                                                //$("#btnUpload4").click();
+                                                $("#btnUpload").click();
+                                                clearval()
+                                                clearimage()
+                                                GetClimtemp(claimno)
+                                                gettypeprocess(claimno)
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }else {
+                        var claimno = $("#_claimno").val();
+                        var cusno = $("#_invcustomer").val();
+                        var _splitocus = "";
+                        if (cusno != "") {
+                            _splitocus = cusno.split('|');
+                            var splitvalcus = _splitocus;
+                            var _splitocus = splitvalcus[0].trim();
+                        } else {
+                            _splitocus = "";
+                        }
+
+                        var _itemno = $("#_itemnodes").val();
+                        var _splito = "";
+                        if (_itemno != "") {
+                            _splito = _itemno.split('|');
+                            var splitval = _splito;
+                            var _itemnosp = _splito[0].trim();
+                        } else {
+                            _itemnosp = "";
+                        }
+                        var com = $("#_company").val();
+                        var slmcod = $("#slmcod").val();
+
+
+                        //var requestby = $("#requestby").val();
+                        var requestby = $("#_uderlogin").val();
+                        var requestdate = $("#requestdate").val();
+
+                        var itemnosp = _itemnosp;
+                        // var invoiceno = $("#_invoiceno").val();
+                        var invoiceno = $("#_invoicenodes").val();
+                        var uom = $("#_uom").val();
+                        var description = $("#_description").val();
+                        var claimqty = $("#_claimqty").val();
+                        var claimnosub = $("#_claimnosub").text();
+                        var _cqty = $('#_hqty').val();
+                        var invoicedate = $("#_psdate").val();
+                        var causeclaim = $("#causeclaim").val();
+                        var causeclaim2 = $("#causeclaimremar").val();
+                        var proceedto = $("#_proceedto").val();
+                        var proceedtotext = $("#_proceedto option:selected").text();
+                        var statusclaim = $("#_statusclaim").val();
+                        var requestby = $("#requestby").val();
+                        var requestdate = $("#requestdate").val();
+                        var net_price = $('#_netprice').val();
+                        var xcasebec = $("#causedrop").val();
+                        var chleng = $('#FilesList > tbody:last-child').children().length;
+                        var valfoc = $('#_focdis').val();
+                        var sefoc;
+                        if (valfoc != "") {
+                            sefoc = "FOC";
+                        } else {
+                            sefoc = "";
+                        }
+                        var leng = $('#FilesList > tbody:last-child').children().length;
+
+
+                        if (leng <= 1) {
+                            $("#textAlertWarningmes").empty();
+                            $("#textAlertWarningmes").text("กรุณา Upload image สองรูปขึ้นไป เพื่อประกอบพิจารณาคืนสินค้า");
+                            $("#myModalWarning").modal();
+                            return false;
+                        }
+                        $.ajax({
+                            url: '@Url.Action("SaveClimtemp", "Createsalesreturn_sales")',
+                            data: {
+                                inCLM_ID: claimno,
+                                CLM_NO: claimnosub,
+                                CUSCOD: _splitocus,
+                                inSTKCOD: _itemnosp,
+                                inSTKDES: description,
+                                inCLM_UOM: uom,
+                                inCLM_INVNO: invoiceno,
+                                inINV_QTY: _cqty,
+                                inCLM_INVDATE: invoicedate,
+                                inCLM_QTY: claimqty,
+                                inCLM_CAUSE: causeclaim,
+                                inCLM_CAUSE2: causeclaim2,
+                                inCLM_PERFORM: proceedto,
+                                inCLM_RCVSTATUS: statusclaim,
+                                inCLM_RCVBY: requestby,
+                                inCLM_RCVDATE: requestdate,
+                                InCom: com,
+                                innet_price: net_price,
+                                incasebec: xcasebec,
+                                infoc: sefoc,
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                //  alert(data.message)
+                                if (data.message == "true") {
+                                    alert("สร้างรายการสำเร็จ");
+                                    $("#_claimnosub").text(data.subno);
+                                    //$("#btnUpload1").click();
+                                    //$("#btnUpload2").click();
+                                    //$("#btnUpload3").click();
+                                    //$("#btnUpload4").click();
+                                    $("#btnUpload").click();
+                                    // alert(chleng)
+                                    if (chleng > 0) {
+                                        $("#btnuploadsales").click();
+                                    }
+                                    clearval()
+                                    GetClimtemp(claimno)
+                                    gettypeprocess(claimno)
+                                }
+                            }
+                        });
+                    }
+                }
+                else {
+                    alert('Not connect to network...');
+                    return false;
+                }
+            });
+            $("#_btnsenclim").on("click", function () {
+                var data = $('#receclaim').find('tbody').find('tr').length
+                var sumamt = 0;
+                var data = [];
+                if (data == "0") {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("ไม่มีรายการสำหรับส่งตรวจสอบ");
+                    $("#myModalWarning").modal();
+                    return false;
+                }
+                $('#receclaim').find('tbody').find('tr').each(function () {
+                    sumamt += parseFloat($(this).attr('price'));
+                });
+                if (sumamt == 0) {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("ไม่สามารถทำรายการคืนสินค้า เนื่องจาก ไม่มีมูลค่าสินค้า(ของแถม) กรุณาทำรายการใหม่");
+                    $("#myModalWarning").modal();
+                    return false;
+                }
+
+                var cusno = $("#_invcustomer").val();
+                var _splitocus = "";
+                if (cusno != "") {
+                    _splitocus = cusno.split('|');
+                    var splitvalcus = _splitocus;
+                    var _splitocus = splitvalcus[0].trim();
+                } else {
+                    _splitocus = "";
+                }
+                if (_splitocus == "") {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("กรุณาเลือกสถานที่รับสินค้า");
+                    $("#myModalWarning").modal();
+                    return false;
+                }
+                var _claimno = $("#_claimno").val();
+                var _slmcod = $("#slmcod").val();
+                $.ajax({
+                    url: '@Url.Action("GetdataRcvStstusRT", "GetdataCenter")',
+                    data: {
+                        CM_NO: _claimno
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+                        var concm = data;
+
+                        if (concm != ""){
+
+                            $.ajax({
+                                url: '@Url.Action("GetdataCusShipping", "GetdataCenter")',
+                                data: {
+                                    XXcus: _splitocus,
+                                    XXslm: _slmcod,
+                                },
+                                type: "POST",
+                                dataType: "JSON",
+                                success: function (data) {
+                                    var ck = data.Getdata.length;
+                                    var cusship = $("#CustomerShipping").val();
+
+                                    $("#btnnext").click();
+
+                                }
+                            });
+
+                        } else {
+                            //$("#save").click();
+                            $("#myModalsignature").modal();
+                        }
+                    }
+                });
+
+            });
+            $(document).delegate('#btnnext', 'click', function () {
+                //  $('#ClickShipping').trigger("click");
+                // $("#ModalShipping").modal();
+                // $(document).delegate('#ClickShipping', 'click', function () {
+                var cusno = $("#_invcustomer").val();
+                var _splitocus = "";
+                if (cusno != "") {
+                    _splitocus = cusno.split('|');
+                    var splitvalcus = _splitocus;
+                    var _splitocus = splitvalcus[0].trim();
+                } else {
+                    _splitocus = "";
+                }
+                if (_splitocus == "") {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อเลือกสถานที่จัดส่งสินค้า");
+                    $("#myModalWarning").modal();
+                    return false;
+                }
+                //
+                var _slmcod = $("#slmcod").val();
+                $.ajax({
+                    url: '@Url.Action("GetdataCusShipping", "GetdataCenter")',
+                    data: {
+                        XXcus: _splitocus,
+                        XXslm: _slmcod
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data);
+                        $("#ModalShipping").modal();
+                        $('#openShipping').css("display", "block");
+
+                        $('#fixed-table-container-5 tbody:last-child').html("");
+                        $("#scs").text(data.length)
+                        var SubmithtmlPage = "";
+                        var crt = "";
+                        //for (var i = 0; i < data.length; i++) {
+                        for (var i = 0; i < data.Getdata.length; i++) {
+                            crt = data.Getdata[i].val.customer
+                            SubmithtmlPage += '<tr style="cursor: pointer;" cus="' + data.Getdata[i].val.customer + '"  Code="' + data.Getdata[i].val.code + '"  Namecus="' + data.Getdata[i].val.name + '" Address="' + data.Getdata[i].val.address + '" Address_2="' + data.Getdata[i].val.address2 + '">';
+                            if (_splitocus == crt) {
+                                SubmithtmlPage += '<td style="background-color: red;color: bisque;">' + data.Getdata[i].val.customer + '</td>';
+                            } else {
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.customer + '</td>';
+                            }
+                            SubmithtmlPage += '<td>' + data.Getdata[i].val.code + '</td>';
+                            SubmithtmlPage += '<td>' + data.Getdata[i].val.name + '</td>';
+                            SubmithtmlPage += '<td>' + data.Getdata[i].val.name2 + '</td>';
+                            SubmithtmlPage += '<td>' + data.Getdata[i].val.address + '</td>';
+                            SubmithtmlPage += '<td>' + data.Getdata[i].val.address2 + '</td>';
+                            SubmithtmlPage += '<td>' + data.Getdata[i].val.city + '</td>';
+                            SubmithtmlPage += '</tr>';
+
+                        }
+                        $('#fixed-table-container-5  tbody:last-child').append(SubmithtmlPage);
+                        // var fixedTable5 = fixTable(document.getElementById('fixed-table-container-5'));
+                    }
+
+                });
+                //var fixedTable5 = fixTable(document.getElementById('fixed-table-container-5'));
+
+            });
+            $('#CancalShippto').click(function () {
+                $('#codeShipping').val("");
+                $('#CustomerShipping').val("");
+                $('#NameShipping').val("");
+                $('#AddressShipping').val("");
+
+            });
+            $('#clval').click(function () {
+
+                $('#codeShipping').val("");
+                $('#CustomerShipping').val("");
+                $('#NameShipping').val("");
+                $('#AddressShipping').val("");
+
+            });
+            //var fixedTable5 = fixTable(document.getElementById('fixed-table-container-5'));
+            $("#shipping").on("click", "tr", function () {
+                var cus = $(this).attr('cus');
+                var code = $(this).attr('code');
+                var name = $(this).attr('namecus');
+                //var name = $(this).attr('name');
+                var address = $(this).attr('address');
+                var Address_2 = $(this).attr('Address_2');
+                $('#CustomerShipping').val(cus);
+                $('#codeShipping').val(code);
+                $('#NameShipping').val(name);
+                $('#AddressShipping').val(address + " " + Address_2);
+                // $("#ModalShipping").modal('hide');
+            });
+            $("#btnconfirm").on("click", function () {
+
+                $("#btnok").click();
+
+            });
+            $("#save").on("click", function () {
+
+                $("#btnok").click();
+            });
+            $('#myModalsignature').on('hidden.bs.modal', function (e) {
+                signaturePad.clear();
+                signaturePadman.clear();
+                $('#qtyboxsend').val("0");
+            })
+            $("#btnok").on("click", function () {
+
+                var claimno = $("#_claimno").val();
+                var RCVBY = $("#requestby").val();
+                var data = $('#receclaim').find('tbody').find('tr').length
+
+                var qtybox;
+                var qtyboxreq = $("#qtybox").val();//รถไปรับ
+                var qtyboxsend = $("#qtyboxsend").val(); //พนงรับเอง
+                //if (retur != "6"){
+                //    if (qtyboxreq != "0") {
+                //        qtybox = qtyboxreq;
+                //    } else if (qtyboxreq == "0") {
+                //        if (qtyboxsend != "0") {
+                //            qtybox = qtyboxsend;
+                //        } else {
+                //            qtybox = "0";
+                //        }
+                //    }
+                //} else if (retur == "6") {
+                //    if (qtyboxreq == "0") {
+                //        alert("กรุณาให้ระบุจำนวนกล่อง");
+                //        return false;
+                //    } else {
+
+                //        qtybox = qtyboxreq;
+                //    }
+
+                //}
+                //APS//
+                var req = "";
+                $('#receclaim tr').each(function () {
+                    req = $(this).attr('statusclaimup');
+                });
+                var remakecar = $("#remakeclaim").val();
+                if (req == "2") {
+                    var data = signaturePad.toDataURL('image/png');
+                    //console.log(signaturePad)
+                    var imgsignature;
+                    if (signaturePad.isEmpty()) {
+                        alert("กรุณาให้ลูกค้าเซ็นยืนยันรับสินค้า");
+                        return false;
+                    } else {
+
+                        $("#imgCapture").attr("src", data);
+                        imgsignature = $('#imgCapture').attr('src');
+                    }
+
+
+                    // $("#imgCapture").attr("src", data);
+                    var dataman = signaturePadman.toDataURL('image/png');
+                    var imgsignatureman;
+                    if (signaturePadman.isEmpty()) {
+                        alert("กรุณาเซ็นยืนยันรับสินค้าจากลูกค้า");
+                        return false;
+                    } else {
+
+                        $("#imgCaptureman").attr("src", dataman);
+                        imgsignatureman = $('#imgCaptureman').attr('src');
+                    }
+
+                    if (qtyboxreq != "0") {
+                        qtybox = qtyboxreq;
+                    } else if (qtyboxreq == "0") {
+                        if (qtyboxsend != "0") {
+                            qtybox = qtyboxsend;
+                        } else {
+                            qtybox = "0";
+                        }
+                    }
+                } else if (req == "6") {
+
+                    if (qtyboxreq == "0") {
+                        alert("กรุณาให้ระบุจำนวนกล่อง");
+                        return false;
+                    } else {
+                        if (remakecar == "") {
+                            alert("กรุณาระบุชื่อขนส่ง ที่ช่อง Comment สำหรับสั่งให้รถไปรับ");
+                            return false;
+                        }
+
+                        qtybox = qtyboxreq;
+
+                    }
+
+                    imgsignature = "";
+                    imgsignatureman = "";
+                } else if (req == "1" || req == "4") {
+
+
+                    if (qtyboxreq != "0") {
+                        qtybox = qtyboxreq;
+                    } else if (qtyboxreq == "0") {
+                        if (qtyboxsend != "0") {
+                            qtybox = qtyboxsend;
+                        } else {
+                            qtybox = "0";
+                        }
+                    }
+                    imgsignature = "";
+                    imgsignatureman = "";
+                }
+
+
+                if (req == "1") {
+                    if (qtybox == "0") {
+                        //$("#textAlertWarningmes").empty();
+                        //$("#textAlertWarningmes").text("กรุณาระบุจำนวนกล่องที่จะให้รถไปรับ");
+                        //$("#myModalWarning").modal();
+                        alert("กรุณาระบุจำนวนกล่องที่จะให้รถไปรับ");
+                        return false;
+                    }
+                } else if (req == "2") {
+                    if (qtybox == "0") {
+                        //$("#textAlertWarningmes").empty();
+                        //$("#textAlertWarningmes").text("กรุณาระบุจำนวนกล่องที่จะให้รถไปรับ");
+                        //$("#myModalWarning").modal();
+                        alert("กรุณาระบุจำนวนกล่องที่จะคืนสินค้า");
+                        return false;
+                    }
+                }
+                if (data == "0") {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("ไม่มีรายการสำหรับส่งพิจารณา");
+                    $("#myModalWarning").modal();
+                    return false;
+                }
+                var CusShipping = $('#CustomerShipping').val();
+                var codeShipping = $('#codeShipping').val();
+                var remakeclaim = $('#remakeclaim').val();
+
+
+                $.ajax({
+                    url: '@Url.Action("SaveClim", "Createsalesreturn_sales")',
+                    data: {
+                        inCLM_ID: claimno,
+                        inCLM_RCVBY: RCVBY,
+                        inCusShipping: CusShipping,
+                        incodeShipping: codeShipping,
+                        inremakeclaim: remakeclaim,
+                        inqtybox: qtybox,
+                        imgsignature: imgsignature,
+                        imgsignatureman: imgsignatureman
+
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data);
+                        //return false;
+                        if (data.cmid != "ERROR") {
+                            $("#myModalsignature").hide();
+                            $("#ModalShipping").hide();
+                            $("#textAlertSucces").empty();
+                            $("#textAlertSucces").text("ส่งพิจจารณาสำเร็จ");
+                            $("#myModalSucces").modal();
+                            var valclim = data.cmid;
+                            //alert(imgsignature)
+                            //if(imgsignature != ""){
+                            // var claimnopr = claimnosend;
+                            var wi = window.open("../Report/frmRequestRT.aspx?ClmNUM=" + btoa(valclim));
+                            // var wi = window.open("../Report/frmReceiveproductRT.aspx?ClmNUM=" + btoa(valclim));
+                            wi.focus();
+                            //}else{
+                            //    var wi = window.open("../Report/frmRequestRT.aspx?ClmNUM=" + btoa(valclim));
+                            //    wi.focus();
+
+                            location.reload();
+
+                            //  }
+
+                        } else {
+                            $("#textAlertWarningmes").empty();
+                            $("#textAlertWarningmes").text("บันทึกไม่สำเร็จ กรุณา ทำรายการใหม่");
+                            $("#myModalWarning").modal();
+
+                        }
+
+                        $("#receclaim > tbody").empty();
+                        $("#_cusno").removeAttr('disabled');
+                        location.reload();
+                        $("#_claimno").val("");
+
+                        clearval();
+
+
+                    }
+                });
+            });
+            $("#receclaim").on("click", "#delclmtemp", function () {
+                var comid = $(this).attr('clmID');
+                var clmnoup = $(this).attr('clmnoup');
+                $.ajax({
+                    url: '@Url.Action("DeleteClaimtemp", "Createsalesreturn_sales")',
+                    data: {
+                        comid: comid,
+                        clmnoup: clmnoup
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data);
+                        if (data.message == "true") {
+                            alert("ลบรายการเรียบร้อย");
+                            GetClimtemp(comid)
+                            $("#_claimno").val("");
+                        } else {
+                            alert(data.message);
+                        }
+                    }
+                });
+            });
+            var formdata = new FormData();
+            var dataimage = [];
+            $("#fileInput").on("change", function () {
+                var fileInput = document.getElementById('fileInput');
+
+                //Iterating through each files selected in fileInput
+                for (i = 0; i < fileInput.files.length; i++) {
+                    var src = "";
+                    var sfilename = fileInput.files[i].name;
+                    let srandomid = Math.random().toString(36).substring(7);
+                    src = URL.createObjectURL(fileInput.files[i]);
+                    //formdata.append(sfilename, fileInput.files[i], a1 + "-" + inCim_NoSub);
+                    formdata.append(sfilename, fileInput.files[i]);
+                    var markup = "<tr id='" + srandomid + "'><td><img src='" + src + "' style='width: 25%'></td>\
+                                  <td>\
+                                 <button type='button' style='float: right;' class='delimagsal' faxdel=1 ic=" + srandomid + " name=" + sfilename + ">Cancel</button></td>\
+                                  </tr>"; // Binding the file name
+                    $("#FilesList tbody").append(markup);
+                    //var ItemList = {
+                    //    Img: clm_no_supplier,
+                    //    inCim_NoSub: clm_no_sub,
+                    //    Cim_No: stkcod,
+                    //    Im_No: _user
+
+                    //}
+                    //dataimage.push(ItemList);
+                }
+                chkatchtbl();
+                $('#fileInput').val('');
+            });
+            $("#FilesList").on("click", "tr .delimagsal", function () {
+                var Fileid = $(this).attr("ic");
+                var FileName = $(this).attr("name");
+                var faxdel = $(this).attr("faxdel");
+                //alert(Fileid)
+                if (faxdel == "1") {
+                    DeleteFile(Fileid, FileName);
+                } else if (faxdel == "2") {
+
+                    DeleteFile(Fileid, FileName);
+                }
+            });
+            function DeleteFile(Fileid, FileName) {
+
+                formdata.delete(FileName)
+                $("#" + Fileid).remove();
+                chkatchtbl();
+            }
+            function chkatchtbl() {
+                //alert($('#FilesList tbody').length)
+                if ($('#FilesList tbody').length >= 1) {
+                    $("#FilesList").css("visibility", "visible");
+                } else {
+                    $("#FilesList").css("visibility", "hidden");
+                }
+            }
+
+            $("#btnuploadsales").click(function () {
+
+                var No = $("#_claimno").val();
+
+                var inCim_NoSub = $("#_claimnosub").text();
+                //var No = 'RTTXXXXXX';
+                // var inCim_NoSub = 'RTAXXXXXX-01';
+                formdata.set('uploadername', No + "-" + inCim_NoSub);
+                formdata.set('inCim_NoSub', inCim_NoSub);
+                formdata.set('No', No);
+
+                $.ajax({
+                    url: '@Url.Action("UploadFiles", "Createsalesreturn_sales")',
+                    type: "POST",
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    //data: formdata,
+                    data: formdata,
+                    async: false,
+                    success: function (result) {
+
+                        if (result != "") {
+
+
+                            alert("บันทึกรูปภาพประกอบสำเร็จ");
+                            //alert(result);
+                            // $("#FilesList tr .delimagsal").trigger("click");
+                            var MyRows = $('#FilesList').find('tbody').find('tr');
+
+                            for (var i = 0; i < MyRows.length; i++) {
+                                var faxdel = $(MyRows[i]).find('td button').attr("ic");
+                                var FileNam = $(MyRows[i]).find('td button').attr('name');
+                                DeleteFile(faxdel, FileNam);
+                            }
+
+                        }
+                    },
+                    error: function (err) {
+                        alert(err.statusText);
+                    }
+                });
+            });
+            $(document).on('click', '#FilesList .delimagsalsccess', function () {
+                var faxdel = $(this).attr("faxdel");
+                if (faxdel == "2") {
+                    var control = $("#fileInput");
+                    control.replaceWith(control.val('').clone(true));
+                    // Some bound handlers to preserve when cloning
+                    control.on({
+                        change: function () { console.log("Changed") },
+                        focus: function () { console.log("Focus") }
+                    });
+                    var clmno = $("#_claimno").val();
+                    var clmsub = $("#_claimnosub").text();
+
+                    var absPath = $(this).attr("img");
+                    var idimag = $(this).attr("remoimage");
+                    // alert("clmno=" + clmno + "////" + "clmsub=" + clmsub + "////" + "absPath=" + absPath + "////" + "idimag=" + idimag);
+                    //return false;
+                    var idimag = $(this).attr("remoimage"); if (idimag != "") {
+                        if (typeof idimag !== "undefined") {
+                            $.ajax({
+                                url: '@Url.Action("Deleteimage", "Createsalesreturn_sales")',
+                                data: {
+                                    comid: clmno,
+                                    clmnoup: clmsub,
+                                    clmidimg: idimag,
+                                    absPath: absPath
+                                },
+                                type: "POST",
+                                dataType: "JSON",
+                                success: function (data) {
+                                    console.log(data);
+                                    if (data.message == "true") {
+
+                                        alert("ลบ image รายการเรียบร้อย");
+                                        $("#receclaim #btngetshowdata").trigger("click");
+
+                                        //var control = $("#fileInput");
+
+                                        //control.replaceWith(control.val('').clone(true));
+
+                                        //// Some bound handlers to preserve when cloning
+                                        //control.on({
+                                        //    change: function () { console.log("Changed") },
+                                        //    focus: function () { console.log("Focus") }
+                                        //});
+                                    } else {
+                                        alert(data.message);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+                //else if (faxdel == "1") {
+                //  DeleteFile(faxdel, FileName);
+                // }
+            });
+
+
+            $('#btnUpload').click(function () {
+                //$('#spinnerModal').modal('show');
+                // Checking whether FormData is available in browser
+                if (window.FormData !== undefined) {
+                    var a2 = $("#_itemno").val();
+                    var _val = a2.replace(/ /g, '');;
+                    a2 = splitval(_val);
+                    var a1 = $("#_claimno").val();
+                    var fileUpload = $("#fileupload").get(0);
+                    var files = fileUpload.files;
+                    console.log(files);
+
+
+                    var inCim_NoSub = $("#_claimnosub").text();
+
+                    // Create FormData object
+                    var fileData = new FormData();
+                    // Looping over all files and add it to FormData object
+                    for (var i = 0; i < files.length; i++) {
+
+                        //fileData.append(files[i].name, files[i], a1 + "-" + a2 + "-" + inCim_NoSub + "-01");
+                        fileData.append(files[i].name, files[i], a1 + "-" + inCim_NoSub + "-01");
+                    }
+                    // Adding one more key to FormData object
+                    // fileData.append('username', 'gdb1100');
+
+                    $.ajax({
+                        url: '@Url.Action("UploadVideo", "Createsalesreturn_sales")',
+                        type: "POST",
+                        contentType: false, // Not to set any content header
+                        processData: false, // Not to process data
+                        data: fileData,
+                        success: function (result) {
+                            console.log(result)
+                            if (result.message == "true") {
+                                var Img = result.fileName;
+                                if (Img != "") {
+                                    $.ajax({
+                                        url: '@Url.Action("Savefilevideo", "Createsalesreturn_sales")',
+                                        data: {
+                                            im_name: Img,
+                                            aj_CLM_NO: a1,
+                                            Im_No: "01",
+                                            aj_CLM_NO_SUB: inCim_NoSub,
+                                            Size: result.Size
+                                        },
+                                        type: "POST",
+                                        dataType: "JSON",
+                                        success: function (data) {
+                                            console.log(data);
+
+                                            if (data.message == 'true') {
+
+                                                //setTimeout(function () {
+
+                                                //    $('#spinnerModal').modal('hide');
+                                                //}, 10);
+                                                alert("บันทึก VIDEO สำเร็จ")
+                                                $('#ststus').text(data.message);
+
+                                            }
+                                        }
+                                    });
+                                }
+
+                            }
+
+
+                        },
+                        error: function (err) {
+                            alert(err.statusText + ":ความยาวเกินกว่ากำหนด Upload ใหม่");
+                        }
+                    });
+                } else {
+                    alert("FormData is not supported.");
+                }
+            });
+            $(document).on('click', '.removevideo', function () {
+                var control = $("#Fileupload");
+                control.replaceWith(control.val('').clone(true));
+                // Some bound handlers to preserve when cloning
+                control.on({
+                    change: function () { console.log("Changed") },
+                    focus: function () { console.log("Focus") }
+                });
+                var clmno = $("#_claimno").val();
+                var clmsub = $("#_claimnosub").text();
+                // var phimage = $('.imageThumb img').attr('src');
+                // var absPath = resultObj[0].val.IMAGE_NAME;
+                var absPath = $(this).attr("img");
+
+                var idimag = $(this).attr("remoimage");
+
+                if (idimag != "") {
+                    if (typeof idimag !== "undefined") {
+                        $.ajax({
+                            url: '@Url.Action("DeleteFileVideo", "Createsalesreturn_sales")',
+                            data: {
+                                comid: clmno,
+                                clmnoup: clmsub,
+                                clmidimg: idimag,
+                                absPath: absPath + ".mp4",
+                                Im_No: "01"
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                if (data.message == "true") {
+
+                                    alert("ลบ VIDEOS รายการเรียบร้อย");
+
+                                    var control = $("#Fileupload");
+
+                                    control.replaceWith(control.val('').clone(true));
+
+                                    // Some bound handlers to preserve when cloning
+                                    control.on({
+                                        change: function () { console.log("Changed") },
+                                        focus: function () { console.log("Focus") }
+                                    });
+                                } else {
+                                    alert(data.message);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+
+            $(document).on('click', '.remove1', function () {
+                var control = $("#FileUpload1");
+                control.replaceWith(control.val('').clone(true));
+                // Some bound handlers to preserve when cloning
+                control.on({
+                    change: function () { console.log("Changed") },
+                    focus: function () { console.log("Focus") }
+                });
+                var clmno = $("#_claimno").val();
+                var clmsub = $("#_claimnosub").text();
+                // var phimage = $('.imageThumb img').attr('src');
+                // var absPath = resultObj[0].val.IMAGE_NAME;
+                var absPath = $(this).attr("img");
+
+                var idimag = $(this).attr("remoimage");
+
+                if (idimag != "") {
+                    if (typeof idimag !== "undefined") {
+                        $.ajax({
+                            url: '@Url.Action("Deleteimage", "Createsalesreturn_sales")',
+                            data: {
+                                comid: clmno,
+                                clmnoup: clmsub,
+                                clmidimg: idimag,
+                                absPath: absPath
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                if (data.message == "true") {
+
+                                    alert("ลบ image รายการเรียบร้อย");
+
+                                    var control = $("#FileUpload1");
+
+                                    control.replaceWith(control.val('').clone(true));
+
+                                    // Some bound handlers to preserve when cloning
+                                    control.on({
+                                        change: function () { console.log("Changed") },
+                                        focus: function () { console.log("Focus") }
+                                    });
+                                } else {
+                                    alert(data.message);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+            $('#btnUpload2').click(function () {
+
+                // Checking whether FormData is available in browser
+                if (window.FormData !== undefined) {
+                    var a2 = $("#_itemno").val();
+                    var _val = a2.replace(/ /g, '');;
+                    a2 = splitval(_val);
+                    var a1 = $("#_claimno").val();
+                    var fileUpload = $("#FileUpload2").get(0);
+                    var files = fileUpload.files;
+
+                    var inCim_NoSub = $("#_claimnosub").text();
+
+                    // Create FormData object
+                    var fileData = new FormData();
+                    // Looping over all files and add it to FormData object
+                    for (var i = 0; i < files.length; i++) {
+
+                        // fileData.append(files[i].name, files[i], a1 + "-" + a2 + "-" + inCim_NoSub + "-01");
+                        fileData.append(files[i].name, files[i], a1 + "-" + inCim_NoSub + "-02");
+                    }
+                    // Adding one more key to FormData object
+                    // fileData.append('username', 'gdb1100');
+                    if ($('#FileUpload2')[0].files.length > 0) {
+                        //    // down.innerHTML = "No files selected";
+                        //    alert("No files selected");
+                        //    return false;
+                        //}
+                        $.ajax({
+                            url: '@Url.Action("Upload", "Createsalesreturn_sales")',
+                            type: "POST",
+                            contentType: false, // Not to set any content header
+                            processData: false, // Not to process data
+                            data: fileData,
+                            success: function (result) {
+                                //alert(result);
+                                if (result.message == "true") {
+                                    var Img = result.imgname;
+
+                                    if (inCim_NoSub == "") {
+                                        alert("กรุณาเลือกรายการด้านล่างเพื่อบันทึก รูปภาพ");
+                                        return false;
+                                    }
+                                    $.ajax({
+                                        url: '@Url.Action("SavePathImagetemp", "Createsalesreturn_sales")',
+                                        data: {
+                                            im_name: Img,
+                                            Cim_No: a1,
+                                            Im_No: "02",
+                                            inCim_NoSub: inCim_NoSub
+                                        },
+                                        type: "POST",
+                                        dataType: "JSON",
+                                        success: function (data) {
+                                            console.log(data);
+                                            if (data.message == 'true') {
+                                                //alert(data.message)
+                                                $('#ststus2').text(data.message);
+
+                                            }
+                                        }
+                                    });
+
+                                } else {
+                                    alert("บันทึกภาพภ่ายไม่สำเร็จ กรุณากดปุ่มบันทึกลงตระกร้าอีกครั้ง");
+                                }
+                            },
+                            error: function (err) {
+                                alert(err.statusText);
+                            }
+                        });
+                    }
+                } else {
+                    alert("FormData is not supported.");
+                }
+            });
+            $(document).on('click', '.remove2', function () {
+                var control = $("#FileUpload2");
+                control.replaceWith(control.val('').clone(true));
+                // Some bound handlers to preserve when cloning
+                control.on({
+                    change: function () { console.log("Changed") },
+                    focus: function () { console.log("Focus") }
+                });
+                var clmno = $("#_claimno").val();
+                var clmsub = $("#_claimnosub").text();
+                // var phimage = $('.imageThumb img').attr('src');
+                // var absPath = resultObj[0].val.IMAGE_NAME;
+                var absPath = $(this).attr("img");
+
+                var idimag = $(this).attr("remoimage");
+
+                if (idimag != "") {
+                    if (typeof idimag !== "undefined") {
+                        $.ajax({
+                            url: '@Url.Action("Deleteimage", "Createsalesreturn_sales")',
+                            data: {
+                                comid: clmno,
+                                clmnoup: clmsub,
+                                clmidimg: idimag,
+                                absPath: absPath
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                if (data.message == "true") {
+
+                                    alert("ลบ image รายการเรียบร้อย");
+
+                                    var control = $("#FileUpload2");
+
+                                    control.replaceWith(control.val('').clone(true));
+
+                                    // Some bound handlers to preserve when cloning
+                                    control.on({
+                                        change: function () { console.log("Changed") },
+                                        focus: function () { console.log("Focus") }
+                                    });
+                                } else {
+                                    alert(data.message);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+            $('#btnUpload3').click(function () {
+
+                // Checking whether FormData is available in browser
+                if (window.FormData !== undefined) {
+                    var a2 = $("#_itemno").val();
+                    var _val = a2.replace(/ /g, '');;
+                    a2 = splitval(_val);
+                    var a1 = $("#_claimno").val();
+                    var fileUpload = $("#FileUpload3").get(0);
+                    var files = fileUpload.files;
+
+                    var inCim_NoSub = $("#_claimnosub").text();
+
+                    // Create FormData object
+                    var fileData = new FormData();
+                    // Looping over all files and add it to FormData object
+                    for (var i = 0; i < files.length; i++) {
+
+                        // fileData.append(files[i].name, files[i], a1 + "-" + a2 + "-" + inCim_NoSub + "-01");
+                        fileData.append(files[i].name, files[i], a1 + "-" + inCim_NoSub + "-03");
+                    }
+                    // Adding one more key to FormData object
+                    // fileData.append('username', 'gdb1100');
+                    if ($('#FileUpload3')[0].files.length > 0) {
+                        //    // down.innerHTML = "No files selected";
+                        //    alert("No files selected");
+                        //    return false;
+                        //}
+                        $.ajax({
+                            url: '@Url.Action("Upload", "Createsalesreturn_sales")',
+                            type: "POST",
+                            contentType: false, // Not to set any content header
+                            processData: false, // Not to process data
+                            data: fileData,
+                            success: function (result) {
+                                //alert(result);
+                                if (result.message == "true") {
+                                    var Img = result.imgname;
+
+                                    if (inCim_NoSub == "") {
+                                        alert("กรุณาเลือกรายการด้านล่างเพื่อบันทึก รูปภาพ");
+                                        return false;
+                                    }
+                                    $.ajax({
+                                        url: '@Url.Action("SavePathImagetemp", "Createsalesreturn_sales")',
+                                        data: {
+                                            im_name: Img,
+                                            Cim_No: a1,
+                                            Im_No: "03",
+                                            inCim_NoSub: inCim_NoSub
+                                        },
+                                        type: "POST",
+                                        dataType: "JSON",
+                                        success: function (data) {
+                                            console.log(data);
+                                            if (data.message == 'true') {
+                                                //alert(data.message)
+                                                $('#ststus3').text(data.message);
+
+                                            }
+                                        }
+                                    });
+
+                                } else {
+                                    alert("บันทึกภาพภ่ายไม่สำเร็จ กรุณากดปุ่มบันทึกลงตระกร้าอีกครั้ง");
+                                }
+                            },
+                            error: function (err) {
+                                alert(err.statusText);
+                            }
+                        });
+                    }
+                } else {
+                    alert("FormData is not supported.");
+                }
+            });
+            $(document).on('click', '.remove3', function () {
+                var control = $("#FileUpload3");
+                control.replaceWith(control.val('').clone(true));
+                // Some bound handlers to preserve when cloning
+                control.on({
+                    change: function () { console.log("Changed") },
+                    focus: function () { console.log("Focus") }
+                });
+                var clmno = $("#_claimno").val();
+                var clmsub = $("#_claimnosub").text();
+                // var phimage = $('.imageThumb img').attr('src');
+                // var absPath = resultObj[0].val.IMAGE_NAME;
+                var absPath = $(this).attr("img");
+
+                var idimag = $(this).attr("remoimage");
+
+                if (idimag != "") {
+                    if (typeof idimag !== "undefined") {
+                        $.ajax({
+                            url: '@Url.Action("Deleteimage", "Createsalesreturn_sales")',
+                            data: {
+                                comid: clmno,
+                                clmnoup: clmsub,
+                                clmidimg: idimag,
+                                absPath: absPath
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                if (data.message == "true") {
+
+                                    alert("ลบ image รายการเรียบร้อย");
+
+                                    var control = $("#FileUpload3");
+
+                                    control.replaceWith(control.val('').clone(true));
+
+                                    // Some bound handlers to preserve when cloning
+                                    control.on({
+                                        change: function () { console.log("Changed") },
+                                        focus: function () { console.log("Focus") }
+                                    });
+                                } else {
+                                    alert(data.message);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+            $('#btnUpload4').click(function () {
+
+                // Checking whether FormData is available in browser
+                if (window.FormData !== undefined) {
+                    var a2 = $("#_itemno").val();
+                    var _val = a2.replace(/ /g, '');;
+                    a2 = splitval(_val);
+                    var a1 = $("#_claimno").val();
+                    var fileUpload = $("#FileUpload4").get(0);
+                    var files = fileUpload.files;
+
+                    var inCim_NoSub = $("#_claimnosub").text();
+
+                    // Create FormData object
+                    var fileData = new FormData();
+                    // Looping over all files and add it to FormData object
+                    for (var i = 0; i < files.length; i++) {
+
+                        // fileData.append(files[i].name, files[i], a1 + "-" + a2 + "-" + inCim_NoSub + "-01");
+                        fileData.append(files[i].name, files[i], a1 + "-" + inCim_NoSub + "-04");
+                    }
+                    // Adding one more key to FormData object
+                    // fileData.append('username', 'gdb1100');
+                    if ($('#FileUpload4')[0].files.length > 0) {
+                        //    // down.innerHTML = "No files selected";
+                        //    alert("No files selected");
+                        //    return false;
+                        //}
+                        $.ajax({
+                            url: '@Url.Action("Upload", "Createsalesreturn_sales")',
+                            type: "POST",
+                            contentType: false, // Not to set any content header
+                            processData: false, // Not to process data
+                            data: fileData,
+                            success: function (result) {
+                                //alert(result);
+                                if (result.message == "true") {
+                                    var Img = result.imgname;
+
+                                    if (inCim_NoSub == "") {
+                                        alert("กรุณาเลือกรายการด้านล่างเพื่อบันทึก รูปภาพ");
+                                        return false;
+                                    }
+                                    $.ajax({
+                                        url: '@Url.Action("SavePathImagetemp", "Createsalesreturn_sales")',
+                                        data: {
+                                            im_name: Img,
+                                            Cim_No: a1,
+                                            Im_No: "04",
+                                            inCim_NoSub: inCim_NoSub
+                                        },
+                                        type: "POST",
+                                        dataType: "JSON",
+                                        success: function (data) {
+                                            console.log(data);
+                                            if (data.message == 'true') {
+                                                //alert(data.message)
+                                                $('#ststus4').text(data.message);
+
+                                            }
+                                        }
+                                    });
+
+                                } else {
+                                    alert("บันทึกภาพภ่ายไม่สำเร็จ กรุณากดปุ่มบันทึกลงตระกร้าอีกครั้ง");
+                                }
+                            },
+                            error: function (err) {
+                                alert(err.statusText);
+                            }
+                        });
+                    }
+                } else {
+                    alert("FormData is not supported.");
+                }
+            });
+            $(document).on('click', '.remove4', function () {
+                var control = $("#FileUpload4");
+                control.replaceWith(control.val('').clone(true));
+                // Some bound handlers to preserve when cloning
+                control.on({
+                    change: function () { console.log("Changed") },
+                    focus: function () { console.log("Focus") }
+                });
+                var clmno = $("#_claimno").val();
+                var clmsub = $("#_claimnosub").text();
+                // var phimage = $('.imageThumb img').attr('src');
+                // var absPath = resultObj[0].val.IMAGE_NAME;
+                var absPath = $(this).attr("img");
+
+                var idimag = $(this).attr("remoimage");
+
+                if (idimag != "") {
+                    if (typeof idimag !== "undefined") {
+                        $.ajax({
+                            url: '@Url.Action("Deleteimage", "Createsalesreturn_sales")',
+                            data: {
+                                comid: clmno,
+                                clmnoup: clmsub,
+                                clmidimg: idimag,
+                                absPath: absPath
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                if (data.message == "true") {
+
+                                    alert("ลบ image รายการเรียบร้อย");
+
+                                    //var control = $("#FileUpload2");
+
+                                    //control.replaceWith(control.val('').clone(true));
+
+                                    //// Some bound handlers to preserve when cloning
+                                    //control.on({
+                                    //    change: function () { console.log("Changed") },
+                                    //    focus: function () { console.log("Focus") }
+                                    //});
+                                } else {
+                                    alert(data.message);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+            var _cmno = $("#_cmno").val();
+
+            if (_cmno != "") {
+                GetClimtemp(_cmno)
+            }
+            function GetClimtemp(claimnokey) {
+                // var valclim = $("#searchclaimno").val();
+                $("#_claimnosub").text("");
+
+                var valclim = claimnokey
+
+                $.ajax({
+                    url: '@Url.Action("GetClimtemp", "Createsalesreturn_sales")',
+                    data: {
+                        inCLM_ID: valclim
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data);
+                        // var SubmithtmlPage = '';
+                        $('#receclaim > tbody:last-child').html("");
+                        if (data.Getdata.length > 0) {
+                            $("#_cusno").attr('disabled', 'disabled');
+                            $("#_company").attr('disabled', 'disabled');
+                            $("#slmcod").attr('disabled', 'disabled');
+                            $("#_invoiceno").attr('disabled', 'disabled');
+                            var sta = data.Getdata[0].val.Status
+
+                            if (sta != "1") {
+
+                                $("#_claimno").val(data.Getdata[0].val.STMP_ID);
+                                $("#_cusno").val(data.Getdata[0].val.CUSCOD);
+                                $("#_cusname").val(data.Getdata[0].val.CUSNAM);
+                                $("#slmcod").val(data.Getdata[0].val.SLMCOD);
+                                $("#sslmnam").val(data.Getdata[0].val.SLMNAM);
+                                $("#requestby").val(data.Getdata[0].val.STMP_REQUESTBY);
+                                $("#requestdate").val(data.Getdata[0].val.CLM_RCVDATE);
+                                $("#_company").val(data.Getdata[0].val.COMPANY);
+                                $("#_invcustomer").val(data.Getdata[0].val.CUSCOD);
+                                $("#_invoiceno").val(data.Getdata[0].val.STMP_INVNO);
+                                $("#causedrop").val(data.Getdata[0].val.STMP_ReasonCodes);
+                                //GetShipto()
+                                //$("#_focdis").val(data.Getdata[0].val.FOC);
+                                var SubmithtmlPage = '';
+                                for (var i = 0; i < data.Getdata.length; i++) {
+                                        SubmithtmlPage = '<tr  fax="2" Price="' + data.Getdata[i].val.Price + '" foc="' + data.Getdata[i].val.FOC + '" cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.COMPANY + '" clmnoup="' + data.Getdata[i].val.STMP_ID_SUB + '"  proceedtoup = "' + data.Getdata[i].val.STMP_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.STMP_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.UOM + '" claimqtyup="' + data.Getdata[i].val.STMP_QTY + '" invoicenoeup="' + data.Getdata[i].val.STMP_INVNO + '" invoicedete = "' + data.Getdata[i].val.STMP_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.STMP_CASE + '" clmmachine="' + data.Getdata[i].val.CLM_Machine + '" >';
+                                        SubmithtmlPage += '<td><button type="reset" id="delclmtemp" style="min-width: 50px;" Price="' + data.Getdata[i].val.Price + '" foc="' + data.Getdata[i].val.FOC + '"  clmID="' + data.Getdata[0].val.STMP_ID + '" clmnoup="' + data.Getdata[i].val.STMP_ID_SUB + '">X</button></td>';
+                                        SubmithtmlPage += '<td  id="btngetshowdata" style="cursor: pointer; color: darkorchid; text-decoration: underline; width: 110px;" fax="2"  Price="' + data.Getdata[i].val.Price + '"  foc="' + data.Getdata[i].val.FOC + '"  prodnam="' + data.Getdata[i].val.PRODNAM + '" prode="' + data.Getdata[i].val.PROD + '"  cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.COMPANY + '" clmnoup="' + data.Getdata[i].val.STMP_ID_SUB + '"  proceedtoup = "' + data.Getdata[i].val.STMP_PERFORM + '" resoncod="' + data.Getdata[i].val.STMP_ReasonCodes + '" statusclaimup = "' + data.Getdata[i].val.STMP_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.UOM + '" claimqtyup="' + data.Getdata[i].val.STMP_QTY + '" invoicenoeup="' + data.Getdata[i].val.STMP_INVNO + '" invoicedete = "' + data.Getdata[i].val.STMP_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.STMP_CASE + '">' + data.Getdata[i].val.STMP_ID_SUB + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STKDES + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STKGRP + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.UOM + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STMP_QTY + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STMP_INVNO + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STMP_CASE + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.PERFORMDESCRIPTION + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '</td>';
+                                        SubmithtmlPage += '</tr>';
+                                    $('#receclaim > tbody:last-child').append(SubmithtmlPage);
+                                }
+                            } else {
+                                alert("สถานะอยู่ระหว่างพิจารณาผล");
+
+                            }
+                        } else {
+                            $("#_cusno").removeAttr('disabled');
+                            clearval();
+                            clearimage();
+                            $("#_invcustomer").val("");
+                            $("#_invcustomer").removeAttr('disabled');
+                            $("#slmcod").removeAttr('disabled');
+                            $("#_invoiceno").removeAttr('disabled');
+                            //alert(" No Data.....");
+                            //location.reload();
+                            //var cvaluser = $("#_uderlogin").val()
+                            gettypeprocess(valclim)
+                            //$("#requestby").val(cvaluser);
+                            //var cval = $("#_tempreq").val();
+                            //$("#requestdate").val(cval);
+                        }
+                        var fixedTable2 = fixTable(document.getElementById('fixed-table-container-2'));
+                    }
+                });
+            }
+            function clearvalsearch() {
+                $("#_claimnosub").text("");
+                //$("#_itemno").val("");
+                $("#_description").val("");
+                $("#_itemnodes").val("");
+                $("#_descriptiondes").val("");
+                $("#_prd").val("");
+                $("#_uom").val("");
+                //$("#_invoiceno").val("");
+                $("#_invoicenodes").val("");
+                $("#_psdate").val("");
+                $("#_claimqty").val("");
+                $("#causeclaim").val("");
+                $("#_intqtyor").val("");
+                $("#_netprice").val("");
+                $("#_amt").val("");
+                $("#_focdis").val("");
+                var claimno = $("#_claimno").val();
+                //alert(claimno)
+                if (claimno != "") {
+                    gettypeprocess(claimno);
+                } else {
+                    $("#_proceedto").val("1");
+                    $("#_statusclaim").val("0");
+                }
+                $("#_amtreturn").text("");
+                //$("#_proceedto").val("1");
+                //$("#_statusclaim").val("0");
+
+            }
+            function clearval() {
+                $("#_claimnosub").text("");
+                $("#_itemno").val("");
+                $("#_description").val("");
+                $("#_itemnodes").val("");
+                $("#_descriptiondes").val("");
+                $("#_prd").val("");
+                $("#_uom").val("");
+                $("#_invoiceno").val("");
+                $("#_invoicenodes").val("");
+                $("#_psdate").val("");
+                $("#_claimqty").val("");
+                $("#causeclaim").val("");
+                $("#_intqtyor").val("");
+                $("#_netprice").val("");
+                $("#_amt").val("");
+                $("#_focdis").val("");
+                var claimno = $("#_claimno").val();
+                //alert(claimno)
+                if (claimno != "") {
+                    gettypeprocess(claimno);
+                } else {
+                    $("#_proceedto").val("1");
+                    $("#_statusclaim").val("0");
+                }
+                //$("#_proceedto").val("1");
+                //$("#_statusclaim").val("0");
+
+            }//aps//
+            $(document).on('click', '#FilesList .delimagsalsccess', function () {
+                var faxdel = $(this).attr("faxdel");
+                var FileName = $(this).attr("name");
+                if (faxdel == "2") {
+                    var control = $("#fileInput");
+                    control.replaceWith(control.val('').clone(true));
+                    // Some bound handlers to preserve when cloning
+                    control.on({
+                        change: function () { console.log("Changed") },
+                        focus: function () { console.log("Focus") }
+                    });
+                    var clmno = $("#_claimno").val();
+                    var clmsub = $("#_claimnosub").text();
+                    var absPath = $(this).attr("img");
+                    var idimag = $(this).attr("remoimage");
+                    // alert("clmno=" + clmno + "////" + "clmsub=" + clmsub + "////" + "absPath=" + absPath + "////" + "idimag=" + idimag);
+                    //return false;
+                    //nrt//
+                    var idimag = $(this).attr("remoimage"); if (idimag != "") {
+                        if (typeof idimag !== "undefined") {
+                            $.ajax({
+                                url: '@Url.Action("Deleteimage", "Createsalesreturn_sales")',
+                                data: {
+                                    comid: clmno,
+                                    clmnoup: clmsub,
+                                    clmidimg: idimag,
+                                    absPath: absPath
+                                },
+                                type: "POST",
+                                dataType: "JSON",
+                                success: function (data) {
+                                    console.log(data);
+                                    if (data.message == "true") {
+                                        //aps//
+                                        alert("ลบ image รายการเรียบร้อย");
+                                        $("#receclaim #btngetshowdata").trigger("click");
+                                        // DeleteFile(Fileid, FileName);
+                                        //var control = $("#fileInput");
+
+                                        //control.replaceWith(control.val('').clone(true));
+
+                                        //// Some bound handlers to preserve when cloning
+                                        //control.on({
+                                        //    change: function () { console.log("Changed") },
+                                        //    focus: function () { console.log("Focus") }
+                                        //});
+                                    } else {
+                                        alert(data.message);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                } else if (faxdel == "1") {
+                    DeleteFile(Fileid, FileName);
+                }
+            });
+            $("#receclaim").on("click", "#btngetshowdata", function () {
+                //clearimage()
+                var cusno = $("#_cusno").val();
+
+                $("#_company").attr('disabled', 'disabled');
+                $("#slmcod").attr('disabled', 'disabled');
+                $("#requestby").attr('disabled', 'disabled');
+                $("#requestdate").attr('disabled', 'disabled');
+                $("#_cusno").attr('disabled', 'disabled');
+                var comup = $(this).attr('comup');
+                var clmnoup = $(this).attr('clmnoup');
+                var clmno = $(this).attr('clmno');
+                var itemup = $(this).attr('itemup');
+                var invoicenoeup = $(this).attr('invoicenoeup');
+                var proceedtoup = $(this).attr('proceedtoup');
+                var statusclaimup = $(this).attr('statusclaimup');
+                var worktimeup = $(this).attr('worktimeup');
+                var claimqtyup = $(this).attr('claimqtyup');
+                var causeclaimup = $(this).attr('causeclaimup'); //เหตุผลเคลม//
+                var resoncod = $(this).attr('resoncod'); //เหตุผลเคลม//
+                var foc = $(this).attr('foc');
+                //alert(foc)
+                //var clmmachine = $(this).attr('clmmachine');
+                //var clmmodel = $(this).attr('clmmodel');
+                //var clmmodelyear = $(this).attr('clmmodelyear');
+                //var clmenginecode = $(this).attr('clmenginecode');
+                //var clmchassisno = $(this).attr('clmchassisno');
+                //var clminjecpump = $(this).attr('clminjecpump');
+                //var clmtypeproduct = $(this).attr('clmtypeproduct');
+
+                //var clmwarratyno = $(this).attr('clmwarratyno');
+                //var clmmilage = $(this).attr('clmmilage');
+                //var clmdatedamage = $(this).attr('clmdatedamage');
+                //var clmbatchcode = $(this).attr('clmbatchcode');
+                //var sp = worktimeup.split("/");
+
+                //var _spyear = sp[0];
+                //var _spmonth = sp[1];
+                //var _spday = sp[2];
+                //var _sphro = sp[3];
+                var prodnam = $(this).attr('prodnam');
+                var prode = $(this).attr('prode');
+                //var fax = $(this).attr('fax');
+
+                //var installdate = $(this).attr('installdate');
+                //var contact = $(this).attr('contact');
+                //var contacttel = $(this).attr('contacttel');
+                var leng = $('#receclaim > tbody:last-child').children().length;
+
+                if (leng > 1) {
+                    //aps2020//
+                } else if (leng == 1) {
+                    $('#_proceedto').removeAttr('disabled');
+                    $('#_statusclaim').removeAttr('disabled');
+                    $('#causedrop').removeAttr('disabled');
+                    $('#causeclaim').removeAttr('disabled');
+                }
+                var fax = $(this).attr('fax');
+
+                if (fax == "1") {
+                    $.ajax({
+                        url: '@Url.Action("GetdataInvoicestatudRT", "GetdataCenter")',
+                        data: {
+                            _cusno: "",
+                            _itemno: itemup,
+                            _invoiceno: invoicenoeup,
+                            _com: comup,
+                            _statdate: "",
+                            _enddate: "",
+                            _foc: foc
+                        },
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function (data) {
+                            console.log(data);
+                            if (data.message == "true") {
+                                //$("#_itemno").val(data.Getdata[0].val.STKCOD);
+                                $("#_description").val(data.Getdata[0].val.STKDES);
+                                $("#_itemnodes").val(data.Getdata[0].val.STKCOD);
+                                $("#_descriptiondes").val(data.Getdata[0].val.STKDES);
+                                $("#_uom").val(data.Getdata[0].val.Uom);
+                                $("#_invoiceno").val(data.Getdata[0].val.DOCNUM);
+                                $("#_invoicenodes").val(data.Getdata[0].val.DOCNUM);
+                                $("#_psdate").val(data.Getdata[0].val.PSTDAT);
+                                ////Get input display ///////
+                                $("#_claimqty").val(claimqtyup);//Qty//
+                                $("#causeclaim").val(causeclaimup);//สาเหตุการคืนสินค้าเพิ่มเติม//
+                                $("#_proceedto").val(proceedtoup);//ดำเนินการ//
+                                $("#_statusclaim").val(statusclaimup); //Status///
+                                $("#_claimnosub").text(clmnoup);
+                                $("#causedrop").val(resoncod);//สาเหตุการคืนสินค้า//
+                                //$("#_workda").val(worktimeup);//ระยะใช้งาน//
+                                //$("#_vemac").val(clmmachine);
+                                //$("#_moty").val(clmmodel);
+                                //$("#_modyear").val(clmmodelyear);
+                                //$("#_encod").val(clmenginecode);
+                                //$("#_chno").val(clmchassisno);
+                                //$("#_pump").val(clminjecpump);
+                                //$("#_typpro").val(clmtypeproduct);
+                                //$("#_warcarno").val(clmwarratyno);
+                                //$("#_milage").val(clmmilage);
+                                //$("#_datofdam").val(clmdatedamage);
+                                //$("#_batcod").val(clmbatchcode);
+
+                                //$("#_installdate").val(installdate);
+                                //$("#_claimcontact").val(contact);
+                                //$("#_contact").val(contacttel);
+                            } else {
+                                alert(data.message)
+                            }
+                        }
+                    });
+                } else {
+                    var cuscod = $(this).attr('cuscod');
+                    var cusnam = $(this).attr('cusnam');
+                    var slmcod = $(this).attr('slmcod');
+                    var slmnam = $(this).attr('slmnam');
+                    var stkdes = $(this).attr('stkdes');
+                    var uomup = $(this).attr('uomup');
+                    var itemup = $(this).attr('itemup');
+                    var invoicedete = $(this).attr('invoicedete');
+                    var foc = $(this).attr('foc');
+                    $("#_invcustomer").val(cuscod + "|" + cusnam);
+                    $("#_prd").val(prode + "/" + prodnam);
+                    $("#_claimnosub").text(clmnoup);
+                    $("#_company").val(comup);
+                    $("#_cusno").val(cuscod);
+                    $("#_cusname").val(cusnam);
+                    $("#slmcod").val(slmcod);
+                    $("#sslmnam").val(slmnam);
+                    // $("#requestby").val();
+                    // $("#_itemno").val(itemup);
+                    $("#_description").val(stkdes);
+                    $("#_itemnodes").val(itemup);
+                    $("#_descriptiondes").val(stkdes);
+
+                    $("#_uom").val(uomup);
+                    $("#_invoiceno").val(invoicenoeup);
+                    $("#_invoicenodes").val(invoicenoeup);
+                    $("#_psdate").val(invoicedete);
+                    $("#_claimqty").val(claimqtyup);
+                    //$("#_workda").val(worktimeup);
+                    $("#causeclaim").val(causeclaimup);
+                    $("#_statusclaim").val(statusclaimup);
+                    $("#_proceedto").val(proceedtoup);
+                    $("#causedrop").val(resoncod);//สาเหตุการคืนสินค้า//
+
+
+                    $.ajax({
+                        url: '@Url.Action("Getdatahis_Date_2year", "GetdataCenter")',
+                        data: {
+                            _cusno: cuscod,
+                            _itemno: itemup,
+                            _invoiceno: invoicenoeup,
+                            _com: comup,
+                            _statdate: "",
+                            _enddate: "",
+                            _foc: foc,
+                            _slmcod: slmcod
+
+                        },
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function (data) {
+                            console.log(data);
+                            if (data.message == "true") {
+                                $("#_intqtyor").val(addCommas(data.Getdata[0].val.Qty));
+                                $("#_netprice").val(addCommas(parseFloat(data.Getdata[0].val.Price).toFixed(2)));
+                                $("#_amt").val(addCommas(parseFloat(data.Getdata[0].val.Amt).toFixed(2)));
+                                var qty = $("#_claimqty").val();
+                                $("#_amtreturn").text(addCommas(parseInt(qty) * parseFloat(data.Getdata[0].val.Price)));
+                                //Aps//
+
+                                // $("#requestby").text(rcvby);
+                                // $("#requestdate").text(rcvdate);
+                            } else {
+                                alert(data.message);
+                            }
+                        }
+                    });
+
+
+                    var nokey = $("#_claimno").val();
+                    $.ajax({
+                        url: '@Url.Action("GetfileVideoRT", "GetdataCenter")',
+                        data: {
+                            inCLM_ID: nokey,
+                            CLM_NO: clmnoup,
+                            Im_No: ""
+                        },
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function (result) {
+                            console.log(result.videolist)
+                            if (result.videolist.length > 0) {
+                                $(".pip").remove();
+                                $("<span class=\"pip\">" +
+                                "<video controls='controls' style='width: 600px; max-width: 100%;'>" +
+                                "<source src=" + result.videolist[0].FilePath + ".mp4" + " type='video/mp4' videomode='720p' />" +
+                                " </video>" +
+                                 "<br/><span class=\"removevideo\"  remoimage=" + result.videolist[0].Name + " img=" + result.videolist[0].Name + " >Remove Video</span>" +
+                                 "</span>").insertAfter("#appvideo");
+
+                                $(".removevideo").click(function () {
+                                    $(this).parent(".pip").remove();
+                                    $("#ststus").text("");
+
+                                });
+                            } else {
+                                $(".pip").remove();
+                                $("#ststus").text("");
+                            }
+                        },
+                    });
+
+                    //Getimage//
+                    var nokey = $("#_claimno").val();
+                    $.ajax({
+                        url: '@Url.Action("GetPathImageRT", "GetdataCenter")',
+                        data: {
+                            inCLM_ID: nokey,
+                            CLM_NO: clmnoup
+                        },
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function (result) {
+
+                            if (result.Getdata.length > 0) {
+                                $("#FilesList tbody").empty();
+                                for (var i = 0; i < result.Getdata.length; i++) {
+                                    resultObj = eval(result.Getdata);
+                                    var markup = "<tr id='" + resultObj[i].val.IMAGE_ID + "'><td><img src='" + resultObj[i].val.PATH + "' id='myImg' style='width: 25%'></td>\
+                                  <td>\
+                                 <button type='button' style='float: right;' class='delimagsalsccess'  faxdel=2 ic=" + resultObj[i].val.IMAGE_ID + " name=" + resultObj[i].val.IMAGE_NAME + " remoimage=" + resultObj[i].val.IMAGE_ID + " img=" + resultObj[i].val.IMAGE_NAME + " >Cancel</button></td>\
+                                  </tr>"; // Binding the file name
+                                    $("#FilesList tbody").append(markup);
+                                    //var sfilename = resultObj[i].val.IMAGE_NAME;
+                                    //formdata.append(sfilename, resultObj[i]);
+
+                                }
+
+                                chkatchtbl();
+                            } else {
+                                $("#FilesList tbody").empty();
+
+                            }
+                        },
+
+                    });
+                }
+            });
+            function clearimage() {
+                //alert("xxxx");
+                $("#FilesList tbody").empty();
+                var control = $("#fileupload");
+                control.replaceWith(control.val('').clone(true));
+                control.on({
+                    change: function () { console.log("Changed") },
+                    focus: function () { console.log("Focus") }
+                });
+                var control = $("#FileUpload1");
+                control.replaceWith(control.val('').clone(true));
+                control.on({
+                    change: function () { console.log("Changed") },
+                    focus: function () { console.log("Focus") }
+                });
+                var control = $("#FileUpload2");
+                control.replaceWith(control.val('').clone(true));
+                control.on({
+                    change: function () { console.log("Changed") },
+                    focus: function () { console.log("Focus") }
+                });
+                var control = $("#FileUpload3");
+                control.replaceWith(control.val('').clone(true));
+                control.on({
+                    change: function () { console.log("Changed") },
+                    focus: function () { console.log("Focus") }
+                });
+                var control = $("#FileUpload4");
+                control.replaceWith(control.val('').clone(true));
+                control.on({
+                    change: function () { console.log("Changed") },
+                    focus: function () { console.log("Focus") }
+                });
+                $(".pip").remove();
+                $(".pip1").remove();
+                $(".pip2").remove();
+                $(".pip3").remove();
+                $(".pip4").remove();
+                $("#ststus").text("");
+                $("#ststus1").text("");
+                $("#ststus2").text("");
+                $("#ststus3").text("");
+                $("#ststus4").text("");
+            }
+        });
+    </script>
+
+
+</body>
+</html>
+
+

@@ -1,0 +1,178 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutindex.cshtml";
+    var user = ViewBag.UserId;
+    var userType = ViewBag.UserType;
+ 
+}
+<html5>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Admin Control</title>
+    <link href="~/Content/css/sb-admin-A.css" rel="stylesheet" />
+    <link href="~/Scripts/JSautocomplete/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/JSautocomplete/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/JSautocomplete/jquery-ui.js"></script>
+    <script src="~/Content/fixed-table-master/fixed-table.js"></script>
+    <link href="~/Content/fixed-table-master/fixed-table.css" rel="stylesheet" />
+</head>
+  <style>
+      input.largerCheckbox {
+          width: 30px;
+          height: 30px;
+      } 
+ </style>
+    <body>
+        <div class="card mb-12">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Log Login
+            </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>User Name:</span>
+                                <select class="bar" id="_usercus"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>Status:</span>
+                                <select class="bar" id="_stacus">
+                                    <option value="0">ALL</option>
+                                    <option value="1">On</option>
+                                    <option value="2">Lock</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" id="_btnsearch">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="fixed-table-container-1" class="fixed-table-container">
+                    <table id="_tbinvoicehiscx">
+                        <thead>
+                            <tr>
+                                <th style=" min-width: 115px; height: 60px; border: 1px solid #222;">UsrID</th>
+                                <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Department</th>
+                                <th style=" min-width: 85px; height: 60px; border: 1px solid #222;">Email</th>
+                                <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">User Code</th>
+                                <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Password</th>
+                                <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">LastLogOn</th>
+                                <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">pwdLastSet</th>
+                                <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Status</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                 </div>
+            </div>
+        </div>
+                <input type="hidden" id="_uderlogin" value="@user" />
+                <input type="hidden" id="_udertype" value="@userType" />
+                <script type="text/javascript">
+                    $(document).ready(function () {
+
+                       // var _valtec = $(this).val();
+                        $.ajax({
+                            url: '@Url.Action("GetdataUsesp", "GetdataCenter")',
+                            data: {},
+                         
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                var select = $("#_usercus");
+                                select.children().remove();
+                                select.append($("<option>").val("0").text("User ALL"));
+                                $(data).each(function (index, item) {
+                                    select.append($("<option>").val(item.ID).text(item.USRID));
+                                });
+
+                            }
+                        });
+                        $("#_btnsearch").click(function () {
+                            var _usercus = $("#_usercus").val();
+                            var _stacus = $("#_stacus").val();
+                            $.ajax({
+                                url: '@Url.Action("GetdatauserSp", "AdminContro")',
+                                data: {
+                                    user: _usercus,
+                                    status: _stacus                                  
+                                },
+                                type: "POST",
+                                dataType: "JSON",
+                                success: function (data) {
+                                    console.log(data);
+                                    // waitingDialog.hide();
+                                    $('#fixed-table-container-1 tbody:last-child').html("");
+                                    var CLM_STATUS = '';
+                                    if (data.Getdata.length > 0) {
+                                        $('#fixed-table-container-1 tbody:last-child').html("");
+                                        for (var i = 0; i < data.Getdata.length; i++) {
+                                            CLM_STATUS = data.Getdata[i].val.Status;
+                                            SubmithtmlPage = '<tr>';
+                                            SubmithtmlPage += '<td>' + data.Getdata[i].val.UsrID + '</td>';
+                                            SubmithtmlPage += '<td>' + data.Getdata[i].val.Department + '</td>';
+                                            SubmithtmlPage += '<td>' + data.Getdata[i].val.Email + '</td>';
+                                            SubmithtmlPage += '<td>' + data.Getdata[i].val.UserCode + '</td>';
+                                            SubmithtmlPage += '<td>' + data.Getdata[i].val.Password + '</td>';
+                                            SubmithtmlPage += '<td>' + data.Getdata[i].val.LastLogOn + '</td>';
+                                            SubmithtmlPage += '<td>' + data.Getdata[i].val.pwdLastSet + '</td>';
+                                            if (CLM_STATUS == "2") {
+                                                SubmithtmlPage += '<td><input class="largerCheckbox" type="checkbox" checked="checked" usr="' + data.Getdata[i].val.UsrID + '" ></td>';
+                                            } else {
+                                                SubmithtmlPage += '<td><input class="largerCheckbox" type="checkbox" usr="' + data.Getdata[i].val.UsrID + '"></td>';
+                                            }
+                                           
+                                            SubmithtmlPage += '</tr>';
+                                            $('#fixed-table-container-1  tbody:last-child').append(SubmithtmlPage);
+                                        }
+                                     }
+                                  }
+                                });
+                        });
+                        $("#fixed-table-container-1").on("click", "tr .largerCheckbox", function () {
+                            var rusr = $(this).attr('usr');
+                            var onstatus;
+                                if ($(this).prop("checked") == true) {
+                                  
+                                    onstatus = "3";
+                                    //alert(onstatus);
+                                }
+                                else if ($(this).prop("checked") == false) {
+                                   
+                                    onstatus = "0";
+                                    //alert(onstatus);
+                                }
+                                $.ajax({
+                                    url: '@Url.Action("updatelogon", "AdminContro")',
+                                    data: {
+                                        user: rusr,
+                                        status: onstatus
+                                    },
+                                    type: "POST",
+                                    dataType: "JSON",
+                                    success: function (data) {
+                                        //console.log(data);
+                                       // if(data.message =="Y")
+                                        //{
+                                            //alert("Unlock User Succeed")
+                                       // } else {
+                                        alert(data.message)
+                                       // }
+                                    }
+                                });
+                        });
+                    });
+                </script>
+</body>
+</html5 >

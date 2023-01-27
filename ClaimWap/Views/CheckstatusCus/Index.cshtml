@@ -1,0 +1,270 @@
+﻿@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_Layoutindex.cshtml";
+    var user = ViewBag.UserId;
+    var usertype = ViewBag.UserType;
+}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Check Ststus Claim</title>
+    <link href="~/Content/css/sb-admin-A.css" rel="stylesheet" />
+
+    @*<link href="~/Content/css/TableFixedColandHeader.css" rel="stylesheet" />*@
+    <link href="~/Scripts/JSautocomplete/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/JSautocomplete/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/JSautocomplete/jquery-ui.js"></script>
+    <script src="~/Content/fixed-table-master/fixed-table.js"></script>
+    <link href="~/Content/fixed-table-master/fixed-table.css" rel="stylesheet" />
+
+    <style>
+        #myImg {
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            #myImg:hover {
+                opacity: 0.7;
+            }
+
+        /* The Modal (background) */
+        .modalx {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+        }
+
+        /* Modal Content (Image) */
+        .modal-contentx {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        /* Caption of Modal Image (Image Text) - Same Width as the Image */
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+        }
+
+        /* Add Animation - Zoom in the Modal */
+        .modal-content, #caption {
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+        /* The Close Button */
+        .close {
+            position: absolute;
+            top: 56px;
+            right: 20px;
+            color: #f1f1f1;
+            font-size: 57px;
+            font-weight: bold;
+            /* transition: 0.3s; */
+            left: 1656px;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #bbb;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .gi-4x {
+            font-size: 1.5em;
+        }
+
+        input[type=checkbox] {
+            /* Double-sized Checkboxes */
+            -ms-transform: scale(2); /* IE */
+            -moz-transform: scale(2); /* FF */
+            -webkit-transform: scale(2); /* Safari and Chrome */
+            -o-transform: scale(2); /* Opera */
+        }
+
+        button.print-button {
+            width: 75px;
+            height: 55px;
+        }
+
+            span.print-icon, span.print-icon::before, span.print-icon::after, button.print-button:hover .print-icon::after {
+                border: solid 2px #333;
+            }
+
+                span.print-icon::after {
+                    border-width: 2px;
+                }
+
+        button.print-button {
+            position: relative;
+            padding: 0;
+            border: 0;
+            border: none;
+            background: transparent;
+        }
+
+            span.print-icon, span.print-icon::before, span.print-icon::after, button.print-button:hover .print-icon::after {
+                box-sizing: border-box;
+                background-color: #fff;
+            }
+
+        span.print-icon {
+            position: relative;
+            display: inline-block;
+            padding: 0;
+            margin-top: 20%;
+            width: 55%;
+            height: 30%;
+            background: #fff;
+            border-radius: 20% 20% 0 0;
+        }
+
+            span.print-icon::before {
+                content: " ";
+                position: absolute;
+                bottom: 100%;
+                left: 12%;
+                right: 12%;
+                height: 110%;
+                transition: height .2s .15s;
+            }
+
+            span.print-icon::after {
+                content: " ";
+                position: absolute;
+                top: 55%;
+                left: 12%;
+                right: 12%;
+                height: 0%;
+                background: #fff;
+                background-repeat: no-repeat;
+                background-size: 70% 90%;
+                background-position: center;
+                background-image: linear-gradient( to top, #fff 0, #fff 14%, #333 14%, #333 28%, #fff 28%, #fff 42%, #333 42%, #333 56%, #fff 56%, #fff 70%, #333 70%, #333 84%, #fff 84%, #fff 100% );
+                transition: height .2s, border-width 0s .2s, width 0s .2s;
+            }
+
+        button.print-button:hover {
+            cursor: pointer;
+        }
+
+            button.print-button:hover .print-icon::before {
+                height: 0px;
+                transition: height .2s;
+            }
+
+            button.print-button:hover .print-icon::after {
+                height: 120%;
+                transition: height .2s .15s, border-width 0s .16s;
+            }
+
+        .pip {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+       
+    </style>
+
+
+</head>
+
+<body>
+    <div class="card mb-12">
+        <div class="card-header">
+            <i class="fa fa-table"></i> ตรวจสอบสถานะใบคำขอเคลม  <div style="float: right;color: #428bca; text-decoration: none;" id="abchang">Change Password</div>
+        </div>
+    </div>
+    @*<div id="container">
+        <div id="header">
+            <center><h1>Change Password</h1></center>
+        </div>
+        <div id="form">
+            <input type="password" placeholder="New Password" id="passOne" />
+            <input type="password" placeholder="Confirm Password" id="passTwo" />
+        </div>
+        <div id="footer" class="incorrect">
+            <center><h1 id="footerText">Filler text</h1></center>
+        </div>
+    </div>*@
+    <div class="modal fade" id="password_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Change Password </h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="control-group">
+                        @*<label for="current_password" class="control-label">Current Password</label>*@
+                        <div class="controls">
+                            <input name="current_password" type="password" placeholder="Current Password">
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        @*<label for="new_password" class="control-label">New Password</label>*@
+                        <div class="controls">
+                            <input name="new_password" type="password" id="password" placeholder="New Password">
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        @*<label for="confirm_password" class="control-label">Confirm Password</label>*@
+                        <div class="controls">
+                            <input name="confirm_password" type="password" id="confirm_password" placeholder="onfirm Password"><span id='message'></span>
+</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <button href="#" class="btn btn-primary" id="password_modal_save">Save changes</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var udertype = $("#_udertype").val();
+            var Userlogin = $("#_uderlogin").val();
+
+            $("#abchang").on("click", function (e) {
+                $("#password_modal").modal();
+               //alert('xxxxx')
+            });
+
+            $('#password, #confirm_password').on('keyup', function () {
+                if ($('#password').val() == $('#confirm_password').val()) {
+                    $('#message').html('Matching').css('color', 'green');
+                } else
+                    $('#message').html('Not Matching').css('color', 'red');
+            });
+             
+        });
+       
+    </script>
+</body>
+ </html>

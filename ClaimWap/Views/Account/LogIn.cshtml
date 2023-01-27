@@ -1,0 +1,266 @@
+﻿@model ClaimWap.Models.LoginUserViewModel
+
+@{
+    ViewBag.Title = "LogIn";
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login Claim System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/Content/Login_v2/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link href="~/Content/Login_v2/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!--===============================================================================================-->
+    <link href="~/Content/Login_v2/fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!--===============================================================================================-->
+    <link href="~/Content/Login_v2/fonts/iconic/css/material-design-iconic-font.min.css" rel="stylesheet" type="text/css" />
+    <!--===============================================================================================-->
+    <link href="~/Content/Login_v2/vendor/animate/animate.css" rel="stylesheet" type="text/css" />
+    <!--===============================================================================================-->
+    <link href="~/Content/Login_v2/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" type="text/css" />
+    <!--===============================================================================================-->
+    <link href="~/Content/Login_v2/vendor/animsition/css/animsition.min.css" rel="stylesheet" type="text/css" />
+    <!--===============================================================================================-->
+    <link href="~/Content/Login_v2/vendor/select2/select2.min.css" rel="stylesheet" type="text/css" />
+    <!--===============================================================================================-->
+    <link href="~/Content/Login_v2/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+    <!--===============================================================================================-->
+    <link href="~/Content/Login_v2/css/util.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Login_v2/css/main.css" rel="stylesheet" type="text/css" />
+    <!--===============================================================================================-->
+    <!--===============================================================================================-->
+    <script src="~/Content/Login_v2/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/Login_v2/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/Login_v2/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/Content/Login_v2/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/Login_v2/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/Login_v2/vendor/daterangepicker/moment.min.js"></script>
+    <script src="~/Content/Login_v2/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/Login_v2/vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/Login_v2/js/main.js"></script>
+   
+</head>
+
+<body>
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                @using (Html.BeginForm())
+                {
+                    <fieldset>
+                        <form class="login100-form validate-form">
+                            <span class="login100-form-title p-b-26">
+                                Welcome
+                            </span>
+                            <span class="login100-form-title p-b-48">
+                                @*<i class="zmdi zmdi-font"></i>*@
+                                TRW Auto Service System
+                            </span>
+
+                            <div class="wrap-input100 validate-input" data-validate="">
+                                @*<input class="input100" type="text" name="user" id="_username">*@
+                                <div class="editor-label">@Html.LabelFor(u => u.Usre)</div>
+                                <div class="editor-field">
+                                    @Html.TextBoxFor(u => u.Usre)
+                                    @Html.ValidationMessageFor(u => u.Usre)
+                                    
+                                </div>
+                               
+                            </div>
+
+                            <div class="wrap-input100 validate-input" data-validate="Enter password">
+                                <span class="btn-show-pass">
+                                    @*<i class="zmdi zmdi-eye"></i>*@
+                                </span>
+                                <div class="editor-label">@Html.LabelFor(u => u.Password)</div>
+                                <div class="editor-field">
+                                    @Html.PasswordFor(u => u.Password)
+                                    @Html.ValidationMessageFor(u => u.Password)
+                                    <span toggle="#inputPasswordOld" class="fa fa-fw fa-eye field-icon toggle-passwordCur"></span>
+                                </div>
+                                @*<input class="input100" type="password" name="pass" id="_password">*@
+
+                            </div>
+
+                            <div class="container-login100-form-btn">
+                                <div class="wrap-login100-form-btn">
+                                    <div class="login100-form-bgbtn"></div>
+                                    <button class="login100-form-btn" id="_btnlogin" type="submit">
+                                        Login
+                                    </button>
+                                </div>
+                            </div>
+                            <br />
+                            
+                          @*<div id="singup">สมัครสมาชิก</div>*@
+                            <strong><div id="reset" style="color: red;float:right;">ลืมรหัสผ่าน</div></strong>
+                            
+                            <div class="text-center p-t-115">
+                                <div id="meassagetext" style="color: red;float:right;"></div>
+
+                            </div>
+                        </form>
+                     </fieldset>
+                    <div style="color:red">@Html.ValidationSummary(true, "Login Failed, check details")</div>
+
+
+
+
+                    <div class="col-md-10" style="text-align:center;">
+                        Version 1.0/2018
+                    </div>
+
+
+                }
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="dropDownSelect1"></div>
+    <div class="modal fade" id="orangeModalSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-notify modal-warning" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header text-center">
+                    <h4 class="modal-title white-text w-100 font-weight-bold py-2">Subscribe</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">&times;</span>
+                    </button>
+                </div>
+
+                <!--Body-->
+                <div class="modal-body">
+                    <div class="md-form">
+                       <!--<i class="fas fa-envelope prefix grey-text"></i>-->
+                        <input type="email" id="formemailsiup" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="form2">Your email</label>
+                    </div>
+                    <div class="md-form mb-5">
+                        <!--<i class="fas fa-user-circle"></i>-->
+                        <input type="text" id="form3" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="form3">Your name</label>
+                    </div>
+
+                   
+                </div>
+
+                <!--Footer-->
+                @*<div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-outline-warning waves-effect" id="reqpassword">รับ Password <i class="fas fa-paper-plane-o ml-1"></i></button>
+                </div>*@
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+    <div class="modal fade" id="orangeModalchange" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-notify modal-warning" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header text-center">
+                    <h4 class="modal-title white-text w-100 font-weight-bold py-2">Send Password</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">&times;</span>
+                    </button>
+                </div>
+
+                <!--Body-->
+                <div class="modal-body">
+                    <!--<div class="md-form mb-5">
+                        <i class="fas fa-user-circle"></i>
+                        <input type="text" id="form3" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="form3">Your name</label>
+                    </div>-->
+                    <label data-error="wrong" data-success="right" for="form2">Enter your email address or your display name/alias to have your password mailed to you.</label>
+                    <div class="md-form">
+                        <i class="fa fa-mail-reply-all"></i>
+                        <input type="email" id="formemail" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="form2">Your email</label>
+                    </div>
+                </div>
+
+                <!--Footer-->
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-outline-warning waves-effect" id="reqpassword">รับ Password <!--<i class="fas fa-paper-plane-o ml-1"></i>--></button>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+
+    @*<script src="~/Scripts/notview.js"></script>*@
+   
+     <script type="text/javascript">
+         $(document).ready(function () {
+             $(".toggle-passwordCur").click(function () {
+                 $(this).toggleClass("fa-eye fa-eye-slash");
+                 var input =$("#Password").attr("type");
+               
+                 if (input == "password") {
+                     $("#Password").attr("type","text")
+                 } else {
+                     $("#Password").attr("type", "password");
+                 }
+             });
+             $("#reset").on("click", function (e) {
+                // $("#orangeModalSubscription").modal();
+             });
+             $("#reset").on("click", function (e) {
+                 $("#orangeModalchange").modal();
+             });
+             $("#reqpassword").on("click", function (e) {
+
+                 var email = $("#formemail").val();
+                 if (email == "") {
+                     alert("กรุณาใส่ Email ที่ใช้ลงทะเบียน");
+                     $("#orangeModalchange").modal('hide');
+                     $("#formemail").val("");
+                     return false
+                 }
+                 var charsPattern = email.substr(email.length - 9);
+                
+                 if (charsPattern == "aac.co.th") {
+                     $("#orangeModalchange").modal('hide');
+                     alert("ใช้ได้สำหรับลูกค้าเท่านั้น");
+                     
+                     $("#formemail").val("");
+                     return false
+                 }
+                 $("#orangeModalchange").modal('hide');
+                  $.ajax({
+                     url: '@Url.Action("Forgotpassword","Account")',
+                      data: {
+                          mlie: email
+                      },
+                      type: "POST",
+                      dataType: "JSON",
+                      success: function (data) {
+                          console.log(data)
+                          $("#orangeModalchange").modal('hide');
+                          alert(data.message)
+                          $("#meassagetext").html(data.message);
+                          $("#formemail").val("");
+                      }
+                  });
+             });
+         });
+    </script>
+   
+</body>
+</html>

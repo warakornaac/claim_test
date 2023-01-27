@@ -1,0 +1,542 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutindex.cshtml";
+    var user = ViewBag.UserId;
+    var usertype = ViewBag.UserType;
+    var company = ViewBag.Company;
+}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Invoice History</title>
+    <link href="~/Content/css/sb-admin-A.css" rel="stylesheet" />
+
+    <link href="~/Scripts/JSautocomplete/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/JSautocomplete/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/JSautocomplete/jquery-ui.js"></script>
+    <script src="~/Content/fixed-table-master/fixed-table.js"></script>
+    <link href="~/Content/fixed-table-master/fixed-table.css" rel="stylesheet" />
+    <style>
+        input[type="file"] {
+            display: block;
+        }
+
+        input[type="checkbox"] {
+            width: 50px;
+            zoom: 2;
+            padding: 2px;
+        }
+
+        .imageThumb {
+            max-height: 75px;
+            border: 2px solid;
+            padding: 1px;
+            cursor: pointer;
+        }
+
+        .pip {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .group {
+            margin-bottom: 14px;
+        }
+
+        .remove:hover {
+            background: white;
+            color: black;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- ModalWarning -->
+    <div id="myModalWarning" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+        <div class="modal-dialog" role="document">
+
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="modal" aria-label=" close"><span aria-hidden="true">&times;</span></button>
+                <strong>Warning!</strong>
+                <div class="modal-body">
+                    <div id="textAlertWarning">Some text in the modal.</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="card mb-12">
+        <div class="card-header">
+            <i class="fa fa-table"></i>Invoice History
+        </div>
+
+        <div class="card-body">
+            <div class="col-md-12">
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>SlmCod:</span>
+                            <select class="bar" id="slmcod"></select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Customer::</span>
+                            <span><input type="text" required id="_cusno"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Company.:</span>
+                            <span>
+                                <select id="_company" style=" font-size: 16px; padding: 9px 5px 0px 2px; display: block; border: none; border-bottom: 1px solid #757575;width: 217px;">
+                                    <option value="0" disabled>Choose option</option>
+                                    <option value="TAC" selected>TAC</option>
+                                    <option value="AAC">AAC</option>
+                                    <option value="OMP">OMP</option>
+                                    <option value="TAM">TAM</option>
+                                    <option value="ALL">ALL</option>
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Invoice No.:</span>
+                            <span><input type="text" id="_invoiceno"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Item No.:</span>
+                            <span><input type="text" required id="_itemno"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Stk Group.:</span>
+                            <span><select id="_stkgrp"></select></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Stat Date:</span>
+                            <span><input type="date" data-date-format="dd/mm/yy" id="_statdate"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>End Date:</span>
+                            <span><input type="date" data-date-format="dd/mm/yy" id="_enddate"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-info">Refresh</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-success" id="_btnsearch">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-12">
+
+            <div class="col-md-12">
+                <div class="row">
+
+                </div>
+            </div>
+            <div id="fixed-table-container-1" class="fixed-table-container" style="z-index:1;height: 500px;">
+                <table id="_tbinvoicehis">
+                    <thead>
+                        <tr>
+                            <th>Invoice No</th>
+                            @*<th>Sel</th>*@
+                            <th>Sale Man</th>
+                            <th>Customer</th>
+                            <th>Invoice Date</th>
+                            <th>Item No.</th>
+                            <th>Description</th>
+                            <th>UOM</th>
+                            <th>Qty</th>
+                            <th>Unit Price</th>
+                            <th>Line <br />Amount</th>
+                            <th>Line <br />Discount %</th>
+                            <th>Line <br />discount Amount</th>
+                            <th>Net<br />Unit Price</th>
+                            <th>Net<br />Line Amount</th>
+                            <th>Stock<br />Group</th>
+                            <th>FOC</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="_uderlogin" value="@user" />
+    <input type="hidden" id="_udertype" value="@usertype" />
+    <script type="text/javascript">
+        var fixedTable1 = fixTable(document.getElementById('fixed-table-container-1'));
+        $("#_cusno").autocomplete({
+            selectFirst: true,
+            autoFocus: true,
+            source: function (request, response) {
+                var param = { Name: $('#_cusno').val(), Slm: $('#slmcod').val() };
+                $.ajax({
+                    url: '@Url.Action("GetdateCusCode", "GetdataCenter")',
+                    data: JSON.stringify(param),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.slice(0, 50), function (item) {
+                            return {
+                                value: item
+                            }
+                        }))
+                    },
+                    error: function (XMLhttpsRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                    }
+                });
+
+            },
+            minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
+        });
+        $("#_itemno").autocomplete({
+            selectFirst: true,
+            autoFocus: true,
+            timeout: 100000,
+            source: function (request, response) {
+                var param = {
+                    Name: $('#_itemno').val(),
+                    XvalCompany: $('#_company').val()
+                };
+
+                $.ajax({
+                    url: '@Url.Action("GetdateStockCode", "GetdataCenter")',
+                    data: JSON.stringify(param),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.slice(0, 20), function (item) {
+                            return {
+                                value: item
+                            }
+                        }))
+                    },
+                    error: function (XMLhttpsRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                    }
+                });
+
+            },
+            minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
+        });
+
+        var now = new Date();
+
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+        $("#_statdate").val(today);
+        $("#_enddate").val(today);
+
+
+        function splitval(_val) {
+            var _splito = "";
+            _splito = _val.split('|');
+
+            return _splito[0];
+        }
+        $(document).ready(function () {
+            //ถ้าเป็น TAM -> company = TAM
+            var company = '@company';
+            if (company != "") {
+                if (company == "TAM") {
+                    $("#_company").val("TAM");
+                    $('#_company').attr('disabled', true);
+                }
+            }
+
+            var UserId = $("#_uderlogin").val();
+            var _tpy = $("#_udertype").val();
+            if (_tpy == "4") {
+                $.ajax({
+                    url: '@Url.Action("GetdataCountProcess", "GetdataCenter")',
+                    data: {
+                        Usertype: _tpy,
+                        // Userlogin: 'samart.s'
+                        Userlogin: UserId
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+                        $("#tile").text(data.Getdata[0].val.Status)
+                        $("#countadmin").html("TAC: " + data.Getdata[0].val.CountAdmin + " &nbsp;&#9830;&nbsp; AAC: " + data.Getdata[1].val.CountAdmin);
+                        //$("#counttec1").text("TAC: " + data.Getdata[2].val.CountAdmin + " <----> AAC: " + data.Getdata[3].val.CountAdmin);
+                        $("#counttec1").css("display", "none");
+                    }
+                });
+            } else if (_tpy == "4") {
+                $.ajax({
+                    url: '@Url.Action("GetdataCountProcess", "GetdataCenter")',
+                    data: {
+                        Usertype: _tpy,
+                        // Userlogin: 'samart.s'
+                        Userlogin: UserId
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+                        $("#tile").text(data.Getdata[0].val.Status)
+                        $("#countadmin").html("TAC: " + data.Getdata[0].val.CountAdmin + " &nbsp;&#9830;&nbsp; AAC: " + data.Getdata[1].val.CountAdmin);
+                        //$("#counttec1").text("TAC: " + data.Getdata[2].val.CountAdmin + " <----> AAC: " + data.Getdata[3].val.CountAdmin);
+                        $("#counttec1").css("display", "none");
+                    }
+                });
+            }
+            else if (_tpy == "1") {
+                $.ajax({
+                    url: '@Url.Action("GetdataCountProcess", "GetdataCenter")',
+                    data: {
+                        Usertype: _tpy,
+                        Userlogin: UserId
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+                        $("#tile").text(data.Getdata[0].val.Status)
+                        $("#tile1").text(data.Getdata[2].val.Status)
+                        $("#countadmin").html("TAC: " + data.Getdata[0].val.CountAdmin + " &nbsp;&#9830;&nbsp; AAC: " + data.Getdata[1].val.CountAdmin);
+                        $("#counttec1").html("TAC: " + data.Getdata[2].val.CountAdmin + " &nbsp;&#9830;&nbsp; AAC: " + data.Getdata[3].val.CountAdmin);
+                    }
+                });
+                //  GetClimline("", "TAC", "1", "", "", "", "", "ALL", "0", "0")
+            } else if (_tpy == "2") {
+                $.ajax({
+                    url: '@Url.Action("GetdataCountProcess", "GetdataCenter")',
+                    data: {
+                        Usertype: _tpy,
+                        Userlogin: UserId
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+                        $("#tile").text(data.Getdata[0].val.Status)
+                        $("#countadmin").html("TAC: " + data.Getdata[0].val.CountAdmin + " &nbsp;&#9830;&nbsp; AAC: " + data.Getdata[1].val.CountAdmin);
+                        //$("#counttec1").text("TAC: " + data.Getdata[2].val.CountAdmin + " <----> AAC: " + data.Getdata[3].val.CountAdmin);
+                        $("#counttec1").css("display", "none");
+                    }
+                });
+            } else if (_tpy == "3") {
+                $.ajax({
+                    url: '@Url.Action("GetdataCountProcess", "GetdataCenter")',
+                    data: {
+                        Usertype: _tpy,
+                        // Userlogin: Userlogin
+                        Userlogin: UserId
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+                        $("#tile").text(data.Getdata[0].val.Status)
+                        $("#countadmin").html("TAC: " + data.Getdata[0].val.CountAdmin + " &nbsp;&#9830;&nbsp; AAC: " + data.Getdata[1].val.CountAdmin);
+                        //$("#counttec1").text("TAC: " + data.Getdata[2].val.CountAdmin + " <----> AAC: " + data.Getdata[3].val.CountAdmin);
+                        $("#counttec1").css("display", "none");
+                    }
+                });
+            }
+            $('#Sccreateclaim').css("background-color", "");
+            $('#ScrProcess_Sc').css("background-color", "");
+            $('#SrcCheckstatus_Sc').css("background-color", "");
+            $('#SrcInvoiceHistory_Sc').css("background-color", "rgb(9, 183, 9)");
+            $.ajax({
+                url: '@Url.Action("Getdateslm","GetdataCenter")',
+                data: {
+                    UserId: UserId
+                    // UserId: "kanjana"
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data)
+
+                    var select = $("#slmcod");
+                    select.children().remove();
+                    if (_tpy == "4") {
+                        $(data).each(function (index, item) {
+                            select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
+                        });
+                    } else {
+                        //alert("xxx")
+                        select.append($("<option>").val("ALL").text("ALL"));
+                        $(data).each(function (index, item) {
+                            select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
+                        });
+                    }
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("Getdatastkgrp", "GetdataCenter")',
+                data: {
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data)
+
+                    var select = $("#_stkgrp");
+                    select.children().remove();
+                    select.append($("<option>").val("ALL").text("ALL"));
+                    $(data).each(function (index, item) {
+
+                        select.append($("<option>").val(item.STKGRP).text(item.STKGRP + "/" + item.GRPNAM));
+                    });
+                }
+            });
+            function addCommas(nStr) {
+                nStr += '';
+                x = nStr.split('.');
+                x1 = x[0];
+                x2 = x.length > 1 ? '.' + x[1] : '';
+                var rgx = /(\d+)(\d{3})/;
+                while (rgx.test(x1)) {
+                    x1 = x1.replace(rgx, '$1' + ',' + '$2');
+                }
+                return x1 + x2;
+            }
+            $("#_btnsearch").click(function () {
+                var _cusno = "";
+                _cusno = $("#_cusno").val();
+                _cusno = splitval(_cusno).trim();
+                //  alert(_cusno);
+                var _invoiceno = $("#_invoiceno").val();
+                var _itemno = "";
+                _itemno = $("#_itemno").val();
+                _itemno = splitval(_itemno).trim();
+                //  alert(_itemno);
+                var _com = $("#_company").val();
+                var _statdate = $("#_statdate").val();
+                var _enddate = $("#_enddate").val();
+                var _slmcod = $("#slmcod").val();
+                var _stkgrp = "";
+                _stkgrp = $("#_stkgrp").val();
+                if (_stkgrp == "ALL") {
+                    _stkgrp = "";
+                } else {
+                    _stkgrp = _stkgrp
+                }
+                $.ajax({
+                    url: '@Url.Action("GetdataInvoiceHistory", "InvoiceHistory_Sc")',
+                    data: {
+                        _cusno: _cusno,
+                        _itemno: _itemno,
+                        _invoiceno: _invoiceno,
+                        _com: _com,
+                        _statdate: _statdate,
+                        _enddate: _enddate,
+                        _slmcod: _slmcod,
+                        _foc: "",
+                        _Stkgrp: _stkgrp
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data);
+                        $('#_tbinvoicehis > tbody:last-child').html("");
+                        if (data.Getdata.length > 0) {
+                            var SubmithtmlPage = '';
+                            for (var i = 0; i < data.Getdata.length; i++) {
+                                SubmithtmlPage = '<tr>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + data.Getdata[i].val.DOCNUM + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + data.Getdata[i].val.SLMCOD + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + data.Getdata[i].val.PEOPLE + "/<br>" + data.Getdata[i].val.CUSNAM + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + data.Getdata[i].val.PSTDAT + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + data.Getdata[i].val.STKCOD + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + data.Getdata[i].val.STKDES + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + data.Getdata[i].val.Uom + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + addCommas(data.Getdata[i].val.Qty) + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + addCommas(parseFloat(data.Getdata[i].val.Price).toFixed(2)) + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + addCommas(parseFloat(data.Getdata[i].val.Amt).toFixed(2)) + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + addCommas(parseFloat(data.Getdata[i].val.DiscountPer).toFixed(2)) + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + addCommas(parseFloat(data.Getdata[i].val.DiscountAmt).toFixed(2)) + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + addCommas(parseFloat(data.Getdata[i].val.Net_Price).toFixed(2)) + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + addCommas(parseFloat(data.Getdata[i].val.NetAmt).toFixed(2)) + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + data.Getdata[i].val.STKGRP + '</td>';
+                                SubmithtmlPage += '<td style="background-color: #bbc;border: 1px solid #222;">' + data.Getdata[i].val.FOC + '</td>';
+
+                                //SubmithtmlPage += '<td>' + data.Getdata[i].val.PEOPLE + '</td>';
+                                //SubmithtmlPage += '<td>' + data.Getdata[i].val.CUSNAM + '</td>';
+                                //SubmithtmlPage += '<td>' + data.Getdata[i].val.SLMCOD + '</td>';
+                                //SubmithtmlPage += '<td>' + data.Getdata[i].val.SEC + '</td>';
+                                //SubmithtmlPage += '<td>' + data.Getdata[i].val.STKGRP + '</td>';
+
+                                //SubmithtmlPage += '<td>' + data.Getdata[i].val.AsOf + '</td>';
+                                //SubmithtmlPage += '<td>' + data.Getdata[i].val.LastClaimNo + '</td>';
+                                //SubmithtmlPage += '<td>' + data.Getdata[i].val.LastClaimdate + '</td>';
+                                //SubmithtmlPage += '<td>' + data.Getdata[i].val.ClaimStatus + '</td>';
+                                //SubmithtmlPage += '<td>' + data.Getdata[i].val.COMP + '</td>';
+                                SubmithtmlPage += '</tr>';
+                                $('#_tbinvoicehis > tbody:last-child').append(SubmithtmlPage);
+                            }
+                        } else {
+
+                            $("#textAlertWarning").empty();
+                            $("#textAlertWarning").text("ไม่มีข้อมูลที่ต้องการค้นหา");
+                            $("#myModalWarning").modal();
+                        }
+                        var fixedTable1 = fixTable(document.getElementById('fixed-table-container-1'));
+                    }
+                });
+            });
+
+        });
+
+
+    </script>
+</body>
+
+
+</html>

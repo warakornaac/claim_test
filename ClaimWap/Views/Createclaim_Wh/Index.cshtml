@@ -1,0 +1,1750 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutindexWH.cshtml";
+    var user = ViewBag.UserId;
+    var userType = ViewBag.UserType;
+    var claimno = ViewBag.Srtno;
+    var department=  ViewBag.Department;
+}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Create& Save Claim Document WH</title>
+    <link href="~/Content/css/sb-admin-A.css" rel="stylesheet" />
+    <link href="~/Scripts/JSautocomplete/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/JSautocomplete/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/JSautocomplete/jquery-ui.js"></script>
+    <script src="~/Content/fixed-table-master/fixed-table.js"></script>
+    <link href="~/Content/fixed-table-master/fixed-table.css" rel="stylesheet" />
+    <script src="~/Scripts/signaturepad-master/js/signature_pad.umd.js"></script>
+    <style>
+        #loadingImg {
+            display: none;
+        }
+
+        .wrapper {
+            position: relative;
+            width: 400px;
+            height: 200px;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        img {
+            /*position: absolute;*/
+            left: 0;
+            top: 0;
+        }
+
+        .signature-pad {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 416px;
+            height: 200px;
+            background-color: white;
+        }
+
+
+
+        .preserveLineBreaks {
+            white-space: pre-line; /*or pre-wrap*/
+        }
+
+        input[type="file"] {
+            display: block;
+        }
+
+        input[type="checkbox"] {
+            width: 35px;
+            zoom: 2;
+            padding: 2px;
+        }
+
+        input[type="text"] {
+            /*background: border-box border-box; */
+            color: blue;
+        }
+
+        input[type="date"] {
+            background: border-box border-box;
+            color: blue;
+        }
+
+        .imageThumb {
+            max-height: 75px;
+            border: 2px solid;
+            padding: 1px;
+            cursor: pointer;
+        }
+
+        .removevideo {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .removevideo:hover {
+                background: white;
+                color: black;
+            }
+
+        .pip {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .pip1 {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove1 {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .remove1:hover {
+                background: white;
+                color: black;
+            }
+
+        .pip2 {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove2 {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .remove2:hover {
+                background: white;
+                color: black;
+            }
+
+        .pip3 {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove3 {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .remove3:hover {
+                background: white;
+                color: black;
+            }
+
+        .pip4 {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .pip {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove4 {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .remove4:hover {
+                background: white;
+                color: black;
+            }
+        /*#receclaim {
+            position: relative;
+            width: 700px;
+            background-color: #aaa;
+            overflow: hidden;
+            border-collapse: collapse;
+        }
+        #receclaim tbody {
+                position: relative;
+                display: block;
+                width: 1200px;
+                height: 239px;
+                overflow: scroll;
+            }*/
+
+        .zoom {
+            transition: transform .2s; /* Animation */
+            margin: 0 auto;
+        }
+
+            .zoom:hover {
+                transform: scale(4.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+            }
+
+        .video-frame {
+            width: 100%;
+            height: 195px;
+            border: 4px solid #dc3545;
+            box-shadow: 1px 2px 3px #dc3545;
+            border-radius: 3px;
+        }
+
+        .title {
+            font-weight: 500;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            background-color: #dc3545;
+            color: white;
+            box-shadow: 1px 2px 4px #dc3545;
+        }
+    </style>
+    <style>
+        /*Copied from bootstrap to handle input file multiple*/
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        /*Also */
+        .btn-success {
+            border: 1px solid #c5dbec;
+            background: #D0E5F5;
+            font-weight: bold;
+            color: #2e6e9e;
+        }
+        /* This is copied from https://github.com/blueimp/jQuery-File-Upload/blob/master/css/jquery.fileupload.css */
+        .fileinput-button {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .fileinput-button input {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0;
+                opacity: 0;
+                -ms-filter: 'alpha(opacity=0)';
+                font-size: 200px;
+                direction: ltr;
+                cursor: pointer;
+            }
+
+        .thumb {
+            height: 80px;
+            width: 100px;
+            border: 1px solid #000;
+        }
+
+        ul.thumb-Images li {
+            width: 120px;
+            float: left;
+            display: inline-block;
+            vertical-align: top;
+            height: 120px;
+        }
+
+        .img-wrap {
+            position: relative;
+            display: inline-block;
+            font-size: 0;
+        }
+
+            .img-wrap .close {
+                position: absolute;
+                top: 2px;
+                right: 2px;
+                z-index: 100;
+                background-color: #D0E5F5;
+                padding: 5px 2px 2px;
+                color: #000;
+                font-weight: bolder;
+                cursor: pointer;
+                opacity: .5;
+                font-size: 23px;
+                line-height: 10px;
+                border-radius: 50%;
+            }
+
+            .img-wrap:hover .close {
+                opacity: 1;
+                background-color: #ff0000;
+            }
+
+        .FileNameCaptionStyle {
+            font-size: 12px;
+        }
+    </style>
+</head>
+    <body>
+      <div class="card mb-12">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <i class="fa fa-table"></i> รายละเอียดสินค้า <li id="clickmeheader" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+                        </div>
+                        <div class="col-sm-4" style="display:none">
+                            <div class="input-group">
+                                <input class="form-control" type="text" id="searchclaimno" placeholder="Search Claim No....">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button" id="_btnsearchclaimno">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" id="myDIVheader">
+           
+                    <div class="row">
+                
+                        <div class="col-sm-3">
+                            <span> <i class="fa fa-pencil"></i>Company.:</span>
+                            <select class="bar" id="_company">
+                                <option value="0" disabled>Choose option</option>
+                                <option value="TAC" selected>TAC</option>
+                                <option value="AAC">AAC</option>
+                                <option value="OMP">OMP</option>
+                                <!-- <option value="ALL">ALL</option>-->
+
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>Item No.:</span>
+                                <span><input type="text" id="_itemno" style="border-bottom: 5px solid #b33c0f;" required /></span>
+                                <button type="button" class="btn btn-info" id="checkstock">ตรวจสอบ Stock</button>
+                              
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>Description:</span>
+                                <span><input type="text" id="_description" disabled="disabled" /></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>ประเภทสินค้า Type of Product:</span>
+                                <span><input type="text" id="_typpro" disabled="disabled" /></span>
+                            </div>
+                        </div>
+                
+                    </div>
+                    <div class="row">
+                
+                        <!--<div class="col-md-3">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>Uom.:</span>
+                                <span><input type="text" id="_uom" disabled="disabled" /></span>
+                            </div>
+                        </div>--->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>แผนก Dep.:</span>
+                                <span><input type="text" id="_sec" disabled="disabled" /></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>Stock Group.:</span>
+                                <span><input type="text" id="_stkgrp" disabled="disabled" /></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>PM:</span>
+                                <span><input type="text" id="_prd" disabled="disabled" /></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </div>       
+                <div class="card mb-12">
+                    <div class="card-header">
+                        <i class="fa fa-table"></i> ปัญหาสินค้า <li id="clickme2" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="col-xs-4"><span id="_claimnosub"></span></div>
+                    </div>
+                    <div class="card-body" id="myDIV2">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group" style="margin-top: 11%;">
+                                        <span><i class="fa fa-pencil"></i>สาเหตุการ Claim:</span>
+                                        <span><select class="bar" id="deopcauseclaim" style="border-bottom: 5px solid #b33c0f;"></select></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <span> <i class="fa fa-pencil"></i>รายละเอียดปัญหา:</span>
+                                        <span><textarea rows="4" cols="80" id="causeclaim" style="border-bottom: 5px solid #b33c0f;"></textarea></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                          <div class="row">
+                             <div class="col-md-3">
+                                  <div class="form-group">
+                                      <span> <i class="fa fa-pencil"></i>จำนวนที่ให้ตรวจสอบ:</span>
+                                      <span><input type="number" id="_claimqty" style="border-bottom: 5px solid #b33c0f;" /></span>
+                                  </div>
+
+                              </div>
+                             <div class="col-md-3">
+                                   <div class="form-group">
+                                      <span> <i class="fa fa-pencil"></i>ต้องการให้ดำเนินการ:</span>
+                                         <span>
+                                             <select class="bar" id="_proceedto" style="border-bottom: 5px solid #b33c0f;"></select>
+                                         </span>
+                                   </div>
+                              </div>
+                              <div class="col-md-3" id="resondis" style="display:none">
+                                  <div class="form-group">
+                                      <span> <i class="fa fa-pencil"></i>ระบุสิ่งที่ต้องการให้ดำเนินการ:</span>
+                                      <span>
+                                          <span><input type="text" id="_proceedtoreason" style="border-bottom: 5px solid #b33c0f;" /></span>
+
+                                      </span>
+                                  </div>
+                              </div>
+                             <div class="col-md-3">
+                                        <div class="form-group">
+                                            <span> <i class="fa fa-pencil"></i>สถานะของสินค้า:</span>
+                                            <span>
+                                                <select class="bar" id="_statusclaim" style="border-bottom: 5px solid #b33c0f;"></select>
+                                            </span>
+                                        </div>
+                                    </div>
+                             <div class="col-md-4">
+                                        <div class="form-group">
+                                            <span> <i class="fa fa-pencil"></i>Location :</span>
+                                            <span>
+                                                <input type="text" id="_location"  />
+                                            </span>
+                                        </div>
+                               </div>
+                             <div class="col-md-4">
+                                        <div class="form-group">
+                                            <button type="button" style="float: left;display:none;" id="_btnprint" class="badge-primary"><i class="fa fa-print"></i>  พิมพ์ใบสั่งรถไปรับของ</button>
+
+                                        </div>
+                                    </div>
+                           </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+
+                                        <span> <i class="fa fa-user"></i>Request by:</span>
+                                        <span><input type="text" id="requestby" disabled="disabled" /></span>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span> <i class="fa fa-pencil"></i>Dep Request by:</span>
+                                        <span><input type="text" id="requestdep" disabled="disabled" /></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span> <i class="fa fa-user"></i>Request Date:</span>
+                                        <span><input type="text" id="requestdate" disabled="disabled" /></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                </div>
+                <div class="card mb-12">
+              <div class="card-header">
+                  <i class="fa fa-table"></i>ภาพ/วีดีโอประกอบ <li id="clickme2" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+              </div>
+               <div class="card-body" id="myDIV3">             
+                  <div class="col-xs-6">
+                      <div class="container py-4" id="appvideo">
+
+                          <div class="card">
+                              <div class="card-header bg-danger text-white">
+                                  <h6 class="text-uppercase"> Upload video ไม่เกิน 50 MB</h6>
+                              </div>
+                              <div class="card-body">
+                                  <div class="row">
+                                      <div class="modal-body">
+
+                                          <div class="form-group">
+
+                                              <div class="input-group">
+                                                  <div class="custom-file">
+                                                      <input type="file" id="fileupload" name="fileupload" @*class="custom-file-input"*@ accept="video/*" />
+                                                      <label class="custom-file-label"></label>
+                                                  </div>
+                                                  <div class="input-group-append">
+                                                      <input type="submit" id="btnUpload" class="btn btn-secondary" value="Upload" style="display:none" />
+                                                  </div>
+                                              </div>
+                                          </div>
+
+                                      </div>
+
+
+                                  </div>
+                                  <div class="row">
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                  </div>
+                  <div class="col-xs-6">
+                      <h3>Upload images</h3>
+                      <!--To give the control a modern look, I have applied a stylesheet in the parent span.-->
+                      <form id="uploader">
+                          <div class="row">
+                              <div class="col-sm-6">
+
+                                  <br />            <br />
+                                  <input id="fileInput" type="file" multiple>
+                                  <br />            <br />
+
+                                  <table class="table" id="FilesList" style="visibility:hidden">
+                                      <tr>
+                                          <th>
+                                              Attachment(s)
+                                          </th>
+                                          <th>
+                                              Action
+                                          </th>
+                                      </tr>
+                                  </table>
+                                  <input type="button" id="btnuploadsales" value="Upload" style="float:right;display:none" />
+
+                              </div>
+                          </div>
+                      </form>
+
+                  </div>
+              </div>
+                <div class="row">
+                  <div class="col-md-4">
+                      <div class="form-group">
+                          <button type="button" style="float: right;" id="_btnsave">บันทึกลงตระกร้า</button>
+                      </div>
+                  </div>
+                  <div class="col-sm-3">
+                      <div class="form-group">
+                          <button type="button" style="width:45%;" id="btnok">ส่งให้ Technic ตรวจสอบ</button>
+                      </div>
+                  </div>
+                  <div class="col-sm-3">
+                      <div class="form-group">
+                          <button type="button" id="refresh" style="width:30%;">Refresh</button>
+                      </div>
+                  </div>
+              </div>
+               </div>
+          <div class="col-md-12">
+              <div class="col-sm-6">
+                  <span class="input-group-btn">
+                      Claim No
+                  </span>
+                  <input type="text" required id="_claimno" disabled="disabled" class="form-control">
+                  <span class="input-group-btn">
+                      <button class="btn btn-default" type="button" id="Gendoc" style="display:none">Gen Doc</button>
+                  </span>
+              </div>
+              <div id="fixed-table-container-2" class="fixed-table-container">
+
+                  <table id="receclaim">
+                      <thead>
+                          <tr>
+                              @*<th style="min-width: 53px;background-color: antiquewhite;">X</th>
+                                <th style="min-width: 120px;">line no</th>
+                                <th style="min-width: 150px;">Item No.</th>
+                                <th style="min-width: 53px;">UOM</th>
+                                <th style="min-width: 70px;">Claim<br /> Qty.</th>
+                                <th style="min-width: 70px;">ระยะ<br />การใช้งาน</th>
+                                <th style="min-width: 120px;">Invoice No</th>
+                                <th style="min-width: 170px;">สาเหตุการเคลม</th>
+                                <th style="min-width: 120px;">ดำเนินการ</th>
+                                <th style="min-width: 120px;">รูปภาพ</th>
+                                <th style="min-width: 120px;">สถานะใบคำขอ</th>*@
+                              <th style="background-color: antiquewhite;">X</th>
+                              <th style="text-align:center">line no</th>
+                              <th>Item No.</th>
+                              <th style="text-align:center">Description.</th>
+                              <th>Stock<br /> Group.</th>
+                              <th>ประเภทสินค้า</th>
+                              <th>Claim<br /> Qty.</th>
+                              <th>Location </th>
+                              <th style="text-align:center">สาเหตุที่ต้องการตรวจสอบ</th>
+                            
+                              <th style="text-align:center">ต้องการให้ดำเนินการ</th>
+                              @*<th>รูปภาพ</th>*@
+                              <th>สถานะสินค้า<br />ต้องการให้ตรวจสอบ</th>
+                          </tr>
+                      </thead>
+                      <tbody></tbody>
+                  </table>
+              </div>
+          </div>
+       </div>
+        <!-- ModalWarning -->
+        <div id="myModalWarning" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+            <div class="modal-dialog" role="document">
+
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="modal" aria-label=" close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Warning!</strong>
+                    <div class="modal-body">
+                        <div id="textAlertWarningmes">Some text in the modal.</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Modalsuccess -->
+        <div class="modal fade" id="myModalSucces" role="dialog">
+            <div class="modal-dialog">
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="modal" aria-label=" close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Succes</strong>
+                    <div class="modal-body">
+                        <div id="textAlertSucces">Save success</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- EndModalsuccess -->
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="myModalstock">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">ตรวจสอบ Stock</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="fixed-table-container" id="fixed-table-container-4">
+                            <table id="stockleb">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center">Company</th>
+                                        <th>Item No.</th>
+                                        <th>Bin</th>
+                                        <th>KDC</th>
+                                        <th>RevQty</th>
+                                        <th>Waiting Pack Qty</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <input type="hidden" id="_uderlogin" value="@user" />
+        <input type="hidden" id="_udertype" value="@userType" />
+        <input type="hidden" id="_department" value="@department" />
+        <input type="hidden" id="_cmno" value="@claimno" />
+  <script type="text/javascript">
+    $("#_itemno").autocomplete({
+        selectFirst: true,
+        autoFocus: true,
+        timeout: 100000,
+        source: function (request, response) {
+            var param = {
+                Name: $('#_itemno').val(),
+                XvalCompany: $('#_company').val()
+            };
+            $.ajax({
+                url: '@Url.Action("GetdateStockCode", "GetdataCenter")',
+                data: JSON.stringify(param),
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataFilter: function (data) { return data; },
+                success: function (data) {
+                    response($.map(data.slice(0, 20), function (item) {
+                        return {
+                            value: item
+                        }
+                    }))
+                },
+                error: function (XMLhttpsRequest, textStatus, errorThrown) {
+                    alert(textStatus);
+                }
+            });
+
+        },
+        select: function (event, ui) {
+            var _val = ui.item.value;
+            var _splito = "";
+            _splito = _val.split('|');
+            var splitval = _splito;
+            $("#_description").val(_splito[1].trim());
+            $("#_uom").val(_splito[2].trim());
+            $("#_itemno").val(_splito[0].trim());
+            var _itemno = _splito[0].trim();
+            var _com = $("#_company").val();
+            var _cusno = $("#_cusno").val();
+            var _invoiceno = "";
+            // getHisInvoice(_cusno, _itemno, _com, _invoiceno);
+            $.ajax({
+                url: '@Url.Action("GetdateStockdetail", "GetdataCenter")',
+                data: {
+                    Name: _itemno,
+                    XvalCompany: _com
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    if (data.length > 0) {
+                        // console.log(data);
+                        $("#_typpro").val(data[0].val.DEPNAM);
+                        $("#_sec").val(data[0].val.SEC);
+                        $("#_stkgrp").val(data[0].val.STKGRP + "/" + data[0].val.GRPNAM);
+                        $("#_prd").val(data[0].val.PROD + "/" + data[0].val.PRODNAM);
+                    }
+                }
+            });
+
+        },
+        minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
+    });
+    $(document).ready(function () {
+        n = new Date();
+        y = n.getFullYear();
+        m = n.getMonth() + 1;
+        mm = ("0" + (n.getMonth() + 1)).slice(-2);
+        dd = ("0" + (n.getDate())).slice(-2);
+        d = n.getDate();
+        var UserId = $("#_uderlogin").val();
+        var department  = $("#_department").val();
+        $("#requestby").val(UserId);
+        $("#requestdep").val(department);
+       
+        $("#_tempreq").val(d + "/" + m + "/" + y);
+        $("#requestdate").val(d + "/" + m + "/" + y);
+          function addCommas(nStr) {
+              nStr += '';
+              x = nStr.split('.');
+              x1 = x[0];
+              x2 = x.length > 1 ? '.' + x[1] : '';
+              var rgx = /(\d+)(\d{3})/;
+              while (rgx.test(x1)) {
+                  x1 = x1.replace(rgx, '$1' + ',' + '$2');
+              }
+              return x1 + x2;
+          }
+
+        $.ajax({
+            url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
+            data: {
+                Name: 29
+            },
+            type: "POST",
+            dataType: "JSON",
+            success: function (data) {
+
+                var select = $("#_proceedto");
+                select.children().remove();
+                // select.append($("<option>").val("0").text("เลือกCUSCOD"));
+                $(data).each(function (index, item) {
+
+                    select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+
+                });
+                //  var CUSCODt = $("#CUSCOD option:selected").text();
+            }
+        });
+
+        $.ajax({
+            url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
+            data: {
+                Name: 30
+            },
+            type: "POST",
+            dataType: "JSON",
+            success: function (data) {
+
+                var select = $("#_statusclaim");
+                select.children().remove();
+                // select.append($("<option>").val("0").text("เลือกCUSCOD"));
+                $(data).each(function (index, item) {
+
+                    select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+
+                });
+                //  var CUSCODt = $("#CUSCOD option:selected").text();
+            }
+        });
+        $.ajax({
+            url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
+            data: {
+                Name: 39
+            },
+            type: "POST",
+            dataType: "JSON",
+            success: function (data) {
+
+                var select = $("#deopcauseclaim");
+                select.children().remove();
+                // select.append($("<option>").val("0").text("เลือกCUSCOD"));
+                $(data).each(function (index, item) {
+
+                    select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                });
+                //  var CUSCODt = $("#CUSCOD option:selected").text();
+            }
+        });
+        $("#_itemno").on("keyup", function () {
+            if ($.trim($(this).val()) == '') {
+                $("#_description").val("");
+                $("#_typpro").val("");
+                $("#_sec").val("");
+                $("#_stkgrp").val("");
+                $("#_prd").val("");
+                $("#causeclaim").val("");
+                $("#_claimqty").val("");
+                $("#_proceedto").val("1");
+                $("#_statusclaim").val("1");
+                $("#_location").val("");
+            }
+        });
+        $("#_claimqty").on("keyup", function () {
+           
+                if (Number($(this).val()) < 0) {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("จำนวนรับเคลม ติดลบ กรุณาระบุจำนวนใหม่");
+                    $("#myModalWarning").modal();
+                    $(this).val("");
+                    return false;
+                }
+                if (Number($(this).val()) == -0) {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("จำนวนรับเคลม ติดลบ กรุณาระบุจำนวนใหม่");
+                    $("#myModalWarning").modal();
+                    $(this).val("");
+                    return false;
+                }
+           
+        });
+
+        $("#_claimqty").on("click", function () {
+
+            if (Number($(this).val()) < 0) {
+                $("#textAlertWarningmes").empty();
+                $("#textAlertWarningmes").text("จำนวนรับเคลม ติดลบ กรุณาระบุจำนวนใหม่");
+                $("#myModalWarning").modal();
+                $(this).val("");
+                return false;
+            }
+
+        });
+        $('#checkstock').click(function () {
+           
+            var xitemno = $("#_itemno").val();
+            if (xitemno == "") {
+                $("#textAlertWarningmes").empty();
+                $("#textAlertWarningmes").text("กรุณาระบุเบอร์สินค้า");
+                $("#myModalWarning").modal();
+                return false;
+            } else {
+                $("#myModalstock").modal();
+                var _itemnosp = "";
+                if (_itemno != "") {
+                    _splito = xitemno.split('|');
+                    var splitval = _splito;
+                    _itemnosp = _splito[0].trim();
+                } else {
+                    _itemnosp = "";
+                }
+                var company = $("#_company").val();
+
+                $.ajax({
+                    url: '@Url.Action("Getdatastock", "GetdataCenter")',
+                    data: {
+                      
+                        stck: _itemnosp,
+                        com: company
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+                        $('#stockleb > tbody:last-child').html("");
+
+
+                        var SubmithtmlPage = '';
+                        if (data.Getdata.length > 0) {
+                          
+                            for (var i = 0; i < data.Getdata.length; i++) {
+                                SubmithtmlPage = '<tr>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.client + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.item_no + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.nav_bin + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.Qty_avail + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.RevQty + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.WaitingPackQty + '</td>';
+                                SubmithtmlPage += '</tr>';
+                               
+                            }
+                            $('#stockleb > tbody:last-child').append(SubmithtmlPage);
+                           
+                        }
+                        //var fixedTable4 = fixTable(document.getElementById('fixed-table-container-4'));
+                    }
+                     
+                    });
+            }
+            
+        });
+       
+        $('#_btnsave').click(function() {
+            var isValid = true;
+            if(navigator.onLine){
+                var xitemno = $("#_itemno").val();
+                if (xitemno == "") {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("กรุณาระบุเบอร์สินค้า");
+                    $("#myModalWarning").modal();
+                    return false;
+                }
+                var xstkgrp = $("#_stkgrp").val();
+                if (xstkgrp == "") {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("Item No.ไม่มีในระบบ");
+                    $("#myModalWarning").modal();
+                    return false;
+                }
+                var dropxcauseclaim = $("#deopcauseclaim").val();
+                if (dropxcauseclaim == "0") {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("กรุณาระบุ สาเหตุการ Claim");
+                    $("#myModalWarning").modal();
+                    return false;
+                }
+                var causeclaim = $("#causeclaim").val();
+                if (causeclaim == ""){
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("กรุณาระบุรายละเอียดปัญหา");
+                    $("#myModalWarning").modal();
+                    return false;
+                }
+                var proceedto = $("#_proceedto").val();
+                if (proceedto == "" || proceedto == "0") {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("กรุณาระบุต้องการให้ดำเนินการ");
+                    $("#myModalWarning").modal();
+                    return false;
+                }
+                var statusclaim = $("#_statusclaim").val();
+                if (statusclaim == "" || statusclaim == "0") {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("กรุณาระบุสถานะของสินค้า");
+                    $("#myModalWarning").modal();
+                    return false;
+                }
+                var claimqty = $("#_claimqty").val();
+
+                if (claimqty == "") {
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("กรุณาระบุจำนวนที่ให้ตรวจสอบ");
+                    $("#myModalWarning").modal();
+                    return false;
+                }
+                var location = $("#_location").val();
+
+                //if (location == "") {
+                //    $("#textAlertWarningmes").empty();
+                //    $("#textAlertWarningmes").text("กรุณาระบุ Location ที่ต้องการให้ตรวจสอบ");
+                //    $("#myModalWarning").modal();
+                //    return false;
+                //}
+                var proceedto = $("#_proceedto").val();
+                var proceedtoreason = $("#_proceedtoreason").val();
+                if (proceedto == "6") {
+                    if (proceedtoreason == "") {
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text("กรุณาระบุสิ่งที่ต้องการให้ดำเนินการ");
+                        $("#myModalWarning").modal();
+                        return false;
+                    }
+                }
+                var claimno = $("#_claimno").val();
+                var _itemno = $("#_itemno").val();
+                var _splito = "";
+                var _itemnosp = "";
+                if (_itemno != "") {
+                    _splito = _itemno.split('|');
+                    var splitval = _splito;
+                    _itemnosp = _splito[0].trim();
+                } else {
+                    _itemnosp = "";
+                }
+                var company = $("#_company").val();
+                //var causeclaim = $("#causeclaim").val();
+                var causeclaim = $("#deopcauseclaim option:selected").text() + '//' + $("#causeclaim").val();
+                var claimqty = $("#_claimqty").val();
+
+                var statusclaim = $("#_statusclaim").val();
+                var location = $("#_location").val();
+                var requestby = $("#_uderlogin").val();
+                var requestbydep = $("#requestdep").val();
+                var requestdate = $("#requestdate").val();
+                var claimnosub = $("#_claimnosub").text();
+                var nokey = $("#_claimno").val();
+                if(nokey == ""){                   
+                    var Gendoc;
+                    var Clno = nokey;
+                    var Com = $("#_company").val();
+                    if (Com == "TAC") {
+                        Gendoc = 'WMT';
+                    } else if (Com == "AAC") {
+                        Gendoc = 'WMA';
+                    } else if (Com == "OMP") {
+                        Gendoc = 'WMO';
+                    }
+                   
+                    $.ajax({
+                            url: '@Url.Action("Gendocno", "Createclaim_Wh")',
+                            data: {
+                                Gendoc: Gendoc,
+                                Clno: Clno,
+                                Com: Com
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                $("#_claimno").val(data.Docnocm);
+                                var claimnokey = $("#_claimno").val();
+                                if (claimnokey == "") {
+                                    $("#textAlertWarningmes").empty();
+                                    $("#textAlertWarningmes").text("กรุณากดสร้างรายการเคลมอีกรอบ");
+                                    $("#myModalWarning").modal();
+                                    return false;
+                                }else{
+                                  
+                                    $.ajax({
+                                        url: '@Url.Action("SaveClimWHtemp", "Createclaim_Wh")',
+                                        data: {
+                                            inCLM_ID: claimnokey,
+                                            inCLM_ID_SUB:claimnosub,
+                                            inSTKCOD: _itemnosp,
+                                            inCLM_CAUSE: causeclaim,
+                                            inCLM_QTY: claimqty,
+                                            inCLM_LOCATION: location,
+                                            inCLM_PERFORM: proceedto,
+                                            inCLM_PERFORM_DES:proceedtoreason,
+                                            inCLM_RCVSTATUS: statusclaim,
+                                            inCLM_Location:location,
+                                            inCLM_RCVBY: requestby,
+                                            inCLM_RCVBYDEP: requestbydep,
+                                            inCLM_RCVDATE: requestdate,
+                                            InCom: company,
+                                            
+
+                                        },
+                                        type: "POST",
+                                        dataType: "JSON",
+                                        success: function (data) {
+                                            console.log(data);
+                                            //  alert(data.message)
+                                            if (data.message == "true") {
+
+                                                $("#_claimnosub").text(data.subno);
+                                                alert("สร้างรายการสำเร็จ");
+                                                $("#btnUpload").click();
+                                                $("#btnuploadsales").click();
+                                              
+                                                //$("#btnUpload").click();
+                                              
+                                                $("#FilesList tbody").empty();
+                                                clearval()
+                                                clearimage()
+                                                GetClimtemp(claimnokey)
+
+                                            } else {
+                                                $("#textAlertWarningmes").empty();
+                                                $("#textAlertWarningmes").text(data.message);
+                                                $("#myModalWarning").modal();
+                                            }
+                                        }
+                                    });
+                                }
+                             }
+                        });
+                } else {
+                    var claimnokey = $("#_claimno").val();
+                    $.ajax({
+                        url: '@Url.Action("SaveClimWHtemp", "Createclaim_Wh")',
+                        data: {
+                            inCLM_ID: claimnokey,
+                            inCLM_ID_SUB: claimnosub,
+                            inSTKCOD: _itemnosp,
+                            inCLM_CAUSE: causeclaim,
+                            inCLM_QTY: claimqty,
+                            inCLM_LOCATION: location,
+                            inCLM_PERFORM: proceedto,
+                            inCLM_PERFORM_DES: proceedtoreason,
+                            inCLM_RCVSTATUS: statusclaim,
+                            inCLM_Location: location,
+                            inCLM_RCVBY: requestby,
+                            inCLM_RCVBYDEP: requestbydep,
+                            inCLM_RCVDATE: requestdate,
+                            InCom: company,
+
+
+                        },
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function (data) {
+                            console.log(data);
+                            //  alert(data.message)
+                            if (data.message == "true") {
+
+                                $("#_claimnosub").text(data.subno);
+                                alert("สร้างรายการสำเร็จ");
+                                $("#btnUpload").click();
+                                $("#btnuploadsales").click();
+                                //$("#btnuploadsales").click();
+
+                                //$("#btnUpload").click();
+
+                                $("#FilesList tbody").empty();
+                                clearval()
+                                clearimage()
+                                GetClimtemp(claimnokey)
+
+                            } else {
+                                $("#textAlertWarningmes").empty();
+                                $("#textAlertWarningmes").text(data.message);
+                                $("#myModalWarning").modal();
+                            }
+                        }
+                    });
+                }
+
+            }else{
+                alert('Not connect to network...');
+                return false;
+            }
+        });
+        //GetClimtemp('WMT20070013')
+
+        var _cmno = $('#_cmno').val();
+        if (_cmno != "") {
+
+           // $("#searchclaimno").val(_cmno);
+            GetClimtemp(_cmno);
+        }
+        function GetClimtemp(claimnokey) {
+            // var valclim = $("#searchclaimno").val();
+            $("#_claimnosub").text("");
+          
+            var valclim = claimnokey
+            $.ajax({
+                url: '@Url.Action("GetClimWHtemp", "Createclaim_Wh")',
+                data: {
+                    inCLM_ID: valclim
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data);
+                    // var SubmithtmlPage = '';
+                    $('#receclaim > tbody:last-child').html("");
+                    if (data.Getdata.length > 0) {
+                       // $("#_itemno").attr('disabled', 'disabled');
+                      $("#_company").attr('disabled', 'disabled');
+                       
+                        var sta = data.Getdata[0].val.Status
+                      
+                        if (sta != "1") {
+                           
+                            $("#_claimno").val(data.Getdata[0].val.CLM_ID);
+                            $("#requestby").val(data.Getdata[0].val.InsertBy);
+                            $("#requestdate").val(data.Getdata[0].val.InsertDate);
+                            $("#_company").val(data.Getdata[0].val.CLM_COMPANY);
+                            var SubmithtmlPage = '';
+                            for (var i = 0; i < data.Getdata.length; i++) {
+                                SubmithtmlPage = '<tr  fax="2" comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_QTY + '" causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '"  >';
+                                SubmithtmlPage += '<td><button type="reset" id="delclmtemp" style="min-width: 50px;"  clmID="' + data.Getdata[0].val.CLM_ID + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '">X</button></td>';
+                                SubmithtmlPage += '<td  id="btngetshowdata" style="cursor: pointer; color: darkorchid; text-decoration: underline; width: 110px;"  prodnam="' + data.Getdata[i].val.PRODNAM + '" prode="' + data.Getdata[i].val.PROD + '"   comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '" proceedtodesup = "' + data.Getdata[i].val.CLM_PERFORM_DES + '" statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_QTY + '"  causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '"  stkgrp = "' + data.Getdata[i].val.STKGRP + '" stkgrpnam = "' + data.Getdata[i].val.GRPNAM + '" dep = "' + data.Getdata[i].val.DEP + '" depnam = "' + data.Getdata[i].val.DEPNAM + '" clmowner = "' + data.Getdata[i].val.CLM_Owner + '"  clmlocation = "' + data.Getdata[i].val.CLM_Location + '"  >' + data.Getdata[i].val.CLM_NO_SUB + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.STKDES + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.STKGRP + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.DEPNAM + '</td>';
+                            
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_Location + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_CAUSE + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.PERFORMDESCRIPTION + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '</td>';
+                                SubmithtmlPage += '</tr>';
+                                $('#receclaim > tbody:last-child').append(SubmithtmlPage);
+                            }
+                        }else {
+                            alert("สถานะอยู่ระหว่างการตรวจสอบ");
+
+                        }
+                    } else {
+                        $("#_cusno").removeAttr('disabled');
+                        clearval();
+                        clearimage();
+                        $("#_invcustomer").val("");
+                        $("#slmcod").removeAttr('disabled');
+                        //alert(" No Data.....");
+                        //location.reload();
+                        //var cvaluser = $("#_uderlogin").val()
+
+                        //$("#requestby").val(cvaluser);
+                        //var cval = $("#_tempreq").val();
+                        //$("#requestdate").val(cval);
+                    }
+                    var fixedTable2 = fixTable(document.getElementById('fixed-table-container-2'));
+                }
+            });
+        }
+       
+        $('#btnUpload').click(function () {
+            // Checking whether FormData is available in browser
+            if (window.FormData !== undefined) {
+                // var a2 = $("#_itemno").val();
+               // var a2 = $("#_itemno").text();
+                //var _val = a2.replace(/ /g, '');;
+                //a2 = splitval(_val);
+                //var a1 = $("#Nospankey").text();
+                var a1 = $("#_claimno").val();
+                var fileUpload = $("#fileupload").get(0);
+                var files = fileUpload.files;
+                console.log(files);
+
+
+                var inCim_NoSub = $("#_claimnosub").text();
+              
+                //alert(a1 + "-" + inCim_NoSub)
+                // Create FormData object
+                var fileData = new FormData();
+                // Looping over all files and add it to FormData object
+                console.log(files)
+                for (var i = 0; i < files.length; i++) {
+
+                    //fileData.append(files[i].name, files[i], a1 + "-" + a2 + "-" + inCim_NoSub + "TEC-01");
+                    fileData.append(files[i].name, files[i], a1 + "-" + inCim_NoSub + "-01");
+                }
+                console.log(fileData)
+                // Adding one more key to FormData object
+                // fileData.append('username', 'gdb1100');
+
+                $.ajax({
+                    url: '@Url.Action("UploadVideo", "Createclaim_Wh")',
+                    type: "POST",
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    data: fileData,
+                    success: function (result) {
+                        console.log(result)
+                        if (result.message == "true") {
+                            var Img = result.fileName;
+                            if (Img != "") {
+                                $.ajax({
+                                    url: '@Url.Action("Savefilevideo", "Createclaim_Wh")',
+                                    data: {
+                                        im_name: Img,
+                                        aj_CLM_NO: a1,
+                                        Im_No: "01",
+                                        aj_CLM_NO_SUB: inCim_NoSub,
+                                        Size: result.Size
+                                    },
+                                    type: "POST",
+                                    dataType: "JSON",
+                                    success: function (data) {
+                                        console.log(data);
+                                        if (data.message == 'true') {
+                                             alert("บันทึก VIDEO สำเร็จ")
+                                            $('#ststus').text(data.message);
+
+                                        }
+                                    }
+                                });
+                            }
+
+                        }
+
+
+                    },
+                    error: function (err) {
+                        alert(err.statusText + "xxxx");
+                    }
+                });
+            } else {
+                alert("FormData is not supported.");
+            }
+        });
+        $("#btnuploadsales").click(function () {
+            var No = $("#_claimno").val();
+            var inCim_NoSub = $("#_claimnosub").text();
+            //alert(No + "-" + inCim_NoSub)
+           //return false;
+            //var No = 'CMTXXXXXX';
+            // var inCim_NoSub = 'CMTXXXXXX-01';
+            formdata.set('uploadername', No + "-" + inCim_NoSub);
+            formdata.set('inCim_NoSub', inCim_NoSub);
+            formdata.set('No', No);
+
+            $.ajax({
+                url: '@Url.Action("UploadFiles", "Createclaim_Wh")',
+                type: "POST",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                //data: formdata,
+                data: formdata,
+                async: false,
+                success: function (result) {
+                    if (result != "") {
+                        alert(result);
+                        $("#FilesList tr .delimagsal").trigger("click");
+                        // $("#_tbclmline tr #xxx").trigger("click");
+
+                    }
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                }
+            });
+        });
+        var formdata = new FormData();
+        var dataimage = [];
+        $("#fileInput").on("change", function () {
+            var fileInput = document.getElementById('fileInput');
+
+            //Iterating through each files selected in fileInput
+            for (i = 0; i < fileInput.files.length; i++) {
+                var src = "";
+                var sfilename = fileInput.files[i].name;
+                let srandomid = Math.random().toString(36).substring(7);
+                src = URL.createObjectURL(fileInput.files[i]);
+                //formdata.append(sfilename, fileInput.files[i], a1 + "-" + inCim_NoSub);
+                formdata.append(sfilename, fileInput.files[i]);
+                var markup = "<tr id='" + srandomid + "'><td><img src='" + src + "' style='width: 25%'></td>\
+                                  <td>\
+                                 <button type='button' style='float: right;' class='delimagsal' faxdel=1 ic=" + srandomid + " name=" + sfilename + ">Cancel</button></td>\
+                                  </tr>"; // Binding the file name
+                $("#FilesList tbody").append(markup);
+            }
+            chkatchtbl();
+            $('#fileInput').val('');
+        });
+        $("#FilesList").on("click", "tr .delimagsal", function () {
+            var Fileid = $(this).attr("ic");
+            var FileName = $(this).attr("name");
+            var faxdel = $(this).attr("faxdel");
+            if (faxdel == "1") {
+                DeleteFile(Fileid, FileName);
+            } else {
+
+            }
+        });
+        function chkatchtbl() {
+            //alert($('#FilesList tbody').length)
+            if ($('#FilesList tbody').length >= 1) {
+                $("#FilesList").css("visibility", "visible");
+            } else {
+                $("#FilesList").css("visibility", "hidden");
+            }
+        }
+        function DeleteFile(Fileid, FileName) {
+
+            formdata.delete(FileName)
+            $("#" + Fileid).remove();
+            chkatchtbl();
+        }
+        function splitvalCLM_CAUSE(_val) {
+            var _splito = "";
+            _splito = _val.split('//');
+
+            return _splito;
+        }
+        $(document).on('click', '#FilesList .delimagsalsccess', function () {
+            var faxdel = $(this).attr("faxdel");
+            if (faxdel == "2") {
+                var control = $("#fileInput");
+                control.replaceWith(control.val('').clone(true));
+                // Some bound handlers to preserve when cloning
+                control.on({
+                    change: function () { console.log("Changed") },
+                    focus: function () { console.log("Focus") }
+                });
+                var clmno = $("#Nospankey").text();
+                var clmsub = $("#subNospan").text();
+
+                var absPath = $(this).attr("img");
+                var idimag = $(this).attr("remoimage");
+                // alert("clmno=" + clmno + "////" + "clmsub=" + clmsub + "////" + "absPath=" + absPath + "////" + "idimag=" + idimag);
+                //return false;
+                var idimag = $(this).attr("remoimage"); if (idimag != "") {
+                    if (typeof idimag !== "undefined") {
+                        $.ajax({
+                            url: '@Url.Action("Deleteimage", "Process_Wh")',
+                            data: {
+                                comid: clmno,
+                                clmnoup: clmsub,
+                                clmidimg: idimag,
+                                absPath: absPath
+                            },
+                            type: "POST",
+                            dataType: "JSON",
+                            success: function (data) {
+                                console.log(data);
+                                if (data.message == "true") {
+
+                                    alert("ลบ image รายการเรียบร้อย");
+                                    $("#receclaim #btngetshowdata").trigger("click");
+                                    $("#_tbclmline #xxx").trigger("click");
+
+                                    var control = $("#fileInput");
+
+                                    control.replaceWith(control.val('').clone(true));
+
+                                    // Some bound handlers to preserve when cloning
+                                    control.on({
+                                        change: function () { console.log("Changed") },
+                                        focus: function () { console.log("Focus") }
+                                    });
+                                } else {
+                                    alert(data.message);
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+        $('#_proceedto').change(function () {
+            var val = $(this).val();
+            if( val == "6")
+            {
+                $("#resondis").css("display", "block");
+            }else {
+                $("#resondis").css("display", "none");
+                $("#_proceedtoreason").val("");
+            }
+        });
+        $("#receclaim").on("click", "#delclmtemp", function () {
+            var comid = $(this).attr('clmID');
+            var clmnoup = $(this).attr('clmnoup');
+            $.ajax({
+                url: '@Url.Action("DeleteClaimtemp", "Createclaim_Wh")',
+                data: {
+                    comid: comid,
+                    clmnoup: clmnoup
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data);
+                    if (data.message == "true") {
+                        alert("ลบรายการเรียบร้อย");
+                        GetClimtemp(comid)
+                        $("#_claimno").val("");
+                    } else {
+                        alert(data.message);
+                    }
+                }
+            });
+        });
+
+        $("#receclaim").on("click", "#btngetshowdata", function (){
+            var itemup = $(this).attr('itemup');
+            var stkdes = $(this).attr('stkdes');
+            var depnam = $(this).attr('depnam');
+            var dep = $(this).attr('dep');
+            var stkgrp = $(this).attr('stkgrp');
+            var stkgrpnam = $(this).attr('stkgrpnam');
+            var dep = $(this).attr('dep');
+            var prode = $(this).attr('prode');
+            var prodnam = $(this).attr('prodnam');
+            var claimqtyup = $(this).attr('claimqtyup');
+            var causeclaimup = $(this).attr('causeclaimup');
+            var dropcauseclaimup = splitvalCLM_CAUSE(causeclaimup); //เหตุผลเคลมdrop down list//
+
+            var _valdropcauseclaimup = dropcauseclaimup[0]; //เหตุผลเคลมdrop down list split//
+            var _valcauseclaimup = dropcauseclaimup[1];
+
+            var proceedtoup = $(this).attr('proceedtoup');
+            var proceedtodesup = $(this).attr('proceedtodesup');
+            var statusclaimup = $(this).attr('statusclaimup');
+            var clmlocation = $(this).attr('clmlocation');
+            var clmnoup = $(this).attr('clmnoup');
+            $("#_itemno").attr('disabled', 'disabled');
+            $("#_company").attr('disabled', 'disabled');
+            $("#_itemno").val(itemup);
+            $("#_description").val(stkdes);
+            $("#_typpro").val(depnam);
+            $("#_sec").val(dep);
+            $("#_stkgrp").val(stkgrp + '/' + stkgrpnam);
+            $("#_prd").val(prode + '/' + prodnam);
+
+            $("#_claimnosub").text(clmnoup);
+            // $("#causeclaim").val(causeclaimup);
+            $("#causeclaim").val(_valcauseclaimup);//เหตุผลเคลม//
+            $("#deopcauseclaim option:contains(" + _valdropcauseclaimup + ")").attr('selected', 'selected');
+            $("#_claimqty").val(claimqtyup);
+            $("#_proceedto").val(proceedtoup);
+            if (proceedtoup == "6") {
+               
+                $("#resondis").css("display", "block");
+                $("#_proceedtoreason").val(proceedtodesup);
+            } else {
+                $("#resondis").css("display", "none");
+                $("#_proceedtoreason").val("");
+            }
+            $("#_location").val(clmlocation);
+            $("#_statusclaim").val(statusclaimup);
+            var nokey = $("#_claimno").val();
+            $.ajax({
+                url: '@Url.Action("GetfileVideoWH", "GetdataCenter")',
+                data: {
+                    inCLM_ID: nokey,
+                    CLM_NO: clmnoup,
+                    Im_No: ""
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (result) {
+                    console.log(result.videolist)
+                    if (result.videolist.length > 0) {
+                        $(".pip").remove();
+                        $("<span class=\"pip\">" +
+                        "<video controls='controls' style='width: 600px; max-width: 100%;'>" +
+                        "<source src=" + result.videolist[0].FilePath + ".mp4" + " type='video/mp4' videomode='720p' />" +
+                        " </video>" +
+                         "<br/><span class=\"removevideo\"  remoimage=" + result.videolist[0].Name + " img=" + result.videolist[0].Name + " >Remove image</span>" +
+                         "</span>").insertAfter("#appvideo");
+
+                        $(".removevideo").click(function () {
+                            $(this).parent(".pip").remove();
+                            $("#ststus").text("");
+
+                        });
+                    } else {
+                        $(".pip").remove();
+                        $("#ststus").text("");
+                    }
+                },
+            });
+            //Getimage//
+
+            var nokey = $("#_claimno").val();
+            $.ajax({
+                url: '@Url.Action("GetPathImageWH", "GetdataCenter")',
+                data: {
+                    inCLM_ID: nokey,
+                    CLM_NO: clmnoup
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (result) {
+
+                    if (result.Getdata.length > 0) {
+                        $("#FilesList tbody").empty();
+                        for (var i = 0; i < result.Getdata.length; i++) {
+                            resultObj = eval(result.Getdata);
+                            var markup = "<tr id='" + resultObj[i].val.IMAGE_ID + "'><td><img src='" + resultObj[i].val.PATH + "' id='myImg' style='width: 25%'></td>\
+                                  <td>\
+                                 <button type='button' style='float: right;' class='delimagsalsccess'  faxdel=2 ic=" + resultObj[i].val.IMAGE_ID + " name=" + resultObj[i].val.IMAGE_NAME + " remoimage=" + resultObj[i].val.IMAGE_ID + " img=" + resultObj[i].val.IMAGE_NAME + " >Cancel</button></td>\
+                                  </tr>"; // Binding the file name
+                            $("#FilesList tbody").append(markup);
+                            //var sfilename = resultObj[i].val.IMAGE_NAME;
+                            //formdata.append(sfilename, resultObj[i]);
+
+                        }
+
+                        chkatchtbl();
+                    } else {
+                        $("#FilesList tbody").empty();
+
+                    }
+                },
+
+            });
+        });
+        $("#btnok").on("click", function () {
+            var claimno = $("#_claimno").val();
+            var requestdep = $("#requestdep").val();
+            var requestby = $("#requestby").val();
+
+          
+            $.ajax({
+                url: '@Url.Action("SaveClimWH", "Createclaim_Wh")',
+                data: {
+                    inCLM_ID: claimno,
+                    inCLM_RCVBY: requestby,
+                    indepreq: requestdep,
+                    imgsignature: ""
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data);
+                    //return false;
+                    if (data.message == "true") {
+
+                        $("#myModalsignature").hide();
+                        $("#ModalShipping").hide();
+                        $("#textAlertSucces").empty();
+                        $("#textAlertSucces").text("ส่งตรวจสอบสำเร็จ");
+                        $("#myModalSucces").modal();
+                      
+                        if (claimno != "" ) {
+                            var wi = window.open("../Report/frmRequestClaimWH.aspx?ClmNUM=" + btoa(claimno));
+                            wi.focus();
+                           
+                        }
+                        $("#receclaim > tbody").empty();
+                       
+                        // location.reload();
+                        $("#_claimno").val("");
+
+                        clearval();
+                    } else {
+
+                        $("#textAlertWarningmes").empty();
+                        $("#textAlertWarningmes").text(data.message);
+                        $("#myModalWarning").modal();
+                    }
+                }
+            });
+        });
+        function clearval() {
+            $("#_claimno").val("");
+            $("#_claimnosub").text("");
+            $("#_itemno").val("");
+            $("#_description").val("");
+            $("#_typpro").val("");
+            $("#_sec").val("");
+            $("#_stkgrp").val("");
+            $("#_prd").val("");
+
+            $("#causeclaim").val("");
+            $("#_claimqty").val("");
+            $("#_location").val("");
+          
+            $("#_proceedto").val("1");  ///สถานะการรับสินค้า
+         
+            $("#_statusclaim").val("1");  ///ดำเนินการ:
+
+            var today = new Date();
+            var _cktype = $("#_udertype").val();
+            var _ckuser = $("#_uderlogin").val();
+            $("#_proceedtotec").val("1");  ///สถานะการรับสินค้า
+            $("#_rcvbyte").val("1");      //ผู้รับสินค้าเคลม
+            $("#requestby").val(_ckuser);
+            var department = $("#_department").val();
+            $("#requestdep").val(department);
+            $("#_company").removeAttr('disabled');
+        }
+        function clearimage() {
+            // alert("xxxx");
+            var control = $("#fileupload");
+            control.replaceWith(control.val('').clone(true));
+            control.on({
+                change: function () { console.log("Changed") },
+                focus: function () { console.log("Focus") }
+            });
+            var control = $("#FileUpload1");
+            control.replaceWith(control.val('').clone(true));
+            control.on({
+                change: function () { console.log("Changed") },
+                focus: function () { console.log("Focus") }
+            });
+            var control = $("#FileUpload2");
+            control.replaceWith(control.val('').clone(true));
+            control.on({
+                change: function () { console.log("Changed") },
+                focus: function () { console.log("Focus") }
+            });
+            var control = $("#FileUpload3");
+            control.replaceWith(control.val('').clone(true));
+            control.on({
+                change: function () { console.log("Changed") },
+                focus: function () { console.log("Focus") }
+            });
+            var control = $("#FileUpload4");
+            control.replaceWith(control.val('').clone(true));
+            control.on({
+                change: function () { console.log("Changed") },
+                focus: function () { console.log("Focus") }
+            });
+            $(".pip").remove();
+            $(".pip1").remove();
+            $(".pip2").remove();
+            $(".pip3").remove();
+            $(".pip4").remove();
+            $("#ststus").text("");
+            $("#ststus1").text("");
+            $("#ststus2").text("");
+            $("#ststus3").text("");
+            $("#ststus4").text("");
+        }
+    });
+    </script>
+    </body>
+</html>

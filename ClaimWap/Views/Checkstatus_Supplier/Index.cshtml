@@ -1,0 +1,756 @@
+﻿@{
+    ViewBag.Title = "Warranty Supplier";
+    var user = ViewBag.UserId;
+    var usertype = ViewBag.UserType;
+    Layout = "~/Views/Shared/_Layoutindex.cshtml";
+}
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ตรวจสอบสถานะ Supplier</title>
+    <link href="~/Content/css/sb-admin-A.css" rel="stylesheet" />
+
+    @*<link href="~/Content/css/TableFixedColandHeader.css" rel="stylesheet" />*@
+    <link href="~/Scripts/JSautocomplete/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/JSautocomplete/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/JSautocomplete/jquery-ui.js"></script>
+    <script src="~/Content/fixed-table-master/fixed-table.js"></script>
+    <link href="~/Content/fixed-table-master/fixed-table.css" rel="stylesheet" />
+    <style>
+        input[type=checkbox] {
+            /* Double-sized Checkboxes */
+            -ms-transform: scale(2); /* IE */
+            -moz-transform: scale(2); /* FF */
+            -webkit-transform: scale(2); /* Safari and Chrome */
+            -o-transform: scale(2); /* Opera */
+        }
+
+        input {
+            font-size: 16px;
+            padding: 5px 2px 2px 0px;
+            display: block;
+            /* width: 100px;*/
+            border: none;
+            border-bottom: 1px solid #141415;
+        }
+
+        .textb {
+            font-size: 16px;
+            padding: 5px 2px 2px 0px;
+            display: block;
+            width: 100px;
+            border: none;
+            border-bottom: 1px solid #141415;
+        }
+
+        button.print-button {
+            width: 75px;
+            height: 55px;
+        }
+
+            span.print-icon, span.print-icon::before, span.print-icon::after, button.print-button:hover .print-icon::after {
+                border: solid 2px #333;
+            }
+
+                span.print-icon::after {
+                    border-width: 2px;
+                }
+
+        button.print-button {
+            position: relative;
+            padding: 0;
+            border: 0;
+            border: none;
+            background: transparent;
+        }
+
+            span.print-icon, span.print-icon::before, span.print-icon::after, button.print-button:hover .print-icon::after {
+                box-sizing: border-box;
+                background-color: #fff;
+            }
+
+        span.print-icon {
+            position: relative;
+            display: inline-block;
+            padding: 0;
+            margin-top: 20%;
+            width: 55%;
+            height: 30%;
+            background: #fff;
+            border-radius: 20% 20% 0 0;
+        }
+
+            span.print-icon::before {
+                content: " ";
+                position: absolute;
+                bottom: 100%;
+                left: 12%;
+                right: 12%;
+                height: 110%;
+                transition: height .2s .15s;
+            }
+
+            span.print-icon::after {
+                content: " ";
+                position: absolute;
+                top: 55%;
+                left: 12%;
+                right: 12%;
+                height: 0%;
+                background: #fff;
+                background-repeat: no-repeat;
+                background-size: 70% 90%;
+                background-position: center;
+                background-image: linear-gradient( to top, #fff 0, #fff 14%, #333 14%, #333 28%, #fff 28%, #fff 42%, #333 42%, #333 56%, #fff 56%, #fff 70%, #333 70%, #333 84%, #fff 84%, #fff 100% );
+                transition: height .2s, border-width 0s .2s, width 0s .2s;
+            }
+
+        button.print-button:hover {
+            cursor: pointer;
+        }
+
+            button.print-button:hover .print-icon::before {
+                height: 0px;
+                transition: height .2s;
+            }
+
+            button.print-button:hover .print-icon::after {
+                height: 120%;
+                transition: height .2s .15s, border-width 0s .16s;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="card mb-12">
+        <div class="card-body">
+            <div class="card-header">
+                <i class="fa fa-table"></i> ตรวจสอบสถานะ supplier<li id="clickme" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+            </div>
+            <div class="card-body" id="myDIV">
+                <table class="table grid">
+                    <tbody></tbody>
+                </table>
+                <div class="row1" style="padding-top: 10px;">
+                    <div class="table-responsive">
+                        <table class="table grid">
+                            <tbody>
+                                <tr>
+                                    <td style="width:30%">
+                                        Company.
+                                        <div class="form-group">
+
+                                            <select id="_company" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;float:inherit;">
+                                                <option value="0" disabled>Choose option</option>
+                                                <option value="TAC" selected>TAC</option>
+                                                <option value="AAC">AAC</option>
+                                                <option value="ALL">ALL</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td style="width:30%">
+                                        สถานะส่งเรื่อง Supplier
+                                        <select id="_notsendsupplier" @*style="border-bottom: 5px solid #b33c0f;"*@></select>
+                                    </td>
+                                    <td style="width:30%">เลขที่ส่งเคลม Supplier.:<select id="_suppliernosend"></select></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    
+                                    <td>Supplier:<input type="text" required id="_suppli"></td>
+                                    <td>Internal Claim No.:<input type="text" id="_cliamno"> </td>
+                                    <td>Item No.:<input type="text" required id="_item"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><span> <i class="fa fa-pencil"></i>ผู้ดูแล Tech 2 :</span><select id="_whotec2" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;"></select></td>
+                                    <td>@*<button type="button" class="btn btn-info" id="refresh">Refresh</button>*@</td>
+                                    <td><button type="button" class="btn btn-success" id="_btnsearch">Search</button></td>
+                                    <td></td>
+                                </tr>
+                                <tr style="border-top: 5px solid rgba(199, 112, 38, 0.72);">
+                                    <td><div id="addstatus">รายการทั้งหมด</div></td>
+                                    <td><div id="rowcountsupplier"></div></td>
+                                    <td>รายการ</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:30%">จำนวนเบอร์สินค้า</td>
+                                    <td><div id="rowcountstlsupplier" style="width:30%"></div></td>
+                                    <td>เบอร์</td>
+                                </tr>
+                                <tr>
+                                    <td>จำนวนสินค้าเคลมภายใน</td>
+                                    <td><div id="rowcountstlitemsupplier" style="width:30%"></div></td>
+                                    <td>ชิ้น</td>
+                                </tr>
+                                <tr style="display:none">
+                                    <td>ยอดเงินรวมสินค้าเคลมภายใน</td>
+                                    <td><div id="rowamtin" style="width:30%"></div></td>
+                                    <td>บาท</td>
+                                </tr>
+                                <tr>
+                                    <td>จำนวนสินค้าส่ง Supplier</td>
+                                    <td><div id="rowcountstlitemsuppliersend" style="width:30%"></div></td>
+                                    <td>ชิ้น</td>
+                                </tr>
+                                <tr style="display:none">
+                                    <td>ยอดเงินรวมสินค้า ส่ง Supplier</td>
+                                    <td><div id="rowamtout" style="width:30%"></div></td>
+                                    <td>บาท</td>
+                                </tr>
+                                <tr style="border-top: 5px solid rgba(199, 112, 38, 0.72);">
+                                    <td><span><i class="fa fa-pencil"></i>Internal Claim No.:</span><input type='text' id='txt_name'></td>
+                                    <td><span><i class="fa fa-pencil"></i>Search item no.:</span><input type='text' id='txt_searchall'></td>
+                                    <td></td>
+
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="fixed-table-container-5" class="fixed-table-container" style="display:block">
+                    <table id="recsupp">
+                        <thead>
+                            <tr>
+                                <th>Internal Claim No.</th>
+                                <th>เลขที่ส่งเคลม Supplier</th>
+                                <th>Internal Cn No.</th>
+                                <th>Internal Log No.</th>
+                                @*<th>Print</th>*@
+                                <th>Item No.</th>
+                                <th>Internal Claim Qty.</th>
+                                <th>Claim Sup Qty.</th>
+                                <th>Unit Price.</th>
+                                <th>Amt.</th>
+                                <th>Invoice No Supplier</th>
+                                <th>Qty_Inv Supplier</th>
+                                <th>Download_Inv Supplier</th>
+                                <th>CN No. Supplier</th>
+                                <th>Qty_CN Supplier</th>
+                                <th>Amt_CN Supplier</th>
+                                <th>Cur Supplier</th>
+                                <th>Download_Cn Supplier</th>
+                                <th>QtyInv_Cancel Supplier</th>
+                                <th>QtyCn_Cancel Supplier</th>
+
+                                <th>Description</th>
+                                <th>Supplier</th>
+                                <th>Inv SUPPLIER</th>
+                                <th>Inv Date SUPPLIER</th>
+                                <th>UOM</th>
+                                <th>สถานะ</th>
+                                <th>ผู้ดูแล</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" id="_uderlogin" value="@user" />
+    <input type="hidden" id="_udertype" value="@usertype" />
+
+    <script type="text/javascript">
+        $("#_cusno").autocomplete({
+            selectFirst: true,
+            autoFocus: true,
+            source: function (request, response) {
+                var param = { Name: $('#_cusno').val(), Slm: 'ALL' };
+                $.ajax({
+                    url: '@Url.Action("GetdateCusCode", "GetdataCenter")',
+                    data: JSON.stringify(param),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.slice(0, 50), function (item) {
+                            return {
+                                value: item
+                            }
+                        }))
+                    },
+                    error: function (XMLhttpsRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                    }
+                });
+            },
+            select: function (event, ui) {
+                var _val = ui.item.value;
+                var _splito = "";
+                _splito = _val.split('|');
+                var splitval = _splito;
+                var cus = _splito[0].trim();
+                var com = $('#_company').val();
+                var astatus = $('#_notsendsupplier').val();
+                var adoc = $(this).val();
+                var strcus = $('#_cusno').val();
+                var sub_no = $('#_cliamno').val();
+                var acus = cus;
+                //GetReceive_Supplier(com, astatus, adoc, acus,sub_no)
+            },
+            minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
+        });
+        $("#_item").autocomplete({
+            selectFirst: true,
+            autoFocus: true,
+            timeout: 100000,
+            source: function (request, response) {
+                var param = {
+                    Name: $('#_item').val(),
+                    XvalCompany: $("#_company").val()
+                };
+                $.ajax({
+                    url: '@Url.Action("GetdateStockCode", "GetdataCenter")',
+                    data: JSON.stringify(param),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.slice(0, 20), function (item) {
+                            return {
+                                value: item
+                            }
+                        }))
+                    },
+                    error: function (XMLhttpsRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                    }
+                });
+
+
+            },
+
+            minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
+        });
+        $("#_suppli").autocomplete({
+            selectFirst: true,
+            autoFocus: true,
+            source: function (request, response) {
+                var param = { Name: $('#_suppli').val(), com: $('#_company').val() };
+                $.ajax({
+                    url: '@Url.Action("Getdatevendor", "GetdataCenter")',
+                    data: JSON.stringify(param),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.slice(0, 50), function (item) {
+                            return {
+                                value: item
+                            }
+                        }))
+                    },
+                    error: function (XMLhttpsRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                    }
+                });
+            },
+            minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
+        });
+        function commaSeparateNumber(val) {
+            while (/(\d+)(\d{3})/.test(val.toString())) {
+                val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+            }
+            return val;
+        }
+
+
+        $(document).ready(function () {
+
+            var waitingDialog = waitingDialog || (function ($) {
+                'use strict';
+
+                // Creating modal dialog's DOM
+                var $dialog = $(
+                    '<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">' +
+                    '<div class="modal-dialog modal-m">' +
+                    '<div class="modal-content">' +
+                        '<div class="modal-header"><h3 style="margin:0;"></h3></div>' +
+                        '<div class="modal-body">' +
+                            '<div class="progress progress-striped active" style="margin-bottom:0;"><div class="progress-bar" style="width: 100%"></div></div>' +
+                        '</div>' +
+                    '</div></div></div>');
+
+                return {
+
+                    show: function (message, options) {
+                        // Assigning defaults
+                        if (typeof options === 'undefined') {
+                            options = {};
+                        }
+                        if (typeof message === 'undefined') {
+                            message = 'Loading';
+                        }
+                        var settings = $.extend({
+                            dialogSize: 'm',
+                            progressType: '',
+                            onHide: null // This callback runs after the dialog was hidden
+                        }, options);
+
+                        // Configuring dialog
+                        $dialog.find('.modal-dialog').attr('class', 'modal-dialog').addClass('modal-' + settings.dialogSize);
+                        $dialog.find('.progress-bar').attr('class', 'progress-bar');
+                        if (settings.progressType) {
+                            $dialog.find('.progress-bar').addClass('progress-bar-' + settings.progressType);
+                        }
+                        $dialog.find('h3').text(message);
+                        // Adding callbacks
+                        if (typeof settings.onHide === 'function') {
+                            $dialog.off('hidden.bs.modal').on('hidden.bs.modal', function (e) {
+                                settings.onHide.call($dialog);
+                            });
+                        }
+                        // Opening dialog
+                        $dialog.modal();
+                    },
+                    /**
+                     * Closes dialog
+                     */
+                    hide: function () {
+                        $dialog.modal('hide');
+                    }
+                };
+
+            })(jQuery);
+            $.ajax({
+                url: '@Url.Action("GetUserTech2", "GetdataCenter")',
+                data: {
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data)
+
+                    var select = $("#_whotec2");
+                    select.children().remove();
+                    select.append($("<option>").val("ALL").text("ALL"));
+                    $(data).each(function (index, item) {
+
+                        select.append($("<option>").val(item.UserId).text(item.UserName));
+                    });
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("GetSupplierNo", "Process_Supplier")',
+                data: {
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data)
+                    var select = $("#_suppliernosend");
+                    select.children().remove();
+                    select.append($("<option>").val("ALL").text("เลือกรายการ"));
+                    $(data).each(function (index, item) {
+                        select.append($("<option>").val(item.No).text(item.No + "/" + item.Detail));
+                    });
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
+                data: {
+                    Name: 17
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    var select = $("#_notsendsupplier");
+                    select.children().remove();
+                    select.append($("<option>").val("0").text("เลือกสถานะ"));
+                    $(data).each(function (index, item) {
+                        if (item.CODE != '0') {
+                            select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                        }
+                    });
+                    //  var CUSCODt = $("#CUSCOD option:selected").text();
+                }
+            });
+            function splitval(_val) {
+                var _splito = "";
+                _splito = _val.split('|');
+
+                return _splito[0];
+            }
+            function Countitemsupplier() {
+
+                var sumQty = 0;
+                var sumamt = 0;
+                var data = [];
+                $("#rowcountstlsupplier").html("0");
+                $("#rowcountstlitemsupplier").html("0");
+                $('#recsupp tr').each(function () {
+
+                    var VSTKCOD = $(this).find(".cstkcod").html();
+                    //var VAMT = $(this).attr('amt');
+                    sumQty += parseFloat($(this).find(".qtyin").html());
+                    //sumamt += parseFloat($(this).attr('amt'));
+                    data.push(VSTKCOD)
+                });
+
+                var sorted_arr = data.sort();
+
+                var results = [];
+                for (var i = 0; i < sorted_arr.length - 1; i++) {
+                    var x = $.trim(sorted_arr[i]);
+                    var y = $.trim(sorted_arr[i + 1]);
+                    if (y == x) {
+
+                        results.push(x);
+
+                    }
+                }
+                var bsum = sorted_arr.length;
+                var fsum = results.length;
+                console.log(sumQty)
+                $("#rowcountstlsupplier").html(bsum - fsum);
+                $("#rowcountstlitemsupplier").html(sumQty);
+                //$("#rowcountamt").html(sumamt);
+            }
+            function GetReceive_Supplier(suppli, com, astatus, adoc, acus, sub_no, astkcod, tec) {
+                //waitingDialog.show();
+                $('#fixed-table-container-5  tbody:last-child').html("");
+                $.ajax({
+                    url: '@Url.Action("CheckStatus_Supplier", "Checkstatus_Supplier")',
+                    data: {
+                        inDOC: adoc,
+                        inStatus: astatus,
+                        inComdisplay: com,
+                        inCuscod: acus,
+                        inDOCSUB: sub_no,
+                        inStkcod: astkcod,
+                        intec: tec,
+                        suppli: suppli
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+                        var sumQty = 0;
+                        var sumQtysup = 0;
+                        var sumamtint = 0;
+                        var sumamtout = 0;
+                        var datain = [];
+                        var rowCount = $('#fixed-table-container-5  tbody:last-child').length;
+                        $('#rowcountsupplier').html(data.Getdata.length);
+                        if (data.Getdata.length > 0) {
+                            waitingDialog.hide();
+                            var SubmithtmlPage = '';
+                            $('#fixed-table-container-5  tbody:last-child').html("");
+                            for (var i = 0; i < data.Getdata.length; i++) {
+                                var VSTKCOD = data.Getdata[i].val.STKCOD;
+                                sumQty += parseInt(data.Getdata[i].val.CLM_QTY);
+                                sumQtysup += parseInt(data.Getdata[i].val.Send_Qty);
+                                sumamtint += parseFloat(data.Getdata[i].val.CLM_QTY) * parseFloat(data.Getdata[i].val.Unit_Price);
+                                sumamtout += parseFloat(data.Getdata[i].val.Send_Qty) * parseFloat(data.Getdata[i].val.Unit_Price);
+                                //sumamtint += parseFloat(data.Getdata[i].val.AMT)
+                                //sumamtout += parseFloat(data.Getdata[i].val.Send_Qty) * parseFloat(data.Getdata[i].val.Unit_Price);
+                                datain.push(VSTKCOD)
+                                SubmithtmlPage += '<tr>';
+                                SubmithtmlPage += '<td><div class="csubno">' + data.Getdata[i].val.CLM_SUB_No + '</div></td>';
+                                SubmithtmlPage += '<td><div class="csubno">' + data.Getdata[i].val.CLM_NO_Supplier + '</div></td>';
+                                SubmithtmlPage += '<td><div class="csubno">' + data.Getdata[i].val.CS_No + '</div></td>';
+                                SubmithtmlPage += '<td><div class="csubno">' + data.Getdata[i].val.Log_No + '</div></td>';
+                                //SubmithtmlPage += '<td><button type="button" id="_btnPrintclim" class="print-button" clm_no_sub="' + data.Getdata[i].val.CLM_SUB_No + '" clm_no_supplier="' + data.Getdata[i].val.CLM_NO_Supplier + '" ><span class="print-icon"></span></button></td>';
+                                SubmithtmlPage += '<td ><div class="cstkcod">' + data.Getdata[i].val.STKCOD + '</div></td>';
+                                SubmithtmlPage += '<td><div class="qtyin">' + data.Getdata[i].val.CLM_QTY + '</div></td>';
+                                SubmithtmlPage += '<td><div class="qtyout">' + data.Getdata[i].val.Send_Qty + '</div></td>';
+                                SubmithtmlPage += '<td>' + commaSeparateNumber(data.Getdata[i].val.Unit_Price) + '</td>';
+                                SubmithtmlPage += '<td>' + commaSeparateNumber(data.Getdata[i].val.AMT) + '</td>';
+                                SubmithtmlPage += '<td><input type="text" class="textb" id="invno' + (i + rowCount) + '"  name="s_invno" value="' + data.Getdata[i].val.INV_Sup_No + '" disabled="disabled"/></td>';
+                                SubmithtmlPage += '<td><input type="text" class="textb" id="qtyinv' + (i + rowCount) + '"  name="s_qtyinv" value="' + data.Getdata[i].val.INV_Qty_Sup + '"disabled="disabled"/></td>';
+                                SubmithtmlPage += '<td><button class="use-inv" id="uploadinv' + (i + rowCount) + '" CLM_SUB_No="' + data.Getdata[i].val.CLM_SUB_No + '"  CLM_NO_Supplier="' + data.Getdata[i].val.CLM_NO_Supplier + '"  Type="In"  >Download invoice</button></td>';
+                                SubmithtmlPage += '<td><input type="text" class="textb" id="cnno' + (i + rowCount) + '"  name="s_cnno" value="' + data.Getdata[i].val.CN_Sup_No + '"disabled="disabled"/></td>';
+                                SubmithtmlPage += '<td><input type="text" class="textb" id="qtycn' + (i + rowCount) + '"  name="s_qtycn" value="' + data.Getdata[i].val.CN_Qty_Sup + '"disabled="disabled"/></td>';
+                                SubmithtmlPage += '<td><input type="text" class="textb" id="amtcn' + (i + rowCount) + '"  name="s_amtcn" value="' + data.Getdata[i].val.CN_Amt + '"disabled="disabled"/></td>';
+                                SubmithtmlPage += '<td><input type="text" class="textb" id="curcn' + (i + rowCount) + '"  name="s_curcn" value="' + data.Getdata[i].val.Cur_Sup + '"disabled="disabled"/></td>';
+                                SubmithtmlPage += '<td><button class="use-inv" id="uploadcn' + (i + rowCount) + '"CLM_SUB_No="' + data.Getdata[i].val.CLM_SUB_No + '"  CLM_NO_Supplier="' + data.Getdata[i].val.CLM_NO_Supplier + '"  Type="Cn" >Download Cn</button></td>';
+                                SubmithtmlPage += '<td><input type="text" class="textb" id="qtyinvcancel' + (i + rowCount) + '"  name="s_qtyinvcance"   value="' + data.Getdata[i].val.INV_Qty_Sup_Cancel + '"disabled="disabled"/></td>';
+                                SubmithtmlPage += '<td><input type="text" class="textb" id="qtycncancel' + (i + rowCount) + '"  name="s_qtycncance" value="' + data.Getdata[i].val.CN_Qty_Sup_Cancel + '"disabled="disabled"/></td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.STKDES + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.VENDORNAME + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.InvoiceSupplier + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.InvoiceDateSupplier + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.UOM + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.Status + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.TECH2_NAME + '</td>';
+                                SubmithtmlPage += ' </tr>';
+                                //$('#fixed-table-container-5  tbody:last-child').append(SubmithtmlPage);
+                            }
+                            $('#fixed-table-container-5  tbody:last-child').append(SubmithtmlPage);
+                            // waitingDialog.hide();
+                            var sorted_arr = datain.sort();
+
+                            var results = [];
+                            for (var i = 0; i < sorted_arr.length - 1; i++) {
+                                var x = $.trim(sorted_arr[i]);
+                                var y = $.trim(sorted_arr[i + 1]);
+                                if (y == x) {
+
+                                    results.push(x);
+
+                                }
+                            }
+                            var bsum = sorted_arr.length;
+                            var fsum = results.length;
+                            console.log(sumamtout)
+                            $("#rowcountstlsupplier").html(commaSeparateNumber(bsum - fsum));
+                            $("#rowcountstlitemsupplier").html(commaSeparateNumber(sumQty));
+                            $("#rowcountstlitemsuppliersend").html(commaSeparateNumber(sumQtysup));
+                            $("#rowamtin").html(commaSeparateNumber(sumamtint.toFixed(2)));
+                            $("#rowamtout").html(commaSeparateNumber(sumamtout.toFixed(2)));
+                        }
+                        else {
+                            waitingDialog.hide();
+                            $('#fixed-table-container-5  tbody:last-child').html("");
+                            alert("ไม่มีข้อมูลที่ต้องการค้นหา")
+                            $("#rowcountstlsupplier").html("0");
+                            $("#rowcountstlitemsupplier").html("0");
+                            $("#rowcountstlitemsuppliersend").html("0");
+                            $("#rowamtin").html("0");
+                            $("#rowamtout").html("0");
+                            //$("#textAlertWarningmes").empty();
+                            //$("#textAlertWarningmes").text("ไม่มีข้อมูล");
+                            //$("#myModalWarning").modal();
+                        }
+                        var fixedTable5 = fixTable(document.getElementById('fixed-table-container-5'));
+                        // Countitemsupplier()
+                    }
+                });
+            }
+            $("#_btnsearch").click(function () {
+
+                var com = $('#_company').val();
+                var astatus = $('#_notsendsupplier').val();
+                //if (astatus == "0") {
+                //    alert("กรุณาเลือกสถานะที่ต้องการค้นหา")
+                //    return false;
+                //}
+                var adoc = $('#_suppliernosend').val();
+                var strsuppli = $('#_suppli').val();
+                var sub_no = $('#_cliamno').val();
+                var suppli = "";
+                if (strsuppli != "") {
+                    suppli = splitval(strsuppli);
+                } else {
+                    suppli = "";
+                }
+                var stkcod = $('#_item').val();
+                var astkcod;
+                if (stkcod != "") {
+                    astkcod = splitval(stkcod);
+                } else {
+                    astkcod = "";
+                }
+                var tec = $('#_whotec2').val();
+                var acus = "";
+                
+                GetReceive_Supplier(suppli, com, astatus, adoc, acus, sub_no, astkcod, tec)
+            });
+            // Search all columns
+            $('#txt_searchall').keyup(function () {
+                // Search Text
+                var search = $(this).val();
+
+                // Hide all table tbody rows
+                $('#recsupp tbody tr').hide();
+
+                // Count total search result
+                var len = $('#recsupp tbody tr:not(.notfound) td:nth-child(5):contains("' + search + '")').length;
+
+                if (len > 0) {
+                    // Searching text in columns and show match row
+                    $('#recsupp tbody tr:not(.notfound) td:contains("' + search + '")').each(function () {
+                        $(this).closest('tr').show();
+                    });
+                } else {
+                    $('.notfound').show();
+                }
+
+            });
+            // Search all columns
+            $('#txt_name').keyup(function () {
+                // Search Text
+                var search = $(this).val();
+
+                // Hide all table tbody rows
+                $('#recsupp tbody tr').hide();
+
+                // Count total search result
+                var len = $('#recsupp tbody tr:not(.notfound) td:nth-child(1):contains("' + search + '")').length;
+
+                if (len > 0) {
+                    // Searching text in columns and show match row
+                    $('#recsupp tbody tr:not(.notfound) td:contains("' + search + '")').each(function () {
+                        $(this).closest('tr').show();
+                    });
+                } else {
+                    $('.notfound').show();
+                }
+
+            });
+
+
+            $("#recsupp").on("click", "tr .use-inv", function () {
+                var clm_sub_no = $(this).attr('clm_sub_no');
+                var clm_no_supplier = $(this).attr('clm_no_supplier');
+                var type = $(this).attr('type');
+
+
+
+                $.ajax({
+                    url: '@Url.Action("GetPathPdf_sup", "GetdataCenter")',
+                    data: {
+                        clm_no_supplier: clm_no_supplier,
+                        clm_sub_no: clm_sub_no,
+                        clm_type: type
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (result) {
+                        console.log(result);
+                        if (result.Getdata.length > 0) {
+                            //$("#myModalimage").modal();
+
+                            if (result.Getdata) {
+                                resultObj = eval(result.Getdata);
+                                var SubmithtmlPage = "";
+                                for (var i = 0; i < resultObj.length; i++) {
+
+                                    window.open(resultObj[i].val.PATH);
+                                }
+                            } else {
+
+                                //$("#myModalimage").modal();
+                            }
+                        } else {
+                            alert("ไม่มี File Download")
+                            //$("#textAlertSucces").empty();
+                            //$("#textAlertSucces").text("ไม่มี File Download");
+                            //$("#myModalSucces").modal();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

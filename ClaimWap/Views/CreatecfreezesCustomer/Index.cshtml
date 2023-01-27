@@ -1,0 +1,549 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutindex.cshtml";
+    var user = ViewBag.UserId;
+    var usertype = ViewBag.UserType;
+    var usrcode = ViewBag.UsrCode;
+
+}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Create</title>
+    <link href="~/Content/css/sb-admin-A.css" rel="stylesheet" />
+
+    @*<link href="~/Content/css/TableFixedColandHeader.css" rel="stylesheet" />*@
+    <link href="~/Scripts/JSautocomplete/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/JSautocomplete/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/JSautocomplete/jquery-ui.js"></script>
+    <script src="~/Content/fixed-table-master/fixed-table.js"></script>
+    <link href="~/Content/fixed-table-master/fixed-table.css" rel="stylesheet" />
+    <script src="~/Scripts/notview.js"></script>
+    <style>
+        .preserveLineBreaks {
+            white-space: pre-line; /*or pre-wrap*/
+        }
+
+        input[type="file"] {
+            display: block;
+        }
+
+        input[type="checkbox"] {
+            width: 35px;
+            zoom: 2;
+            padding: 2px;
+            -webkit-appearance: checkbox;
+        }
+
+        input[type="text"] {
+            /*background: border-box border-box; */
+            color: blue;
+        }
+
+        input[type="date"] {
+            background: border-box border-box;
+            color: blue;
+        }
+
+        .imageThumb {
+            max-height: 75px;
+            border: 2px solid;
+            padding: 1px;
+            cursor: pointer;
+        }
+
+        .pip1 {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove1 {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .remove1:hover {
+                background: white;
+                color: black;
+            }
+
+        .pip2 {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove2 {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .remove2:hover {
+                background: white;
+                color: black;
+            }
+
+        .pip3 {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove3 {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .remove3:hover {
+                background: white;
+                color: black;
+            }
+
+        .pip4 {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove4 {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .remove4:hover {
+                background: white;
+                color: black;
+            }
+        /*#receclaim {
+            position: relative;
+            width: 700px;
+            background-color: #aaa;
+            overflow: hidden;
+            border-collapse: collapse;
+        }
+        #receclaim tbody {
+                position: relative;
+                display: block;
+                width: 1200px;
+                height: 239px;
+                overflow: scroll;
+            }*/
+
+        .zoom {
+            transition: transform .2s; /* Animation */
+            margin: 0 auto;
+        }
+
+            .zoom:hover {
+                transform: scale(4.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+            }
+    </style>
+
+</head>
+<body>
+
+    <!-- Modalsuccess -->
+    <div class="modal fade" id="myModalSucces" role="dialog">
+        <div class="modal-dialog">
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="modal" aria-label=" close"><span aria-hidden="true">&times;</span></button>
+                <strong>Succes</strong>
+                <div class="modal-body">
+                    <div id="textAlertSucces">Save success</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- ModalWarning -->
+    <div id="myModalWarning" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+        <div class="modal-dialog" role="document">
+
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="modal" aria-label=" close"><span aria-hidden="true">&times;</span></button>
+                <strong>Warning!</strong>
+                <div class="modal-body">
+                    <div id="textAlertWarning">Some text in the modal.</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="card-header">
+            <i class="fa fa-table"></i> รายการค้างตรวจสอบ
+        </div>
+        <div class="card-body">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Customer:</span>
+                            <span><input type="text" id="_cusno" value="@usrcode" disabled="disabled"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Name:</span>
+                            <span><input type="text" id="_cusname" disabled="disabled"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Company.:</span>
+                            <span>
+                                <select id="_company" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;float:inherit;">
+                                    <option value="0" disabled>Choose option</option>
+                                    <option value="TAC">TAC</option>
+                                    <option value="AAC">AAC</option>
+                                    <option value="ALL" selected>ALL</option>
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                  
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Parts No.:</span>
+                            <span><input type="text" required id="_itemno"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-success" id="_btnsearch">Search</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="display:none">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>SlmCod:</span>
+                            <span><input type="text" id="slmcod" disabled="disabled"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="fixed-table-container-2" class="fixed-table-container" style="z-index:1">
+        <table id="receclaim">
+            <thead>
+                <tr>
+                    
+                    <th style="background-color: antiquewhite;">X</th>
+                    <th style="text-align:center">No.</th>
+                    <th style="text-align:center">line no</th>
+                    <th>Item No.</th>
+                    <th style="text-align:center">Customer.</th>
+                    <th style="text-align:center">Sales Man.</th>
+                    <th>Stock<br /> Group.</th>
+                    <th>UOM</th>
+                    <th>Claim<br /> Qty.</th>
+                    <th style="text-align:center">ระยะ<br />การใช้งาน<br /> /Y/M/D/H</th>
+                    <th style="text-align:center">Invoice No</th>
+                    <th style="text-align:center">สาเหตุการเคลม</th>
+                    <th style="text-align:center">ดำเนินการ</th>
+                    @*<th>รูปภาพ</th>*@
+                    <th>สถานะใบคำขอ</th>
+                    <th style="text-align:center">User Create.</th>
+                    <th style="text-align:center">Claim Date.</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+ 
+    <input type="text" hidden id="_hqty" />
+    <input type="text" hidden id="_cmnosub" />
+    <input type="hidden" id="_uderlogin" value="@user" />
+    <input type="hidden" id="_udertype" value="@usertype" />
+    <input type="hidden" id="_udercode" value="@usrcode" />
+    <input type="hidden" id="_tempreq" />
+    <input type="hidden" id="sslmnam">
+    <script type="text/javascript">
+        
+        $("#_itemno").autocomplete({
+            selectFirst: true,
+            autoFocus: true,
+            timeout: 100000,
+            source: function (request, response) {
+                var param = {
+                    Name: $('#_itemno').val(),
+                    XvalCompany: $("#_company").val()
+                };
+                $.ajax({
+                    url: '@Url.Action("GetdateStockCode", "GetdataCenter")',
+                    data: JSON.stringify(param),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.slice(0, 20), function (item) {
+                            return {
+                                value: item
+                            }
+                        }))
+                    },
+                    error: function (XMLhttpsRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                    }
+                });
+
+
+            },
+
+            minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
+        });
+        $(document).ready(function () {
+            $('#Createcfreezes').css("background-color", "rgb(9, 183, 9)");
+            $('#receclaim tbody').scroll(function (e) { //detect a scroll event on the tbody
+
+                /*
+                Setting the thead left value to the negative valule of tbody.scrollLeft will make it track the movement
+                of the tbody element. Setting an elements left value to that of the tbody.scrollLeft left makes it maintain 			it's relative position at the left of the table.
+                */
+                $('thead').css("left", -$("#receclaim tbody").scrollLeft()); //fix the thead relative to the body scrolling
+                $('#receclaim thead th:nth-child(1)').css("left", $("tbody").scrollLeft()); //fix the first cell of the header
+                $('#receclaim tbody td:nth-child(1)').css("left", $("tbody").scrollLeft()); //fix the first column of tdbody
+                $('#receclaim thead th:nth-child(2)').css("left", $("tbody").scrollLeft()); //fix the 2 cell of the header
+                $('#receclaim tbody td:nth-child(2)').css("left", $("tbody").scrollLeft()); //fix the 2 column of tdbody
+            });
+            var udertype = $("#_udertype").val();
+            var uderlogin = $("#_uderlogin").val();
+
+           
+            var udercode = $("#_udercode").val();
+            $.ajax({
+                url: '@Url.Action("GetdateByCusCode", "GetdataCenter")',
+                data: {
+                    CusCode: udercode,
+                    Slm: "ALL"
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+
+                    $("#_cusname").val(data.Cusname);
+                    $("#slmcod").val(data.CusSlmcode);
+
+                }
+            });
+
+            if (udertype == "4") {
+                $.ajax({
+                    url: '@Url.Action("GetdataCountProcess", "GetdataCenter")',
+                    data: {
+                        Usertype: udertype,
+                        Userlogin: uderlogin
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+                        $("#tile").text(data.Getdata[0].val.Status)
+                        $("#countadmin").text("TAC: " + data.Getdata[0].val.CountAdmin + " <----> AAC: " + data.Getdata[1].val.CountAdmin);
+                        //$("#counttec1").text("TAC: " + data.Getdata[2].val.CountAdmin + " <----> AAC: " + data.Getdata[3].val.CountAdmin);
+                        $("#counttec1").css("display", "none");
+                    }
+                });
+            } else if (udertype == "5") {
+                $.ajax({
+                    url: '@Url.Action("GetdataCountProcess", "GetdataCenter")',
+                    data: {
+                        Usertype: udertype,
+                        Userlogin: uderlogin
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+                        $("#tile").text(data.Getdata[0].val.Status)
+                        $("#countadmin").text("TAC: " + data.Getdata[0].val.CountAdmin + " <----> AAC: " + data.Getdata[1].val.CountAdmin);
+                        //$("#counttec1").text("TAC: " + data.Getdata[2].val.CountAdmin + " <----> AAC: " + data.Getdata[3].val.CountAdmin);
+                        $("#counttec1").css("display", "none");
+                    }
+                });
+            }
+            else if (udertype == "1") {
+                $.ajax({
+                    url: '@Url.Action("GetdataCountProcess", "GetdataCenter")',
+                    data: {
+                        Usertype: udertype,
+                        Userlogin: uderlogin
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+                        $("#tile").text(data.Getdata[0].val.Status)
+                        $("#tile1").text(data.Getdata[2].val.Status)
+                        $("#countadmin").html("TAC: " + data.Getdata[0].val.CountAdmin + " &nbsp;&#9830;&nbsp; AAC: " + data.Getdata[1].val.CountAdmin);
+                        $("#counttec1").html("TAC: " + data.Getdata[2].val.CountAdmin + " &nbsp;&#9830;&nbsp; AAC: " + data.Getdata[3].val.CountAdmin);
+                    }
+                });
+                //  GetClimline("", "TAC", "1", "", "", "", "", "ALL", "0", "0")
+            } else if (udertype == "2") {
+                $.ajax({
+                    url: '@Url.Action("GetdataCountProcess", "GetdataCenter")',
+                    data: {
+                        Usertype: udertype,
+                        Userlogin: uderlogin
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+                        $("#tile").text(data.Getdata[0].val.Status)
+                        $("#countadmin").html("TAC: " + data.Getdata[0].val.CountAdmin + " &nbsp;&#9830;&nbsp; AAC: " + data.Getdata[1].val.CountAdmin);
+                        //$("#counttec1").text("TAC: " + data.Getdata[2].val.CountAdmin + " <----> AAC: " + data.Getdata[3].val.CountAdmin);
+                        $("#counttec1").css("display", "none");
+                    }
+                });
+            }
+           
+             GetClimtemp()
+            $("#_btnsearch").click(function () {
+                GetClimtemp()
+            });
+
+            function splitval(_val) {
+                var _splito = "";
+                _splito = _val.split('|');
+
+                return _splito[0];
+            }
+            function GetClimtemp() {
+                // var valclim = $("#searchclaimno").val();
+                var uderlogin = $("#_uderlogin").val();
+                var company = $("#_company").val();
+                var cusno = $("#_cusno").val();
+                if (cusno != "") {
+                    cusno = splitval(cusno);
+                } else {
+                    cusno = "";
+                }
+                var itemno = $("#_itemno").val();
+                if (itemno != "") {
+                    itemno = splitval(itemno);
+                } else {
+                    itemno = "";
+                }
+               
+                var slmcod = $("#slmcod").val();
+                $.ajax({
+                    url: '@Url.Action("GetClimtempCustomer", "CreatecfreezesCustomer")',
+                    data: {
+                        Usrlogin: uderlogin,
+                        company: company,
+                        cusno: cusno,
+                        iemno: itemno,
+                        company: company,
+                        slmcod: slmcod,
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data);
+                        // var SubmithtmlPage = '';
+                        $('#receclaim > tbody:last-child').html("");
+                        if (data.Getdata.length > 0) {
+                            //$("#_cusno").attr('disabled', 'disabled');
+                            var SubmithtmlPage = '';
+                            for (var i = 0; i < data.Getdata.length; i++) {
+                                SubmithtmlPage = '<tr  fax="2" cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_QTY + '" worktimeup="' + data.Getdata[i].val.CLM_USEDAY + '"invoicenoeup="' + data.Getdata[i].val.CLM_INVNO + '" invoicedete = "' + data.Getdata[i].val.CLM_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '" clmmachine="' + data.Getdata[i].val.CLM_Machine + '"  clmmodel="' + data.Getdata[i].val.CLM_Model + '"  clmmodelyear="' + data.Getdata[i].val.CLM_ModelYear + '"  clmenginecode="' + data.Getdata[i].val.CLM_EngineCode + '"  clmchassisno="' + data.Getdata[i].val.CLM_ChassisNo + '"  clminjecpump="' + data.Getdata[i].val.CLM_InjecPump + '"  clmtypeproduct="' + data.Getdata[i].val.CLM_TypeProduct + '"  clmwarratyno="' + data.Getdata[i].val.CLM_WarrantyNo + '"  clmmilage="' + data.Getdata[i].val.CLM_Milage + '"  clmdatedamage="' + data.Getdata[i].val.CLM_DateDamage + '"  clmbatchcode="' + data.Getdata[i].val.CLM_BatchCode + '" >';
+                                SubmithtmlPage += '<td><button type="reset" id="delclmtemp" style="min-width: 50px;"  clmID="' + data.Getdata[i].val.CLM_ID + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '">X</button></td>';
+                                SubmithtmlPage += '<td style="cursor: pointer;color: darkorchid;text-decoration: underline;" id="_btnview" clmID="' + data.Getdata[i].val.CLM_ID + '"  >' + data.Getdata[i].val.CLM_ID + '</td>';
+                                SubmithtmlPage += '<td  id="btngetshowdata"  >' + data.Getdata[i].val.CLM_NO_SUB + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '/<br>' + data.Getdata[i].val.STKDES + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CUSCOD + '/<br>' + data.Getdata[i].val.CUSNAM + ' </td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.SLMCOD + '/<br>' + data.Getdata[i].val.SLMNAM + ' </td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.STKGRP + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UOM + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_USEDAY + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_INVNO + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_CAUSE + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.PERFORMDESCRIPTION + '</td>';
+                                // SubmithtmlPage += '<td><button type="button" class="btn btn-info" style="width:70%;" id="viewimg" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '" clmnoid="' + data.Getdata[0].val.CLM_ID + '">view</button></td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_RCVBY + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_RCVDATE + '</td>';
+                                SubmithtmlPage += '</tr>';
+                                $('#receclaim > tbody:last-child').append(SubmithtmlPage);
+                                var fixedTable2 = fixTable(document.getElementById('fixed-table-container-2'));
+                            }
+
+                        } else {
+
+
+                        }
+                        var fixedTable2 = fixTable(document.getElementById('fixed-table-container-2'));
+                    }
+                });
+            }
+            $("table").on("click", "tr #_btnview", function () {
+                var req_no = $(this).attr('clmID');
+
+
+                var _usertype = $("#_udertype").val();
+                var claimno = $(this).attr('clmID');
+
+                var wi = window.open("../Create_Customer/Index?ClmNUM=" + btoa(claimno));
+                wi.focus();
+                // $("#modalconfirmProcess").modal('hide');
+
+
+            });
+            $("#receclaim").on("click", "#delclmtemp", function () {
+                var comid = $(this).attr('clmID');
+                var clmnoup = $(this).attr('clmnoup');
+                $.ajax({
+                    url: '@Url.Action("DeleteClaimtemp", "Createclaim_Sc")',
+                    data: {
+                        comid: comid,
+                        clmnoup: clmnoup
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data);
+                        if (data.message == "true") {
+                            $("#textAlertSucces").empty();
+                            $("#textAlertSucces").text("ลบรายการเรียบร้อย");
+                            $("#myModalSucces").modal();
+
+                            GetClimtemp();
+                        } else {
+                            $("#textAlertWarning").empty();
+                            $("#textAlertWarning").text(data.message);
+                            $("#myModalWarning").modal(); return false;
+
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

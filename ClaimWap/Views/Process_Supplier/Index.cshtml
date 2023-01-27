@@ -1,0 +1,2922 @@
+﻿@{
+    ViewBag.Title = "Warranty Supplier";
+    var user = ViewBag.UserId;
+    var usertype = ViewBag.UserType;
+    Layout = "~/Views/Shared/_Layoutindex.cshtml";
+}
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Supplier Claim</title>
+    <link href="~/Content/css/sb-admin-A.css" rel="stylesheet" />
+
+    @*<link href="~/Content/css/TableFixedColandHeader.css" rel="stylesheet" />*@
+    <link href="~/Scripts/JSautocomplete/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/JSautocomplete/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/JSautocomplete/jquery-ui.js"></script>
+    <script src="~/Content/fixed-table-master/fixed-table.js"></script>
+    <link href="~/Content/fixed-table-master/fixed-table.css" rel="stylesheet" />
+    <style>
+        input[type=checkbox] {
+            /* Double-sized Checkboxes */
+            -ms-transform: scale(2); /* IE */
+            -moz-transform: scale(2); /* FF */
+            -webkit-transform: scale(2); /* Safari and Chrome */
+            -o-transform: scale(2); /* Opera */
+            -webkit-appearance: checkbox;
+        }
+
+        input {
+            font-size: 16px;
+            padding: 5px 2px 2px 0px;
+            display: block;
+            /* width: 100px;*/
+            border: none;
+            border-bottom: 1px solid #141415;
+        }
+
+        .textb {
+            font-size: 16px;
+            padding: 5px 2px 2px 0px;
+            display: block;
+            width: 100px;
+            border: none;
+            border-bottom: 1px solid #141415;
+        }
+    </style>
+</head>
+<body>
+    <div class="card mb-12">
+        <div class="card-header">
+            <i class="fa fa-table"></i> Claim Supplier
+        </div>
+        <div class="card-body">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Company.:</span>
+                            <span>
+                                <select id="_company" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;float:inherit;">
+                                    <option value="0" disabled>Choose option</option>
+                                    <option value="TAC" selected>TAC</option>
+                                    <option value="AAC">AAC</option>
+                                    <option value="OMP">OMP</option>
+                                    <option value="ALL">ALL</option>
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Sec.:</span>
+                            <span>
+                                <select id="_sec" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;"></select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Stk Group.:</span>
+                            <span><select id="_stkgrp"></select></span>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Supplier:</span>
+                            <span><input type="text" required id="_suppli"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Item No.:</span>
+                            <span><input type="text" required id="_itemno"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Internal Claim No.:</span>
+                            <span>
+                                <input type="text" id="_cliamno">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="display:none">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>SlmCod:</span>
+                            <select class="bar" id="slmcod"></select>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>From end process pm approve:</span>
+                            <span><input type="date" data-date-format="dd/mm/yy" id="_statdate"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>To end process pm approve:</span>
+                            <span><input type="date" data-date-format="dd/mm/yy" id="_enddate"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>ผู้ดูแล Tech 2 :</span>
+                            <span>
+                                <select id="_whotec2" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;"></select>
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4" style="display:none">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Status CN/สินค้าทดแทน.:</span>
+                            <span>
+                                <select id="_status" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;"></select>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-md-4" style="display:none">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Customer:</span>
+                            <span><input type="text" required id="_cusno"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" style="display:none;">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-info" id="refresh">Refresh</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>WE//WR/WF.:</span>
+                            <span>
+                                <select id="_statuswad" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;">
+                                    <option value="ALL">ALL</option>
+                                    <option value="WE">WE</option>
+                                    <option value="WR">WR</option>
+                                    <option value="WF">WF</option>
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Claim Type:</span>
+                            <span>
+                                <select id="_statuscmtype" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;">
+                                    <option value="1">Claim Customer</option>
+                                    <option value="2">Claim WH</option>
+                                   
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                          
+                            <button type="button" class="btn btn-success" id="_btnsearch">Search</button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div style="border-bottom: 1px solid #1447798c; padding-bottom: 15px; padding-top: 10px; width: 1700px;"></div>
+            </div>
+            <div class="card-header">
+                <i class="fa fa-table"></i> Create by Technical<li id="clickmecreate" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+            </div>
+            <div class="col-md-12" id="myDIVcreate">
+                <div class="row" style="padding-top: 10px;">
+                    <div class="table-responsive">
+                        <table class="table grid">
+                            <tbody>
+                                <tr>
+                                    <td>เลือกรายการส่งClaim Supplier:</td>
+                                    <td> <input type="checkbox" id="select_all" style="width:70px;" /></td>
+                                    <td> <button type="button" class="btn btn-success" id="_btnconfrim">บันทึกรายการส่งเรื่องให้ Supplier</button></td>
+                                    @*<td> <button type="button" class="btn btn-success" id="_btnblackconfrim">ยืนยันเรื่องตอบกลับจาก supplier</button></td>*@
+                                </tr>
+                                <tr>
+                                    <td>จำนวนรอส่ง Supplier</td>
+                                    <td><div id="rowcount"></div></td>
+                                    <td>รายการ</td>
+
+                                </tr>
+                                <tr>
+                                    <td>จำนวนที่ท่านเลือก</td>
+                                    <td><div id="rowcountuse"></div></td>
+                                    <td>รายการ</td>
+                                    <td>จำนวนเบอร์สินค้า</td>
+                                    <td><div id="rowcountstl"></div></td>
+                                    <td>เบอร์</td>
+                                    <td>จำนวนสินค้า</td>
+                                    <td><div id="rowcountstlitem"></div></td>
+                                    <td>ชิ้น</td>
+                                    <td style="display:none">จำนวนเงินทั้งหมด</td>
+                                    <td style="display:none"><div id="rowcountamt"></div></td>
+                                    <td style="display:none">บาท</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="fixed-table-container-3" class="fixed-table-container" style="display:block">
+                    <table id="exampletb">
+                        <thead>
+                            <tr>
+                                <th>Internal Claim No.</th>
+                                <th>Select</th>
+                                <th>Claim Date</th>
+                                <th>Pm Approve</th>
+                                <th>Item No.</th>
+                                <th>Description</th>
+                                <th>Claim Qty.</th>
+                                <th>Invoice <br />Qty Supplier</th>
+                                <th>Invoice <br />Cur Supplier</th>
+                                <th>Invoice <br />RATE Supplier</th>
+                                <th>Unit Cost</th>
+                                <th>Amount</th>
+                                <th>Invoice Supplier</th>
+                                <th>Invoice Date Supplier</th>
+                                <th>WE/WR/WF</th>
+                                <th>Supplier</th>
+
+                                <th>Internal Log No.</th>
+                                @*<th>ดำเนินเรื่อง</th>*@
+                                <th>ผู้ดูแล</th>
+                                @*<th>Customer</th>
+                                    <th>Sales Man</th>*@
+                                <th>UOM</th>
+                                @*<th>สถานะเคลม</th>*@
+                                @*<<th>last update date</th>*@
+                                @*<<th>last update by</th>*@
+                                @*<th>สถานะเคลม</th>*@
+                                @*<th>สถานะ<br />รับของเคม</th>*@
+                                @*<th>Claim<br /> supplier</th>*@
+
+                                @*<th>ยกเลิกเคลม</th>*@
+                                @*<th>Edit</th>
+                                    <th>Tech staff</th>*@
+                                @*<th>ตรวจสอบ<br />รับสินค้า</th>
+                                    <th>Tech1</th>
+                                    <th>Tech2</th>
+                                    <th>PM</th>*@
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            @*<button class="SendEmail">Send Email</button>*@
+            <div class="card-header">
+                <i class="fa fa-table"></i> Edit by Technical<li id="clickmetec" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+            </div>
+            <div class="col-md-12" id="myDIVtecedit" style="display:none">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>เลขที่ส่งเคลม Supplier.:</span>
+                            <span><select id="_suppliernosendedit"></select></span>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-success" id="_btnsearchsupedit">Search</button>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-success" id="_updatesupedit">Update รายการ</button>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-success" id="_btnoksupedit">ยืนยันส่งเรื่องส่ง Supplier</button>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-success" id="_btnprintdocsupedit">Print เอกสาร </button>
+                        </div>
+                    </div>
+
+
+                    @*<div class="col-md-4">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" id="_btnsearchdisposaltec">Search</button>
+                            </div>
+                        </div>*@
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @*<button id="_printdisposalafter">Print รายงานทำลายสินค้า</button>*@
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>Search Internal Claim No.:</span>
+                                <input type='text' id='txt_nameedit'>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>Search Item No.:</span>
+                                <input type='text' id='txt_nameedititem'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="table-responsive">
+                                <table class="table grid" id="alldeltb" style="display:none">
+                                    <tbody>
+                                        <tr>
+                                            <td>เลือกลบรายการทำลายทั้งหมด:</td>
+                                            <td> <input type="checkbox" id="select_dellalledit" style="width:70px;" /></td>
+                                            <td><button type="button" class="btn btn-outline-danger" id="_btndelall" style="display:none">Delete All</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="table-responsive">
+                                <table class="table grid" id="alldeltb" style="display:none">
+                                    <tbody>
+                                        <tr>
+                                            <td>เลือกลบรายการทำลายทั้งหมด:</td>
+                                            <td> <input type="checkbox" id="select_dellall" style="width:70px;" /></td>
+                                            <td><button type="button" class="btn btn-outline-danger" id="_btndelall" style="display:none">Delete All</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="fixed-table-container-4" class="fixed-table-container" style="display:block">
+                        <table id="exampletbedit">
+                            <thead>
+                                <tr>
+                                    <th>Internal Claim No.</th>
+                                    <th>Select</th>
+                                    <th>Delete</th>
+                                    <th>Claim Date</th>
+                                    <th>Pm Approve</th>
+                                    <th>Item No.</th>
+                                    <th>Description</th>
+                                    <th>Claim Qty.</th>    
+                                    <th>Invoice <br />Qty Supplier</th>
+                                    <th>Invoice <br />Cur Supplier</th>
+                                    <th>Invoice <br />RATE Supplier</th>                               
+                                    <th>Unit Cost</th>
+                                    <th>Amount</th>
+                                    <th>Invoice Supplier</th>
+                                    <th>Invoice Date Supplier</th>
+                                    <th>WE/WR/WF</th>
+                                    <th>Supplier</th>
+                                    <th>Internal Log No.</th>
+                                    <th>ผู้ดูแล</th>
+                                    <th>UOM</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card-header">
+                <i class="fa fa-table"></i> ยืนยันเรื่องตอบกลับจาก supplier<li id="clickme" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+            </div>
+            <div class="card-body" id="myDIV">
+                <table class="table grid">
+                    <tbody></tbody>
+                </table>
+                <div style="">
+                    <div class="row" style="padding-top: 10px;">
+
+                        <div class="table-responsive">
+                            <table class="table grid">
+                                <tbody>
+                                    <tr>
+                                        <td style="width:30%">เลขที่ส่งเคลม Supplier.:<select id="_suppliernosend"></select></td>
+                                        <td><button type="button" class="btn btn-success" id="_btnsearchdocsup">Search</button></td>
+                                        <td><button type="button" class="btn btn-success" id="_btnprintdocsup">Print เอกสาร </button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="table-responsive" id="fucntec" style="display:none">
+                            <table class="table grid">
+                                <tbody>
+                                    <tr>
+                                        <td style="">เปิดFuntion Reopen:</td>
+                                        <td>
+                                            <select id="_stareopentec" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;float:inherit;">
+                                                <option value="0" selected>เลือก option</option>
+                                                <option value="Y">Yes</option>
+                                                <option value="N">No</option>
+                                            </select>
+                                        </td>
+                                        <td>@*<button type="button" class="btn btn-success" id="close_btnsupplier">ปิดงาน</button>*@</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="">เลือกรายการ Reopen ทั้งหมด:</td>
+                                        <td><input type="checkbox" id="close_allsupplier" style="width:40px;" disabled="disabled" /></td>
+                                        <td>@*<button type="button" class="btn btn-success" id="close_btnsupplier">ปิดงาน</button>*@</td>
+                                        <td><button type="button" class="btn btn-success" id="open_btnsupplier" disabled="disabled">Reopen</button></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table grid">
+                            <tbody>
+                                <tr style="border-top: 5px solid rgba(199, 112, 38, 0.72);">
+                                    <td style="">เลือกรายการยืนยันจาก Supplier ทั้งหมด:</td>
+                                    <td><input type="checkbox" id="select_allsupplier" style="width:40px;" /></td>
+                                    <td><button type="button" class="btn btn-success" id="_btnsupplier">บันทึกรายการเคลมจากSupplier</button></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>@*<button type="button" class="btn btn-success" id="close_btnsupplier">ปิดงาน</button>*@</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>จำนวนรอยืนยันจาก Supplier</td>
+                                    <td><div id="rowcountsupplier"></div></td>
+                                    <td>รายการ</td>
+                                </tr>
+                                <tr style="border-bottom: 5px solid rgba(199, 112, 38, 0.72);">
+                                    <td>จำนวนที่ท่านเลือก</td>
+                                    <td><div id="rowcountselectsupplier"></div></td>
+                                    <td>รายการ</td>
+                                    <td>จำนวนเบอร์สินค้า</td>
+                                    <td><div id="rowcountstlsupplier"></div></td>
+                                    <td>เบอร์</td>
+                                    <td>จำนวนสินค้า</td>
+                                    <td><div id="rowcountstlitemsupplier"></div></td>
+                                    <td>ชิ้น</td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="table-responsive">
+
+                        </div>
+                    </div>
+
+                    <div class="row" style="padding-top: 10px;">
+                        <div class="table-responsive">
+                            <table class="table grid">
+                                <tbody>
+                                    <tr>
+                                        <td><i class="fa fa-pencil"></i><span>Search Internal Claim No.:</span><input type='text' id='txt_searchall'></td>
+                                        <td></td>
+                                        <td><i class="fa fa-pencil"></i><span>Search Item No.:</span><input type='text' id='txt_name'></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="fixed-table-container-5" class="fixed-table-container" style="display:block">
+                    <table id="recsupp">
+                        <thead>
+                            <tr>
+                                <th>Select</th>
+                                <th>No.</th>
+                                <th>Item No.</th>
+                                <th>Claim Qty.</th>
+                                <th>Internal Claim No.</th>
+                                <th>Invoice Supplier.</th>
+                                <th>Invoice Date Supplier.</th>
+                                <th>Invoice No.</th>
+                                <th>Qty_Inv</th>
+                                <th>Upload_Inv</th>
+                                <th>CN No.</th>
+                                <th>Qty_CN</th>
+                                <th>Amt_CN</th>
+                                <th>Cur Supplier</th>
+                                <th>Upload_Cn</th>
+                                <th>QtyInv_Cancel</th>
+                                <th>QtyCn_Cancel</th>
+                                <th>Description</th>
+                                <th>Supplier</th>
+                                <th>UOM</th>
+                                <th>Status</th>
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- The Modal -->
+    <div class="modal" id="myModalconfrimprint" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>ยืนยัน สร้างรายการส่งทำเคลม Supplier</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="refromreqest">สร้างเอกสารใหม่</button>
+                    <button type="button" class="btn btn-secondary" id="refrompredeli">เพิ่มรายการเข้าเอกสาร</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="myModalinsetdoc" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <span> <i class="fa fa-pencil"></i>Document No.:</span>
+                    <input type="text" id="_gennoteccreate">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="refromreqestok">ยืนยัน</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModalsend">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">ยืนยันวันที่ส่งเรื่องให้ Supplier</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table grid">
+                            <tbody>
+                                <tr>
+                                    <td>วันที่ส่งเรื่องให้ Supplier:</td>
+                                    <td>User ส่งเรื่อง:</td>
+
+                                </tr>
+                                <tr>
+                                    <td><input type="date" data-date-format="dd/mm/yy" id="_supplierdate"></td>
+                                    <td><input type="text" id="_usersend"></td>
+
+                                </tr>
+                                <tr>
+                                    <td>comment</td>
+                                    <td><textarea cols="50" id="comment" style="margin-top: 0px; margin-bottom: 0px; height: 119px;"></textarea></td>
+
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><button type="button" class="btn btn-success" id="_btnok" style="width:110px;">บันทึก</button></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer" style="background-color: #8962a754;">
+                    <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModalconsupplier">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">ยืนยันวันที่รับเรื่องให้ Supplier</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table grid">
+                            <tbody>
+                                <tr>
+                                    <td>วันที่รับเรื่องจาก Supplier:</td>
+                                    <td>User รับเรื่อง:</td>
+
+                                </tr>
+                                <tr>
+                                    <td><input type="date" id="_supplierdatere"></td>
+                                    <td><input type="text" id="_usersendre" disabled="disabled"></td>
+
+                                </tr>
+                                <tr>
+                                    <td>comment</td>
+                                    <td><textarea cols="50" id="commentre" style="margin-top: 0px; margin-bottom: 0px; height: 119px;"></textarea></td>
+
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><button type="button" class="btn btn-success" id="_btnokre" style="width:110px;">บันทึก</button></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer" style="background-color: #8962a754;">
+                    <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="myModalWarning" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+        <div class="modal-dialog" role="document">
+
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="modal" aria-label=" close"><span aria-hidden="true">&times;</span></button>
+                <strong>Warning!</strong>
+                <div class="modal-body">
+                    <div id="textAlertWarningmes">Some text in the modal.</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="_uderlogin" value="@user" />
+    <input type="hidden" id="_udertype" value="@usertype" />
+    <script type="text/javascript">
+        $("#_itemno").autocomplete({
+            selectFirst: true,
+            autoFocus: true,
+            timeout: 100000,
+            source: function (request, response) {
+                var param = {
+                    Name: $('#_itemno').val(),
+                    XvalCompany: $("#_company").val()
+                };
+                $.ajax({
+                    url: '@Url.Action("GetdateStockCode", "GetdataCenter")',
+                    data: JSON.stringify(param),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.slice(0, 20), function (item) {
+                            return {
+                                value: item
+                            }
+                        }))
+                    },
+                    error: function (XMLhttpsRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                    }
+                });
+
+
+            },
+
+            minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
+        });
+        $("#_suppli").autocomplete({
+            selectFirst: true,
+            autoFocus: true,
+            source: function (request, response) {
+                var param = { Name: $('#_suppli').val(), com: $('#_company').val() };
+                $.ajax({
+                    url: '@Url.Action("Getdatevendor", "GetdataCenter")',
+                    data: JSON.stringify(param),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.slice(0, 50), function (item) {
+                            return {
+                                value: item
+                            }
+                        }))
+                    },
+                    error: function (XMLhttpsRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                    }
+                });
+            },
+            minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
+        });
+        $(document).ready(function () {
+            function commaSeparateNumber(val) {
+                while (/(\d+)(\d{3})/.test(val.toString())) {
+                    val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                }
+                return val;
+            }
+            function splitval(_val) {
+                var _splito = "";
+                _splito = _val.split('|');
+
+                return _splito[0];
+            }
+            $("#_btnconfrim").click(function () {
+                var data = new Array();
+                $('#fixed-table-container-3').find('input[type="checkbox"]:checked').each(function () {
+                    var itemno = $(this).attr('itemno');
+                    var ItemList = {
+                        STKCOD: itemno,
+                    }
+                    data.push(ItemList);
+                    // console.log(data)
+                });
+                if (data.length == 0) {
+                    $("#myModalconfrimprint").modal('hide');
+                    alert("กรุณาเลือกรายการที่ท่านต้องการ");
+                    return false;
+                } else {
+                    $("#myModalconfrimprint").modal();
+                }
+                return false;
+
+            });
+            $('#_gennoteccreate').keyup(function () {
+                this.value = this.value.toUpperCase();
+                // $(this).val("");
+            });
+
+            $("#refrompredeli").click(function () {
+                var data = new Array();
+                $("#myModalconfrimprint").modal('hide');
+                $('#fixed-table-container-3').find('input[type="checkbox"]:checked').each(function () {
+                    var itemno = $(this).attr('itemno');
+                    var ItemList = {
+                        STKCOD: itemno,
+                    }
+                    data.push(ItemList);
+                    // console.log(data)
+                });
+                if (data.length == 0) {
+                    $("#myModalconfrimprint").modal('hide');
+                    alert("กรุณาเลือกรายการที่ท่านต้องการ");
+
+                    return false;
+                } else {
+                    $("#myModalconfrimprint").modal('hide');
+                    $("#myModalinsetdoc").modal();
+                }
+
+
+            });
+            $("#refromreqest").click(function () {
+                n = new Date();
+                y = n.getFullYear();
+                m = n.getMonth() + 1;
+                mm = ("0" + (n.getMonth() + 1)).slice(-2);
+                dd = ("0" + (n.getDate())).slice(-2);
+                d = n.getDate();
+                $("#_supplierdate").val(y + "-" + mm + "-" + dd);
+                $("#myModalconfrimprint").modal('hide');
+                $("#myModalsend").modal('show');
+
+            });
+            $("#_btnblackconfrim").click(function () {
+                $("#myModalconsupplier").modal('show');
+            });
+            $("#clickmecreate").on("click", function (e) {
+
+                myFunctioncreate();
+            });
+
+            function myFunctioncreate() {
+                var x = document.getElementById("myDIVcreate");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+            $("#clickme").on("click", function (e) {
+
+                myFunction();
+            });
+            var x = document.getElementById("myDIV");
+            x.style.display = "none";
+            function myFunction() {
+                var x = document.getElementById("myDIV");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+            $("#clickmetec").on("click", function (e) {
+
+                myFunctiontec();
+            });
+            var x = document.getElementById("myDIVtecedit");
+            x.style.display = "none";
+            function myFunctiontec() {
+                var x = document.getElementById("myDIVtecedit");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+            var fixedTable5 = fixTable(document.getElementById('fixed-table-container-5'));
+            var numberOfChecked = $('.select_:checked').length;
+            $("#rowcountuse").text(numberOfChecked);
+
+
+            //$("#requestdate").val(d + "/" + m + "/" + y);
+            //$("#receiveddate").val(d + "/" + m + "/" + y);
+
+
+
+
+            $('.SendEmail').click(function (event) {
+                var No_Claim = [];
+                var No_PN = [];
+                $.each($(".select_:checked"), function () {
+                    No_Claim.push($(this).attr('claimsupno'));
+                    No_PN.push($(this).attr('itemno'));
+                });
+                //alert("My  are: " + No_Claim.join(", ") + "item" + No_PN.join(", "));
+                var email = 'sample@gmail.com';
+                var subject = 'Test';
+                var emailBody = 'Claim No. ' + No_Claim.join(", ") + '  P/N' + No_PN.join(", ");
+                // var attach = 'path';
+                document.location = "mailto:" + email + "?subject=" + subject + "&body=" + emailBody;
+                //"?attach=" + attach;
+            });
+            var udertype = $("#_udertype").val();
+            var Userlogin = $("#_uderlogin").val();
+            $("#_usersend").val(Userlogin);
+            $("#_usersendre").val(Userlogin);
+            $("#_btnsearch").click(function () {
+                $("#rowcount").html("0");
+                $("#rowcountuse").html("0");
+                $("#rowcountstl").html("0");
+                $("#rowcountstlitem").html("0");
+                $("#rowcountamt").html("0");
+                $("#select_all").prop("checked", false);
+                var claimnokey = $("#_cliamno").val();
+                var company = $("#_company").val();
+                var status = $("#_status").val();
+                var _supplino = $("#_suppli").val();
+                var statusrec = $("#_statusclaimdisplay").val();
+                if (_supplino != "") {
+                    _supplino = splitval(_supplino);
+                } else {
+                    _supplino = "";
+                }
+                var cusno = "";
+                var itemno = $("#_itemno").val();
+                if (itemno != "") {
+                    itemno = splitval(itemno);
+                } else {
+                    itemno = "";
+                }
+                var slmcod = $("#slmcod").val();
+                var sec = $("#_sec").val();
+                var tec2 = $("#_whotec2").val();
+                var statdate = $("#_statdate").val();
+                var enddate = $("#_enddate").val();
+                var statusclaimafter = $("#_statusclaimafter").val();
+                var cktyp = $("#_udertype").val();
+                var stkgrp = $("#_stkgrp").val();
+                var proceedtofter = $("#_proceedtofter").val();
+                var statusprint = $("#_statusprint").val();
+                var statuswad = $("#_statuswad").val();
+                var statuscmtype = $("#_statuscmtype").val();
+              
+                if (cktyp == "1") {
+                    if (status == "1" && statusrec != "1" && statusrec != "0" && statusrec != "4") {
+
+                        $("#_btnprint").css("display", "block");
+                        GetClimcheckdataSupplier(statuscmtype,statuswad, _supplino, claimnokey, company, status, cusno, itemno, statdate, enddate, slmcod, statusrec, statusclaimafter, stkgrp, proceedtofter, statusprint, tec2, sec)
+                    } else {
+                        $("#_btnprint").css("display", "none");
+                        GetClimcheckdataSupplier(statuscmtype, statuswad, _supplino, claimnokey, company, status, cusno, itemno, statdate, enddate, slmcod, statusrec, statusclaimafter, stkgrp, proceedtofter, statusprint, tec2, sec)
+                    }
+                    if (statusclaimafter == "1") {
+                        // $("#modalconfirmdate").modal();
+                        // $("#displ").css("display", "block");
+                    } else {
+                        //  $("#displ").css("display", "none");
+                        // GetClimline(claimnokey, company, status, cusno, itemno, statdate, enddate, slmcod, statusrec, statusclaimafter)
+                    }
+                } else {
+                    //alert(slmcod)
+                    GetClimcheckdataSupplier(statuscmtype, statuswad, _supplino, claimnokey, company, status, cusno, itemno, statdate, enddate, slmcod, statusrec, statusclaimafter, stkgrp, "0", "2", tec2, sec)
+                }
+
+            });
+            var waitingDialog = waitingDialog || (function ($) {
+                'use strict';
+                // Creating modal dialog's DOM
+                var $dialog = $(
+                    '<div class="modal fade" data-backdrop="static" id="myModalloading" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">' +
+                    '<div class="modal-dialog modal-m">' +
+                    '<div class="modal-content">' +
+                        '<div class="modal-header"><h3 style="margin:0;"></h3></div>' +
+                        '<div class="modal-body">' +
+                            '<div class="progress progress-striped active" style="margin-bottom:0;"><div class="progress-bar" style="width: 100%"></div></div>' +
+                        '</div>' +
+                    '</div></div></div>');
+
+                return {
+                    show: function (message, options) {
+                        // Assigning defaults
+                        if (typeof options === 'undefined') {
+                            options = {};
+                        }
+                        if (typeof message === 'undefined') {
+                            message = 'Loading...';
+                        }
+                        var settings = $.extend({
+                            dialogSize: 'm',
+                            progressType: '',
+                            onHide: null // This callback runs after the dialog was hidden
+                        }, options);
+
+                        // Configuring dialog
+                        $dialog.find('.modal-dialog').attr('class', 'modal-dialog').addClass('modal-' + settings.dialogSize);
+                        $dialog.find('.progress-bar').attr('class', 'progress-bar');
+                        if (settings.progressType) {
+                            $dialog.find('.progress-bar').addClass('progress-bar-' + settings.progressType);
+                        }
+                        $dialog.find('h3').text(message);
+                        // Adding callbacks
+                        if (typeof settings.onHide === 'function') {
+                            $dialog.off('hidden.bs.modal').on('hidden.bs.modal', function (e) {
+                                settings.onHide.call($dialog);
+                            });
+                        }
+                        // Opening dialog
+                        $dialog.modal();
+                    },
+                    /**
+                     * Closes dialog
+                     */
+                    hide: function () {
+                        $dialog.modal('hide');
+                    }
+                };
+
+            })(jQuery);
+
+
+            $.ajax({
+                url: '@Url.Action("Getdatastkgrp", "GetdataCenter")',
+                data: {
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data)
+
+                    var select = $("#_stkgrp");
+                    select.children().remove();
+                    select.append($("<option>").val("ALL").text("ALL"));
+                    $(data).each(function (index, item) {
+
+                        select.append($("<option>").val(item.STKGRP).text(item.STKGRP + "/" + item.GRPNAM));
+                    });
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("GetUserTech2", "GetdataCenter")',
+                data: {
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data)
+
+                    var select = $("#_whotec2");
+                    select.children().remove();
+                    select.append($("<option>").val("ALL").text("ALL"));
+                    $(data).each(function (index, item) {
+
+                        select.append($("<option>").val(item.UserId).text(item.UserName));
+                    });
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("GetSection", "GetdataCenter")',
+                data: {
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data)
+
+                    var select = $("#_sec");
+                    select.children().remove();
+                    select.append($("<option>").val("ALL").text("ALL"));
+                    $(data).each(function (index, item) {
+
+                        select.append($("<option>").val(item.Id).text(item.Id + '/' + item.Name));
+                    });
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
+                data: {
+                    Name: 1
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    var select = $("#_status");
+                    select.children().remove();
+                    select.append($("<option>").val("5").text("ALL"));
+                    $(data).each(function (index, item) {
+                        if (item.CODE != '0') {
+                            select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                        }
+                    });
+                    //  var CUSCODt = $("#CUSCOD option:selected").text();
+                }
+            });
+            var UserId = $("#_uderlogin").val();
+            $.ajax({
+                url: '@Url.Action("Getdateslm","GetdataCenter")',
+                data: {
+                    UserId: UserId
+
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data)
+                    var _tpy = $("#_udertype").val();
+                    var select = $("#slmcod");
+                    select.children().remove();
+                    if (_tpy == "4") {
+                        $(data).each(function (index, item) {
+                            select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
+                        });
+                        var slmcod = $("#slmcod").val();
+                        // GetClimline("", "TAC", "1", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
+                    } else if (_tpy == "1") {
+                        select.append($("<option>").val("ALL").text("ALL"));
+                        $(data).each(function (index, item) {
+                            select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
+                        });
+                        var slmcod = $("#slmcod").val();
+                        //  GetClimline("", "TAC", "1", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
+                    }
+                    else if (_tpy == "2") {
+                        select.append($("<option>").val("ALL").text("ALL"));
+                        $(data).each(function (index, item) {
+                            select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
+                        });
+                        var slmcod = $("#slmcod").val();
+                        //  GetClimline("", "TAC", "3", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
+                    }
+                    else if (_tpy == "3") {
+                        select.append($("<option>").val("ALL").text("ALL"));
+                        $(data).each(function (index, item) {
+                            select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
+                        });
+                        var slmcod = $("#slmcod").val();
+                        // GetClimline("", "TAC", "4", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
+                    } else if (_tpy == "5") {
+                        select.append($("<option>").val("ALL").text("ALL"));
+                        $(data).each(function (index, item) {
+                            select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
+                        });
+                        var slmcod = $("#slmcod").val();
+                        //GetClimline("", "TAC", "1", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
+                    }
+                }
+            });
+            $("#select_all").click(function () {
+                $('.select_').not(this).prop('checked', this.checked);
+                var numberOfChecked = $('.select_:checked').length;
+                $("#rowcountuse").text(numberOfChecked);
+                Countitem()
+            });
+
+            $("table").on("click", "tr .select_", function () {
+                var numberOfChecked = $('.select_:checked').length;
+                $("#rowcountuse").text(numberOfChecked);
+                Countitem()
+                var ischecked = $(this).is(':checked');
+                if (!ischecked) {
+                    $('#select_all').prop("checked", false);
+                }
+
+            });
+
+            var _tpy = $("#_udertype").val();
+            if (_tpy == "2") {
+                $("#fucntec").css("display", "block");
+            }
+
+            $('#_stareopentec').change(function () {
+                var _valoption = $(this).val();
+                /// alert(_valoption)
+                if (_valoption == "Y") {
+                    $('#close_allsupplier').prop("disabled", false);
+                    $('#open_btnsupplier').prop("disabled", false);
+                    $('#select_allsupplier').prop("disabled", true);
+                    $('#_btnsupplier').prop("disabled", true);
+                    var tark = "2";
+                    selectcheck(tark)
+                } else {
+                    $('#select_allsupplier').prop("disabled", false);
+                    $('#_btnsupplier').prop("disabled", false);
+                    $('#close_allsupplier').prop("disabled", true);
+                    $('#open_btnsupplier').prop("disabled", true);
+                    $('#recsupp .select_sup').prop("disabled", false);
+                    var tark = "1";
+                    $('#_suppliernosend').trigger('change');
+                }
+            })
+            function selectcheck(tark) {
+                // waitingDialog.show();
+                // alert(tark)
+                var Nosup = $('#_suppliernosend').val();
+                $('#fixed-table-container-5  tbody:last-child').html("");
+                $.ajax({
+                    url: '@Url.Action("GetReceive_Supplier", "Process_Supplier")',
+                    data: {
+                        inNO: Nosup
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+                        var STATUS = '';
+                        var rowCount = $('#fixed-table-container-5  tbody:last-child').length;
+                        $('#rowcountsupplier').html(data.Getdata.length);
+                        if (data.Getdata.length > 0) {
+                            waitingDialog.hide();
+                            var _tpy = $("#_udertype").val();
+                            var SubmithtmlPage = '';
+                            $('#fixed-table-container-5  tbody:last-child').html("");
+                            for (var i = 0; i < data.Getdata.length; i++) {
+                                STATUS = data.Getdata[i].val.STATUS;
+                                SubmithtmlPage += '<tr>';
+                                //if (_tpy == "1") {
+                                //        if (STATUS != "COMPLETE") {
+                                //            SubmithtmlPage += '<td><input type="checkbox" class="select_sup"style="width: 112px;" strte="' + STATUS + '" Qty="' + data.Getdata[i].val.Send_Qty + '" itemno="' + data.Getdata[i].val.STKCOD + '"checked=checked></td>';
+                                //        } else {
+                                //            SubmithtmlPage += '<td><input type="checkbox" class="select_sup"style="width: 112px;" strte="' + STATUS + '" Qty="' + data.Getdata[i].val.Send_Qty + '" itemno="' + data.Getdata[i].val.STKCOD + '"disabled="disabled"></td>';
+                                //        }
+
+                                //} else if (_tpy == "2") {
+                                //if (tark == "2") {
+                                if (STATUS == "3") {
+                                    SubmithtmlPage += '<td><input type="checkbox" class="select_sup"style="width: 112px;" strte="' + STATUS + '" Qty="' + data.Getdata[i].val.Send_Qty + '" itemno="' + data.Getdata[i].val.STKCOD + '" disabled="disabled"></td>';
+                                } else if (STATUS != "3") {
+                                    SubmithtmlPage += '<td><input type="checkbox" class="select_sup"style="width: 112px;" strte="' + STATUS + '" Qty="' + data.Getdata[i].val.Send_Qty + '" itemno="' + data.Getdata[i].val.STKCOD + '" ></td>';
+                                }
+
+                                SubmithtmlPage += '<td ><div class="rownumber">' + (i + rowCount) + '</div></td>';
+                                SubmithtmlPage += '<td ><div class="cstkcod">' + data.Getdata[i].val.STKCOD + '</div></td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.Send_Qty + '</td>';
+                                SubmithtmlPage += '<td><div class="csubno">' + data.Getdata[i].val.CLM_SUB_No + '</div></td>';
+                                SubmithtmlPage += '<td><div class="invsup">' + data.Getdata[i].val.InvoiceSupplier + '</div></td>';
+                                SubmithtmlPage += '<td><div class="invdate">' + data.Getdata[i].val.InvoiceDateSupplier + '</div></td>';
+                                if (STATUS == "3") {
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="invno' + (i + rowCount) + '"  name="s_invno" value="' + data.Getdata[i].val.INV_Sup_No + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtyinv' + (i + rowCount) + '"  name="s_qtyinv" value="' + data.Getdata[i].val.INV_Qty_Sup + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="file" name="s_invup"id="FileUpload' + (i + rowCount) + '" /></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="cnno' + (i + rowCount) + '"  name="s_cnno" value="' + data.Getdata[i].val.CN_Sup_No + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtycn' + (i + rowCount) + '"  name="s_qtycn" value="' + data.Getdata[i].val.CN_Qty_Sup + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="amtcn' + (i + rowCount) + '"  name="s_amtcn" value="' + data.Getdata[i].val.CN_Amt + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="curcn' + (i + rowCount) + '"  name="s_curcn" value=""/></td>';
+                                    SubmithtmlPage += '<td><input type="file"name="s_cnup" id="FileUploadcn' + (i + rowCount) + '" /></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtyinvcancel' + (i + rowCount) + '"  name="s_qtyinvcance"   value="' + data.Getdata[i].val.INV_Qty_Sup_Cancel + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtycncancel' + (i + rowCount) + '"  name="s_qtycncance" value="' + data.Getdata[i].val.CN_Qty_Sup_Cancel + '"/></td>';
+                                } else if (STATUS != "3") {
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="invno' + (i + rowCount) + '"  name="s_invno" value="' + data.Getdata[i].val.INV_Sup_No + '" disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtyinv' + (i + rowCount) + '"  name="s_qtyinv" value="' + data.Getdata[i].val.INV_Qty_Sup + '"disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="file" name="s_invup"id="FileUpload' + (i + rowCount) + '" disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="cnno' + (i + rowCount) + '"  name="s_cnno" value="' + data.Getdata[i].val.CN_Sup_No + '"disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtycn' + (i + rowCount) + '"  name="s_qtycn" value="' + data.Getdata[i].val.CN_Qty_Sup + '"disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="amtcn' + (i + rowCount) + '"  name="s_amtcn" value="' + data.Getdata[i].val.CN_Amt + '"disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="curcn' + (i + rowCount) + '"  name="s_curcn" value="" disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="file"name="s_cnup" id="FileUploadcn' + (i + rowCount) + '" disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtyinvcancel' + (i + rowCount) + '"  name="s_qtyinvcance"   value="' + data.Getdata[i].val.INV_Qty_Sup_Cancel + '"disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtycncancel' + (i + rowCount) + '"  name="s_qtycncance" value="' + data.Getdata[i].val.CN_Qty_Sup_Cancel + '"disabled="disabled"/></td>';
+                                }
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.STKDES + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.VENDORNAME + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.UOM + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.STATUSName + '</td>';
+                                if (STATUS == "3") {
+                                    SubmithtmlPage += '<td><button type="button" class="btn btn-success" id="linebtnsupplier' + (i + rowCount) + '" cstkcod= "' + data.Getdata[i].val.STKCOD + '" csubno="' + data.Getdata[i].val.CLM_SUB_No + '"" disabled="disabled"">Open</button></td>';
+                                } else if (STATUS == "2") {
+                                    SubmithtmlPage += '<td><button type="button" class="btn btn-secondary" id="linebtnsupplier' + (i + rowCount) + '" cstkcod= "' + data.Getdata[i].val.STKCOD + '" csubno="' + data.Getdata[i].val.CLM_SUB_No + '" disabled="disabled"">Open</button></td>';
+                                } else if (STATUS != "3") {
+                                    SubmithtmlPage += '<td><button type="button" class="btn btn-secondary" id="linebtnsupplier' + (i + rowCount) + '" cstkcod= "' + data.Getdata[i].val.STKCOD + '" csubno="' + data.Getdata[i].val.CLM_SUB_No + '" disabled="disabled"">Close</button></td>';
+                                }
+                                SubmithtmlPage += ' </tr>';
+                                //$('#fixed-table-container-5  tbody:last-child').append(SubmithtmlPage);
+                            }
+                            $('#fixed-table-container-5  tbody:last-child').append(SubmithtmlPage);
+                        }
+                        else {
+                            waitingDialog.hide();
+                            $("#textAlertWarningmes").empty();
+                            $("#textAlertWarningmes").text("ไม่มีข้อมูล");
+                            $("#myModalWarning").modal();
+                        }
+                        var fixedTable5 = fixTable(document.getElementById('fixed-table-container-5'));
+                    }
+                });
+
+            }
+
+            //$('#select_allsupplier').change(function () {
+            //    if ($(this).prop('checked')) {
+
+            //        $('#recsupp input[type="checkbox"]').each(function () {
+            //            alert('xxx')
+            //            $('#recsupp input[type="checkbox"]').prop('checked', true);
+            //        });
+            //    } else {
+
+            //        $('#recsupp input[type="checkbox"]').each(function () {
+            //            alert('yy')
+            //            $('#recsupp input[type="checkbox"]').prop('checked', false);
+            //        });
+            //    }
+            //});
+            $("#select_allsupplier").click(function () {
+                //npx//
+
+                //$('.select_sup').not(this).prop('checked', this.checked);
+
+                //Countitemsupplier()
+
+                if ($(this).prop('checked')) {
+
+
+                    var checked_status = this.checked;
+
+                    $('#recsupp tr input[type="checkbox"]').each(function () {
+                        if (!this.disabled)
+                            this.checked = checked_status;
+                    });
+                    //selectcheck("1")
+                    var numberOfChecked = $('#recsupp tr .select_sup:checked').length;
+                    $("#rowcountselectsupplier").text(numberOfChecked);
+                    Countitemsupplier()
+                } else {
+
+                    $('#recsupp tr input[type="checkbox"]').each(function () {
+
+                        $('#recsupp tr').find('.select_sup').prop("checked", false);
+                        $('#recsupp tr').find('.select_sup').removeAttr("checked", "checked");
+                    });
+                    var numberOfChecked = $('.select_sup:checked').length;
+                    //alert(numberOfChecked)
+                    $("#rowcountselectsupplier").text(numberOfChecked);
+                }
+            });
+            $("#close_allsupplier").click(function () {
+
+                if ($(this).prop('checked')) {
+                    var checked_status = this.checked;
+
+                    $('#recsupp tr input[type="checkbox"]').each(function () {
+                        if (!this.disabled)
+                            this.checked = checked_status;
+                    });
+
+                    //selectcheck("2")
+
+                    var numberOfChecked = $('#recsupp tr .select_sup:checked').length;
+                    $("#rowcountselectsupplier").text(numberOfChecked);
+                    Countitemsupplier()
+                } else {
+
+                    $('#recsupp tr input[type="checkbox"]').each(function () {
+
+                        $('#recsupp tr').find('.select_sup').prop("checked", false);
+                        $('#recsupp tr').find('.select_sup').removeAttr("checked", "checked");
+                    });
+                    var numberOfChecked = $('.select_sup:checked').length;
+
+                    $("#rowcountselectsupplier").text(numberOfChecked);
+                }
+            });
+            $("#select_dellalledit").click(function () {
+                //$('.selectdell_').not(this).prop('checked', this.checked);
+                // Countitem()
+                if ($(this).prop("checked") == true) {
+                    $("#_btndelall").css("display", "block");
+                }
+                else if ($(this).prop("checked") == false) {
+                    $("#_btndelall").css("display", "none");
+                }
+            });
+            $("#select_dellalledit").click(function () {
+                //$('.selectdell_').not(this).prop('checked', this.checked);
+                if ($(this).prop('checked')) {
+                    var checked_status = this.checked;
+
+                    $('#exampletb tr input[type="checkbox"]').each(function () {
+                        if (!this.disabled)
+                            this.checked = checked_status;
+                    });
+                } else {
+
+                    $('#exampletb tr input[type="checkbox"]').each(function () {
+
+                        $('#exampletb tr').find('.selectdell_').prop("checked", false);
+                        $('#exampletb tr').find('.selectdell_').removeAttr("checked", "checked");
+                    });
+
+                }
+            });
+            // $("#close_allsupplier").click(function () {
+            //$('.select_sup').not(this).prop('checked', this.checked);
+            //var numberOfChecked = $('.select_sup:checked').length;
+            //$("#rowcountselectsupplier").text(numberOfChecked);
+            //Countitemsupplier()
+            // });
+            $("table").on("click", "tr .select_sup", function () {
+                var numberOfChecked = $('.select_sup:checked').length;
+                $("#rowcountselectsupplier").text(numberOfChecked);
+                Countitemsupplier()
+                var ischecked = $(this).is(':checked');
+                if (!ischecked) {
+                    $('#select_allsupplier').prop("checked", false);
+                    $(this).removeAttr("checked", "checked");
+                    $('#close_allsupplier').prop("checked", false);
+                    $(this).removeAttr("checked", "checked");
+
+                }
+            });
+            function Countitem() {
+                var sumQty = 0;
+                var sumamt = 0;
+                var data = [];
+                $("#rowcountstl").html("0");
+                $("#rowcountstlitem").html("0");
+                $('#exampletb tr').find('input[type="checkbox"]:checked').each(function () {
+                    var VSTKCOD = $(this).attr('itemno');
+                    var VAMT = $(this).attr('amt');
+                    sumQty += parseFloat($(this).attr('Qty'));
+                    //sumamt += parseFloat($(this).attr('amt'));
+                    var idamt = $(this).parents("tr:eq(0)").find(".texuntamt").attr('id');
+                    var revalx = $("#" + idamt + "").val().replace(',', '').replace(' ', '');
+
+                    sumamt += parseFloat(revalx);
+                    data.push(VSTKCOD)
+                });
+                var sorted_arr = data.sort();
+
+                var results = [];
+                for (var i = 0; i < sorted_arr.length - 1; i++) {
+                    var x = $.trim(sorted_arr[i]);
+                    var y = $.trim(sorted_arr[i + 1]);
+                    if (y == x) {
+
+                        results.push(x);
+
+                    }
+                }
+                var bsum = sorted_arr.length;
+                var fsum = results.length;
+                $("#rowcountstl").html(bsum - fsum);
+                $("#rowcountstlitem").html(commaSeparateNumber(sumQty));
+                //$("#rowcountamt").html(commaSeparateNumber(sumamt.toFixed(2)));
+                $("#rowcountamt").html("0.00")
+            }
+            function Countitemsupplier() {
+
+                var sumQty = 0;
+                var sumamt = 0;
+                var data = [];
+                $("#rowcountstlsupplier").html("0");
+                $("#rowcountstlitemsupplier").html("0");
+                $('#recsupp tr').find('input[type="checkbox"]:checked').each(function () {
+                    var VSTKCOD = $(this).attr('itemno');
+                    //var VAMT = $(this).attr('amt');
+                    sumQty += parseFloat($(this).attr('Qty'));
+                    //sumamt += parseFloat($(this).attr('amt'));
+                    data.push(VSTKCOD)
+                });
+                var sorted_arr = data.sort();
+
+                var results = [];
+                for (var i = 0; i < sorted_arr.length - 1; i++) {
+                    var x = $.trim(sorted_arr[i]);
+                    var y = $.trim(sorted_arr[i + 1]);
+                    if (y == x) {
+
+                        results.push(x);
+
+                    }
+                }
+                var bsum = sorted_arr.length;
+                var fsum = results.length;
+                $("#rowcountstlsupplier").html(bsum - fsum);
+                $("#rowcountstlitemsupplier").html(sumQty);
+                //$("#rowcountamt").html(sumamt);
+            }
+
+            $("#_btndelall").click(function () {
+
+                var data = [];
+                var usesend = $("#_uderlogin").val();
+                $('#fixed-table-container-4').find('input[type="checkbox"]:checked').each(function () {
+                    var clm_no_supplier = $(this).attr('clm_no_supplier');
+                    var clm_no_sub = $(this).attr('clm_no_sub');
+                    var stkcod = $(this).attr('stkcod');
+                    var _user = usesend;
+                    var fix = "1";
+                    var ItemList = {
+                        clmnosupplier: clm_no_supplier,
+                        clmnosub: clm_no_sub,
+                        stkcod: stkcod,
+                        InsertBy: _user,
+                        fix: fix
+                    }
+                    data.push(ItemList);
+                    // console.log(data)
+                });
+                if (data.length == 0) {
+                    alert("ท่านยังไม่ได้เลือกรายการที่ต้องการลบ กรุณาเลือกรายการที่ต้องการลบ");
+                    return false;
+                }
+                var DataSend = JSON.stringify(data);
+                return false;
+                $.ajax({
+                    url: '@Url.Action("DeleteClaimSupplier", "Process_Supplier")',
+                    data: {
+                        DataSend: DataSend,
+                        usesend: usesend
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        // console.log(data);
+                        if (data.message == "Y") {
+
+                            alert("ลบรายการสำเร็จ");
+                            $('#fixed-table-container-4 tbody:last-child').html("");
+                            // $("#_suppliernosendedit").trigger("change");
+                            $('#select_dellalledit').prop('checked', false);
+
+                        } else {
+                            alert(data.message);
+                        }
+                    }
+                });
+            });
+            $("table").on("click", "tr #_deletedisposom", function () {
+                var data = [];
+                var data = [];
+                var usesend = $("#_uderlogin").val();
+                //$('#fixed-table-container-4').find('input[type="checkbox"]:checked').each(function () {
+                var clm_no_supplier = $(this).attr('clm_no_supplier');
+                var clm_no_sub = $(this).attr('clm_no_sub');
+                var stkcod = $(this).attr('stkcod');
+                var _user = usesend;
+                var fix = "2";
+                var ItemList = {
+                    clmnosupplier: clm_no_supplier,
+                    clmnosub: clm_no_sub,
+                    stkcod: stkcod,
+                    InsertBy: _user,
+                    fix: fix
+                }
+                data.push(ItemList);
+                //    // console.log(data)
+                //});
+                if (data.length == 0) {
+                    alert("ท่านยังไม่ได้เลือกรายการที่ต้องการลบ กรุณาเลือกรายการที่ต้องการลบ");
+                    return false;
+                }
+                var DataSend = JSON.stringify(data);
+                $.ajax({
+                    url: '@Url.Action("DeleteClaimSupplier", "Process_Supplier")',
+                    data: {
+                        DataSend: DataSend,
+                        usesend: usesend
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        // console.log(data);
+                        if (data.message == "Y") {
+
+                            alert("ลบรายการสำเร็จ");
+                            $('#fixed-table-container-4 tbody:last-child').html("");
+                            $("#_suppliernosendedit").trigger("change");
+                        } else {
+                            alert(data.message);
+                        }
+                    }
+                });
+            });
+            //aps//
+            $("table").on("blur", "tr input[name='s_untcost']", function () {
+                var valunt = $(this).val();
+                var valfqty = $(this).attr('fqty');
+                var sumamt = "0";
+                sumamt = parseFloat(valunt) * parseFloat(valfqty);
+                var idamt = $(this).parents("tr:eq(0)").find(".texuntamt").attr('id');
+                $("#" + idamt + "").val(commaSeparateNumber(sumamt));
+            });
+            function GetClimcheckdataSupplier(statuscmtype, statuswad, _supplino, claimnokey, company, status, cusno, itemno, statdate, enddate, slmcod, statusrec, statusclaimafter, stkgrp, proceedtofter, statusprint, tec2, sec) {
+                // var valclim = $("#searchclaimno").val();
+                var _user = $("#_uderlogin").val();
+                //var _status = $("#_status").val();
+                $.ajax({
+                    url: '@Url.Action("GetdataUsetype", "GetdataCenter")',
+                    data: { User: _user },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data);
+                        $("#_udertype").val(data.Usetpye);
+                    }
+                });
+                var valclim = claimnokey;
+                var valcompany = company;
+                // var valstatus = status;
+                var valstatus = "0";
+                var valcusno = cusno;
+                var valitemno = itemno;
+                var valstatdate = statdate;
+                var valenddate = enddate;
+                var valslm = "";
+                var cktyp = $("#_udertype").val();
+                // if (cktyp != "4") {
+                //   valslm = "ALL";
+                // } else {
+                valslm = slmcod;
+                // }
+                //waitingDialog.show();
+                $('#fixed-table-container-3 tbody:last-child').html("");
+                var storcontroll = "";
+              
+                if (statuscmtype == "1") {
+                  //  alert("xxx")
+                    $.ajax({
+                        url: '@Url.Action("GetClimcheckdataSupplier", "Process_Supplier")',
+                        data: {
+                            inCLM_ID: valclim,
+                            incompany: valcompany,
+                            instatus: valstatus,
+                            incusno: valcusno,
+                            initemno: valitemno,
+                            instatdate: valstatdate,
+                            inenddate: valenddate,
+                            insales: valslm,
+                            instatusrec: "0",
+                            instatusclaimafter: statusclaimafter,
+                            instkgrp: stkgrp,
+                            proceedtofter: proceedtofter,
+                            statusprint: statusprint,
+                            tec2: tec2,
+                            sec: sec,
+                            supplino: _supplino,
+                            statuswad: statuswad,
+                            statuscmtype: statuscmtype
+                        },
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function (data) {
+                            console.log(data);
+                            waitingDialog.hide();
+                            // $('table  tbody:last-child').html("");
+                            if (data.Getdata.length > 0) {
+                                waitingDialog.hide();
+                                var SubmithtmlPage = '';
+                                var ADMIN_ANLYS_STATUS = '';
+                                var TECH1_PROCESS_STATUS = '';
+                                var TECH2_PROCESS_STATUS = '';
+                                var TECH2_ANLYS_STATUS = '';
+                                var PM_PROCESS_STATUS = '';
+                                var CLM_STATUS = '';
+                                var stp = '';
+                                //  $('#fixed-table-container-3 tbody:last-child').html("");
+                                var rowCount = $('#fixed-table-container-3  tbody:last-child').length;
+                                if (cktyp != "4" && cktyp != "5") {//User <> Sales
+                                    $('#rowcount').text(data.Getdata.length);
+                                    $('#fixed-table-container-3 tbody:last-child').html("");
+                                    for (var i = 0; i < data.Getdata.length; i++) {
+                                        ADMIN_ANLYS_STATUS = data.Getdata[i].val.ADMIN_ANLYS_STATUS;
+                                        TECH1_PROCESS_STATUS = data.Getdata[i].val.TECH1_PROCESS_STATUS;
+                                        TECH2_PROCESS_STATUS = data.Getdata[i].val.TECH2_PROCESS_STATUS;
+                                        TECH2_ANLYS_STATUS = data.Getdata[i].val.TECH2_ANLYS_STATUS;
+                                        PM_PROCESS_STATUS = data.Getdata[i].val.PM_PROCESS_STATUS;
+                                        CLM_STATUS = data.Getdata[i].val.CLM_STATUS;
+                                        stp = data.Getdata[0].val.Cmstyp;
+                                      
+                                        if (CLM_STATUS != "7") {
+                                            SubmithtmlPage = '<tr fax="1"  foc="' + data.Getdata[i].val.CLM_FOC + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '"  anlyafretori="' + data.Getdata[i].val.ANLYS_AFTERPROCESSTEXT + '"   statuclm="' + data.Getdata[i].val.CLM_STATUS + '"  statustext="' + data.Getdata[i].val.STATUSTEXT + '" supstatus="' + data.Getdata[i].val.CLM_FRMSUP_STATUS + '"supno="' + data.Getdata[i].val.CLM_FRMSUP_NO + '" supdate="' + data.Getdata[i].val.CLM_FRMSUP_DATE + '"  tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '" afterprocess="' + data.Getdata[i].val.ANLYS_AFTERPROCESS + '" cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_QTY + '" worktimeup="' + data.Getdata[i].val.CLM_USEDAY + '"invoicenoeup="' + data.Getdata[i].val.CLM_INVNO + '" invoicedete = "' + data.Getdata[i].val.CLM_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '">';
+                                        } else {
+                                            SubmithtmlPage = '<tr class="table-danger fax="1"  foc="' + data.Getdata[i].val.CLM_FOC + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '" anlyafretori="' + data.Getdata[i].val.ANLYS_AFTERPROCESSTEXT + '" statuclm="' + data.Getdata[i].val.CLM_STATUS + '" statustext="' + data.Getdata[i].val.STATUSTEXT + '" supstatus="' + data.Getdata[i].val.CLM_FRMSUP_STATUS + '"supno="' + data.Getdata[i].val.CLM_FRMSUP_NO + '" supdate="' + data.Getdata[i].val.CLM_FRMSUP_DATE + '"  tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '" afterprocess="' + data.Getdata[i].val.ANLYS_AFTERPROCESS + '" cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_QTY + '" worktimeup="' + data.Getdata[i].val.CLM_USEDAY + '"invoicenoeup="' + data.Getdata[i].val.CLM_INVNO + '" invoicedete = "' + data.Getdata[i].val.CLM_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '" >';
+                                        }
+                                        SubmithtmlPage += '<td style="color: darkorchid; width: 117px; position: absolute; left: 0px;"  foc="' + data.Getdata[i].val.CLM_FOC + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" statuclm="' + data.Getdata[i].val.CLM_STATUS + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '" company="' + data.Getdata[i].val.CLM_COMPANY + '" claimno="' + data.Getdata[i].val.REQ_NO + '"  claimsupno="' + data.Getdata[i].val.CLM_NO_SUB + '"  invoiceno="' + data.Getdata[i].val.CLM_INVNO + '" afterprocess="' + data.Getdata[i].val.ANLYS_AFTERPROCESS + '" cuscod="' + data.Getdata[i].val.Customer + '" itemno="' + data.Getdata[i].val.STKCOD + '" anlyafretori="' + data.Getdata[i].val.ANLYS_AFTERPROCESSTEXT + '" statustext="' + data.Getdata[i].val.STATUSTEXT + '" id="_btnview" style="cursor: pointer;">' + data.Getdata[i].val.CLM_NO_SUB + '</td>';
+                                        SubmithtmlPage += '<td><input type="checkbox" class="select_" cmtype="' + stp + '" vendor="' + data.Getdata[i].val.VENDOR + '" untiprice="' + parseFloat(data.Getdata[i].val.UNIT_COST) + '"  amt="' + parseFloat(data.Getdata[i].val.AMOUNT) + '"  Qty="' + data.Getdata[i].val.FCLM_QTY + '"  foc="' + data.Getdata[i].val.CLM_FOC + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" statuclm="' + data.Getdata[i].val.CLM_STATUS + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '" company="' + data.Getdata[i].val.CLM_COMPANY + '" claimno="' + data.Getdata[i].val.REQ_NO + '"  claimsupno="' + data.Getdata[i].val.CLM_NO_SUB + '"  invoiceno="' + data.Getdata[i].val.CLM_INVNO + '" afterprocess="' + data.Getdata[i].val.ANLYS_AFTERPROCESS + '" cuscod="' + data.Getdata[i].val.Customer + '" itemno="' + data.Getdata[i].val.STKCOD + '" anlyafretori="' + data.Getdata[i].val.ANLYS_AFTERPROCESSTEXT + '" statustext="' + data.Getdata[i].val.STATUSTEXT + '" style="width: 112px;"></td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.REQ_DATE + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.Endprocessdate + '</td>';
+                                        //SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UPDATE_DATE + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STKDES + '</td>';
+                                        // SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.FCLM_QTY + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.Lastqtyinv + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.Lastcurinv + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.LastRATEinv + '</td>';
+                                        SubmithtmlPage += '<td><input type="text"  style="width:80px" class="texuntcost" id="untcost' + (i + rowCount) + '"  name="s_untcost" value="' + commaSeparateNumber(data.Getdata[i].val.Lastunitcostinv) + '" fqty=' + data.Getdata[i].val.FCLM_QTY + ' disabled="disabled"></td>';
+                                        SubmithtmlPage += '<td><input   type="text" style="width:80px" class="texuntamt" id="amt' + (i + rowCount) + '" name="s_amt" value="' + commaSeparateNumber(data.Getdata[i].val.AMOUNT) + '"disabled="disabled"></td>';
+                                        SubmithtmlPage += '<td><input type="text"  style="width:90px" class="texuntinvsup" id="invsup' + (i + rowCount) + '" name="s_invsup" value="' + data.Getdata[i].val.InvoiceSupplier + '"></td>';
+                                        SubmithtmlPage += '<td><input type="date"  data-date-format="DD/MMMM/YYYY" style="width:140px" class="texuntinvdatsup" id="invdatsup' + (i + rowCount) + '"name="s_invdatsup" value="' + data.Getdata[i].val.InvoiceDateSupplier + '"/></td>';
+                                        //SubmithtmlPage += '<td><input type="date"  data-date-format="DD/MMMM/YYYY" style="width:140px" class="texuntinvdatsup" id="invdatsup' + (i + rowCount) + '"name="s_invdatsup" value="2015-08-09"/></td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.ClaimType + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.VENDOR + '/' + data.Getdata[i].val.VENDORNAME + '</td>';
+
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.Log_No + '</td>';
+                                        // }
+                                        //SubmithtmlPage += '<td>' + data.Getdata[i].val.ANLYS_AFTERPROCESSTEXT + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.TECH2_NAME + '</td>';
+                                        //SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_DUEDATE + '</td>';
+                                        //SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_INVNO + '</td>';
+                                        //SubmithtmlPage += '<td>' + data.Getdata[i].val.Customer + "/<br>" + data.Getdata[i].val.CUSNAM + '</td>';
+                                        // SubmithtmlPage += '<td>' + data.Getdata[i].val.SLMCOD + "/<br>" + data.Getdata[i].val.SLMNAM + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UOM + '</td>';
+
+                                        SubmithtmlPage += '</tr>';
+                                        $('#fixed-table-container-3  tbody:last-child').append(SubmithtmlPage);
+
+                                    }
+                                }
+                            } else {
+                                var _status = $("#_status :selected").text();
+                                waitingDialog.hide();
+                                $('#fixed-table-container-3 tbody:last-child').html("");
+                                $("#textAlertWarningmes").empty();
+                                $("#textAlertWarningmes").text("ไม่มีข้อมูลที่ต้องการค้นหา");
+                                $("#myModalWarning").modal();
+                                $("#_btnprint").css("display", "none");
+
+                            }
+
+                            var fixedTable3 = fixTable(document.getElementById('fixed-table-container-3'));
+                        }
+                    });
+                } else if (statuscmtype == "2") {
+                  
+                    $.ajax({
+                        url: '@Url.Action("GetClimcheckdataSupplierWH", "Process_Supplier")',
+                        data: {
+                            inCLM_ID: valclim,
+                            incompany: valcompany,
+                            instatus: valstatus,
+                            incusno: valcusno,
+                            initemno: valitemno,
+                            instatdate: valstatdate,
+                            inenddate: valenddate,
+                            insales: valslm,
+                            instatusrec: "0",
+                            instatusclaimafter: statusclaimafter,
+                            instkgrp: stkgrp,
+                            proceedtofter: proceedtofter,
+                            statusprint: statusprint,
+                            tec2: tec2,
+                            sec: sec,
+                            supplino: _supplino,
+                            statuswad: statuswad,
+                            statuscmtype: statuscmtype
+                        },
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function (data) {
+                            console.log(data);
+                            waitingDialog.hide();
+                            // $('table  tbody:last-child').html("");
+                            if (data.Getdata.length > 0) {
+                                waitingDialog.hide();
+                                var SubmithtmlPage = '';
+                                var ADMIN_ANLYS_STATUS = '';
+                                var TECH1_PROCESS_STATUS = '';
+                                var TECH2_PROCESS_STATUS = '';
+                                var TECH2_ANLYS_STATUS = '';
+                                var PM_PROCESS_STATUS = '';
+                                var CLM_STATUS = '';
+                                var stp = "";
+                                //  $('#fixed-table-container-3 tbody:last-child').html("");
+                                var rowCount = $('#fixed-table-container-3  tbody:last-child').length;
+                                if (cktyp != "4" && cktyp != "5") {//User <> Sales
+                                    $('#rowcount').text(data.Getdata.length);
+                                    $('#fixed-table-container-3 tbody:last-child').html("");
+                                    for (var i = 0; i < data.Getdata.length; i++) {
+                                        ADMIN_ANLYS_STATUS = data.Getdata[i].val.ADMIN_ANLYS_STATUS;
+                                        TECH1_PROCESS_STATUS = data.Getdata[i].val.TECH1_PROCESS_STATUS;
+                                        TECH2_PROCESS_STATUS = data.Getdata[i].val.TECH2_PROCESS_STATUS;
+                                        TECH2_ANLYS_STATUS = data.Getdata[i].val.TECH2_ANLYS_STATUS;
+                                        PM_PROCESS_STATUS = data.Getdata[i].val.PM_PROCESS_STATUS;
+                                        CLM_STATUS = data.Getdata[i].val.CLM_STATUS;
+                                        stp = data.Getdata[0].val.Cmstyp;
+                                       
+                                        if (CLM_STATUS != "8") {
+                                            SubmithtmlPage = '<tr fax="1"  foc="' + data.Getdata[i].val.CLM_FOC + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '"  anlyafretori="' + data.Getdata[i].val.ANLYS_AFTERPROCESSTEXT + '"   statuclm="' + data.Getdata[i].val.CLM_STATUS + '"  statustext="' + data.Getdata[i].val.STATUSTEXT + '" supstatus="' + data.Getdata[i].val.CLM_FRMSUP_STATUS + '"supno="' + data.Getdata[i].val.CLM_FRMSUP_NO + '" supdate="' + data.Getdata[i].val.CLM_FRMSUP_DATE + '"  tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '" afterprocess="' + data.Getdata[i].val.ANLYS_AFTERPROCESS + '" cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_QTY + '" worktimeup="' + data.Getdata[i].val.CLM_USEDAY + '"invoicenoeup="' + data.Getdata[i].val.CLM_INVNO + '" invoicedete = "' + data.Getdata[i].val.CLM_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '">';
+                                        } else {
+                                            SubmithtmlPage = '<tr class="table-danger fax="1"  foc="' + data.Getdata[i].val.CLM_FOC + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '" anlyafretori="' + data.Getdata[i].val.ANLYS_AFTERPROCESSTEXT + '" statuclm="' + data.Getdata[i].val.CLM_STATUS + '" statustext="' + data.Getdata[i].val.STATUSTEXT + '" supstatus="' + data.Getdata[i].val.CLM_FRMSUP_STATUS + '"supno="' + data.Getdata[i].val.CLM_FRMSUP_NO + '" supdate="' + data.Getdata[i].val.CLM_FRMSUP_DATE + '"  tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '" afterprocess="' + data.Getdata[i].val.ANLYS_AFTERPROCESS + '" cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_QTY + '" worktimeup="' + data.Getdata[i].val.CLM_USEDAY + '"invoicenoeup="' + data.Getdata[i].val.CLM_INVNO + '" invoicedete = "' + data.Getdata[i].val.CLM_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '" >';
+                                        }
+                                        SubmithtmlPage += '<td style="color: darkorchid; width: 117px; position: absolute; left: 0px;"  foc="' + data.Getdata[i].val.CLM_FOC + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" statuclm="' + data.Getdata[i].val.CLM_STATUS + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '" company="' + data.Getdata[i].val.CLM_COMPANY + '" claimno="' + data.Getdata[i].val.REQ_NO + '"  claimsupno="' + data.Getdata[i].val.CLM_NO_SUB + '"  invoiceno="' + data.Getdata[i].val.CLM_INVNO + '" afterprocess="' + data.Getdata[i].val.ANLYS_AFTERPROCESS + '" cuscod="' + data.Getdata[i].val.Customer + '" itemno="' + data.Getdata[i].val.STKCOD + '" anlyafretori="' + data.Getdata[i].val.ANLYS_AFTERPROCESSTEXT + '" statustext="' + data.Getdata[i].val.STATUSTEXT + '" id="_btnview" style="cursor: pointer;">' + data.Getdata[i].val.CLM_NO_SUB + '</td>';
+                                        SubmithtmlPage += '<td><input type="checkbox" class="select_" cmtype="' + stp + '" vendor="' + data.Getdata[i].val.VENDOR + '" untiprice="' + parseFloat(data.Getdata[i].val.UNIT_COST) + '"  amt="' + parseFloat(data.Getdata[i].val.AMOUNT) + '"  Qty="' + data.Getdata[i].val.FCLM_QTY + '"  foc="' + data.Getdata[i].val.CLM_FOC + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" statuclm="' + data.Getdata[i].val.CLM_STATUS + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '" company="' + data.Getdata[i].val.CLM_COMPANY + '" claimno="' + data.Getdata[i].val.REQ_NO + '"  claimsupno="' + data.Getdata[i].val.CLM_NO_SUB + '"  invoiceno="' + data.Getdata[i].val.CLM_INVNO + '" afterprocess="' + data.Getdata[i].val.ANLYS_AFTERPROCESS + '" cuscod="' + data.Getdata[i].val.Customer + '" itemno="' + data.Getdata[i].val.STKCOD + '" anlyafretori="' + data.Getdata[i].val.ANLYS_AFTERPROCESSTEXT + '" statustext="' + data.Getdata[i].val.STATUSTEXT + '" style="width: 112px;"></td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.REQ_DATE + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.Endprocessdate + '</td>';
+                                        //SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UPDATE_DATE + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STKDES + '</td>';
+                                        // SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.FCLM_QTY + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.Lastqtyinv + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.Lastcurinv + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.LastRATEinv + '</td>';
+                                        SubmithtmlPage += '<td><input type="text"  style="width:80px" class="texuntcost" id="untcost' + (i + rowCount) + '"  name="s_untcost" value="' + commaSeparateNumber(data.Getdata[i].val.Lastunitcostinv) + '" fqty=' + data.Getdata[i].val.FCLM_QTY + ' disabled="disabled"></td>';
+                                        SubmithtmlPage += '<td><input   type="text" style="width:80px" class="texuntamt" id="amt' + (i + rowCount) + '" name="s_amt" value="' + commaSeparateNumber(data.Getdata[i].val.AMOUNT) + '"disabled="disabled"></td>';
+                                        SubmithtmlPage += '<td><input type="text"  style="width:90px" class="texuntinvsup" id="invsup' + (i + rowCount) + '" name="s_invsup" value="' + data.Getdata[i].val.InvoiceSupplier + '"></td>';
+                                        SubmithtmlPage += '<td><input type="date"  data-date-format="DD/MMMM/YYYY" style="width:140px" class="texuntinvdatsup" id="invdatsup' + (i + rowCount) + '"name="s_invdatsup" value="' + data.Getdata[i].val.InvoiceDateSupplier + '"/></td>';
+                                        //SubmithtmlPage += '<td><input type="date"  data-date-format="DD/MMMM/YYYY" style="width:140px" class="texuntinvdatsup" id="invdatsup' + (i + rowCount) + '"name="s_invdatsup" value="2015-08-09"/></td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.ClaimType + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.VENDOR + '/' + data.Getdata[i].val.VENDORNAME + '</td>';
+
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.Log_No + '</td>';
+                                        // }
+                                        //SubmithtmlPage += '<td>' + data.Getdata[i].val.ANLYS_AFTERPROCESSTEXT + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.TECH2_NAME + '</td>';
+                                        //SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_DUEDATE + '</td>';
+                                        //SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_INVNO + '</td>';
+                                        //SubmithtmlPage += '<td>' + data.Getdata[i].val.Customer + "/<br>" + data.Getdata[i].val.CUSNAM + '</td>';
+                                        // SubmithtmlPage += '<td>' + data.Getdata[i].val.SLMCOD + "/<br>" + data.Getdata[i].val.SLMNAM + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UOM + '</td>';
+
+                                        SubmithtmlPage += '</tr>';
+                                        $('#fixed-table-container-3  tbody:last-child').append(SubmithtmlPage);
+
+                                    }
+                                }
+                            } else {
+                                var _status = $("#_status :selected").text();
+                                waitingDialog.hide();
+                                $('#fixed-table-container-3 tbody:last-child').html("");
+                                $("#textAlertWarningmes").empty();
+                                $("#textAlertWarningmes").text("ไม่มีข้อมูลที่ต้องการค้นหา");
+                                $("#myModalWarning").modal();
+                                $("#_btnprint").css("display", "none");
+
+                            }
+
+                            var fixedTable3 = fixTable(document.getElementById('fixed-table-container-3'));
+                        }
+                    });
+                }
+              
+
+            }
+            $.ajax({
+                url: '@Url.Action("GetSupplierNo", "Process_Supplier")',
+                data: {
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data)
+                    var select = $("#_suppliernosend");
+                    select.children().remove();
+                    select.append($("<option>").val("0").text("เลือกรายการ"));
+                    $(data).each(function (index, item) {
+                        select.append($("<option>").val(item.No).text(item.No + "/" + item.Detail));
+                    });
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("GetSupplierReceiveNo", "Process_Supplier")',
+                data: {
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    console.log(data)
+                    var select = $("#_suppliernosendedit");
+                    select.children().remove();
+                    select.append($("<option>").val("0").text("เลือกรายการ"));
+                    $(data).each(function (index, item) {
+                        select.append($("<option>").val(item.No).text(item.No + "/" + item.Detail));
+                    });
+                }
+            });
+            // Search all columns Edit
+            $('#txt_nameedit').keyup(function () {
+                // Search Text
+                var search = $(this).val();
+
+                // Hide all table tbody rows
+                $('#exampletbedit tbody tr').hide();
+
+                // Count total search result
+                var len = $('#exampletbedit tbody tr:not(.notfound) td:nth-child(1):contains("' + search + '")').length;
+                // alert(len)
+                if (len > 0) {
+                    // Searching text in columns and show match row
+                    $('#exampletbedit tbody tr:not(.notfound) td:contains("' + search + '")').each(function () {
+                        $(this).closest('tr').show();
+                    });
+                } else {
+                    $('.notfound').show();
+                }
+
+            });
+            // Search all columns
+            $('#txt_nameedititem').keyup(function () {
+                // Search Text
+                var search = $(this).val();
+
+                // Hide all table tbody rows
+                $('#exampletbedit tbody tr').hide();
+
+                // Count total search result
+                var len = $('#exampletbedit tbody tr:not(.notfound) td:nth-child(6):contains("' + search + '")').length;
+
+                if (len > 0) {
+                    // Searching text in columns and show match row
+                    $('#exampletbedit tbody tr:not(.notfound) td:contains("' + search + '")').each(function () {
+                        $(this).closest('tr').show();
+                    });
+                } else {
+                    $('.notfound').show();
+                }
+
+            });
+            // Search all columns
+            $('#txt_searchall').keyup(function () {
+                // Search Text
+                var search = $(this).val();
+
+                // Hide all table tbody rows
+                $('#recsupp tbody tr').hide();
+
+                // Count total search result
+                var len = $('#recsupp tbody tr:not(.notfound) td:nth-child(3):contains("' + search + '")').length;
+
+                if (len > 0) {
+                    // Searching text in columns and show match row
+                    $('#recsupp tbody tr:not(.notfound) td:contains("' + search + '")').each(function () {
+                        $(this).closest('tr').show();
+                    });
+                } else {
+                    $('.notfound').show();
+                }
+
+            });
+            // Search all columns
+            $('#txt_name').keyup(function () {
+                // Search Text
+                var search = $(this).val();
+
+                // Hide all table tbody rows
+                $('#recsupp tbody tr').hide();
+
+                // Count total search result
+                var len = $('#recsupp tbody tr:not(.notfound) td:nth-child(5):contains("' + search + '")').length;
+
+                if (len > 0) {
+                    // Searching text in columns and show match row
+                    $('#recsupp tbody tr:not(.notfound) td:contains("' + search + '")').each(function () {
+                        $(this).closest('tr').show();
+                    });
+                } else {
+                    $('.notfound').show();
+                }
+
+            });
+            // $("#_suppliernosendedit").change(function () {
+            //autu//
+            $("#_btnsearchsupedit").click(function () {
+                var Nosup = $("#_suppliernosendedit").val();
+                //waitingDialog.show();
+                $.ajax({
+                    url: '@Url.Action("GetReceive_Supplier", "Process_Supplier")',
+                    data: {
+                        inNO: Nosup
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+
+                        if (data.Getdata.length > 0) {
+                            waitingDialog.hide();
+                            $("#alldeltb").css("display", "block");
+                            var SubmithtmlPage = '';
+                            var ADMIN_ANLYS_STATUS = '';
+                            var TECH1_PROCESS_STATUS = '';
+                            var TECH2_PROCESS_STATUS = '';
+                            var TECH2_ANLYS_STATUS = '';
+                            var PM_PROCESS_STATUS = '';
+                            var CLM_STATUS = '';
+                            var rowCount = $('#fixed-table-container-4  tbody:last-child').length;
+                            $('#fixed-table-container-4 tbody:last-child').html("");
+                            for (var i = 0; i < data.Getdata.length; i++) {
+
+                                CLM_STATUS = data.Getdata[i].val.STATUS;
+
+                                SubmithtmlPage = '<tr fax="1">';
+
+                                SubmithtmlPage += '<td style="cursor: pointer; color: darkorchid;width: 117px; position: absolute; left: 0px;"   id="_btnview" >' + data.Getdata[i].val.CLM_SUB_No + '</td>';
+                                if (CLM_STATUS == '2') {
+                                    SubmithtmlPage += '<td><input type="checkbox" class="selectdell_" CLM_NO_Supplier="' + data.Getdata[i].val.CLM_NO_Supplier + '" CLM_NO_SUB="' + data.Getdata[i].val.CLM_SUB_No + '" stkcod="' + data.Getdata[i].val.STKCOD + '" style="width: 112px;"></td>';
+                                    SubmithtmlPage += '<td><button type="button" class="btn btn-outline-danger" id="_deletedisposom" stkcod="' + data.Getdata[i].val.STKCOD + '" CLM_NO_Supplier="' + data.Getdata[i].val.CLM_NO_Supplier + '" CLM_NO_SUB="' + data.Getdata[i].val.CLM_SUB_No + '">Del</button></td>';
+                                } else {
+                                    SubmithtmlPage += '<td><input type="checkbox" class="selectdell_" CLM_NO_Supplier="' + data.Getdata[i].val.CLM_NO_Supplier + '" CLM_NO_SUB="' + data.Getdata[i].val.CLM_SUB_No + '" stkcod="' + data.Getdata[i].val.STKCOD + '" style="width: 112px;" disabled="disabled"></td>';
+                                    SubmithtmlPage += '<td><button type="button" class="btn btn-outline-danger" id="_deletedisposom" stkcod="' + data.Getdata[i].val.STKCOD + '" CLM_NO_Supplier="' + data.Getdata[i].val.CLM_NO_Supplier + '" CLM_NO_SUB="' + data.Getdata[i].val.CLM_SUB_No + '"  disabled="disabled">Del</button></td>';
+                                }
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.REQ_DATE_Clim + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.Endprocessdate + '</td>';
+                                //SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UPDATE_DATE + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.STKDES + '</td>';
+                                // SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.Send_Qty + '</td>';
+                                //SubmithtmlPage += '<td>' + commaSeparateNumber(data.Getdata[i].val.Unit_Price) + '</td>';
+                                //SubmithtmlPage += '<td>' + commaSeparateNumber(data.Getdata[i].val.AMT) + '</td>';
+                                //SubmithtmlPage += '<td>' + data.Getdata[i].val.InvoiceSupplier + '</td>';
+                                //SubmithtmlPage += '<td>' + data.Getdata[i].val.InvoiceDateSupplier + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.Lastqtyinv + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.Lastcurinv + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.LastRATEinv + '</td>';
+                                SubmithtmlPage += '<td><input type="text"  style="width:80px" class="texuntcosedtt" id="untcostedt' + (i + rowCount) + '"  name="s_untcostedt" value="' + commaSeparateNumber(data.Getdata[i].val.Unit_Price) + '" fqtyedt=' + data.Getdata[i].val.FCLM_QTY + ' disabled="disabled"></td>';
+                                SubmithtmlPage += '<td><input   type="text" style="width:80px" class="texuntamtedt" id="amtedt' + (i + rowCount) + '" name="s_amtedt" value="' + commaSeparateNumber(data.Getdata[i].val.AMT) + '"disabled="disabled"></td>';
+                                SubmithtmlPage += '<td><input type="text"  style="width:90px" class="texuntinvsupedt" id="invsupedt' + (i + rowCount) + '" name="s_invsupedt" value="' + data.Getdata[i].val.InvoiceSupplier + '"></td>';
+                                SubmithtmlPage += '<td><input type="date"  data-date-format="DD/MMMM/YYYY" style="width:140px" class="texuntinvdatsupedt" id="invdatsupedt' + (i + rowCount) + '"name="s_invdatsupedt" value="' + data.Getdata[i].val.InvoiceDateSupplier + '"/></td>';
+
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.ClaimType + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.Supplier + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.Log_No + '</td>';
+                                // }
+                                // SubmithtmlPage += '<td>' + data.Getdata[i].val.ANLYS_AFTERPROCESSTEXT + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.TECH2_NAME + '</td>';
+                                //SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_DUEDATE + '</td>';
+                                //SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_INVNO + '</td>';
+                                //  SubmithtmlPage += '<td>' + data.Getdata[i].val.CUSCOD + "/<br>" + data.Getdata[i].val.CUSNAM + '</td>';
+                                //  SubmithtmlPage += '<td>' + data.Getdata[i].val.SLMCOD + "/<br>" + data.Getdata[i].val.SLMNAM + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UOM + '</td>';
+
+                                SubmithtmlPage += '</tr>';
+                                $('#fixed-table-container-4  tbody:last-child').append(SubmithtmlPage);
+
+                            }
+
+                        }
+                        else {
+                            waitingDialog.hide();
+                            $('#fixed-table-container-4tbody:last-child').html("");
+                            $("#alldeltb").css("display", "block");
+                            $("#textAlertWarningmes").empty();
+                            $("#textAlertWarningmes").text("ไม่มีข้อมูลที่ต้องการค้นหา");
+                            $("#myModalWarning").modal();
+                        }
+                        var fixedTable4 = fixTable(document.getElementById('fixed-table-container-4'));
+                    }
+                });
+            });
+            $("#_btnsearchdocsup").click(function () {
+                // alert("xxx")
+                var Nosup = $("#_suppliernosend").val();
+                // waitingDialog.show();
+                $.ajax({
+                    url: '@Url.Action("GetReceive_Supplier", "Process_Supplier")',
+                    data: {
+                        inNO: Nosup
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+                        // waitingDialog.hide();
+                        var STATUS = '';
+                        var rowCount = $('#fixed-table-container-5  tbody:last-child').length;
+                        $('#rowcountsupplier').html(data.Getdata.length);
+                        if (data.Getdata.length > 0) {
+                            waitingDialog.hide();
+                            var _tpy = $("#_udertype").val();
+                            var SubmithtmlPage = '';
+                            $('#fixed-table-container-5  tbody:last-child').html("");
+                            for (var i = 0; i < data.Getdata.length; i++) {
+                                STATUS = data.Getdata[i].val.STATUS;
+
+                                SubmithtmlPage += '<tr>';
+                                //  if (_tpy == "1") {
+                                if (STATUS == "2") {
+                                    SubmithtmlPage += '<td><input type="checkbox" class="select_sup"style="width: 112px;" Qty="' + data.Getdata[i].val.Send_Qty + '" itemno="' + data.Getdata[i].val.STKCOD + '"></td>';
+                                } else if (STATUS == "3") {
+                                    SubmithtmlPage += '<td><input type="checkbox" class="select_sup"style="width: 112px;" Qty="' + data.Getdata[i].val.Send_Qty + '" itemno="' + data.Getdata[i].val.STKCOD + '"></td>';
+                                }
+                                else if (STATUS == "4") {
+                                    SubmithtmlPage += '<td><input type="checkbox" class="select_sup"style="width: 112px;" Qty="' + data.Getdata[i].val.Send_Qty + '" itemno="' + data.Getdata[i].val.STKCOD + '"disabled="disabled"></td>';
+                                }
+                                //} else if (_tpy == "2") {
+                                //    if (STATUS != "COMPLETE") {
+                                //        SubmithtmlPage += '<td><input type="checkbox" class="select_sup"style="width: 112px;" Qty="' + data.Getdata[i].val.Send_Qty + '" itemno="' + data.Getdata[i].val.STKCOD + '"></td>';
+                                //    } else {
+                                //        SubmithtmlPage += '<td><input type="checkbox" class="select_sup"style="width: 112px;" Qty="' + data.Getdata[i].val.Send_Qty + '" itemno="' + data.Getdata[i].val.STKCOD + '"></td>';
+                                //    }
+                                //}
+                                SubmithtmlPage += '<td ><div class="rownumber">' + (i + rowCount) + '</div></td>';
+                                SubmithtmlPage += '<td ><div class="cstkcod">' + data.Getdata[i].val.STKCOD + '</div></td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.Send_Qty + '</td>';
+                                SubmithtmlPage += '<td><div class="csubno">' + data.Getdata[i].val.CLM_SUB_No + '</div></td>';
+                                SubmithtmlPage += '<td><div class="invsup">' + data.Getdata[i].val.InvoiceSupplier + '</div></td>';
+                                SubmithtmlPage += '<td><div class="invdate">' + data.Getdata[i].val.InvoiceDateSupplier + '</div></td>';
+                                if (STATUS == "2") {
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="invno' + (i + rowCount) + '"  name="s_invno" value="' + data.Getdata[i].val.INV_Sup_No + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtyinv' + (i + rowCount) + '"  name="s_qtyinv" value="' + data.Getdata[i].val.INV_Qty_Sup + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="file" name="s_invup"id="FileUpload' + (i + rowCount) + '" /></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="cnno' + (i + rowCount) + '"  name="s_cnno" value="' + data.Getdata[i].val.CN_Sup_No + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtycn' + (i + rowCount) + '"  name="s_qtycn" value="' + data.Getdata[i].val.CN_Qty_Sup + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="amtcn' + (i + rowCount) + '"  name="s_amtcn" value="' + data.Getdata[i].val.CN_Amt + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="curcn' + (i + rowCount) + '"  name="s_curcn" value="' + data.Getdata[i].val.Cur_Sup + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="file"name="s_cnup" id="FileUploadcn' + (i + rowCount) + '" /></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtyinvcancel' + (i + rowCount) + '"  name="s_qtyinvcance"   value="' + data.Getdata[i].val.INV_Qty_Sup_Cancel + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtycncancel' + (i + rowCount) + '"  name="s_qtycncance" value="' + data.Getdata[i].val.CN_Qty_Sup_Cancel + '"/></td>';
+                                } else if (STATUS == "3") {
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="invno' + (i + rowCount) + '"  name="s_invno" value="' + data.Getdata[i].val.INV_Sup_No + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtyinv' + (i + rowCount) + '"  name="s_qtyinv" value="' + data.Getdata[i].val.INV_Qty_Sup + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="file" name="s_invup"id="FileUpload' + (i + rowCount) + '" /></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="cnno' + (i + rowCount) + '"  name="s_cnno" value="' + data.Getdata[i].val.CN_Sup_No + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtycn' + (i + rowCount) + '"  name="s_qtycn" value="' + data.Getdata[i].val.CN_Qty_Sup + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="amtcn' + (i + rowCount) + '"  name="s_amtcn" value="' + data.Getdata[i].val.CN_Amt + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="curcn' + (i + rowCount) + '"  name="s_curcn" value="' + data.Getdata[i].val.Cur_Sup + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="file"name="s_cnup" id="FileUploadcn' + (i + rowCount) + '" /></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtyinvcancel' + (i + rowCount) + '"  name="s_qtyinvcance"   value="' + data.Getdata[i].val.INV_Qty_Sup_Cancel + '"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtycncancel' + (i + rowCount) + '"  name="s_qtycncance" value="' + data.Getdata[i].val.CN_Qty_Sup_Cancel + '"/></td>';
+                                }
+                                else if (STATUS == "4") {//aps//
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="invno' + (i + rowCount) + '"  name="s_invno" value="' + data.Getdata[i].val.INV_Sup_No + '" disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtyinv' + (i + rowCount) + '"  name="s_qtyinv" value="' + data.Getdata[i].val.INV_Qty_Sup + '"disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="file" name="s_invup"id="FileUpload' + (i + rowCount) + '" disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="cnno' + (i + rowCount) + '"  name="s_cnno" value="' + data.Getdata[i].val.CN_Sup_No + '"disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtycn' + (i + rowCount) + '"  name="s_qtycn" value="' + data.Getdata[i].val.CN_Qty_Sup + '"disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="amtcn' + (i + rowCount) + '"  name="s_amtcn" value="' + data.Getdata[i].val.CN_Amt + '"disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="curtcn' + (i + rowCount) + '"  name="s_curcn" value="' + data.Getdata[i].val.Cur_Sup + '"disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="file"name="s_cnup" id="FileUploadcn' + (i + rowCount) + '" disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtyinvcancel' + (i + rowCount) + '"  name="s_qtyinvcance"   value="' + data.Getdata[i].val.INV_Qty_Sup_Cancel + '"disabled="disabled"/></td>';
+                                    SubmithtmlPage += '<td><input type="text" class="textb" id="qtycncancel' + (i + rowCount) + '"  name="s_qtycncance" value="' + data.Getdata[i].val.CN_Qty_Sup_Cancel + '"disabled="disabled"/></td>';
+                                }
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.STKDES + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.VENDORNAME + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.UOM + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.STATUSName + '</td>';
+                                if (STATUS == "3") {
+                                    SubmithtmlPage += '<td><button type="button" class="btn btn-success" id="linebtnsupplier' + (i + rowCount) + '" cstkcod= "' + data.Getdata[i].val.STKCOD + '" csubno="' + data.Getdata[i].val.CLM_SUB_No + '"" disabled="disabled"">Open</button></td>';
+                                } else if (STATUS == "2") {
+                                    SubmithtmlPage += '<td><button type="button" class="btn btn-success" id="linebtnsupplier' + (i + rowCount) + '" cstkcod= "' + data.Getdata[i].val.STKCOD + '" csubno="' + data.Getdata[i].val.CLM_SUB_No + '" disabled="disabled"">Open</button></td>';
+                                }
+                                else if (STATUS == "4") {
+                                    SubmithtmlPage += '<td><button type="button" class="btn btn-secondary" id="linebtnsupplier' + (i + rowCount) + '" cstkcod= "' + data.Getdata[i].val.STKCOD + '" csubno="' + data.Getdata[i].val.CLM_SUB_No + '" disabled="disabled"">Close</button></td>';
+                                }
+                                SubmithtmlPage += ' </tr>';
+                                //$('#fixed-table-container-5  tbody:last-child').append(SubmithtmlPage);
+                            }
+                            $('#fixed-table-container-5  tbody:last-child').append(SubmithtmlPage);
+                            waitingDialog.hide();
+                        }
+                        else {
+                            waitingDialog.hide();
+                            $("#textAlertWarningmes").empty();
+                            $("#textAlertWarningmes").text("ไม่มีข้อมูล");
+                            $("#myModalWarning").modal();
+                        }
+                        var fixedTable5 = fixTable(document.getElementById('fixed-table-container-5'));
+                    }
+                });
+            });
+            $("#_btnsupplier").click(function () {
+                n = new Date();
+                y = n.getFullYear();
+                m = n.getMonth() + 1;
+                mm = ("0" + (n.getMonth() + 1)).slice(-2);
+                dd = ("0" + (n.getDate())).slice(-2);
+                d = n.getDate();
+                $("#_supplierdatere").val(y + "-" + mm + "-" + dd);
+                $("#myModalconsupplier").modal();
+            });
+            $("#close_btnsupplier").click(function () {
+                var supplierusersendre = $("#_usersendre").val();
+                var keysupplier = $("#_suppliernosend").val();
+                if (keysupplier == "0") {
+
+                }
+                var data = new Array();
+                $("#recsupp input[type=checkbox]:checked").each(function () {
+                    var row = $(this).closest("tr");
+                    var MyIndexValuecstkcod = row.find('td .cstkcod').html();
+                    var MyIndexValuecsubno = row.find('td .csubno').html();
+                    var ItemList = {
+                        MyIndexValuecstkcod: MyIndexValuecstkcod,
+                        MyIndexValuecsubno: MyIndexValuecsubno,
+                        MyIndexValueusersendre: supplierusersendre,
+                        MyIndexValuekeysupplier: keysupplier
+
+                    }
+                    data.push(ItemList);
+                });
+
+
+                console.log(data);
+
+            });
+            $("#open_btnsupplier").click(function () {
+                var usesend = $("#_uderlogin").val();
+                var keysupplier = $("#_suppliernosend").val();
+                if (keysupplier == "0") {
+                    alert("กรุณาเลือก Document No....");
+                    return false;
+                }
+                var data = new Array();
+                $("#recsupp input[type=checkbox]:checked").each(function () {
+                    var row = $(this).closest("tr");
+                    var MyIndexValuecstkcod = row.find('td .cstkcod').html();
+                    var MyIndexValuecsubno = row.find('td .csubno').html();
+                    var ItemList = {
+                        MyIndexValuecstkcod: MyIndexValuecstkcod,
+                        MyIndexValuecsubno: MyIndexValuecsubno,
+                        MyIndexValueusersendre: usesend,
+                        MyIndexValuekeysupplier: keysupplier
+
+                    }
+                    data.push(ItemList);
+                });
+                if (data.length == 0) {
+                    alert("กรุณาเลือกรายการที่ท่านต้องการ");
+                    return false;
+                }
+                var DataSend = JSON.stringify(data);
+
+                $.ajax({
+                    url: '@Url.Action("ReopenClaimSupplier", "Process_Supplier")',
+                    data: {
+                        DataSend: DataSend,
+                        usesend: usesend
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        // console.log(data);
+                        if (data.message == "Y") {
+                            alert("Repoen เรียบร้อย");
+                            $("#_stareopentec").val("0");
+                            $("#_btnsearchdocsup").trigger("click");
+                            $("#select_allsupplier").prop("disabled", false);
+                            $("#_btnsupplier").prop("disabled", false);
+                            $("#close_allsupplier").prop("checked", false);
+                            //$("#_suppliernosend").trigger("change");
+                        } else {
+                            alert(data.message);
+                        }
+                    }
+                });
+
+            });
+            $("#_btnoksupedit").click(function () {
+                var data = new Array();
+                var keysupplier = $("#_suppliernosendedit").val();
+                var im_name = $("#_uderlogin").val();
+                if (keysupplier == "0") {
+                    alert("กรุณาเลือก เลขที่ส่งเคลม Supplier ที่ต้องการ");
+                    return false;
+                }
+                var ItemList = {
+                    VSTCLMNO: '',
+                    VSTKCOD: '',
+                    keysupplier: keysupplier,
+
+                }
+                data.push(ItemList);
+                var DataSend = JSON.stringify(data);
+                $.ajax({
+                    url: '@Url.Action("UpdateClaimSupplierreceive", "Process_Supplier")',
+                    data: {
+                        DataSend: DataSend,
+                        supplierusersendre: '',
+                        keysupplier: keysupplier,
+                        com: "",
+                        im_name: im_name
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        // console.log(data);
+                        if (data.message == "true") {
+                            alert("Update สถานะเรียบร้อย")
+                            location.reload();
+                        } else {
+                            alert(data.message)
+                        }
+                    }
+                });
+            });
+            $("#recsupp").on("click", "tr button[type='button']", function () {
+                var supplierusersendre = $("#_usersendre").val();
+                var keysupplier = $("#_suppliernosend").val();
+                var im_name = $("#_uderlogin").val();
+                if (keysupplier == "0") {
+
+                }
+                var data = new Array();
+                var cstkcod = $(this).attr('cstkcod');
+                var csubno = $(this).attr('csubno');
+
+                var ItemList = {
+                    VSTCLMNO: csubno,
+                    VSTKCOD: cstkcod,
+                    keysupplier: keysupplier,
+
+                }
+                data.push(ItemList);
+                var DataSend = JSON.stringify(data);
+                $.ajax({
+                    url: '@Url.Action("UpdateClaimSupplierreceive", "Process_Supplier")',
+                    data: {
+                        DataSend: DataSend,
+                        supplierusersendre: supplierusersendre,
+                        keysupplier: keysupplier,
+                        com: "",
+                        im_name: im_name
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        // console.log(data);
+                        if (data.message == "Y") {
+                            alert(data.message)
+                            $("#_suppliernosend").trigger("change");
+                            // $("#myModalconsupplier").modal('hide');
+                        } else {
+                            alert(data.message)
+                        }
+                    }
+                });
+            });
+
+            $("#_btnokre").click(function () {
+                var supplierdatered = $("#_supplierdatere").val();
+                var supplierusersendre = $("#_usersendre").val();
+                var suppliercommentred = $("#commentre").val();
+                var keysupplier = $("#_suppliernosend").val();
+                var data = new Array();
+                $("#recsupp input[type=checkbox]:checked").each(function () {
+                    var row = $(this).closest("tr");
+                    var MyIndexValueinvno = row.find('td input[name="s_invno"]').val().replace(',', '').replace(' ', '');
+                    var MyIndexValueQtyinv = row.find('td input[name="s_qtyinv"]').val().replace(',', '').replace(' ', '');
+                    var MyIndexValuecnno = row.find('td input[name="s_cnno"]').val().replace(',', '').replace(' ', '');
+                    var MyIndexValueQtycn = row.find('td input[name="s_qtycn"]').val().replace(',', '').replace(' ', '');
+                    var MyIndexValueAmtcn = row.find('td input[name="s_amtcn"]').val().replace(',', '').replace(' ', '');
+                    var MyIndexValuesCurcn = row.find('td input[name="s_curcn"]').val().replace(',', '').replace(' ', '');
+                    var MyIndexValueQtyinvcance = row.find('td input[name="s_qtyinvcance"]').val().replace(',', '').replace(' ', '');
+                    var MyIndexValueQtycncance = row.find('td input[name="s_qtycncance"]').val().replace(',', '').replace(' ', '');
+                    var MyIndexValuecstkcod = row.find('td .cstkcod').html();
+                    var MyIndexValuecsubno = row.find('td .csubno').html();
+                    var InvoiceSupplier = row.find('td .invsup').html();
+                    var InvoiceDateSupplier = row.find('td .invdate').html();
+                    var ItemList = {
+                        MyIndexValueinvno: MyIndexValueinvno,
+                        MyIndexValueQtyinv: MyIndexValueQtyinv,
+                        MyIndexValuecnno: MyIndexValuecnno,
+                        MyIndexValueQtycn: MyIndexValueQtycn,
+                        MyIndexValueAmtcn: MyIndexValueAmtcn,
+                        MyIndexValueQtyinvcance: MyIndexValueQtyinvcance,
+                        MyIndexValueQtycncance: MyIndexValueQtycncance,
+                        MyIndexValuecstkcod: MyIndexValuecstkcod,
+                        MyIndexValuecsubno: MyIndexValuecsubno,
+                        MyIndexValueInvoiceSupplier: InvoiceSupplier,
+                        MyIndexValueInvoiceDateSupplier: InvoiceDateSupplier,
+                        MyIndexValuesCurcn:MyIndexValuesCurcn
+                    };
+                    data.push(ItemList);
+                    if (window.FormData !== undefined) {
+                        var a1 = $("#_suppliernosend").val();
+                        var a2 = MyIndexValuecsubno;
+                        var fileUpload = row.find('td input[type="file"]').get(0);
+
+                        var files = fileUpload.files;
+                        console.log(files);
+
+                        // Create FormData object
+                        var fileData = new FormData();
+                        // Looping over all files and add it to FormData object
+                        for (var i = 0; i < files.length; i++) {
+
+                            fileData.append(files[i].name, files[i], a1 + "-" + a2);
+                        }
+                        $.ajax({
+                            url: '@Url.Action("UploadInvoicePdf", "Process_Supplier")',
+                            type: "POST",
+                            contentType: false, // Not to set any content header
+                            processData: false, // Not to process data
+                            data: fileData,
+                            success: function (result) {
+                                if (result.message == "true") {
+                                    var Img = result.imgname;
+                                    $.ajax({
+                                        url: '@Url.Action("SavePathPdf", "Process_Supplier")',
+                                        data: {
+                                            im_name: Img,
+                                            Cim_No: a1,
+                                            Im_No: "01",
+                                            inCim_NoSub: MyIndexValuecsubno,
+                                            type: "In"
+                                        },
+                                        type: "POST",
+                                        dataType: "JSON",
+                                        success: function (data) {
+                                            console.log(data);
+                                            // alert(data.path)
+                                            if (data.message == 'true') {
+                                                alert("บันทึก File สำเร็จ")
+                                                $("#_btnsearchdocsup").trigger("click");
+                                            } else {
+
+                                                $("#textAlertWarningmes").empty();
+                                                $("#textAlertWarningmes").text(data.message);
+                                                $("#myModalWarning").modal();
+                                            }
+                                        }
+                                    });
+                                }
+
+                            }
+
+                        });
+                    } else {
+                        alert("FormData is not supported.");
+                    }
+                    if (window.FormData !== undefined) {
+                        var a1 = $("#_suppliernosend").val();
+                        var a2 = MyIndexValuecsubno;
+                        var fileUpload = row.find('td input[name="s_cnup"]').get(0);
+
+                        var files = fileUpload.files;
+                        console.log(files);
+
+                        // Create FormData object
+                        var fileData = new FormData();
+                        // Looping over all files and add it to FormData object
+                        for (var i = 0; i < files.length; i++) {
+
+                            fileData.append(files[i].name, files[i], a1 + "-" + a2);
+                        }
+                        $.ajax({
+                            url: '@Url.Action("UploadCnPdf", "Process_Supplier")',
+                            type: "POST",
+                            contentType: false, // Not to set any content header
+                            processData: false, // Not to process data
+                            data: fileData,
+                            success: function (result) {
+                                if (result.message == "true") {
+                                    var Img = result.imgname;
+                                    $.ajax({
+                                        url: '@Url.Action("SavePathPdf", "Process_Supplier")',
+                                        data: {
+                                            im_name: Img,
+                                            Cim_No: a1,
+                                            Im_No: "01",
+                                            inCim_NoSub: MyIndexValuecsubno,
+                                            type: "Cn"
+                                        },
+                                        type: "POST",
+                                        dataType: "JSON",
+                                        success: function (data) {
+                                            console.log(data);
+                                            // alert(data.path)
+                                            if (data.message == 'true') {
+                                                alert("บันทึก File สำเร็จ")
+                                                $("#_btnsearchdocsup").trigger('click');
+                                            } else {
+
+                                                $("#textAlertWarningmes").empty();
+                                                $("#textAlertWarningmes").text(data.message);
+                                                $("#myModalWarning").modal();
+                                            }
+                                        }
+                                    });
+                                }
+
+                            }
+
+                        });
+                    } else {
+                        alert("FormData is not supported.");
+                    }
+                });
+
+                var DataSend = JSON.stringify(data);
+                if (data.length > 0) {
+                    $.ajax({
+                        url: '@Url.Action("SaveClaimSupplierreceive", "Process_Supplier")',
+                        data: {
+                            DataSend: DataSend,
+                            supplierdatered: supplierdatered,
+                            supplierusersendre: supplierusersendre,
+                            suppliercommentred: suppliercommentred,
+                            keysupplier: keysupplier,
+                            com: ""
+                        },
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function (data) {
+                            // console.log(data);
+                            if (data.message == "Y") {
+                                alert("บันทึกข้อมูลสำเร็จ")
+                                $("#_btnsearchdocsup").trigger("click");
+                                $("#myModalconsupplier").modal('hide');
+                                $("#commentre").val("");
+                                n = new Date();
+                                y = n.getFullYear();
+                                m = n.getMonth() + 1;
+                                mm = ("0" + (n.getMonth() + 1)).slice(-2);
+                                dd = ("0" + (n.getDate())).slice(-2);
+                                d = n.getDate();
+                                $("#_supplierdatere").val(y + "-" + mm + "-" + dd);
+
+                            } else {
+                                alert(data.message)
+                            }
+                        }
+                    });
+                } else {
+                    $("#myModalconsupplier").modal('hide');
+                    alert("ไม่มีข้อมูลให้บันทึก");
+
+                }
+            });
+            $("#_updatesupedit").click(function () {
+                var data = [];
+                var useupdate = $('#_uderlogin').val();
+                var CLM_NO_Supplier = $('#_suppliernosendedit').val();
+                $('#exampletbedit tr').find('input[type="checkbox"]:checked').each(function () {
+                    var VSTCLMNO = $(this).attr('clm_no_sub');
+                    var VSTKCOD = $(this).attr('stkcod');
+                    var InvoiceSupplier = $(this).parents("tr:eq(0)").find(".texuntinvsupedt").val();
+                    var InvoiceDateSupplier = $(this).parents("tr:eq(0)").find(".texuntinvdatsupedt").val();
+                    var ItemList = {
+                        VSTCLMNO: VSTCLMNO,
+                        VSTKCOD: VSTKCOD,
+                        VInvoiceSupplier: InvoiceSupplier,
+                        VInvoiceDateSupplier: InvoiceDateSupplier
+                    }
+                    data.push(ItemList)
+                });
+                if (data.length == 0) {
+                    alert("กรุณาเลือกรายการที่ท่านต้องการ Update");
+                    return false;
+                }
+                console.log(data)
+
+                var DataSend = JSON.stringify(data);
+                $.ajax({
+                    url: '@Url.Action("UpdateClaimSupplier", "Process_Supplier")',
+                    data: {
+                        DataSend: DataSend,
+                        usesend: useupdate,
+                        CLM_NO_Supplier: CLM_NO_Supplier,
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data);
+                        if (data.message == "Y") {
+                            //$('#myModalsend').modal('hide');
+                            alert("Update รายการสำเร็จ");
+                            var no = data.gendocno;
+                            var wi = window.open("../Report/frmSupplier.aspx?IDNUM=" + btoa(no));
+                            wi.focus();
+
+
+                            $('#fixed-table-container-4  tbody:last-child').html("");
+
+
+                        } else {
+                            alert(data.message);
+                        }
+                    }
+                });
+            });
+            $("#refromreqestok").click(function () {
+                var data = [];
+
+                var CLM_NO_Supplier = $('#_gennoteccreate').val();
+                var ressupplierdatesend = $('#_supplierdate').val();
+                var usesend = $('#_usersend').val();
+                var commentsend = $('#comment').val();
+                var countstksend = $('#rowcountstl').html();
+                var countnumbersend = $('#rowcountstlitem').html();
+                var countamt = $('#rowcountamt').html();
+                $('#exampletb tr').find('input[type="checkbox"]:checked').each(function () {
+                    var VSTKCOD = $(this).attr('itemno');
+                    var VSTCLMNO = $(this).attr('claimno');
+                    var VAMT = $(this).attr('amt');
+                    var Vendor = $(this).attr('vendor');
+                    var untiprice = $(this).attr('untiprice');
+                    var VClmsupno = $(this).attr('claimsupno');
+                    var VQty = $(this).attr('Qty');
+                    var Vsupplier = $(this).attr('vendor');
+                    var company = $(this).attr('company');
+                    var InvoiceSupplier = $(this).parents("tr:eq(0)").find(".texuntinvsup").val();
+                    var InvoiceDateSupplier = $(this).parents("tr:eq(0)").find(".texuntinvdatsup").val();
+                    var ItemList = {
+                        VSTCLMNO: VSTCLMNO,
+                        VSTKCOD: VSTKCOD,
+                        VAMT: VAMT,
+                        VUNITPRICE: untiprice,
+                        Vendor: Vendor,
+                        Clmsupno: VClmsupno,
+                        VQty: VQty,
+                        Vsupplier: Vsupplier,
+                        company: company,
+                        VInvoiceSupplier: InvoiceSupplier,
+                        VInvoiceDateSupplier: InvoiceDateSupplier
+                    }
+                    data.push(ItemList)
+                });
+                if (data.length == 0) {
+                    alert("กรุณาเลือกรายการที่ท่านต้องการ");
+                    return false;
+                }
+                if (CLM_NO_Supplier == "") {
+                    alert("กรุณาใส่เลขเอกสารที่ต้องเพิ่มรายการ");
+                    return false;
+                }
+                var DataSend = JSON.stringify(data);
+
+                $.ajax({
+                    url: '@Url.Action("AddClaimDisposal", "Process_Supplier")',
+                    data: {
+                        DataSend: DataSend,
+                        usesend: usesend,
+                        ingenno: CLM_NO_Supplier,
+                        commentsend: commentsend
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        // console.log(data);
+                        $('#myModalinsetdoc').modal('hide');
+                        if (data.message == "Y") {
+                            $('#myModalsend').modal('hide');
+
+                            alert("บันทึกรายการสำเร็จ");
+
+
+                            var no = data.gendocno;
+
+                            var wi = window.open("../Report/frmSupplier.aspx?IDNUM=" + btoa(no));
+                            wi.focus();
+
+                            location.reload();
+                            // $('#_btnsearch').trigger('click');
+                            $('#rowcount').html("");
+                            $('#rowcountuse').html("");
+                            $('#rowcountstl').html("");
+                            $('#rowcountstlitem').html("");
+                            $('#rowcountamt').html("");
+                            var today = new Date();
+                            var dd = today.getDate();
+                            var mm = today.getMonth() + 1; //January is 0!
+
+                            var yyyy = today.getFullYear();
+                            if (dd < 10) {
+                                dd = '0' + dd
+                            }
+                            if (mm < 10) {
+                                mm = '0' + mm
+                            }
+                            var today = dd + '/' + mm + '/' + yyyy;
+
+                            //crdate.datepicker({ dateFormat: 'dd-mm-yy' });
+                            $("#_supplierdate").val(today);
+                            $('#comment').val("");
+                        } else {
+                            $('#myModalinsetdoc').modal('hide');
+                            alert(data.message);
+                        }
+                    }
+                });
+            });
+            $("#_btnok").click(function () {
+                var data = [];
+                var Doc;
+                var com = $('#_company').val();
+                if (com == "TAC") {
+                    Doc = 'SUT'
+                } else if (com == "AAC") {
+                    Doc = 'SUA'
+                } else if (com == "OMP") {
+                    Doc = 'SUO'
+                }
+                else if (com == "ALL") {
+                    alert("กรุณาเลือก Company");
+                    return false;
+                }
+                var CLM_NO_Supplier = "";
+                var ressupplierdatesend = $('#_supplierdate').val();
+                var usesend = $('#_usersend').val();
+                var commentsend = $('#comment').val();
+                var countstksend = $('#rowcountstl').html();
+                var countnumbersend = $('#rowcountstlitem').html().replace(/,/g, '');
+                var countamt = $('#rowcountamt').html();
+                
+                //var idamt = $(this).parents("tr:eq(0)").find(".texuntamt").attr('id');
+                //$("#" + idamt + "").val(commaSeparateNumber(sumamt));
+                var Vstp ="";
+                $('#exampletb tr').find('input[type="checkbox"]:checked').each(function () {
+                    var VSTKCOD = $(this).attr('itemno');
+                    var VSTCLMNO = $(this).attr('claimno');
+                    //var VAMT = $(this).attr('amt');
+                    var VAMT = $(this).parents("tr:eq(0)").find(".texuntamt").val();
+                    var Vendor = $(this).attr('vendor');
+                    //var untiprice = $(this).attr('untiprice');
+                    var untiprice = $(this).parents("tr:eq(0)").find(".texuntcost").val();
+                    var VClmsupno = $(this).attr('claimsupno');
+                    var VQty = $(this).attr('Qty');
+                    var Vsupplier = $(this).attr('vendor');
+                    var InvoiceSupplier = $(this).parents("tr:eq(0)").find(".texuntinvsup").val();
+                    var InvoiceDateSupplier = $(this).parents("tr:eq(0)").find(".texuntinvdatsup").val();
+                    var Vtype = $(this).attr('Qty');
+                    Vstp = $(this).attr('cmtype');
+                    var ItemList = {
+                        VSTCLMNO: VSTCLMNO,
+                        VSTKCOD: VSTKCOD,
+                        VAMT: VAMT,
+                        VUNITPRICE: untiprice,
+                        Vendor: Vendor,
+                        Clmsupno: VClmsupno,
+                        VQty: VQty,
+                        Vsupplier: Vsupplier,
+                        VInvoiceSupplier: InvoiceSupplier,
+                        VInvoiceDateSupplier: InvoiceDateSupplier
+                    }
+                    data.push(ItemList)
+                });
+                if (data.length == 0) {
+                    alert("กรุณาเลือกรายการที่ท่านต้องการ");
+                    return false;
+                }
+                var DataSend = JSON.stringify(data);
+               
+                $.ajax({
+                    url: '@Url.Action("SaveClaimSupplier", "Process_Supplier")',
+                    data: {
+                        DataSend: DataSend,
+                        ressupplierdatesend: ressupplierdatesend,
+                        usesend: usesend,
+                        countstksend: countstksend,
+                        countnumbersend: countnumbersend,
+                        countamt: countamt,
+                        com: com,
+                        Doc: Doc,
+                        CLM_NO_Supplier: CLM_NO_Supplier,
+                        commentsend: commentsend,
+                        claimtype:Vstp
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        // console.log(data);
+                        if (data.message == "Y") {
+                            $('#myModalsend').modal('hide');
+                            alert("บันทึกรายการสำเร็จ");
+
+
+                            var no = data.gendocno;
+
+                            var wi = window.open("../Report/frmSupplier.aspx?IDNUM=" + btoa(no));
+                            wi.focus();
+
+
+                            //$('#_btnsearch').trigger('click');
+                            $('#rowcount').html("");
+                            $('#rowcountuse').html("");
+                            $('#rowcountstl').html("");
+                            $('#rowcountstlitem').html("");
+                            $('#rowcountamt').html("");
+                            $('#select_all').prop('checked', false);
+                            $('#fixed-table-container-3  tbody:last-child').html("");
+                            var today = new Date();
+                            var dd = today.getDate();
+                            var mm = today.getMonth() + 1; //January is 0!
+
+                            var yyyy = today.getFullYear();
+                            if (dd < 10) {
+                                dd = '0' + dd
+                            }
+                            if (mm < 10) {
+                                mm = '0' + mm
+                            }
+                            var today = dd + '/' + mm + '/' + yyyy;
+
+                            //crdate.datepicker({ dateFormat: 'dd-mm-yy' });
+                            $("#_supplierdate").val(today);
+                            $('#comment').val("");
+                        } else {
+                            alert(data.message);
+                        }
+                    }
+                });
+
+            });
+            $("#_btnprintdocsupedit").click(function () {
+
+                var no = $("#_suppliernosendedit").val();
+
+                var wi = window.open("../Report/frmSupplier.aspx?IDNUM=" + btoa(no));
+                wi.focus();
+            });
+            $("#_btnprintdocsup").click(function () {
+
+                var no = $("#_suppliernosend").val();
+
+                var wi = window.open("../Report/frmSupplier.aspx?IDNUM=" + btoa(no));
+                wi.focus();
+            });
+            //$("#recsupp").on("click", "tr .use-inv", function () {
+            $(document).on("click", "#recsupp tbody tr td button.use-inv", function () {
+                var id = $(this).parents("tr:eq(0)").find(".use-inv").attr('id');
+
+            });
+
+            $("#recsupp").on("change", "tr input[name='s_invup']", function () {
+
+                var myfile = $(this).val();
+
+                var ext = myfile.split('.').pop();
+
+                if (ext == "pdf" || ext == "docx" || ext == "doc") {
+
+                } else {
+                    if (ext != "") {
+                        alert("Uplaod ได้เฉพาะ ไฟล์ PDF");
+                        var idck = $(this).parents("tr:eq(0)").find("input[name='s_invup']").attr('id');
+                        alert(idck);
+                        var control = $("#recsupp tr #" + idck + "");
+                        control.replaceWith(control.val('').clone(true));
+                    } else {
+                        var idck = $(this).parents("tr:eq(0)").find("input[name='s_invup']").attr('id');
+
+                        var control = $("#recsupp tr #" + idck + "");
+                        control.replaceWith(control.val('').clone(true));
+                    }
+
+                }
+            });
+            $("#recsupp").on("change", "tr input[name='s_cnup']", function () {
+                var myfile = $(this).val();
+                var ext = myfile.split('.').pop();
+                if (ext == "pdf" || ext == "docx" || ext == "doc") {
+
+                } else {
+                    if (ext != "") {
+                        alert("Uplaod ได้เฉพาะ ไฟล์ PDF");
+                        var idck = $(this).parents("tr:eq(0)").find("input[name='s_cnup']").attr('id');
+
+                        var control = $("#recsupp tr #" + idck + "");
+                        control.replaceWith(control.val('').clone(true));
+                    } else {
+                        var idck = $(this).parents("tr:eq(0)").find("input[name='s_cnup']").attr('id');
+                        var control = $("#recsupp tr #" + idck + "");
+                        control.replaceWith(control.val('').clone(true));
+                    }
+                }
+            });
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,196 @@
+﻿@{
+    ViewBag.Title = "Index";
+    var user = ViewBag.UserId;
+    var usertype = ViewBag.UserType;
+    var company = ViewBag.Company;
+}
+
+
+<html>
+<head>
+    <link href="~/Content/css/style-theme.css" rel="stylesheet" />
+</head>
+
+<body @*oncontextmenu="return false"*@>
+    @*@ViewBag.Company*@
+    <input type="hidden" id="_uderlogin" value="@user" />
+    <input type="hidden" id="_udertype" value="@usertype" />
+    @*<section class="text-center" >
+            <img src="~/Content/logo-TAC-AAC.png" style="height:50%"/>
+        </section>*@
+    <section class="after-loop">
+        <div class="container text-center">
+            <div class="row">
+                <div class="mb-10 mb-lg-0 mx-auto">
+                    <img src="~/Content/logo-TAC-AAC.jpg" style="width:100%" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="text-center">
+        <h4>Welcome to TAC AAC TAM Service System </h4>
+
+    </div>
+
+    <section class="after-loop">
+        <div class="container">
+            <div class="row">
+                @if (usertype == "4" || usertype == "5")
+                {
+                    <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
+
+                        <a href="~/Checkstatus_Sc/index" class="after-loop-item card border-0 card-templates shadow-lg">
+                            <div class="card-body d-flex align-items-end flex-column text-right">
+                                <h4>Claim System</h4>
+                                <p class="w-75">Choose your menu to access </p>
+                                <i class="fa fa-amazon-pay"></i>
+                            </div>
+                        </a>
+                    </div>
+                    if (company != "TAM")
+                    {
+                        if (user != "PSA")
+                        {
+                            <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
+                            </div>
+                            <div class="col-lg-4 col-md-8 mx-auto">
+                                <a href="~/CheckstatusRt/index" class="after-loop-item card border-0 card-guides shadow-lg">
+                                    <div class="card-body d-flex align-items-end flex-column text-right">
+                                        <h4>Sales Return</h4>
+                                        <p class="w-75">Choose your menu to access</p>
+                                        <i class="fal fa-books"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-lg-4 col-md-8 mx-auto">
+                                <a href="~/ProcessApproveSmSup/index" class="after-loop-item card border-0 card-guides shadow-lg">
+                                    <div class="card-body d-flex align-items-end flex-column text-right">
+                                        <h4>Sales Return</h4>
+                                        <p class="w-75">Choose your menu to access</p>
+                                        <i class="fal fa-books"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    }
+                }
+                else if (usertype == "10")
+                {
+                    <div class="col-lg-4 col-md-8 mx-auto">
+                        <a href="~/CheckstatusRt/index" class="after-loop-item card border-0 card-guides shadow-lg">
+                            <div class="card-body d-flex align-items-end flex-column text-right">
+                                <h4>Sales Return</h4>
+                                <p class="w-75">Choose your menu to access</p>
+                                <i class="fal fa-books"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
+                    </div>
+                    <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
+                        <a href="~/Checkstatus_Wh/index" class="after-loop-item card border-0  card-templates shadow-lg" style="background-color: #802e82;">
+                            <div class="card-body d-flex align-items-end flex-column text-right">
+                                <h4>Claim Warehouse System</h4>
+                                <p class="w-75">Choose your menu to access </p>
+                                <i class="fa fa-amazon-pay"></i>
+                            </div>
+                        </a>
+                    </div>
+                }
+                else if (usertype == "6")
+                {
+
+
+                    <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
+                        <a href="~/Checkstatus_Wh/index" class="after-loop-item card border-0  card-templates shadow-lg" style="background-color: #802e82;">
+                            <div class="card-body d-flex align-items-end flex-column text-right">
+                                <h4>Claim Warehouse System</h4>
+                                <p class="w-75">Choose your menu to access </p>
+                                <i class="fa fa-amazon-pay"></i>
+                            </div>
+                        </a>
+                    </div>
+                }
+                else if (usertype == "1" || usertype == "2") //tech1, tech2
+                {
+                    <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
+                        <a href="~/Checkstatus_Sc/index" class="after-loop-item card border-0 card-templates shadow-lg">
+                            <div class="card-body d-flex align-items-end flex-column text-right">
+                                <h4>Claim System </h4>
+                                <p class="w-75">Choose your menu to access </p>
+                                <i class="fa fa-amazon-pay"></i>
+                            </div>
+                        </a>
+                    </div>
+                    if (company != "TAM")
+                    {
+                        <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto"> </div>
+                        <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
+                            <a href="~/Checkstatus_Wh/index" class="after-loop-item card border-0  card-templates shadow-lg" style="background-color: #802e82;">
+                                <div class="card-body d-flex align-items-end flex-column text-right">
+                                    <h4>Claim Warehouse System</h4>
+                                    <p class="w-75">Choose your menu to access </p>
+                                    <i class="fa fa-amazon-pay"></i>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                }
+                else if (usertype == "12") //GM TAM
+                {
+                    <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
+                        <a href="~/ProcessApproveGmTam/index" class="after-loop-item card border-0 card-templates shadow-lg">
+                            <div class="card-body d-flex align-items-end flex-column text-right">
+                                <h4>Claim System</h4>
+                                <p class="w-75">Choose your menu to access </p>
+                                <i class="fa fa-amazon-pay"></i>
+                            </div>
+                        </a>
+                    </div>
+                  
+                }
+                else
+                {
+                    <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
+                        <a href="~/Checkstatus_Sc/index" class="after-loop-item card border-0 card-templates shadow-lg">
+                            <div class="card-body d-flex align-items-end flex-column text-right">
+                                <h4>Claim System</h4>
+                                <p class="w-75">Choose your menu to access </p>
+                                <i class="fa fa-amazon-pay"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
+                    </div>
+
+                    <div class="col-lg-4 col-md-8 mx-auto">
+                        <a href="~/CheckstatusRt/index" class="after-loop-item card border-0 card-guides shadow-lg">
+                            <div class="card-body d-flex align-items-end flex-column text-right">
+                                <h4>Sales Return</h4>
+                                <p class="w-75">Choose your menu to access</p>
+                                <i class="fal fa-books"></i>
+                            </div>
+                        </a>
+                    </div>
+
+
+                }
+            </div>
+        </div>
+    </section>
+    @*<div class="row">
+            <div class="col-md-12 text-center">
+                <iframe id="iframeDiv" width="320" height="620" src="https://www.bangchak.co.th/en/oilprice/widget" frameborder="0" name="I1" scrolling="no" height="100%" width="100%" marginwidth="0" marginheight="0" style="pointer-events:none;"></iframe>
+            </div>
+        </div>*@
+</body>
+<script type="text/jscript">
+    //document.addEventListener("contextmenu", function (e) {
+    //    e.preventDefault();
+    //    //alert('555');
+    //});
+</script>
+</html>
