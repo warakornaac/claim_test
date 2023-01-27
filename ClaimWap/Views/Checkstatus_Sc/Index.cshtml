@@ -6,7 +6,6 @@
     var company = ViewBag.Company;
 }
 
-
 <html>
 <head>
     <meta charset="utf-8">
@@ -1413,6 +1412,7 @@
             }
             var udertype = $("#_udertype").val();
             var Userlogin = $("#_uderlogin").val();
+            //alert(udertype);
             if (udertype == "4") {
                 $.ajax({
                     url: '@Url.Action("GetdataCountProcess", "GetdataCenter")',
@@ -2797,7 +2797,6 @@
                 }
             });
             $("table").on("click", "tr #_btnview", function () {
-                LoadingShow();
                 var req_no = $(this).attr('claimno');
                 var statuclm = $(this).attr('statuclm');
                 var clm_no_sub = $(this).attr('claimsupno');

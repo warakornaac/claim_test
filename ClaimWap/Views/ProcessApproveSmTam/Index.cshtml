@@ -858,6 +858,16 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> สถานะการวิเคราะห์ WR,WE,WF/Warranty claim type:</span>
+                                <span>
+                                    <select class="bar" id="_anlysstatustecpm_sm"></select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <span> <i class="fa fa-edit"></i>Saleman Remark:</span>
@@ -1438,6 +1448,18 @@
                 minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
             });
             $(document).ready(function () {
+                $('#saleman_approve_status').change(function () {
+                    var saleman_approve_status = $(this).val();
+                    if(saleman_approve_status == '1'){
+                        $('#_anlysstatustecpm_sm').val('2').change(); //2=WE
+                    } else {
+                        //ดึงสถานะเดิมกลับ
+                        var anlysstatustecpm = $('#_anlysstatustecpm').val();
+                        //alert(anlysstatustecpm);
+                        $('#_anlysstatustecpm_sm').val(anlysstatustecpm).change();
+                    }
+                });
+
                 LoadingShow();
                 //ถ้าเป็น TAM -> company = TAM
                 var company = '@company';
@@ -1589,7 +1611,7 @@
                             //alert("vvvv"+type)
                             //if (type == "3") {
 
-                                $("#_status").val("4");
+                                $("#_status").val("9");
 
                                 var UserId = $("#_uderlogin").val();
                                 $.ajax({
@@ -1918,6 +1940,14 @@
 
 
                         var select = $("#_anlysstatustecpm");
+                        select.children().remove();
+                        // select.append($("<option>").val("0").text("เลือกCUSCOD"));
+                        $(data).each(function (index, item) {
+
+                            select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                        });
+                        //Saleman view
+                        var select = $("#_anlysstatustecpm_sm");
                         select.children().remove();
                         // select.append($("<option>").val("0").text("เลือกCUSCOD"));
                         $(data).each(function (index, item) {
@@ -2862,6 +2892,8 @@
                                         }
 
                                         $("#_anlysstatustecpm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
+                                        //ที่เพิ่มของ Saleman
+                                        $("#_anlysstatustecpm_sm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
                                         if (tyclom == "1") {
                                             $("#a").prop('checked', true);
                                             $("#b").prop('checked', false);

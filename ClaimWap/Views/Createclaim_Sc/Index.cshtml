@@ -324,7 +324,7 @@
 <body>
     <!-- Modal -->
 
-    <div id="myModal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div id="myModal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
 
         <div class="modal-dialog modal-lg" style=" max-width: 1200px;">
             <div class="modal-content">
@@ -364,7 +364,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="close btn btn-default" data-dismiss="modal" >Close</button>
                 </div>
             </div>
         </div>
@@ -401,40 +401,40 @@
                     </div>
                 </div>
                 <div class="card mb-12">
-
                     <div id="openShipping" style="display:block;">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon">ระบุจำนวนกล่องที่จะให้รถไปรับ<span class="glyphicon glyphicon-hand-right"></span></span>
-                                    <select id="qtybox" style="border-bottom: 1px solid #c51717;">
-                                        <option>0</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                        <option>7</option>
-                                        <option>8</option>
-                                        <option>9</option>
-                                        <option>10</option>
-                                        <option>11</option>
-                                        <option>12</option>
-                                        <option>13</option>
-                                        <option>14</option>
-                                        <option>15</option>
-                                        <option>16</option>
-                                        <option>17</option>
-                                        <option>18</option>
-                                        <option>19</option>
-                                        <option>20</option>
-                                    </select>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">ระบุจำนวนกล่องที่จะให้รถไปรับ/Ship to Qty.<span class="glyphicon glyphicon-hand-right"></span></span>
+                                        <select id="qtybox" style="border-bottom: 1px solid #c51717;">
+                                            <option>0</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                            <option>19</option>
+                                            <option>20</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="input-group">
@@ -491,7 +491,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <textarea rows="4" cols="80" id="remakeclaim" placeholder="Comment สำหรับสั่งให้รถไปรับ"></textarea>
                                 </div>
@@ -1251,6 +1251,12 @@
                     $('#_company').attr('disabled', true);
                 }
             }
+            //close modal reload
+            $('.close').on('click', function () {
+                LoadingShow();
+                location.reload();
+                LoadingHide();
+            });
         });
         var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
             backgroundColor: 'rgba(255, 255, 255, 0)',
@@ -1386,16 +1392,16 @@
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
                     dataFilter: function (data) { return data; },
-                    beforeSend: function () {
-                        LoadingShow();
-                    },
+                    //beforeSend: function () {
+                    //    LoadingShow();
+                    //},
                     success: function (data) {
                         response($.map(data.slice(0, 50), function (item) {
                             return {
                                 value: item
                             }
                         }))
-                        LoadingHide();
+                       // LoadingHide();
                     },
                     error: function (XMLhttpsRequest, textStatus, errorThrown) {
                         alert(textStatus);
@@ -3130,6 +3136,7 @@
                 }
             });
             $("#receclaim").on("click", "#btngetshowdata", function () {
+                LoadingShow();
                 clearimage()
                 var cusno = $("#_cusno").val();
 
@@ -3178,7 +3185,8 @@
                 var contact = $(this).attr('contact');
                 var contacttel = $(this).attr('contacttel');
 
-                var fax = $(this).attr('fax');
+                //var fax = $(this).attr('fax');
+                //alert(fax);
                 if (fax == "1") {
                     $.ajax({
                         url: '@Url.Action("GetdataInvoicestatud", "GetdataCenter")',
@@ -3355,6 +3363,7 @@
 
                     });
                 }
+                LoadingHide();
             });
             function DeleteFile(Fileid, FileName) {
 
@@ -3622,7 +3631,7 @@
                     }
 
                     var leng = $('#FilesList > tbody:last-child').children().length;
-
+                    //alert(leng);
                     if (leng == 1) {
                         $("#textAlertWarningmes").empty();
                         $("#textAlertWarningmes").text("กรุณา Upload image เพื่อประกอบพิจารณาเคลม");
@@ -4078,7 +4087,7 @@
                 if (remainqty == "0") {
 
                     $("#textAlertWarningmes").empty();
-                    $("#textAlertWarningmes").text("จำนวนไม่เพียงพอ");
+                    $("#textAlertWarningmes").text("จำนวนไม่เพียงพอ/Qty not enough");
                     $("#myModalWarning").modal();
                     return false;
                 }
@@ -4378,7 +4387,7 @@
                             }
                             var fixedTable1 = fixTable(document.getElementById('fixed-table-container-1'));
                         } else {
-                            $("#myModal").modal('hide');
+                            //$("#myModal").modal('hide');
                             $("#textAlertWarningmes").empty();
                             $("#textAlertWarningmes").text("No Data.....");
                             $("#myModalWarning").modal();
