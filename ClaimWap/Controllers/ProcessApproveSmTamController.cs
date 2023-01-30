@@ -35,7 +35,7 @@ namespace ClaimWap.Controllers
             return View();
             //return Content("Hi there!");
         }
-        public JsonResult SaveProcessClaimSmTam(string SP_REQ_NO, string SP_CLM_NO_SUB, string SP_SM_NAME, string SP_SM_APPRV_STATUS, string SP_SM_REMARK, string SP_SM_APPRV_DATE, string SP_USERLOGIN, string SP_CLAIMTYPE)
+        public JsonResult SaveProcessClaimSmTam(string SP_REQ_NO, string SP_CLM_NO_SUB, string SP_SM_NAME, string SP_SM_APPRV_STATUS, string SP_SM_REMARK, string SP_SM_APPRV_DATE, string SP_USERLOGIN, string SP_CLAIMTYPE, string SP_CLAIMTYPE_SM)
         {
             string message = string.Empty;
             string subno = string.Empty;
@@ -54,6 +54,7 @@ namespace ClaimWap.Controllers
                 command.Parameters.AddWithValue("@SP_SM_APPRV_DATE", SP_SM_APPRV_DATE);
                 command.Parameters.AddWithValue("@SP_USERLOGIN", SP_USERLOGIN);
                 command.Parameters.AddWithValue("@inWarrantyClmType", SP_CLAIMTYPE);
+                command.Parameters.AddWithValue("@SP_CLAIMTYPE_SM", SP_CLAIMTYPE_SM);
                 SqlParameter returnValuedoc = new SqlParameter("@outGenstatus", SqlDbType.NVarChar, 100);
                 returnValuedoc.Direction = System.Data.ParameterDirection.Output;
                 command.Parameters.Add(returnValuedoc);

@@ -810,7 +810,7 @@
             </div>
             <div class="col-md-12" id="myDIV1" style="display:block">
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <span> <i class="fa fa-pencil"></i> สถานะการวิเคราะห์ WR,WE,WF/Warranty claim type:</span>
                             <span>
@@ -818,7 +818,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <span> <i class="fa fa-pencil"></i> หลังเสร็จสิ้นกระบวนการเคลม/Action after finished claim:</span>
                             <span>
@@ -826,19 +826,18 @@
                             </span>
                         </div>
                     </div>
-                    <div id="displpm" style="display:none">
-                        <div class="form-group">
-                            <span> <i class="fa fa-calendar"></i> วันที่จะทำลาย/Destroy Date:</span>
-                            <span>
-                                @*<input type="date" data-date-format="dd/mm/yy" id="_scrapdatetec1" />*@
-                                <input type="text" id="_scrapdatetecpm" />
-                            </span>
+                    <div class="col-md-4">
+                        <div id="displpm" style="display:none">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> วันที่จะทำลาย/Destroy Date:</span>
+                                <span>
+                                    @*<input type="date" data-date-format="dd/mm/yy" id="_scrapdatetec1" />*@
+                                    <input type="text" id="_scrapdatetecpm" />
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                </div>
-
                 <span><i class="fa fa-pencil"></i>Warranty Cliam Type</span><br />
                 <div class="row" style="display:none">
 
@@ -885,19 +884,6 @@
                             </span>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            @*<span> <i class="fa fa-user"></i> Product Manager:</span>
-                                <span>
-                                    <select class="bar" id="_PM"></select>
-                                </span>*@
-                        </div>
-                    </div>
-
-
-                </div>
-
-                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <span> <i class="fa fa-sort-down"></i>Status</span>
@@ -1502,16 +1488,11 @@
                     type: "POST",
                     dataType: "JSON",
                     success: function (data) {
-
                         $("#_udertype").val(data.UsrClmStaff);
-
                         var type = $("#_udertype").val();
-
-                        //alert("vvvv"+type)
+                        //alert("type = "+type)
                         if (type == "3") {
-
                             $("#_status").val("4");
-
                             var UserId = $("#_uderlogin").val();
                             $.ajax({
                                 url: '@Url.Action("GetProductdata", "GetdataCenter")',

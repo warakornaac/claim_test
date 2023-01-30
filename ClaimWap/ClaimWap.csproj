@@ -2236,18 +2236,22 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Report\rptClaim.rdlc" />
+    <EmbeddedResource Include="Report\rptClaimTechTam.rdlc" />
     <EmbeddedResource Include="Report\rptClaimWH.rdlc" />
     <EmbeddedResource Include="Report\rptClaimTech.rdlc" />
+    <EmbeddedResource Include="Report\rptLabelTam.rdlc" />
     <EmbeddedResource Include="Report\rptLabelWH.rdlc" />
     <EmbeddedResource Include="Report\rptLabel.rdlc" />
     <EmbeddedResource Include="Report\rptDisposal.rdlc" />
+    <EmbeddedResource Include="Report\rptReceiveproduct.rdlc" />
     <EmbeddedResource Include="Report\rptReceiveproductRT.rdlc" />
+    <EmbeddedResource Include="Report\rptReceiveproductTam.rdlc" />
+    <EmbeddedResource Include="Report\rptRequestClaimTam.rdlc" />
     <EmbeddedResource Include="Report\rptRequestClaimWH.rdlc" />
     <EmbeddedResource Include="Report\rptRequestpickupRT.rdlc" />
     <EmbeddedResource Include="Report\rptRequestConfirmRT.rdlc" />
     <EmbeddedResource Include="Report\rptRequestRT.rdlc" />
     <EmbeddedResource Include="Report\rptSupplier.rdlc" />
-    <EmbeddedResource Include="Report\rptReceiveproduct.rdlc" />
     <EmbeddedResource Include="Report\rptRequestClaim.rdlc" />
   </ItemGroup>
   <ItemGroup>

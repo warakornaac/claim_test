@@ -1386,12 +1386,20 @@ namespace ClaimWap.Models
         }
         public JsonResult GetProductall()
         {
+            string company = Session["company"].ToString();
+            string tbProd = string.Empty;
+            tbProd = " v_SLMTAB_PD";
+            if (company == "TAM")
+            {
+                tbProd = " v_SLMTAB_PD_TAM";
+            }
             List<Pm> List = new List<Pm>();
             var connectionString = ConfigurationManager.ConnectionStrings["CLAIM_ConnectionString"].ConnectionString;
             SqlConnection Connection = new SqlConnection(connectionString);
             Connection.Open();
 
-            SqlCommand command = new SqlCommand("select * From v_SLMTAB_PD ", Connection);
+            SqlCommand command = new SqlCommand("select * From " + tbProd, Connection);
+
             SqlDataReader dr = command.ExecuteReader();
 
             while (dr.Read())

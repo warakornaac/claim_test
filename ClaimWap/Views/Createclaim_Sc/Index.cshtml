@@ -447,7 +447,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         @*<span class="input-group-addon" id="btnok" style="background-color: #7FC1A9;cursor: pointer;color: white;">Ship To Code<span class=" glyphicon glyphicon-hand-right"></span></span>*@
-                                        <input type="button" id="btnok" class="btn-default" name="example" value="ส่งตรวจสอบ" style="background-color: aqua;">
+                                        <input type="button" id="btnok" class="btn-default" name="example" value="ส่งตรวจสอบ/Send check" style="background-color: aqua;">
                                         <span class="input-group-addon "><span id="scs" style="color: cyan;display:none"></span><span></span></span>
                                     </div>
                                 </div>
@@ -1152,7 +1152,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <div class="input-group">
-                                <span class="input-group-addon">ระบุจำนวนกล่องที่รับมา<span class="glyphicon glyphicon-hand-right"></span></span>
+                                <span class="input-group-addon">ระบุจำนวนกล่องที่รับมา/Ship to Qty.<span class="glyphicon glyphicon-hand-right"></span></span>
                                 <select id="qtyboxsend" style="border-bottom: 1px solid #c51717; border-top: 1px solid cornsilk;">
                                     <option>0</option>
                                     <option>1</option>
@@ -1184,7 +1184,7 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     @*<span class="input-group-addon" id="btnok" style="background-color: #7FC1A9;cursor: pointer;color: white;">Ship To Code<span class=" glyphicon glyphicon-hand-right"></span></span>*@
-                                    <input type="button" id="save" class="btn-default" name="example" value="ส่งตรวจสอบ" style="background-color: aqua;">
+                                    <input type="button" id="save" class="btn-default" name="example" value="ส่งตรวจสอบ/Send check" style="background-color: aqua;">
                                     <span class="input-group-addon "><span id="scs" style="color: cyan;display:none"></span><span></span></span>
                                 </div>
                             </div>
@@ -3822,7 +3822,7 @@
                                                 //$("#btnUpload3").click();
                                                 //$("#btnUpload4").click();
                                                 $("#btnUpload").click();
-                                                alert("สร้างรายการสำเร็จ")
+                                                alert("สร้างรายการสำเร็จ/Item created success")
                                                 $("#FilesList tbody").empty();
                                                 clearval()
                                                 clearimage()
@@ -4585,7 +4585,7 @@
                                     $('#receclaim > tbody:last-child').append(SubmithtmlPage);
                                 }
                             } else {
-                                alert("สถานะเคลมอยู่ระหว่างการตรวจสอบ");
+                                alert("สถานะเคลมอยู่ระหว่างการตรวจสอบ/Claim status is pending review");
 
                             }
                         } else {

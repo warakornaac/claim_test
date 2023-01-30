@@ -311,7 +311,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <span> <i class="fa fa-pencil"></i>Status Print .:</span>
                             <span>
@@ -324,10 +324,9 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <div class="form-group">
-                            <button type="button" style="float: left;display:block;" id="_btnprintrepall" class="badge-primary"><i class="fa fa-print"></i>  พิมพ์แบบฟอร์มใบคำร้องขอชดเชยสินค้า</button>
-
+                            <button type="button" style="float: left;display:block;" id="_btnprintrepall" class="badge-primary"><i class="fa fa-print"></i>  พิมพ์แบบฟอร์มใบคำร้องขอชดเชยสินค้า/Print request form</button>
                         </div>
                     </div>
                 </div>
@@ -338,15 +337,15 @@
                         <button type="button" class="btn btn-info" id="refresh">Refresh</button>
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <div class="form-group">
                         <button type="button" class="btn btn-success" id="_btnsearch">Search</button>
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="form-group">
-                        <button type="button" style="float: left;display:none;" id="_btnprint" class="badge-primary"><i class="fa fa-print"></i>  พิมพ์ใบสั่งรถไปรับของ</button>
+                        <button type="button" style="float: left;display:none;" id="_btnprint" class="badge-primary"><i class="fa fa-print"></i>  พิมพ์ใบสั่งรถไปรับของ/Print order pick-up</button>
 
                     </div>
                 </div>
@@ -430,11 +429,8 @@
                             <th>Tech1</th>
                             <th>Tech2</th>
                             <th>PM</th>
-                            if (@Session["company"].ToString() == "TAM")
-                            {
-                            <th>Saleman</th>
-                            <th>GM/Yap</th>
-                            }
+                            <th class="comTam" style="display: none;">Saleman</th>
+                            <th class="comTam" style="display: none;">GM/Yap</th>
                             <th>CS</th>
                             <th>Log</th>
                         </tr>
@@ -483,11 +479,10 @@
                             <th>Tech1</th>
                             <th>Tech2</th>
                             <th>PM</th>
-                            if (@Session["company"].ToString() == "TAM")
-                            {
-                            <th>Saleman</th>
-                            <th>GM/Yap</th>
-                            }
+
+                            <th class="comTam" style="display: none;">Saleman</th>
+                            <th class="comTam" style="display: none;">GM/Yap</th>
+
                             <th>CS</th>
                             <th>Log</th>
                         </tr>
@@ -1123,7 +1118,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <span> <i class="fa fa-sort-down"></i>........</span>
+                                <span> <i class="fa fa-pencil"></i> สถานะการวิเคราะห์ WR,WE,WF/Warranty claim type by PM:</span>
                                 <span>
                                     <select class="bar" id="_pmtstus"></select>
                                 </span>
@@ -2224,18 +2219,9 @@
                     success: function (data) {
                         console.log(data);
                         waitingDialog.hide();
-                        // $('table  tbody:last-child').html("");
                         $('#fixed-table-container-1 tbody:last-child').html("");
                         if (data.Getdata.length > 0) {
                             waitingDialog.hide();
-
-                            //  $("#_claimno").val(data.Getdata[0].val.CLM_ID);
-                            //$("#_cusno").text(data.Getdata[0].val.CUSCOD);
-                            //$("#_cusname").text(data.Getdata[0].val.CUSNAM);
-                            //$("#slmcod").text(data.Getdata[0].val.SLMCOD);
-                            //$("#sslmnam").text(data.Getdata[0].val.SLMNAM);
-                            //$("#requestby").text(data.Getdata[0].val.CLM_RCVBY);
-                            //$("#requestdate").text(data.Getdata[0].val.CLM_RCVDATE);
                             var SubmithtmlPage = '';
                             var ADMIN_ANLYS_STATUS = '';
                             var TECH1_PROCESS_STATUS = '';
