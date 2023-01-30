@@ -28,15 +28,18 @@ namespace ClaimWap.Models
             {
                 string User = Session["UserID"].ToString();
                 string UserType = Session["UserType"].ToString();
+                string Company = Session["company"].ToString();
                 if (UserType == "3")
                 {
                     return RedirectToAction("Index", "ProcessApprove");
                     ViewBag.UserId = User;
                     ViewBag.UserType = UserType;
+                    ViewBag.Comapny = Company;
                 }
 
                 ViewBag.UserId = User;
                 ViewBag.UserType = UserType;
+                ViewBag.Comapny = Company;
 
 
             }

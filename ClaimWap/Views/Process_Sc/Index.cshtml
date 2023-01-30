@@ -2717,7 +2717,7 @@
                                 var today = new Date();
                                 var _cktype = $("#_udertype").val();
                                 var _ckuser = $("#_uderlogin").val();
-                                //  alert(_ckuser)
+                                //alert(data.Getdata[0].val.CLM_REMARK)
                                 var _tec1Proststus = data.Getdata[0].val.TECH1_PROCESS_STATUS;
                                 var _AdminProststus = data.Getdata[0].val.ADMIN_ANLYS_STATUS;
 
@@ -2800,7 +2800,7 @@
                                     var newDate = addDays(new Date(), 21);
 
                                     $("#_duedatetec").val(('0' + newDate.getDate()).slice(-2) + '/' + ('0' + (newDate.getMonth() + 1)).slice(-2) + '/' + newDate.getFullYear()); //Due date
-                                    //$("#causeclaimtec").val("");//หมายเหตุการรับเคลม
+                                    $("#causeclaimtec").val(data.Getdata[0].val.CLM_REMARK);//หมายเหตุการรับเคลม
                                 }
                                 if (_tec1Proststus != "0") {
                                     // alert(_tec1Proststus)

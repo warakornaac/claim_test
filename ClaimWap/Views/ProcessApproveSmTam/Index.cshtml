@@ -1502,7 +1502,7 @@
                         }
                     });
                 }
-                $.ajax({
+                @*$.ajax({
                     url: '@Url.Action("Getdatastkgrp", "GetdataCenter")',
                     data: {
                     },
@@ -1519,7 +1519,7 @@
                             select.append($("<option>").val(item.STKGRP).text(item.STKGRP + "/" + item.GRPNAM));
                         });
                     }
-                });
+                });*@
                 $('#SrcProcessApprove').css("background-color", "rgb(9, 183, 9)");
                 $('#SrcInvoiceHistory_Sc').css("background-color", "");
                 function addDays(theDate, days) {
@@ -1651,6 +1651,9 @@
                                 var valstatdatecus = $("#_statdate").val();
                                 var valenddatecus = $("#_enddate").val();
                                 var itemno = $("#_itemnosearch").val();
+                                //get stkgrp
+                                getStkByPm(valpm);
+
                                 if (itemno != "") {
                                     itemno = splitval(itemno);
                                 } else {
@@ -2196,6 +2199,9 @@
                 var valstatdatecus = $("#_statdate").val();
                 var valenddatecus = $("#_enddate").val();
                 var itemno = $("#_itemnosearch").val();
+                //get stkgrp
+                getStkByPm(valpm);
+
                 if (itemno != "") {
                     itemno = splitval(itemno);
                 } else {

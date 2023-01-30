@@ -463,7 +463,7 @@
 
 
         <div class="card mb-12" id="claimDetail" style="display: none;">
-            <div class="card-header">
+            <div class="card-header bg-info">
                 <i class="fa fa-table"></i>รายละเอียดสินค้าเคลม/Claim detail <li id="clickme" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
             </div>
             <div class="card-body" id="myDIV">
@@ -692,7 +692,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-header">
+            <div class="card-header bg-info">
                 <i class="fa fa-table"></i>ข้อมูลเคลมสำหรับรุ่นรถ/Claim detail  <li id="clickme5" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
             </div>
             <div class="card-body" id="myDIV5" style="display:none">
@@ -805,10 +805,10 @@
                     </table>
                 </div>
             </div>
-            <div class="card-header">
+            <div class="card-header bg-warning">
                 <i class="fa fa-table"></i>Product Manager Approval <li id="clickme1" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
             </div>
-            <div class="col-md-12" id="myDIV1" style="display:block">
+            <div class="col-md-12 alert-warning" id="myDIV1" style="display:block">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -918,9 +918,7 @@
                     </div>
                 </div>
             </div>
-
-
-            <div class="card-header">
+            <div class="card-header bg-success">
                 <i class="fa fa-table"></i>Technic 2 : ผลการพิจารณา/TECH2 Investigation <li id="clickme2" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
             </div>
             <div class="card-body" id="myDIV2" style="display:none">
@@ -1033,7 +1031,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-header">
+            <div class="card-header bg-success">
                 <i class="fa fa-table"></i>Technic 1 : วิเคราะห์สินค้าเคลม/TECH1 Investigation <li id="clickme3" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
             </div>
             <div class="card-body" id="myDIV3" style="display:none">
@@ -1125,7 +1123,7 @@
                 </div>
 
             </div>
-            <div class="card-header">
+            <div class="card-header bg-success">
                 <i class="fa fa-table"></i>ตรวจสอบรับสินค้าเคลม/Check pick claim part <li id="clickme4" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
             </div>
             <div class="card-body" id="myDIV4" style="display:none">
@@ -1387,7 +1385,7 @@
                     }
                 });
             }
-            $.ajax({
+            @*$.ajax({
                 url: '@Url.Action("Getdatastkgrp", "GetdataCenter")',
                 data: {
                 },
@@ -1404,7 +1402,7 @@
                         select.append($("<option>").val(item.STKGRP).text(item.STKGRP + "/" + item.GRPNAM));
                     });
                 }
-            });
+            });*@
             $('#SrcProcessApprove').css("background-color", "rgb(9, 183, 9)");
             $('#SrcInvoiceHistory_Sc').css("background-color", "");
             function addDays(theDate, days) {
@@ -1521,6 +1519,9 @@
                                     var valstatdatecus = $("#_statdate").val();
                                     var valenddatecus = $("#_enddate").val();
                                     var itemno = $("#_itemnosearch").val();
+                                    //get stkgrp
+                                    getStkByPm(valpm);
+
                                     if (itemno != "") {
                                         itemno = splitval(itemno);
                                     } else {
@@ -2045,6 +2046,9 @@
                 var valstatdatecus = $("#_statdate").val();
                 var valenddatecus = $("#_enddate").val();
                 var itemno = $("#_itemnosearch").val();
+                //get stk
+                getStkByPm(valpm);
+
                 if (itemno != "") {
                     itemno = splitval(itemno);
                 } else {
@@ -2128,6 +2132,9 @@
                     },
                     type: "POST",
                     dataType: "JSON",
+                    beforeSend: function () {
+                        LoadingShow();
+                    },
                     success: function (data) {
                         // console.log(data);
                         $('#fixed-table-container-2  tbody:last-child').html("");
@@ -2257,13 +2264,15 @@
                             }
                         } else {
                             $("#textAlertWarning").empty();
-                            $("#textAlertWarning").text("ไม่มีรายการออนุมัติ");
+                            $("#textAlertWarning").text("ไม่มีรายการออนุมัติ/No List approval");
                             $("#myModalWarning").modal();
                             //  location.reload();
                         }
                         var fixedTable2 = fixTable(document.getElementById('fixed-table-container-2'));
 
-                    }
+                    },complete: function() {
+                        LoadingHide();
+                    },
                 });
             }
 

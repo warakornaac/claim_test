@@ -314,15 +314,14 @@
         </div>
         <div class="card-body" id="myDIVheader">
             <div class="row">
-                @*<div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-user"></i> Product Manager:</span>
-                            <span>
-                                <select class="bar" id="_PM"></select>
-                            </span>
-                        </div>
-                    </div>*@
-
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <span> <i class="fa fa-user"></i> Product Manager:</span>
+                        <span>
+                            <select class="bar" id="_PM"></select>
+                        </span>
+                    </div>
+                </div>
                 <div class="col-md-4">
                     <div class="group" style=" margin-bottom: 22px;">
                         <span> <i class="fa fa-user"></i> Company:</span>
@@ -925,7 +924,6 @@
                     </div>
                 </div>
                 @*ประวัติ*@
-                @*ประวัติ*@
                 <div class="card-header bg-success">
                     <i class="fa fa-table"></i>Product Manager Approval <li id="clickme1" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
@@ -1420,6 +1418,7 @@
 
 
         <script type="text/javascript">
+
             $("#_itemnosearch").autocomplete({
                 selectFirst: true,
                 autoFocus: true,
@@ -1521,10 +1520,11 @@
                         }
                     });
                 }
-                $.ajax({
+                @*$.ajax({
                     url: '@Url.Action("Getdatastkgrp", "GetdataCenter")',
                     data: {
                     },
+                    type: "POST",
                     type: "POST",
                     dataType: "JSON",
                     success: function (data) {
@@ -1538,7 +1538,8 @@
                             select.append($("<option>").val(item.STKGRP).text(item.STKGRP + "/" + item.GRPNAM));
                         });
                     }
-                });
+                });*@
+
                 $('#SrcProcessApprove').css("background-color", "rgb(9, 183, 9)");
                 $('#SrcInvoiceHistory_Sc').css("background-color", "");
                 function addDays(theDate, days) {
@@ -1657,7 +1658,6 @@
 
                                     select.append($("<option>").val(item.PROD).text(item.PROD + "/" + item.PRODNAM));
                                 });
-
                                 var valpm = $("#_PM").val();
                                 var valststus = $("#_status").val();
                                 var valDoc = $("#searchclaimno").val();
@@ -1668,6 +1668,9 @@
                                 var valstatdatecus = $("#_statdate").val();
                                 var valenddatecus = $("#_enddate").val();
                                 var itemno = $("#_itemnosearch").val();
+                                //get stkgrp
+                                getStkByPm(valpm);
+
                                 if (itemno != "") {
                                     itemno = splitval(itemno);
                                 } else {
@@ -2154,7 +2157,7 @@
             });
 
             $("#_PM").on("change", function (e) {
-
+        
                 $("#Nospankey").text("");
                 $("#subNospan").text("");
                 $("#_cusno").text("");
@@ -2223,6 +2226,9 @@
                 var valstatdatecus = $("#_statdate").val();
                 var valenddatecus = $("#_enddate").val();
                 var itemno = $("#_itemnosearch").val();
+                //get stkgrp
+                getStkByPm(valpm);
+
                 if (itemno != "") {
                     itemno = splitval(itemno);
                 } else {
@@ -2230,6 +2236,7 @@
                 }
                 Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus)
             });
+        
             $("#_company").on("change", function (e) {
                 var valpm = $("#_PM").val();
                 var valstkgrp = $("#_stkgrp").val();

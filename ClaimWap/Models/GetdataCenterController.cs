@@ -531,23 +531,25 @@ namespace ClaimWap.Models
             Connection.Close();
             return Json(new { Slm, Slmcodname }, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult Getdatastkgrp()
+        public JsonResult Getdatastkgrp(string prodId)
         {
-            string company = Session["company"].ToString();
-            string tbPrd = string.Empty;
-            if(company == "TAM"){
-                tbPrd = "Prdgrpemail_TAM";
-            } else {
-                tbPrd = "v_Prdgrp";
-            }
+            string chkCompany = string.Empty;
+            //string prodIdTemp = string.Empty;
+            chkCompany = Session["company"].ToString();
+            List<Stkgrp> List = new List<Stkgrp>();
             var connectionString = ConfigurationManager.ConnectionStrings["CLAIM_ConnectionString"].ConnectionString;
             SqlConnection Connection = new SqlConnection(connectionString);
+            if (prodId == "" || prodId == null)
+            {
+                prodId = "";
+            }
+            var command = new SqlCommand("P_Get_Stkgrp", Connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@intCompany", chkCompany);
+            command.Parameters.AddWithValue("@intProd", prodId);
             Connection.Open();
-            List<Stkgrp> List = new List<Stkgrp>();
+            SqlDataReader dr = command.ExecuteReader();
 
-
-            SqlCommand cmd = new SqlCommand("select STKGRP ,GRPNAM from  " + tbPrd + " order by STKGRP", Connection);
-            SqlDataReader dr = cmd.ExecuteReader();
 
             while (dr.Read())
             {
@@ -560,7 +562,7 @@ namespace ClaimWap.Models
             }
             dr.Close();
             dr.Dispose();
-            cmd.Dispose();
+            command.Dispose();
             Connection.Close();
             return Json(List, JsonRequestBehavior.AllowGet);
         }

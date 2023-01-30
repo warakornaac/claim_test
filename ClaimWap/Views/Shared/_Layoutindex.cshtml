@@ -28,6 +28,11 @@
     <!-- Custom styles for this template-->
     <link href="~/Content/css/sb-admin.css" rel="stylesheet" />
     <link href="~/vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <style>
+        .comTam {
+            display: none;
+        }
+    </style>
 </head>
 <body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
     <!-- Navigation-->
@@ -1028,6 +1033,38 @@
         const mm = ('0' + (date.getMonth() + 1)).slice(-2);
         const dd = ('0' + date.getDate()).slice(-2);
         return String(yyyy + '-' + mm + '-' + dd);
+    }
+
+    //get Stk Group
+    function getStkByPm(pmId) {
+        //console.log('pmId = ' + pmId);
+        if (pmId != '') {
+            $.ajax({
+                url: '@Url.Action("Getdatastkgrp", "GetdataCenter")',
+                data: {
+                    prodId: pmId
+                },
+                beforeSend: function () {
+                    LoadingShow();
+                    $("#_stkgrp").LoadingOverlay("show");
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+                    var select = $("#_stkgrp");
+                    select.children().remove();
+                    select.append($("<option>").val("ALL").text("ALL"));
+                    $(data).each(function (index, item) {
+                        //console.log('item.GRPNAM = ' + item.GRPNAM)
+                        select.append($("<option>").val(item.STKGRP).text(item.STKGRP + "/" + item.GRPNAM));
+                    });
+                },
+                complete: function () {
+                    $("#_stkgrp").LoadingOverlay("hide");
+                    LoadingHide();
+                },
+            });
+        }
     }
 </script>
 

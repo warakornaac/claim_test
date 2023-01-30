@@ -429,8 +429,10 @@
                             <th>Tech1</th>
                             <th>Tech2</th>
                             <th>PM</th>
-                            <th class="comTam" style="display: none;">Saleman</th>
+
+                            <th class="comTam" style="display: none">Saleman</th>
                             <th class="comTam" style="display: none;">GM/Yap</th>
+
                             <th>CS</th>
                             <th>Log</th>
                         </tr>
@@ -1400,10 +1402,11 @@
             var company = '@company';
             if (company != "") {
                 if (company == "TAM") {
+                    alert(company);
                     $("#_company").val("TAM");
                     $('#_company').attr('disabled', true);
                     $('.comTam').css('display', 'block');
-                }
+                } 
             }
             var udertype = $("#_udertype").val();
             var Userlogin = $("#_uderlogin").val();
