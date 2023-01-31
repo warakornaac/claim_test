@@ -22,8 +22,12 @@
     <script src="~/Scripts/JSautocomplete/jquery-ui.js"></script>
     <script src="~/Content/fixed-table-master/fixed-table.js"></script>
     <link href="~/Content/fixed-table-master/fixed-table.css" rel="stylesheet" />
-
     <style>
+        /*.comTam {
+            display: none;
+            width: 100%;
+        } */
+        
         #myImg {
             border-radius: 5px;
             cursor: pointer;
@@ -384,19 +388,19 @@
                             <th>Tech1</th>
                             <th>Tech2</th>
                             <th>PM</th>
-
-                            <th class="comTam" style="display: none;">Saleman</th>
-                            <th class="comTam" style="display: none;">GM/Yap</th>
-
+                            @if (Session["company"].ToString() == "TAM")
+                            {
+                                <th class="comTam">Saleman1</th>
+                                <th class="comTam">GM/Yap1</th>
+                            }
                             <th>CS</th>
                             <th>Log</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
                 </table>
-
-
             </div>
+            @*con2*@
             <div id="fixed-table-container-2" class="fixed-table-container" style="display:none;z-index:1">
                 <table>
                     <thead>
@@ -429,10 +433,10 @@
                             <th>Tech1</th>
                             <th>Tech2</th>
                             <th>PM</th>
-
-                            <th class="comTam" style="display: none">Saleman</th>
-                            <th class="comTam" style="display: none;">GM/Yap</th>
-
+                            @if (Session["company"].ToString() == "TAM") {
+                                <th class="comTam" >Saleman2</th>
+                                <th class="comTam">GM/Yap2</th>
+                            }
                             <th>CS</th>
                             <th>Log</th>
                         </tr>
@@ -481,10 +485,11 @@
                             <th>Tech1</th>
                             <th>Tech2</th>
                             <th>PM</th>
-
-                            <th class="comTam" style="display: none;">Saleman</th>
-                            <th class="comTam" style="display: none;">GM/Yap</th>
-
+                            @if (Session["company"].ToString() == "TAM")
+                            {
+                                <th class="comTam">Saleman1</th>
+                                <th class="comTam">GM/Yap1</th>
+                            }
                             <th>CS</th>
                             <th>Log</th>
                         </tr>
@@ -1167,6 +1172,7 @@
                     </button>
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="~/Account/LogIn">Logout</a>
@@ -1402,12 +1408,11 @@
             var company = '@company';
             if (company != "") {
                 if (company == "TAM") {
-                    alert(company);
                     $("#_company").val("TAM");
                     $('#_company').attr('disabled', true);
-                    $('.comTam').css('display', 'block');
-                } 
+                }
             }
+
             var udertype = $("#_udertype").val();
             var Userlogin = $("#_uderlogin").val();
             //alert(udertype);
@@ -2056,6 +2061,7 @@
                             $("#fixed-table-container-2").css("display", "none");
                             $("#fixed-table-container-1").css("display", "none");
                             $('#fixed-table-container-3 tbody:last-child').html("");
+
                             for (var i = 0; i < data.Getdata.length; i++) {
                                 ADMIN_ANLYS_STATUS = data.Getdata[i].val.ADMIN_ANLYS_STATUS;
                                 TECH1_PROCESS_STATUS = data.Getdata[i].val.TECH1_PROCESS_STATUS;
@@ -2122,7 +2128,6 @@
                                     SubmithtmlPage += '<td><span class="fa fa-refresh gi-4x" style="color: red;"title="ตรวจสอบใหม่"></span></td>';
                                 }
                                 //TAM
-                                //alert(company);
                                 if (company == 'TAM') {
                                     //SM
                                     if (SM_PROCESS_STATUS == "") {
@@ -2741,7 +2746,6 @@
                     console.log(data)
                     var select = $("#_PM");
                     select.children().remove();
-
                     $(data).each(function (index, item) {
 
                         select.append($("<option>").val(item.PROD).text(item.PROD + "/" + item.PRODNAM));

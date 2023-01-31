@@ -471,7 +471,7 @@
             </div>
 
             <div class="card mb-12" id="divShowSearch" style="display: none;">
-                <div class="card-header bg-info">
+                <div class="card-header">
                     <i class="fa fa-table"></i>รายละเอียดสินค้าเคลม <li id="clickme" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="card-body" id="myDIV">
@@ -704,7 +704,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-header bg-info">
+                <div class="card-header">
                     <i class="fa fa-table"></i>ข้อมูลเคลมสำหรับรุ่นรถ/Claim details <li id="clickme5" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="card-body" id="myDIV5" style="display:none">
@@ -818,10 +818,10 @@
                     </div>
                 </div>
                 @*Gm อนุมัติ*@
-                <div class="card-header bg-warning alert-warning">
+                <div class="card-header bg-head-work">
                     <i class="fa fa-table"></i>GM Approve <li id="clickmeGm" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
-                <div class="col-md-12 alert-warning" id="myDIVGM" style="display:block;">
+                <div class="col-md-12" id="myDIVGM" style="display:block;">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -880,7 +880,7 @@
                 </div>
 
                 @*saleman อนุมัติ*@
-                <div class="card-header bg-success">
+                <div class="card-header">
                     <i class="fa fa-table"></i>Saleman Approve <li id="clickmeSaleman" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="col-md-12" id="myDIVSM" style="display:none;">
@@ -924,7 +924,7 @@
                     </div>
                 </div>
                 @*ประวัติ*@
-                <div class="card-header bg-success">
+                <div class="card-header">
                     <i class="fa fa-table"></i>Product Manager Approval <li id="clickme1" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="col-md-12" id="myDIV1" style="display:none">
@@ -1052,10 +1052,10 @@
                 </div>
 
 
-                <div class="card-header bg-success">
+                <div class="card-header">
                     <i class="fa fa-table"></i>Technic 2 : ผลการพิจารณา/TECH2 Investigation <li id="clickme2" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
-                <div class="card-body bg-success" id="myDIV2" style="display:none">
+                <div class="card-body" id="myDIV2" style="display:none">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -1165,7 +1165,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-header bg-success">
+                <div class="card-header">
                     <i class="fa fa-table"></i>Technic 1 : วิเคราะห์สินค้าเคลม/TECH1 Investigation <li id="clickme3" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="card-body" id="myDIV3" style="display:none">
@@ -1256,7 +1256,7 @@
                     </div>
 
                 </div>
-                <div class="card-header bg-success">
+                <div class="card-header">
                     <i class="fa fa-table"></i>ตรวจสอบรับสินค้าเคลม/Check pick claim part <li id="clickme4" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="card-body" id="myDIV4" style="display:none">
@@ -1498,6 +1498,8 @@
                         $('#comTam').css('display', 'block');
                     }
                 }
+                //color menu
+                $('#approveGm').css("background-color", "rgb(9, 183, 9)");
 
                 var udertype = $("#_udertype").val();
                 var Userlogin = $("#_uderlogin").val();
@@ -2404,17 +2406,17 @@
                                     if (company == 'TAM') {
                                         //SM
                                         if (SM_PROCESS_STATUS == "") {
-                                            SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                            SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ SM"></span></td>';
                                         } else {
                                             if (SM_PROCESS_STATUS == "1") {
-                                                SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
+                                                SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย SM"></span></td>'
                                             } else if (SM_PROCESS_STATUS == "2") {
                                                 SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
                                             }
                                         }
                                         //GM
                                         if (GM_PROCESS_STATUS == "") {
-                                            SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                            SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ GM"></span></td>';
                                         } else {
                                             if (GM_PROCESS_STATUS == "1") {
                                                 SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'

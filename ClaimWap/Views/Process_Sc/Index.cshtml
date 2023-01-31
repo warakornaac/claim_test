@@ -475,10 +475,11 @@
                             <th>Tech<br />1</th>
                             <th>Tech<br />2</th>
                             <th>PM</th>
-
-                            <th class="comTam" style="display: none;">Saleman</th>
-                            <th class="comTam" style="display: none;">GM/Yap</th>
-
+                            @if (Session["company"].ToString() == "TAM")
+                            {
+                                <th class="comTam">Saleman</th>
+                                <th class="comTam">GM/Yap</th>
+                            }
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -1885,25 +1886,7 @@
                     //  var CUSCODt = $("#CUSCOD option:selected").text();
                 }
             });
-            $.ajax({
-                url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
-                data: {
-                    Name: 2
-                },
-                type: "POST",
-                dataType: "JSON",
-                success: function (data) {
-                    var select = $("#_proceedtotec");
-                    select.children().remove();
-                    select.append($("<option>").val("0").text("สถานะรับของเคลม"));
-                    $(data).each(function (index, item) {
-                        if (item.CODE == "1" || item.CODE == "2" || item.CODE == "3") {
-                            select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
-                        }
-                    });
-                    //  var CUSCODt = $("#CUSCOD option:selected").text();
-                }
-            });
+
             $.ajax({
                 url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
                 data: {
@@ -2648,6 +2631,9 @@
                 $("#_t1").val(tec1status);
                 $("#_t2").val(tec2status);
                 $("#_t3").val(pmstatus);
+                if (tec1status == 0) {
+                    statusclaimup = 1;
+                }
 
                 if (fax == "1") {
                     $.ajax({

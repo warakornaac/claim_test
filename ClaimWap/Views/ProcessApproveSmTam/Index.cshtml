@@ -309,7 +309,7 @@
         </div>
     </div>
     <div class="card mb-12">
-        <div class="card-header bg-primary">
+        <div class="card-header">
             <i class="fa fa-th-list "></i> Approve Claim Customer <li id="clickmeheader" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
         </div>
         <div class="card-body" id="myDIVheader">
@@ -472,7 +472,7 @@
             </div>
 
             <div class="card mb-12" id="divShowSearch" style="display: none;">
-                <div class="card-header bg-info">
+                <div class="card-header">
                     <i class="fa fa-table"></i>รายละเอียดสินค้าเคลม/Claim Details <li id="clickme" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="card-body" id="myDIV">
@@ -706,7 +706,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-header bg-info">
+                <div class="card-header">
                     <i class="fa fa-table"></i>ข้อมูลเคลมสำหรับรุ่นรถ/Claim details <li id="clickme5" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="card-body" id="myDIV5" style="display:none">
@@ -820,10 +820,10 @@
                     </div>
                 </div>
                 @*saleman อนุมัติ*@
-                <div class="card-header bg-warning">
+                <div class="card-header bg-head-work">
                     <i class="fa fa-table"></i>Saleman Approve <li id="clickme0" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
-                <div class="col-md-12 alert-warning" id="myDIV0" style="display:block;">
+                <div class="col-md-12" id="myDIV0" style="display:block;">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -882,7 +882,7 @@
                     </div>
                 </div>
                 @*ประวัติ*@
-                <div class="card-header bg-success">
+                <div class="card-header">
                     <i class="fa fa-table"></i>Product Manager Approval <li id="clickme1" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="col-md-12" id="myDIV1" style="display:none">
@@ -997,7 +997,7 @@
                 </div>
 
 
-                <div class="card-header bg-success">
+                <div class="card-header">
                     <i class="fa fa-table"></i>Technic 2 : ผลการพิจารณา/TECH2 Investigation <li id="clickme2" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="card-body" id="myDIV2" style="display:none">
@@ -1110,7 +1110,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-header bg-success">
+                <div class="card-header">
                     <i class="fa fa-table"></i>Technic 1 : วิเคราะห์สินค้าเคลม/TECH1 Investigation <li id="clickme3" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="card-body" id="myDIV3" style="display:none">
@@ -1201,7 +1201,7 @@
                     </div>
 
                 </div>
-                <div class="card-header bg-success">
+                <div class="card-header">
                     <i class="fa fa-table"></i>ตรวจสอบรับสินค้าเคลม/Check pick claim part <li id="clickme4" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="card-body" id="myDIV4" style="display:none">
@@ -1369,7 +1369,7 @@
                 //PM ไม่อนุมัติ ต้องปรับเป็น WE=PM_ANLYS_STATUS
                 var pmApproveStatus = $("#_pmtstus").val(); //1=อนุมัตื, 2=ไม่อนุมัติ
                 var claimType = $("#_anlysstatustecpm").val(); //1=WR, 2=WE, 3=WF, 4=Rej
-                if(pmApproveStatus == '2' && claimType != '2'){//2=ไม่อนุมัติ, 2= ไม่ใช่ WE
+                if(pmApproveStatus == '2'){//2=ไม่อนุมัติ, 2= ไม่ใช่ WE
                     if(salemanApproveAtatusID == '1'){ //saleman อนุมัติ
 
                         Swal.fire({
@@ -1480,6 +1480,8 @@
 
                     }
                 }
+                //color menu
+                $('#approveSaleman').css("background-color", "rgb(9, 183, 9)");
 
                 var udertype = $("#_udertype").val();
                 var Userlogin = $("#_uderlogin").val();
@@ -1635,7 +1637,7 @@
                                 console.log(data)
                                 var select = $("#_PM");
                                 select.children().remove();
-
+                                select.append($("<option>").val("ALL").text("ALL"));
                                 $(data).each(function (index, item) {
 
                                     select.append($("<option>").val(item.PROD).text(item.PROD + "/" + item.PRODNAM));
