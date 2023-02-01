@@ -2788,8 +2788,8 @@
                                         $("#displpm").css("display", "none")
                                     }
                                     var tyclom = data.Getdata[0].val.Clmtype;
-
-                                    if (_PMProststus == "2") {
+                                    //alert('_PMProststus = ' + data.Getdata[0].val.PM_ANLYS_STATUS);
+                                    @*if (_PMProststus == "2") { //PM ไม่อนุมัติ
                                         $.ajax({
                                             url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
                                             data: {
@@ -2802,15 +2802,15 @@
                                                 select.children().remove();
                                                 // select.append($("<option>").val("0").text("เลือกCUSCOD"));
                                                 $(data).each(function (index, item) {
-                                                    if (item.CODE == 2 || item.CODE == 4) {
+                                                    //if (item.CODE == 2 || item.CODE == 4) {
                                                         select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
-                                                    }
+                                                    //}
                                                 });
 
                                             }
                                         });
 
-                                    }
+                                    }*@
                                     $("#_anlysstatustecpm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
                                     if (tyclom == "1") {
                                         $("#a").prop('checked', true);

@@ -1366,12 +1366,13 @@
 
         <script type="text/javascript">
             function chkClaimWe(salemanApproveAtatusID){
+                var claimTypeCur = $('#_anlysstatustecpm_sm').val();
+                //alert(claimTypeCur);
                 //PM ไม่อนุมัติ ต้องปรับเป็น WE=PM_ANLYS_STATUS
                 var pmApproveStatus = $("#_pmtstus").val(); //1=อนุมัตื, 2=ไม่อนุมัติ
                 var claimType = $("#_anlysstatustecpm").val(); //1=WR, 2=WE, 3=WF, 4=Rej
                 if(pmApproveStatus == '2'){//2=ไม่อนุมัติ, 2= ไม่ใช่ WE
                     if(salemanApproveAtatusID == '1'){ //saleman อนุมัติ
-
                         Swal.fire({
                             icon: 'question',
                             title: 'Change claim type WE',
@@ -2897,32 +2898,10 @@
                                     }
                                     var tyclom = data.Getdata[0].val.Clmtype;
 
-                                    if (_PMProststus == "2") {
-                                        $.ajax({
-                                            url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
-                                            data: {
-                                                Name: 3
-                                            },
-                                            type: "POST",
-                                            dataType: "JSON",
-                                            success: function (data) {
-
-                                                var select = $("#_anlysstatustecpm");
-                                                select.children().remove();
-                                                // select.append($("<option>").val("0").text("เลือกCUSCOD"));
-                                                $(data).each(function (index, item) {
-                                                    if (item.CODE == 2 || item.CODE == 4) {
-                                                        select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
-                                                    }
-                                                });
-
-                                            }
-                                        });
-                                    }
-
-                                    $("#_anlysstatustecpm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
+                                    //alert(data.Getdata[0].val.PM_ANLYS_STATUS);
                                     //ที่เพิ่มของ Saleman
                                     $("#_anlysstatustecpm_sm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
+                                    $("#_anlysstatustecpm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
                                     if (tyclom == "1") {
                                         $("#a").prop('checked', true);
                                         $("#b").prop('checked', false);
