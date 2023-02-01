@@ -62,7 +62,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Company...: @company</span>
+                            <span> <i class="fa fa-pencil"></i>Company:</span>
                             <span>
                                 <select id="_company" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;float:inherit;">
                                     <option value="0" disabled>Choose option</option>
@@ -831,14 +831,13 @@
         $(document).ready(function () {
             //ถ้าเป็น TAM -> company = TAM
             var company = '@company';
-            //alert(company);
             if (company != "") {
                 if (company == "TAM") {
                     $("#_company").val("TAM");
                     $('#_company').attr('disabled', true);
-                    $('#comTam').css('display', 'block');
                 }
             }
+
             function commaSeparateNumber(val) {
                 while (/(\d+)(\d{3})/.test(val.toString())) {
                     val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');

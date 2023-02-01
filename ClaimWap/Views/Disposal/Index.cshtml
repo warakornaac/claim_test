@@ -3,6 +3,8 @@
     Layout = "~/Views/Shared/_Layoutindex.cshtml";
     var user = ViewBag.UserId;
     var usertype = ViewBag.UserType;
+    var company = Session["company"].ToString(); ;
+
 }
 
 <html>
@@ -39,46 +41,22 @@
 </head>
 <body>
     <div class="card mb-12">
+        <div class="card-header">
+            <i class="fa fa-table"></i> Disposal
+        </div>
         <div class="card-body">
-            <div class="card-header">
-                <i class="fa fa-table"></i> Disposal
-            </div>
-
             <div class="col-md-12" id="dispyte" style="display:none">
-                @*<div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i>SlmCod:</span>
-                                <select class="bar" id="slmcod"></select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i>เลขทีใบคำขอเคลม:</span>
-                                <span>
-                                    <input type="text" id="_cliamno">
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i>Customer:</span>
-                                <span><input type="text" required id="_cusno"></span>
-                            </div>
-                        </div>
-                    </div>*@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Company.:</span>
+                            <span> <i class="fa fa-pencil"></i>Company:</span>
                             <span>
                                 <select id="_company" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;float:inherit;">
                                     <option value="0" disabled>Choose option</option>
                                     <option value="TAC" selected>TAC</option>
                                     <option value="AAC">AAC</option>
                                     <option value="OMP">OMP</option>
-
+                                    <option value="TAM">TAM</option>
                                 </select>
                             </span>
                         </div>
@@ -137,7 +115,7 @@
                             </span>
                         </div>
                     </div>
-                   
+
                     <div class="col-md-4">
                         <div class="form-group">
                             <span> <i class="fa fa-user"></i> ช่างที่รับผิดชอบ:</span>
@@ -200,9 +178,9 @@
                                 </select>
                             </span>
                         </div>
-                        
+
                     </div>
-                    
+
                     <div class="col-sm-4">
                         <div class="form-group">
                             <button type="button" class="btn btn-success" id="_btnsearch">Search</button>
@@ -636,7 +614,7 @@
             </div>
         </div>
     </div>
-   
+
     <div class="modal" id="myModalinsetdoc" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -698,6 +676,13 @@
             minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
         });
         $(document).ready(function () {
+            var company = '@company';
+            if (company != "") {
+                if (company == "TAM") {
+                    $("#_company").val("TAM");
+                    $('#_company').attr('disabled', true);
+                }
+            }
 
             var usetype = $("#_udertype").val();
 
@@ -1271,14 +1256,14 @@
                         fix: fix
                     }
                     data.push(ItemList);
-                   console.log(data)
+                    console.log(data)
                 });
-              
+
                 if (data.length == 0) {
                     alert("ท่านยังไม่ได้เลือกรายการที่ต้องการลบ กรุณาเลือกรายการที่ต้องการลบ");
                     return false;
                 }
-              
+
                 var usesend = $("#_uderlogin").val();
                 var DataSend = JSON.stringify(data);
                 $.ajax({
@@ -1385,14 +1370,14 @@
 
                     }
                     data.push(ItemList);
-                   // console.log(data)
+                    // console.log(data)
                 });
                 var DataSend = JSON.stringify(data);
-              //  console.log(DataSend)
+                //  console.log(DataSend)
                 var countstksend = $('#rowcountstlacc').val();
                 var countnumbersend = $('#rowcountstlacc').val();
                 var CLM_NO_Disposal = clmnodisposal;
-               
+
                 $.ajax({
                     url: '@Url.Action("SaveClaimDisposal", "Disposal")',
                     data: {
@@ -1444,7 +1429,7 @@
                     } else if (stval == "2") {
                         _cremake = "ส่งกลับโรงงาน";
                     }
-                   
+
                     var ItemList = {
                         // CLM_NO_Disposal: clmdisposal,
                         CLM_NO_SUB: claimsupno,
@@ -1500,7 +1485,7 @@
                                     var clm_qt = $(this).attr('clm_qty')
                                     var com = $(this).attr('company')
                                     var _user = $("#_uderlogin").val();
-                                   // var _cremake = $(this).parents("tr:eq(0)").find(".cremake").val().trim();
+                                    // var _cremake = $(this).parents("tr:eq(0)").find(".cremake").val().trim();
                                     var _cremake = "";
                                     if (stval == "1") {
                                         _cremake = $(this).parents("tr:eq(0)").find(".cremake").val().trim();
@@ -1609,7 +1594,7 @@
                     var _cremake = "";
                     if (stval == "1") {
                         _cremake = $(this).parents("tr:eq(0)").find(".cremake").val().trim();
-                    } else if(stval == "2") {
+                    } else if (stval == "2") {
                         _cremake = "ส่งกลับโรงงาน";
                     }
                     var ItemList = {
@@ -1671,8 +1656,8 @@
                     }
                 });
 
-            }); 
-            $("#_printdisposal").click(function () {             
+            });
+            $("#_printdisposal").click(function () {
                 var data = new Array();
                 $('#fixed-table-container-3').find('input[type="checkbox"]:checked').each(function () {
                     var itemno = $(this).attr('itemno');
@@ -1682,7 +1667,7 @@
                     data.push(ItemList);
                     // console.log(data)
                 });
-               
+
                 if (data.length == 0) {
                     $("#myModalconfrimprint").modal('hide');
                     alert("กรุณาเลือกรายการที่ท่านต้องการ");
@@ -1690,7 +1675,7 @@
                 } else {
                     $("#myModalconfrimprint").modal('show');
 
-                     $("#hidid").val("1");
+                    $("#hidid").val("1");
                 }
                 return false;
 
@@ -1729,7 +1714,7 @@
                 var genno = $("#_gennotec").val();
                 var fax = "1";
 
-               // GetClimDisposalAfter(genno, fax)
+                // GetClimDisposalAfter(genno, fax)
                 GetClimDisposalAftertech(genno, fax)
             });
             $("#_btnsearchdisposal").click(function () {
@@ -1737,7 +1722,7 @@
                 var genno = $("#_gennoacc").val();
                 var fax = "2";
                 GetClimDisposalAfter(genno, fax)
-               
+
             });
 
             $("#_btnsearchcreate").click(function () {
@@ -1948,8 +1933,8 @@
                                         SubmithtmlPage += '<td><input type="text" style="width: 113px;text-align: center;font-size: large;"  id="_comfirmqty" value="' + data.Getdata[i].val.FCLM_QTY + '" disabled="disabled"></td>';
                                         //SubmithtmlPage += '<td><button type="button" class="btn btn-outline-danger">Del</button></td>';
                                         SubmithtmlPage += '<td><input type="checkbox" class="select_" clm_qty="' + data.Getdata[i].val.FCLM_QTY + '"  foc="' + data.Getdata[i].val.CLM_FOC + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" statuclm="' + data.Getdata[i].val.CLM_STATUS + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '" company="' + data.Getdata[i].val.CLM_COMPANY + '" claimno="' + data.Getdata[i].val.REQ_NO + '"  claimsupno="' + data.Getdata[i].val.CLM_NO_SUB + '"  invoiceno="' + data.Getdata[i].val.CLM_INVNO + '" afterprocess="' + data.Getdata[i].val.ANLYS_AFTERPROCESS + '" cuscod="' + data.Getdata[i].val.Customer + '" itemno="' + data.Getdata[i].val.STKCOD + '" anlyafretori="' + data.Getdata[i].val.ANLYS_AFTERPROCESSTEXT + '" statustext="' + data.Getdata[i].val.STATUSTEXT + '" style="width: 112px;"></td>';
-                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_COMPANY +'</td>';
-                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD +'</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_COMPANY + '</td>';
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
                                         SubmithtmlPage += '<td>' + data.Getdata[i].val.STKDES + '</td>';
                                         SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_SHELF_LOCATION + "\n" + '</td>';
                                         SubmithtmlPage += '<td>' + data.Getdata[i].val.FCLM_QTY + '</td>';
@@ -2040,7 +2025,7 @@
 
                             for (var i = 0; i < data.Getdata.length; i++) {
                                 Ststus_Scrap = data.Getdata[i].val.Ststus_Scrap;
-                               
+
                                 if (Ststus_Scrap == "1" || Ststus_Scrap == "3") {
 
                                     //SubmithtmlPage = '<tr fax="1">';
@@ -2172,12 +2157,12 @@
                                 $('#fixed-table-container-4').css('display', 'block');
                             }
                             // $('#fixed-table-container-5 tbody:last-child').html("");
-                            
+
                             for (var i = 0; i < data.Getdata.length; i++) {
                                 Ststus_Scrap = data.Getdata[i].val.Ststus_Scrap;
                                 console.log(Ststus_Scrap)
                                 if (Ststus_Scrap == "1" || Ststus_Scrap == "3") {
-                                  
+
                                     SubmithtmlPage = '<tr fax="1">';
                                     if (fax == "1") {
                                         SubmithtmlPage = '<tr fax="1">';
@@ -2188,19 +2173,19 @@
                                     }
 
                                 } else {
-                                    
-                                  SubmithtmlPage = '<tr fax="2" class="disabled" disabled=disabled >';
-                                
+
+                                    SubmithtmlPage = '<tr fax="2" class="disabled" disabled=disabled >';
+
                                     SubmithtmlPage += '<td><input type="text"  disabled=disabled style="width: 113px;text-align: center;font-size: large;" id="_comfirmqty" class="Scrap_Acc" value="' + data.Getdata[i].val.CLM_Qty + '"><br></td>';
                                 }
 
                                 if (fax == "1") {
                                     SubmithtmlPage += '<td><button type="button" class="btn btn-outline-danger" id="_deletedisposom" clmnodisposal="' + data.Getdata[i].val.CLM_NO_Disposal + '" com="' + data.Getdata[i].val.COMP + '"  clm_qty="' + data.Getdata[i].val.CLM_Qty + '" clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '"  stkcod="' + data.Getdata[i].val.STKCOD + '">Del</button></td>';
                                 } else {
-                                   // SubmithtmlPage += '<td><button type="button" class="btn btn-outline-secondary" disabled="disabled" clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '"  stkcod="' + data.Getdata[i].val.STKCOD + '">Del</button></td>';
+                                    // SubmithtmlPage += '<td><button type="button" class="btn btn-outline-secondary" disabled="disabled" clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '"  stkcod="' + data.Getdata[i].val.STKCOD + '">Del</button></td>';
                                 }
 
-                              
+
 
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.COMP + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
