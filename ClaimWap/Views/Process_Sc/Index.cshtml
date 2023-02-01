@@ -2940,9 +2940,9 @@
                                 var _tec2Proststus = data.Getdata[0].val.TECH2_ANLYS_STATUS;//approve tec2
                                 var _PMProststus = data.Getdata[0].val.PM_PROCESS_STATUS;//approve PM
                                 var _PM_NAME = data.Getdata[0].val.PM_NAME;
+                                //alert("Technic 2 : พิจารณา" + _tec2Proststus);
                                 if (_tec2Proststus != "0") {
                                     ///Technic 2 : ผลการพิจารณา///
-                                    //  alert("Technic 2 : พิจารณา");
                                     var tyclom = data.Getdata[0].val.Clmtype;
 
                                     if (tyclom == "1") {
@@ -2998,19 +2998,25 @@
                                     $("#_appdatetec").val(data.Getdata[0].val.TECH2_ANLYS_DATE);  //วันที่เทคนิคพิจารณา
                                     $("#_apprvststus").val(data.Getdata[0].val.TECH2_ANLYS_STATUS); // สถานะ
                                     $("#remaketec2").val(data.Getdata[0].val.TECH2_REMARK);   //หมายเหตุ
-                                    //alert(_cktype);
+                                    //console.log('_cktype = ' + _cktype + '_PMProststus =  ' + _PMProststus);
                                     if (_PMProststus == "0") {// if PM<>Approve
-                                        if (_cktype == "2") {
+                                        if (_cktype == "2") {//tec2
                                             $("#_btnsaveconsider").css("display", "block");
+                                            //ปุ่มบันทึก tec1
+                                            $("#_btnsavecheck").removeAttr('disabled');
+                                            $("#_btnsavecheck").css("display", "block");
                                             if (_tec2Proststus != "1") {
                                                 // $("#_btnsaveconsider").removeAttr('disabled');
                                                 $("#_btnsaveconsider").attr("disabled", "disabled");
-                                            } else {
-                                                $("#_btnsaveconsider").attr("disabled", "disabled");
                                             }
-                                        } else {
+                                        } else {//tech1
+                                            //btn tec1
+                                            $("#_btnsavecheck").removeAttr("disabled");
+                                            $("#_btnsavecheck").css("display", "block");
+                                            //btn tec2
                                             $("#_btnsaveconsider").attr("disabled", "disabled");
                                             $("#_btnsaveconsider").css("display", "none");
+
                                         }
                                     } else if (_PMProststus != "0") {
                                         //PM = Approve//
@@ -3029,6 +3035,10 @@
                                     }
                                 } else {
                                     if (_cktype == "2") {
+
+                                        $("#_btnsavecheck").removeAttr('disabled');
+                                        $("#_btnsavecheck").css("display", "block");
+
                                         $("#_btnsaveconsider").removeAttr('disabled');
                                         $("#_name2tec").val(_ckuser); //รับรองการตรวจสอบโดย
                                         $("#_appdatetec").val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));  //วันที่เทคนิคพิจารณา

@@ -1485,7 +1485,6 @@
                 minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
             });
             $(document).ready(function () {
-                LoadingShow();
                 $('#_anlysstatustecpm_sm').attr('disabled', true);
 
                 //ถ้าเป็น TAM -> company = TAM
@@ -2300,6 +2299,9 @@
                 if (valststus == null) {
                     valststus = "10";
                 }
+                if(valstkgrp == "" || valstkgrp == null){
+                    valstkgrp = "ALL";
+                }
                 $.ajax({
                     url: '@Url.Action("GetClimdataGm", "GetdataCenter")',
                     data: {
@@ -2317,6 +2319,9 @@
                     },
                     type: "POST",
                     dataType: "JSON",
+                    beforeSend : function(){
+                        LoadingShow();
+                    },
                     success: function (data) {
                         // console.log(data);
                         $('#fixed-table-container-2  tbody:last-child').html("");
@@ -2449,8 +2454,10 @@
                             //  location.reload();
                         }
                         var fixedTable2 = fixTable(document.getElementById('fixed-table-container-2'));
+                       
+                    }, complete : function(){
                         LoadingHide();
-                    }
+                    },
                 });
             }
 
@@ -3077,6 +3084,8 @@
                                 $("#textAlertWarning").text("No claim item...");
                                 $("#myModalWarning").modal();
                             }
+                        }, complete: function(){
+                            LoadingHide();
                         }
                     });
 

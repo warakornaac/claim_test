@@ -1467,7 +1467,6 @@
 
 
             $(document).ready(function () {
-                LoadingShow();
                 $('#_anlysstatustecpm_sm').attr('disabled', true);
 
                 //ถ้าเป็น TAM -> company = TAM
@@ -1567,7 +1566,6 @@
                     type: "POST",
                     dataType: "JSON",
                     success: function (data) {
-
                         var select = $("#_status");
                         select.children().remove();
                         // select.append($("<option>").val("0").text("เลือกCUSCOD"));
@@ -1583,9 +1581,8 @@
                                 opt.disabled = false;
                     } else {
                                 opt.disabled = true;
-            }
-            });
-            LoadingHide();
+                    }
+                });
             }
             });
             function getdate() {
@@ -1614,6 +1611,9 @@
                     },
                     type: "POST",
                     dataType: "JSON",
+                    beforeSend : function(){
+                        //LoadingShow();
+                    },
                     success: function (data) {
 
                         $("#_udertype").val(data.UsrClmStaff);
@@ -1663,7 +1663,6 @@
                                     itemno = "";
                                 }
                                 Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdate, valenddate)
-                                //Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp)
                             }
                         });
 
@@ -1774,10 +1773,10 @@
                             $("#_btnsaveconsider").attr("disabled", "disabled");
 
                         }
+                    }, complete : function(){
+                       // LoadingHide();
                     }
                 });
-
-
 
             }
 
@@ -2127,8 +2126,6 @@
 
                 if (e.keyCode == 13) {
                     Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus)
-                    //Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp)
-                    // GetClimtemp(claimnokey)
                 }
             });
 
@@ -2272,6 +2269,9 @@
                 if (valststus == null) {
                     valststus = "9";
                 }
+                if(valstkgrp == "" || valstkgrp == null){
+                    valstkgrp = "ALL";
+                }
                 //alert(valststus);
                 $.ajax({
                     url: '@Url.Action("GetClimdataSm", "GetdataCenter")',
@@ -2290,6 +2290,9 @@
                     },
                     type: "POST",
                     dataType: "JSON",
+                    beforeSend : function(){
+                        LoadingShow();
+                    },
                     success: function (data) {
                         // console.log(data);
                         $('#fixed-table-container-2  tbody:last-child').html("");
@@ -2423,7 +2426,9 @@
                         }
                         var fixedTable2 = fixTable(document.getElementById('fixed-table-container-2'));
 
-                    }
+                    }, complete: function(){
+                        LoadingHide();
+                    },
                 });
             }
 
@@ -3009,6 +3014,8 @@
                                 $("#textAlertWarning").text("No List claim...");
                                 $("#myModalWarning").modal();
                             }
+                        }, complete: function(){
+                            LoadingHide();
                         }
                     });
 
@@ -3142,7 +3149,7 @@
                         }
                     });
                 }
-                LoadingHide();
+                //adingHide();
             });
             $(document).on('click', '#myImg', function () {
                 var modal = document.getElementById('myModalzoom');
