@@ -1595,7 +1595,6 @@
                             $("#_btnsavecheck").css("display", "block");
                             $("#_btnsavete1").css("display", "block");
                         } else if (data.UsrClmStaff == "2") {
-
                             $("#_name2tec").val(userlog);
                             $("#_btnsaveconsider").css("display", "block");
                             // $("#_btnsavecheck").css("display", "none");
@@ -2072,7 +2071,7 @@
                         console.log('GetdataCenterTec = ' + data);
                         var select = $("#_rcvbyte");
                         select.children().remove();
-                        select.append($("<option>").val("0").text("เลือกผู้รับสินค้าเคลม"));
+                        select.append($("<option>").val("0").text("เลือกผู้รับสินค้าเคลม/Choose a claim receive"));
                         $(data).each(function (index, item) {
 
                             select.append($("<option>").val(item.PROD).text(item.PROD));
@@ -2796,8 +2795,8 @@
                                     $("#_duedatetec").val(('0' + newDate.getDate()).slice(-2) + '/' + ('0' + (newDate.getMonth() + 1)).slice(-2) + '/' + newDate.getFullYear()); //Due date
                                     $("#causeclaimtec").val(data.Getdata[0].val.CLM_REMARK);//หมายเหตุการรับเคลม
                                 }
+                                //alert(_tec1Proststus)
                                 if (_tec1Proststus != "0") {
-                                    // alert(_tec1Proststus)
                                     ///ผ่านการตรวจสอบรับสินค้าเคลม && วิเคราะห์สินค้าเคลม////
                                     //alert("xxxผ่านการตรวจสอบรับสินค้าเคลม");
                                     ///ตรวจสอบรับสินค้าเคลม////
@@ -2814,6 +2813,8 @@
                                     $("#_duedatetec").val(data.Getdata[0].val.CLM_DUEDATE); //Due date
                                     $("#_admintec").val(data.Getdata[0].val.CLM_ADMIN);//Admin:
                                     //$("#_datechecktec").val(data.Getdata[0].val.CLM_DATE); //วันที่ตรวจสอบ
+
+                                    $("#_btnsaveconsider").css("display", "block");
 
                                     var shelf = data.Getdata[0].val.CLM_SHELF_LOCATION;
                                     $("#_shelfloctec").val(shelf);//Shelf Location
@@ -2997,6 +2998,7 @@
                                     $("#_appdatetec").val(data.Getdata[0].val.TECH2_ANLYS_DATE);  //วันที่เทคนิคพิจารณา
                                     $("#_apprvststus").val(data.Getdata[0].val.TECH2_ANLYS_STATUS); // สถานะ
                                     $("#remaketec2").val(data.Getdata[0].val.TECH2_REMARK);   //หมายเหตุ
+                                    //alert(_cktype);
                                     if (_PMProststus == "0") {// if PM<>Approve
                                         if (_cktype == "2") {
                                             $("#_btnsaveconsider").css("display", "block");
@@ -3041,6 +3043,7 @@
 
                                         // $("#_btnsavecheck").removeAttr('disabled');
                                         $("#_btnsaveconsider").attr("disabled", "disabled");
+                                        $("#_btnsaveconsider").css('display', 'none');
                                         $("#_name2tec").val(""); //รับรองการตรวจสอบโดย
                                         $("#_appdatetec").val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));  //วันที่เทคนิคพิจารณา
                                         $("#_apprvststus").val("0"); // สถานะ
@@ -3810,7 +3813,7 @@
 
                 if (tecwork == "0") {
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("กรุณาระบุช่างที่รับผิดชอบ");
+                    $("#textAlertWarning").text("กรุณาระบุช่างที่รับผิดชอบ/Please specify the TECH");
                     $("#myModalWarning").modal(); return false;
                 }
                 if (shelfloctec == "") {
@@ -3826,7 +3829,7 @@
 
                 if (perfromtec1 == "0") {
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("ต้องการให้ดำเนินการ ??");
+                    $("#textAlertWarning").text("ต้องการให้ดำเนินการ ?");
                     $("#myModalWarning").modal(); return false;
                 }
                 if (anlysstatustec1 == "0") {
