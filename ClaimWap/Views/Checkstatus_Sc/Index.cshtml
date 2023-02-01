@@ -27,7 +27,7 @@
             display: none;
             width: 100%;
         } */
-        
+
         #myImg {
             border-radius: 5px;
             cursor: pointer;
@@ -433,9 +433,10 @@
                             <th>Tech1</th>
                             <th>Tech2</th>
                             <th>PM</th>
-                            @if (Session["company"].ToString() == "TAM") {
-                                <th class="comTam" >Saleman2</th>
-                                <th class="comTam">GM/Yap2</th>
+                            @if (Session["company"].ToString() == "TAM")
+                            {
+                                <th class="comTam">Saleman</th>
+                                <th class="comTam">GM/Yap</th>
                             }
                             <th>CS</th>
                             <th>Log</th>
@@ -2130,23 +2131,31 @@
                                 //TAM
                                 if (company == 'TAM') {
                                     //SM
-                                    if (SM_PROCESS_STATUS == "") {
-                                        SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                    if (PM_PROCESS_STATUS == "3") { //pm ตรวจสอบใหม่
+                                        SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: Brown;" title="PM ตรวจสอบใหม่"></span></td>';
                                     } else {
-                                        if (SM_PROCESS_STATUS == "1") {
-                                            SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
-                                        } else if (SM_PROCESS_STATUS == "2") {
-                                            SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                        if (SM_PROCESS_STATUS == "") {
+                                            SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                        } else {
+                                            if (SM_PROCESS_STATUS == "1") {
+                                                SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
+                                            } else if (SM_PROCESS_STATUS == "2") {
+                                                SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                            }
                                         }
                                     }
                                     //GM
-                                    if (GM_PROCESS_STATUS == "") {
-                                        SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                    if (PM_PROCESS_STATUS == "3") { //pm ตรวจสอบใหม่
+                                        SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: Brown;" title="PM ตรวจสอบใหม่"></span></td>';
                                     } else {
-                                        if (GM_PROCESS_STATUS == "1") {
-                                            SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
-                                        } else if (GM_PROCESS_STATUS == "2") {
-                                            SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                        if (GM_PROCESS_STATUS == "") {
+                                            SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                        } else {
+                                            if (GM_PROCESS_STATUS == "1") {
+                                                SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
+                                            } else if (GM_PROCESS_STATUS == "2") {
+                                                SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                            }
                                         }
                                     }
                                 }
@@ -2336,26 +2345,33 @@
                                         SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
                                     }
                                     //TAM
-                                    //alert(company);
                                     if (company == 'TAM') {
                                         //SM
-                                        if (SM_PROCESS_STATUS == "") {
-                                            SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                        if (PM_PROCESS_STATUS == "3") { //pm ตรวจสอบใหม่
+                                            SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: Brown;" title="PM ตรวจสอบใหม่"></span></td>';
                                         } else {
-                                            if (SM_PROCESS_STATUS == "1") {
-                                                SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
-                                            } else if (SM_PROCESS_STATUS == "2") {
-                                                SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                            if (SM_PROCESS_STATUS == "") {
+                                                SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                            } else {
+                                                if (SM_PROCESS_STATUS == "1") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
+                                                } else if (SM_PROCESS_STATUS == "2") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                                }
                                             }
                                         }
                                         //GM
-                                        if (GM_PROCESS_STATUS == "") {
-                                            SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                        if (PM_PROCESS_STATUS == "3") { //pm ตรวจสอบใหม่
+                                            SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: Brown;" title="PM ตรวจสอบใหม่"></span></td>';
                                         } else {
-                                            if (GM_PROCESS_STATUS == "1") {
-                                                SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
-                                            } else if (GM_PROCESS_STATUS == "2") {
-                                                SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                            if (GM_PROCESS_STATUS == "") {
+                                                SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                            } else {
+                                                if (GM_PROCESS_STATUS == "1") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
+                                                } else if (GM_PROCESS_STATUS == "2") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                                }
                                             }
                                         }
                                     }
@@ -2454,23 +2470,31 @@
                                     //TAM
                                     if (company == 'TAM') {
                                         //SM
-                                        if (SM_PROCESS_STATUS == "") {
-                                            SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                        if (PM_PROCESS_STATUS == "3") { //pm ตรวจสอบใหม่
+                                            SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: Brown;" title="PM ตรวจสอบใหม่"></span></td>';
                                         } else {
-                                            if (SM_PROCESS_STATUS == "1") {
-                                                SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
-                                            } else if (SM_PROCESS_STATUS == "2") {
-                                                SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                            if (SM_PROCESS_STATUS == "") {
+                                                SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                            } else {
+                                                if (SM_PROCESS_STATUS == "1") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
+                                                } else if (SM_PROCESS_STATUS == "2") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                                }
                                             }
                                         }
                                         //GM
-                                        if (GM_PROCESS_STATUS == "") {
-                                            SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                        if (PM_PROCESS_STATUS == "3") { //pm ตรวจสอบใหม่
+                                            SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: Brown;" title="PM ตรวจสอบใหม่"></span></td>';
                                         } else {
-                                            if (GM_PROCESS_STATUS == "1") {
-                                                SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
-                                            } else if (GM_PROCESS_STATUS == "2") {
-                                                SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                            if (GM_PROCESS_STATUS == "") {
+                                                SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                            } else {
+                                                if (GM_PROCESS_STATUS == "1") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
+                                                } else if (GM_PROCESS_STATUS == "2") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                                }
                                             }
                                         }
                                     }

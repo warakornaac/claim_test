@@ -2513,23 +2513,31 @@
                                     //TAM
                                     if (company == 'TAM') {
                                         //SM
-                                        if (SM_PROCESS_STATUS == "") {
-                                            SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                        if (PM_PROCESS_STATUS == "3") { //pm ตรวจสอบใหม่
+                                            SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: Brown;" title="PM ตรวจสอบใหม่"></span></td>';
                                         } else {
-                                            if (SM_PROCESS_STATUS == "1") {
-                                                SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
-                                            } else if (SM_PROCESS_STATUS == "2") {
-                                                SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                            if (SM_PROCESS_STATUS == "") {
+                                                SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                            } else {
+                                                if (SM_PROCESS_STATUS == "1") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
+                                                } else if (SM_PROCESS_STATUS == "2") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                                }
                                             }
                                         }
                                         //GM
-                                        if (GM_PROCESS_STATUS == "") {
-                                            SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                        if (PM_PROCESS_STATUS == "3") { //pm ตรวจสอบใหม่
+                                            SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: Brown;" title="PM ตรวจสอบใหม่"></span></td>';
                                         } else {
-                                            if (GM_PROCESS_STATUS == "1") {
-                                                SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
-                                            } else if (GM_PROCESS_STATUS == "2") {
-                                                SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                            if (GM_PROCESS_STATUS == "") {
+                                                SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                            } else {
+                                                if (GM_PROCESS_STATUS == "1") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
+                                                } else if (GM_PROCESS_STATUS == "2") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                                }
                                             }
                                         }
                                     }
