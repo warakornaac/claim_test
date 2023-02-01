@@ -1555,7 +1555,7 @@
                         select.append($("<option>").val(item.STKGRP).text(item.STKGRP + "/" + item.GRPNAM));
                     });
                 }, complete: function () {
-                    $('#_btnsearch').trigger('click');
+                    //$('#_btnsearch').trigger('click');
                 }
             });
             $.ajax({
@@ -2168,8 +2168,6 @@
 
                         } else {
                             var _status = $("#_status :selected").text();
-
-
                             $("#textAlertWarningmes").empty();
                             $("#textAlertWarningmes").text("ไม่มีข้อมูล" + _status);
                             $("#myModalWarning").modal();
@@ -2234,7 +2232,7 @@
                     type: "POST",
                     dataType: "JSON",
                     success: function (data) {
-                        console.log(data);
+                        //console.log('GetClimline = ' + data.Getdata.length);
                         waitingDialog.hide();
                         $('#fixed-table-container-1 tbody:last-child').html("");
                         if (data.Getdata.length > 0) {
@@ -2508,9 +2506,8 @@
                             }
 
                         } else {
+                            waitingDialog.hide(); //hide loading
                             var _status = $("#_status :selected").text();
-
-
                             $("#textAlertWarningmes").empty();
                             $("#textAlertWarningmes").text("ไม่มีข้อมูล" + _status);
                             $("#myModalWarning").modal();
@@ -2543,8 +2540,7 @@
                             select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
                         });
                         var slmcod = $("#slmcod").val();
-
-                        //GetClimline("", "TAC", "1", "", "", "", "", slmcod, "0", "0", "ALL","0","2")
+                        //GetClimline("", "company", "1", "", "", "", "", slmcod, "0", "0", "ALL","0","2")
                     } else if (_tpy == "1") {
                         select.append($("<option>").val("ALL").text("ALL"));
                         $(data).each(function (index, item) {
@@ -2552,16 +2548,14 @@
                         });
                         var slmcod = $("#slmcod").val();
                         GetClimline("", company, "1", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
-                    }
-                    else if (_tpy == "2") {
+                    } else if (_tpy == "2") {
                         select.append($("<option>").val("ALL").text("ALL"));
                         $(data).each(function (index, item) {
                             select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
                         });
                         var slmcod = $("#slmcod").val();
                         GetClimline("", company, "3", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
-                    }
-                    else if (_tpy == "3") {
+                    } else if (_tpy == "3") {
                         select.append($("<option>").val("ALL").text("ALL"));
                         $(data).each(function (index, item) {
                             select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
@@ -3557,7 +3551,7 @@
                             $("#textAlertSucces").empty();
                             $("#textAlertSucces").text("ยกเลิกรายการเคลมสำเร็จ");
                             $("#myModalSucces").modal();
-                            GetClimline("", "TAC", "4", "", "", "", "", slmcod, "0", "0", "ALL")
+                            GetClimline("", company, "4", "", "", "", "", slmcod, "0", "0", "ALL")
                             //$("#_btnsearch").click();
                         } else {
                             $("#textAlertSucces").empty();
