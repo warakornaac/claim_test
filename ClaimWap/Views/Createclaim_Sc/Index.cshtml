@@ -364,7 +364,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="close btn btn-default" data-dismiss="modal" >Close</button>
+                    <button type="button" class="closeSearchInvoice btn btn-default" data-dismiss="modal" style="font-weight: bold">Close</button>
                 </div>
             </div>
         </div>
@@ -447,7 +447,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         @*<span class="input-group-addon" id="btnok" style="background-color: #7FC1A9;cursor: pointer;color: white;">Ship To Code<span class=" glyphicon glyphicon-hand-right"></span></span>*@
-                                        <input type="button" id="btnok" class="btn-default" name="example" value="ส่งตรวจสอบ/Send check" style="background-color: aqua;">
+                                        <input type="button" id="btnok" class="btn btn-default" name="example" value="ส่งตรวจสอบ/Send check" style="background-color: aqua;">
                                         <span class="input-group-addon "><span id="scs" style="color: cyan;display:none"></span><span></span></span>
                                     </div>
                                 </div>
@@ -565,7 +565,7 @@
     </div>
     <!-- Trigger the modal with a button -->
     <div class="card mb-12">
-        <div class="card-header bg-primary text-white">
+        <div class="card-header bg-info text-white">
             <div class="row">
                 <div class="col-sm-12">
                     <i class="fa fa-table"></i> สร้างใบเคลม/Create claim doc. <li id="clickmeheader" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
@@ -677,7 +677,7 @@
         <div class="card-footer">
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="btnmol" style="font-size: medium;"><i class="fa fa-search"></i> Find history</button>
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="btnmol" style="font-size: medium;"><i class="fa fa-search"></i> Find history</button>
                 </div>
             </div>
         </div>
@@ -840,7 +840,7 @@
                     <tbody>
                         <tr>
                             <td style="background: white;">1.สำหรับรถ Vehicle/Machine:<select id="_vemac" style="border-bottom: 5px solid #b33c0f;"></select>@*<input type="text" id="_vemac" style="border-bottom: 5px solid #b33c0f;" />*@</td>
-                            <td>2.รุ่่น Model/Type:<input type="text" id="_moty" style="border-bottom: 5px solid #b33c0f;" /></td>
+                            <td>2.รุ่น Model/Type:<input type="text" id="_moty" style="border-bottom: 5px solid #b33c0f;" /></td>
                             <td>3.ปีผลิต Model Year:<input type="text" id="_modyear" /></td>
                         </tr>
                         <tr>
@@ -1028,7 +1028,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <br />
-                                            <input id="fileInput" type="file" multiple>
+                                            <input id="fileInput" type="file" value="TEST" multiple>
                                             <br />            <br />
                                             <table class="table" id="FilesList" style="visibility:hidden">
                                                 <tr>
@@ -1080,7 +1080,7 @@
                 <thead>
                     <tr>
                         <th style="background-color: antiquewhite; height:100%;">X</th>
-                        <th style="text-align:center">line no</th>
+                        <th style="text-align:center">Line No.</th>
                         <th>Item No.</th>
                         <th style="text-align:center">Description.</th>
                         <th>Stock<br /> Group.</th>
@@ -1184,8 +1184,8 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     @*<span class="input-group-addon" id="btnok" style="background-color: #7FC1A9;cursor: pointer;color: white;">Ship To Code<span class=" glyphicon glyphicon-hand-right"></span></span>*@
-                                    <input type="button" id="save" class="btn-default" name="example" value="ส่งตรวจสอบ/Send check" style="background-color: aqua;">
-                                    <span class="input-group-addon "><span id="scs" style="color: cyan;display:none"></span><span></span></span>
+                                    <input type="button" id="save" class="btn-default" name="example" value="ส่งตรวจสอบ/Send check" style="background-color: aqua; margin-right: -3px;">
+                                    <span class="input-group-addon"><span id="scs" style="color: cyan; display: none;"></span><span></span></span>
                                 </div>
                             </div>
                         </div>
@@ -1252,11 +1252,14 @@
                 }
             }
             //close modal reload
-            $('.close').on('click', function () {
+            $('.closeSearchInvoice').on('click', function () {
                 LoadingShow();
                 location.reload();
                 LoadingHide();
             });
+
+           
+            setTimeout(function () { $("#fileInput").text("test"); }, 3000);
         });
         var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
             backgroundColor: 'rgba(255, 255, 255, 0)',
@@ -2831,7 +2834,7 @@
                             $("#myModalsignature").hide();
                             $("#ModalShipping").hide();
                             $("#textAlertSucces").empty();
-                            $("#textAlertSucces").text("ส่งตรวจสอบสำเร็จ");
+                            $("#textAlertSucces").text("ส่งตรวจสอบสำเร็จ/Send check successfully");
                             $("#myModalSucces").modal();
                             var valclim = claimno;
                             $.ajax({
@@ -3535,7 +3538,7 @@
                     var xmodeltype = $("#_moty").val();
                     if (xmodeltype == "") {
                         $("#textAlertWarningmes").empty();
-                        $("#textAlertWarningmes").text("กรุณาระบุข้อมูล รุ่่น Model/Type");
+                        $("#textAlertWarningmes").text("กรุณาระบุข้อมูล รุ่น Model/Type");
                         $("#myModalWarning").modal();
                         return false;
                     }
@@ -4256,7 +4259,7 @@
                     var select = $("#_statusclaim");
                     select.children().remove();
 
-                    select.append($("<option>").val("0").text("สถานะรับของเคลม"));
+                    select.append($("<option>").val("0").text("สถานะรับของเคลม/"));
                     $(data).each(function (index, item) {
                         if (item.CODE == "2" || item.CODE == "4") {
                             select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));

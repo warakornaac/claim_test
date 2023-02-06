@@ -198,89 +198,204 @@
                 </div>
             </div>
             <div id="displaytech">
-                <div class="card-header">
-                    <i class="fa fa-table"></i> Create by Technical<li id="clickme" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
-                </div>
-                <div class="col-md-12" id="myDIVcreatetec">
-                    <div class="row" style="padding-top: 10px;">
-                        <div class="table-responsive">
-                            <table class="table grid">
-                                <tbody>
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-table"></i> Create by Technical<li id="clickme" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+                    </div>
+                    <div class="col-md-12" id="myDIVcreatetec">
+                        <div class="row" style="padding-top: 10px;">
+                            <div class="table-responsive">
+                                <table class="table grid">
+                                    <tbody>
+                                        <tr>
+                                            <td>เลือกเตรียมรายการทั้งหมด:</td>
+                                            <td> <input type="checkbox" id="select_all" style="width:70px;" /></td>
+                                            <td>  วันที่บันทึกเอกสาร:</td>
+                                            <td><input type="date" data-date-format="dd/mm/yy" id="_scrapdatetec1" /></td>
+                                            <td><button id="_printdisposal">Print รายงานทำลายสินค้า</button></td>
+                                            <td><button id="_printdisposalSupplier">Print รายงานทำลายสินค้า</button></td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 10px; border-top: 5px solid rgba(199, 112, 38, 0.72);">
+                            <div class="table-responsive">
+                                <table class="table grid">
+                                    <tbody>
+                                        <tr>
+                                            <td>จำนวน</td>
+                                            <td><div id="rowcount"></div></td>
+                                            <td>รายการ</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>จำนวนที่ท่านเลือก</td>
+                                            <td><div id="rowcountuse"></div></td>
+                                            <td>รายการ</td>
+                                            <td>จำนวนเบอร์สินค้า</td>
+                                            <td><div id="rowcountstl"></div></td>
+                                            <td>เบอร์</td>
+                                            <td>จำนวนสินค้า</td>
+                                            <td><div id="rowcountstlitem"></div></td>
+                                            <td>ชิ้น</td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                        <div class="row" style="border-top: 5px solid rgba(199, 112, 38, 0.72);">
+                            <div class="col-md-12">
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-pencil"></i>Search Internal Claim No.:</span>
+                                    <input type='text' id='txt_nameeditcreate'>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-pencil"></i>Search item no.:</span>
+                                    <input type='text' id='txt_searchallcreate'>&nbsp;
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div id="fixed-table-container-3" class="fixed-table-container" style="display:none">
+                            <table id="exampletb">
+                                <thead>
                                     <tr>
-                                        <td>เลือกเตรียมรายการทั้งหมด:</td>
-                                        <td> <input type="checkbox" id="select_all" style="width:70px;" /></td>
-                                        <td>  วันที่บันทึกเอกสาร:</td>
-                                        <td><input type="date" data-date-format="dd/mm/yy" id="_scrapdatetec1" /></td>
-                                        <td><button id="_printdisposal">Print รายงานทำลายสินค้า</button></td>
-                                        <td><button id="_printdisposalSupplier">Print รายงานทำลายสินค้า</button></td>
+                                        <th>Disposal Qty.</th>
+                                        <th>Select</th>
+                                        <th>Company</th>
+                                        <th>Item No.</th>
+                                        <th>Description</th>
+                                        <th>Location.</th>
+                                        <th>Qty.</th>
+                                        <th>Internal Claim No.</th>
+                                        <th>UOM</th>
+                                        <th>WE/WR/WF</th>
+                                        <th>Claim date</th>
+                                        <th>Due<br /> Disposal date</th>
+                                        @*<th>Customer</th>*@
+                                        @*<th>Claim No.</th>*@
+                                        <th>Internal Invoice No.</th>
+                                        <th>Internal Log No.</th>
+                                        <th>เลขที่เคลม Supplier</th>
+                                        <th>Invoice Supplier</th>
+                                        <th>CN Supplier</th>
+                                        <th>Remark</th>
+                                        @*<th>Sales Man</th>*@
                                     </tr>
-
-
-                                </tbody>
+                                </thead>
+                                <tbody></tbody>
                             </table>
-
-
                         </div>
                     </div>
-                    <div class="row" style="padding-top: 10px; border-top: 5px solid rgba(199, 112, 38, 0.72);">
-                        <div class="table-responsive">
-                            <table class="table grid">
-                                <tbody>
-                                    <tr>
-                                        <td>จำนวน</td>
-                                        <td><div id="rowcount"></div></td>
-                                        <td>รายการ</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>จำนวนที่ท่านเลือก</td>
-                                        <td><div id="rowcountuse"></div></td>
-                                        <td>รายการ</td>
-                                        <td>จำนวนเบอร์สินค้า</td>
-                                        <td><div id="rowcountstl"></div></td>
-                                        <td>เบอร์</td>
-                                        <td>จำนวนสินค้า</td>
-                                        <td><div id="rowcountstlitem"></div></td>
-                                        <td>ชิ้น</td>
-
-                                    </tr>
-
-                                </tbody>
-                            </table>
-
-
-                        </div>
+                    <div class="card-header">
+                        <i class="fa fa-table"></i> Edit by Technical<li id="clickmetec" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                     </div>
-                    <div class="row" style="border-top: 5px solid rgba(199, 112, 38, 0.72);">
-                        <div class="col-md-12">
-                            <div class="form-group">
+                    <div class="col-md-12" id="myDIVtec" style="display:none">
 
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-pencil"></i>Disposal No.:</span>
+                                    <span><input type="text" id="_gennotec"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-success" id="_btnsearchdisposaltec">Search</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button id="_printdisposalafter">Print รายงานทำลายสินค้า</button>
+                                </div>
                             </div>
                         </div>
+
+                        <div class="row" style="border-top: 5px solid rgba(199, 112, 38, 0.72);">
+                            <div class="col-md-12">
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-pencil"></i>Search Internal Claim No.:</span>
+                                    <input type='text' id='txt_nameedit'>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-pencil"></i>Search item no.:</span>
+                                    <input type='text' id='txt_searchalledit'>&nbsp;
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i>Search Internal Claim No.:</span>
-                                <input type='text' id='txt_nameeditcreate'>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i>Search item no.:</span>
-                                <input type='text' id='txt_searchallcreate'>&nbsp;
+                            <div class="table-responsive">
+                                <table class="table grid" id="alldeltb" style="display:none">
+                                    <tbody>
+                                        <tr>
+                                            <td>เลือกลบรายการทั้งหมด:</td>
+                                            <td> <input type="checkbox" id="select_dellall" style="width:70px;" /></td>
+                                            <td><button type="button" class="btn btn-outline-danger" id="_btndelall" style="display:none">Delete All</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div id="fixed-table-container-3" class="fixed-table-container" style="display:none">
+                    <div id="fixed-table-container-5" class="fixed-table-container" style="display:none">
                         <table id="exampletb">
                             <thead>
                                 <tr>
                                     <th>Disposal Qty.</th>
-                                    <th>Select</th>
+                                    <th>Delete</th>
+                                    @*<th>Select</th>*@
                                     <th>Company</th>
                                     <th>Item No.</th>
                                     <th>Description</th>
@@ -295,135 +410,15 @@
                                     @*<th>Claim No.</th>*@
                                     <th>Internal Invoice No.</th>
                                     <th>Internal Log No.</th>
-                                    <th>เลขที่เคลม Supplier</th>
-                                    <th>Invoice Supplier</th>
-                                    <th>CN Supplier</th>
                                     <th>Remark</th>
+                                    <th style="display:none">Select</th>
                                     @*<th>Sales Man</th>*@
-
-
-
                                 </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
                     </div>
                 </div>
-                <div class="card-header">
-                    <i class="fa fa-table"></i> Edit by Technical<li id="clickmetec" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
-                </div>
-                <div class="col-md-12" id="myDIVtec" style="display:none">
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i>Disposal No.:</span>
-                                <span><input type="text" id="_gennotec"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <button type="button" class="btn btn-success" id="_btnsearchdisposaltec">Search</button>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <button id="_printdisposalafter">Print รายงานทำลายสินค้า</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row" style="border-top: 5px solid rgba(199, 112, 38, 0.72);">
-                        <div class="col-md-12">
-                            <div class="form-group">
-
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i>Search Internal Claim No.:</span>
-                                <input type='text' id='txt_nameedit'>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i>Search item no.:</span>
-                                <input type='text' id='txt_searchalledit'>&nbsp;
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="table-responsive">
-                            <table class="table grid" id="alldeltb" style="display:none">
-                                <tbody>
-                                    <tr>
-                                        <td>เลือกลบรายการทั้งหมด:</td>
-                                        <td> <input type="checkbox" id="select_dellall" style="width:70px;" /></td>
-                                        <td><button type="button" class="btn btn-outline-danger" id="_btndelall" style="display:none">Delete All</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div id="fixed-table-container-5" class="fixed-table-container" style="display:none">
-                    <table id="exampletb">
-                        <thead>
-                            <tr>
-                                <th>Disposal Qty.</th>
-                                <th>Delete</th>
-                                @*<th>Select</th>*@
-                                <th>Company</th>
-                                <th>Item No.</th>
-                                <th>Description</th>
-                                <th>Location.</th>
-                                <th>Qty.</th>
-                                <th>Internal Claim No.</th>
-                                <th>UOM</th>
-                                <th>WE/WR/WF</th>
-                                <th>Claim date</th>
-                                <th>Due<br /> Disposal date</th>
-                                @*<th>Customer</th>*@
-                                @*<th>Claim No.</th>*@
-                                <th>Internal Invoice No.</th>
-                                <th>Internal Log No.</th>
-                                <th>Remark</th>
-                                <th style="display:none">Select</th>
-                                @*<th>Sales Man</th>*@
-
-
-
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-
             </div>
         </div>
         <div id="displayacc">
@@ -435,10 +430,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-
                         </div>
                     </div>
-
                     <div class="col-md-4">
                         <div class="form-group">
                             <span> <i class="fa fa-pencil"></i>Disposal No.:</span>

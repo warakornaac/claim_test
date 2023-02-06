@@ -363,12 +363,12 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Form Labal</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Label Form</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">คุณต้องการ พิมพ์ Labal หรือไม่/Print label? </div>
+                <div class="modal-body">คุณต้องการ พิมพ์ Label หรือไม่/Print label? </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal" id="btnnotprintlabal">No</button>
                     <button class="btn btn-secondary" type="button" id="btnprintlabal">Print</button>
@@ -3561,7 +3561,7 @@
                         console.log(data);
                         // waitingDialog.hide();
                         if (data.message == "true") {
-                            alert("บันทึกข้อมูลสำเร็จ")
+                            alert("บันทึกข้อมูลสำเร็จ/Save successfully")
                             //$("#textAlertWarning").empty();
                             //$("#textAlertWarning").text("บันทึกข้อมูลสำเร็จ");
                             //$("#textAlertWarning").modal();
@@ -3726,7 +3726,7 @@
                             //  waitingDialog.hide();
                             $("#_admin").val("2");
                             $("#textAlertSucces").empty();
-                            $("#textAlertSucces").text("บันทึกข้อมูลสำเร็จ");
+                            $("#textAlertSucces").text("บันทึกข้อมูลสำเร็จ/Save successfully");
                             $("#myModalSucces").modal();
                             $("#PrintModal").modal();
 
@@ -3861,7 +3861,7 @@
                 //console.log(leng)
                 if (leng == 1) {
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("กรุณา Upload image สองรูปขึ้นไป เพื่อประกอบพิจารณาเคลม");
+                    $("#textAlertWarning").text("กรุณา Upload image สองรูปขึ้นไป เพื่อประกอบพิจารณาเคลม/Please upload two or more images");
                     $("#myModalWarning").modal();
                     return false;
                 }
@@ -3930,7 +3930,7 @@
                         if (data.message == "true") {
                             //  waitingDialog.hide();
                             $("#textAlertSucces").empty();
-                            $("#textAlertSucces").text("บันทึกข้อมูลสำเร็จ");
+                            $("#textAlertSucces").text("บันทึกข้อมูลสำเร็จ/Save successfully");
                             $("#myModalSucces").modal();
                             $("#btnUpload").click();
                             $("#btnuploadsales").click();
@@ -4927,7 +4927,7 @@
                         if (data.message == "true") {
                             waitingDialog.hide();
                             $("#textAlertSucces").empty();
-                            $("#textAlertSucces").text("บันทึกข้อมูลสำเร็จ");
+                            $("#textAlertSucces").text("บันทึกข้อมูลสำเร็จ/Save successfully");
                             $("#myModalSucces").modal();
 
                             // $("#myModalSucces").click(function () {
@@ -4985,7 +4985,7 @@
                         if (data.message == "true") {
                             waitingDialog.hide();
                             $("#textAlertSucces").empty();
-                            $("#textAlertSucces").text("บันทึกข้อมูลสำเร็จ");
+                            $("#textAlertSucces").text("บันทึกข้อมูลสำเร็จ/Save successfully");
                             // $("#myModalSucces").modal();
                             location.reload();
                         } else {

@@ -309,8 +309,8 @@
         </div>
     </div>
     <div class="card mb-12">
-        <div class="card-header bg-primary">
-            <i class="fa fa-th-list"></i> Approve Claim Customer <li id="clickmeheader" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+        <div class="card-header">
+            <i class="fa fa-th-list"></i> Approve Claim Customer (GM) <li id="clickmeheader" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
         </div>
         <div class="card-body" id="myDIVheader">
             <div class="row">
@@ -841,7 +841,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-sort-down"></i>GM Status</span>
+                                <span> <i class="fa fa-sort-down"></i>GM Status:</span>
                                 <span>
                                     <select class="bar" id="gm_approve_status">
                                         <option value="0">Choose option</option>
@@ -871,7 +871,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 text-right">
+                        <div class="col-md-12 text-left">
                             <div class="form-group">
                                 <button class="btn btn-info" id="btn_save_gm">Submit</button>
                             </div>
@@ -2158,7 +2158,7 @@
             });
 
             $("#_PM").on("change", function (e) {
-        
+
                 $("#Nospankey").text("");
                 $("#subNospan").text("");
                 $("#_cusno").text("");
@@ -2237,7 +2237,7 @@
                 }
                 Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus)
             });
-        
+
             $("#_company").on("change", function (e) {
                 var valpm = $("#_PM").val();
                 var valstkgrp = $("#_stkgrp").val();
@@ -2454,7 +2454,7 @@
                             //  location.reload();
                         }
                         var fixedTable2 = fixTable(document.getElementById('fixed-table-container-2'));
-                       
+
                     }, complete : function(){
                         LoadingHide();
                     },
@@ -3523,46 +3523,30 @@
                 console.log('claimtypecke ' + claimtypecke);
                 if (gm_approve_date == "") {
                     ++error;
-                    msg += '<br>' + error + '. Please select an approval date.';
+                    //msg += '<br>' + error + '. Please select an approval date.';
+                    $("#textAlertWarning").empty();
+                    $("#textAlertWarning").text("Please select an approval date.");
+                    $("#myModalWarning").modal(); return false;
                 }
                 if (gm_approve_status == "0") {
                     ++error;
-                    msg += '<br>' + error + '. Please select an approval status.';
+                    // msg += '<br>' + error + '. Please select an approval status.';
+                    $("#textAlertWarning").empty();
+                    $("#textAlertWarning").text("Please select an approval status.");
+                    $("#myModalWarning").modal(); return false;
                 } else {
                     if (gm_approve_status == "2") {// ไม่อนุมัติ
                         if (gm_remark == "") {//ไม่มีหมายเหตุ
                             ++error;
-                            msg += '<br>' + error + '. Please specify additional notes.';
+                            // msg += '<br>' + error + '. Please specify additional notes.';
+                            $("#textAlertWarning").empty();
+                            $("#textAlertWarning").text("Please specify additional notes.");
+                            $("#myModalWarning").modal(); return false;
                         }
                     }
                 }
-                if (error) {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Please check the following information.',
-                        html: (error < 2) ? '<div class="ptop-10">' + msg + '</div>' : '<div class="text-left">' + msg + '</div>',
-                        confirmButtonColor: '#d33',
-                        confirmButtonText: 'close',
-                        allowOutsideClick: false,
-                        focusConfirm: false,
-                    });
-                    return false;
-                } else {
-                    Swal.fire({
-                        icon: 'question',
-                        title: 'save confirmation',
-                        html: '',
-                        showCancelButton: true,
-                        confirmButtonColor: '#00a65a',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'save',
-                        cancelButtonText: 'cancel',
-                        allowOutsideClick: false,
-                        focusConfirm: false,
-                    }).then((result) => {
-                        if (result.value) {
-                            $.ajax({
-                        url: '@Url.Action("SaveProcessClaimGmTam", "ProcessApproveGmTam")',
+                $.ajax({
+                    url: '@Url.Action("SaveProcessClaimGmTam", "ProcessApproveGmTam")',
                     data: {
                         SP_REQ_NO: nokey,
                         SP_CLM_NO_SUB: nosubkey,
@@ -3572,90 +3556,28 @@
                         SP_GM_APPRV_DATE: gm_approve_date,
                         SP_USERLOGIN: userlogin,
                         SP_CLAIMTYPE: claimtypecke,
-                        },
+                    },
                     type: "POST",
                     dataType: "JSON",
                     success: function (data) {
-                        console.log(data);
-                        if (data.message == "true") {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Approved successfully',
-                                // html: res.message,
-                                confirmButtonColor: '#3085d6',
-                                confirmButtonText: 'close',
-                                allowOutsideClick: false,
-                                focusConfirm: false,
-                                timer: 5000  // หน่วงเวลา
-                            }).then(
-                              function () {
-                                  //if (result.value) { // กรณีกดปุ่ม ตกลง
-                                  var valpm = $("#_PM").val();
-                                  var valststus = $("#_status").val();
-                                  var valDoc = $("#searchclaimno").val();
-                                  var valcom = $("#_company").val();
-                                  var valstkgrp = $("#_stkgrp").val();
-                                  var valstatdate = $("#_statdate").val();
-                                  var valenddate = $("#_enddate").val();
-                                  var valstatdatecus = $("#_statdate").val();
-                                  var valenddatecus = $("#_enddate").val();
-                                  var itemno = $("#_itemnosearch").val
-                                  if (itemno != "") {
-                                      itemno = splitval(itemno);
-                                  } else {
-                                      itemno = "";
-                                  }
-                                  Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus);
-                                  LoadingShow();
-                                  localtion.reload();
-                                  // }
-                              }
-                            )
 
-                            //  waitingDialog.hide();
-                            //$("#textAlertSucces").empty();
-                            //$("#textAlertSucces").text("บันทึกข้อมูลสำเร็จ");
-                            //$("#myModalSucces").modal();
-                            ////location.reload();
-                            //$("#myModalSucces").click(function () {
-                            //    var valpm = $("#_PM").val();
-                            //    var valststus = $("#_status").val();
-                            //    var valDoc = $("#searchclaimno").val();
-                            //    var valcom = $("#_company").val();
-                            //    var valstkgrp = $("#_stkgrp").val();
-                            //    var valstatdate = $("#_statdate").val();
-                            //    var valenddate = $("#_enddate").val();
-                            //    var valstatdatecus = $("#_statdate").val();
-                            //    var valenddatecus = $("#_enddate").val();
-                            //    var itemno = $("#_itemnosearch").val
-                            //    if (itemno != "") {
-                            //        itemno = splitval(itemno);
-                            //    } else {
-                            //        itemno = "";
-                            //    }
-                            //    Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus)
+                        $("#textAlertSucces").empty();
+                        $("#textAlertSucces").text("บันทึกข้อมูลสำเร็จ/Save successfully");
+                        $("#myModalSucces").modal();
 
-                            //});
-                        } else {
-                            //  waitingDialog.hide();
-                            //$("#textAlertWarning").empty();
-                            //$("#textAlertWarning").text(data.message);
-                            //$("#myModalWarning").modal(); return false;
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'System malfunction',
-                                html: 'Please notify the administrator <br>' + data.message,
-                                confirmButtonColor: '#d33',
-                                confirmButtonText: 'close',
-                                allowOutsideClick: false,
-                                focusConfirm: false,
-                            });
-                        }
+                        var valpm = $("#_PM").val();
+                        var valststus = $("#_status").val();
+                        var valDoc = $("#searchclaimno").val();
+                        var valcom = $("#_company").val();
+                        var valstkgrp = $("#_stkgrp").val();
+                        var valstatdate = $("#_statdate").val();
+                        var valenddate = $("#_enddate").val();
+                        var valstatdatecus = $("#_statdate").val();
+                        var valenddatecus = $("#_enddate").val();
+                        var itemno = $("#_itemnosearch").val || "";
+                        Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus);
                     }
                 });
-            }
-            });
-            }
             });
 
             function clearval() {

@@ -210,7 +210,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <span> <i class="fa fa-pencil"></i>เลขทีใบคำขอเคลม/Claim no:</span>
+                        <span> <i class="fa fa-pencil"></i>Claim no:</span>
                         <span>
                             <input type="text" id="_cliamno">
                         </span>
@@ -360,7 +360,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th style="height: 100%;">เลขที่เคลม/Claim no</th>
+                            <th style="height: 100%;">Claim no</th>
                             <th>Print</th>
                             <th>line no</th>
                             <th>Request date</th>
@@ -377,14 +377,14 @@
                             @*<th>สถานะเคลม</th>*@
                             <th>last update date</th>
                             <th>last update by</th>
-                            <th>สถานะ<br />เคลม</th>
-                            <th>สถานะ<br />รับของเคลม/Defect status</th>
+                            <th>สถานะเคลม/Claim status</th>
+                            <th>สถานะรับของเคลม/Defect status</th>
                             @*<th>Claim<br /> supplier</th>*@
                             <th>สินค้าหลังเคลม/Status after claim</th>
 
                             @*<th>Edit</th>
                                 <th>Tech staff</th>*@
-                            <th>ตรวจสอบ<br />รับสินค้า</th>
+                            <th>ตรวจสอบรับสินค้า<br />Check receive</th>
                             <th>Tech1</th>
                             <th>Tech2</th>
                             <th>PM</th>
@@ -405,7 +405,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th style="height: 100%;">เลขที่เคลม/Claim no</th>
+                            <th style="height: 100%;">Claim no</th>
                             <th>Print</th>
                             <th>line no</th>
                             <th>Request date</th>
@@ -423,13 +423,13 @@
                             <th>last update date</th>
                             <th>last update by</th>
                             <th>สถานะเคลม/Claim status</th>
-                            <th>สถานะ<br />รับของเคลม/Defect status</th>
+                            <th>สถานะรับของเคลม/Defect status</th>
                             @*<th>Claim<br /> supplier</th>*@
                             <th>สินค้าหลังเคลม/Status after claim</th>
                             <th>ยกเลิกเคลม/Claim cancel</th>
                             @*<th>Edit</th>
                                 <th>Tech staff</th>*@
-                            <th>ตรวจสอบ<br />รับสินค้า</th>
+                            <th>ตรวจสอบรับสินค้า<br />Check receive</th>
                             <th>Tech1</th>
                             <th>Tech2</th>
                             <th>PM</th>
@@ -457,7 +457,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th style="height: 100%;">เลขที่เคลม/Claim no</th>
+                            <th style="height: 100%;">Claim no</th>
                             <th>เลือกรายการ</th>
                             <th>Print</th>
                             <th>line no</th>
@@ -476,13 +476,13 @@
                             <th>last update date</th>
                             <th>last update by</th>
                             <th>สถานะเคลม/Claim status</th>
-                            <th>สถานะ<br />รับของเคลม/Defect status</th>
+                            <th>สถานะรับของเคลม/Defect status</th>
                             @*<th>Claim<br /> supplier</th>*@
                             <th>สินค้าหลังเคลม/Status after claim</th>
                             <th>ยกเลิกเคลม/Claim cancel</th>
                             @*<th>Edit</th>
                                 <th>Tech staff</th>*@
-                            <th>ตรวจสอบ<br />รับสินค้า</th>
+                            <th>ตรวจสอบรับสินค้า<br />Check receive</th>
                             <th>Tech1</th>
                             <th>Tech2</th>
                             <th>PM</th>
@@ -1323,17 +1323,17 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Print แบบฟอร์ม</h5>
+                    <h5 class="modal-title">Print Form</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>เลือก แบบฟอร์มที่ท่านต้องการ Print</p>
+                    <p>เลือก แบบฟอร์มที่ท่านต้องการ Print/Select the form print</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="refromreqest">ใบคำขอร้องชดเชยสินค้า</button>
-                    <button type="button" class="btn btn-secondary" id="refrompredeli">ใบรับคืนสินค้า</button>
+                    <button type="button" class="btn btn-primary" id="refromreqest">ใบคำขอร้องชดเชยสินค้า/Print request form</button>
+                    <button type="button" class="btn btn-secondary" id="refrompredeli">ใบรับคืนสินค้า/Return receipt</button>
                     <button class="btn btn-secondary" type="button" id="btnprintlabal">Re Print Lable</button>
                 </div>
             </div>
@@ -2423,9 +2423,9 @@
 
                                     if (CLM_STATUS != "7") {
                                         if (TECH1_PROCESS_STATUS == "0") {
-                                            SubmithtmlPage += '<td>  <button type="button" id="_btndelclaim" class="btn btn-default"  req_no="' + data.Getdata[i].val.REQ_NO + '"  clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '">ยกเลิก</button></td>';
+                                            SubmithtmlPage += '<td>  <button type="button" id="_btndelclaim" class="btn btn-default"  req_no="' + data.Getdata[i].val.REQ_NO + '"  clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '">ยกเลิก/cancel</button></td>';
                                         } else if (TECH1_PROCESS_STATUS == "1") {
-                                            SubmithtmlPage += '<td>  <button type="button" id="_btndelclaim" class="btn btn-default" disabled="disabled"  req_no="' + data.Getdata[i].val.REQ_NO + '"  clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '">ยกเลิก</button></td>';
+                                            SubmithtmlPage += '<td>  <button type="button" id="_btndelclaim" class="btn btn-default" disabled="disabled"  req_no="' + data.Getdata[i].val.REQ_NO + '"  clm_no_sub="' + data.Getdata[i].val.CLM_NO_SUB + '">ยกเลิก/cancel</button></td>';
                                         }
                                         if (ADMIN_ANLYS_STATUS == "0") {
                                             SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รอการตรวจรับสินค้า"></span></td>';

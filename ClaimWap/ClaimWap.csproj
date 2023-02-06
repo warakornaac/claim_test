@@ -2072,6 +2072,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="VideoFileUpload\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -2229,9 +2230,6 @@
     <Content Include="Content\Login_v2\vendor\bootstrap\css\bootstrap.min.css.map" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Account\LogIn.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\ProcessApprove\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -2275,7 +2273,6 @@
     <Content Include="Views\Disposal\Index.cshtml" />
     <Content Include="Views\Process_Supplier\Index.cshtml" />
     <Content Include="Views\CheckstatusCus\Index.cshtml" />
-    <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Create_Customer\Index.cshtml" />
     <Content Include="Views\CreatecfreezesCustomer\Index.cshtml" />
     <Content Include="Views\CheckstatusCustomer\Index.cshtml" />
@@ -2473,6 +2470,11 @@
     <Content Include="Views\apidata\Index.cshtml" />
     <Content Include="Views\ProcessApprove_WHDM_MD\Index.cshtml" />
     <Content Include="Views\ProcessApproveSmTam\Index.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\LogIn Soon.cshtml" />
+    <Content Include="Views\Account\LogIn.cshtml" />
+    <Content Include="Views\ProcessApproveGmTam\Index.cshtml" />
+    <Content Include="Views\ProcessApprovSM\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

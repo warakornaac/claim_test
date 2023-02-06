@@ -90,9 +90,6 @@
                         </div>
                     </div>
 
-
-
-
                 </div>
 
                 <div class="row">
@@ -209,415 +206,415 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div style="border-bottom: 1px solid #1447798c; padding-bottom: 15px; padding-top: 10px; width: 1700px;"></div>
-            </div>
-            <div class="card-header">
-                <i class="fa fa-table"></i> Create by Technical<li id="clickmecreate" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
-            </div>
-            <div class="col-md-12" id="myDIVcreate">
-                <div class="row" style="padding-top: 10px;">
-                    <div class="table-responsive">
-                        <table class="table grid">
-                            <tbody>
-                                <tr>
-                                    <td>เลือกรายการส่งClaim Supplier:</td>
-                                    <td> <input type="checkbox" id="select_all" style="width:70px;" /></td>
-                                    <td> <button type="button" class="btn btn-success" id="_btnconfrim">บันทึกรายการส่งเรื่องให้ Supplier</button></td>
-                                    @*<td> <button type="button" class="btn btn-success" id="_btnblackconfrim">ยืนยันเรื่องตอบกลับจาก supplier</button></td>*@
-                                </tr>
-                                <tr>
-                                    <td>จำนวนรอส่ง Supplier</td>
-                                    <td><div id="rowcount"></div></td>
-                                    <td>รายการ</td>
-
-                                </tr>
-                                <tr>
-                                    <td>จำนวนที่ท่านเลือก</td>
-                                    <td><div id="rowcountuse"></div></td>
-                                    <td>รายการ</td>
-                                    <td>จำนวนเบอร์สินค้า</td>
-                                    <td><div id="rowcountstl"></div></td>
-                                    <td>เบอร์</td>
-                                    <td>จำนวนสินค้า</td>
-                                    <td><div id="rowcountstlitem"></div></td>
-                                    <td>ชิ้น</td>
-                                    <td style="display:none">จำนวนเงินทั้งหมด</td>
-                                    <td style="display:none"><div id="rowcountamt"></div></td>
-                                    <td style="display:none">บาท</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="card mb-12">
+                <div class="card-header">
+                    <i class="fa fa-table"></i> Create by Technical<li id="clickmecreate" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
-                <div id="fixed-table-container-3" class="fixed-table-container" style="display:block">
-                    <table id="exampletb">
-                        <thead>
-                            <tr>
-                                <th>Internal Claim No.</th>
-                                <th>Select</th>
-                                <th>Claim Date</th>
-                                <th>Pm Approve</th>
-                                <th>Item No.</th>
-                                <th>Description</th>
-                                <th>Claim Qty.</th>
-                                <th>Invoice <br />Qty Supplier</th>
-                                <th>Invoice <br />Cur Supplier</th>
-                                <th>Invoice <br />RATE Supplier</th>
-                                <th>Unit Cost</th>
-                                <th>Amount</th>
-                                <th>Invoice Supplier</th>
-                                <th>Invoice Date Supplier</th>
-                                <th>WE/WR/WF</th>
-                                <th>Supplier</th>
+                <div class="col-md-12" id="myDIVcreate">
+                    <div class="row" style="padding-top: 10px;">
+                        <div class="table-responsive">
+                            <table class="table grid">
+                                <tbody>
+                                    <tr>
+                                        <td>เลือกรายการส่งClaim Supplier:</td>
+                                        <td> <input type="checkbox" id="select_all" style="width:70px;" /></td>
+                                        <td> <button type="button" class="btn btn-success" id="_btnconfrim">บันทึกรายการส่งเรื่องให้ Supplier</button></td>
+                                        @*<td> <button type="button" class="btn btn-success" id="_btnblackconfrim">ยืนยันเรื่องตอบกลับจาก supplier</button></td>*@
+                                    </tr>
+                                    <tr>
+                                        <td>จำนวนรอส่ง Supplier</td>
+                                        <td><div id="rowcount"></div></td>
+                                        <td>รายการ</td>
 
-                                <th>Internal Log No.</th>
-                                @*<th>ดำเนินเรื่อง</th>*@
-                                <th>ผู้ดูแล</th>
-                                @*<th>Customer</th>
-                                    <th>Sales Man</th>*@
-                                <th>UOM</th>
-                                @*<th>สถานะเคลม</th>*@
-                                @*<<th>last update date</th>*@
-                                @*<<th>last update by</th>*@
-                                @*<th>สถานะเคลม</th>*@
-                                @*<th>สถานะ<br />รับของเคม</th>*@
-                                @*<th>Claim<br /> supplier</th>*@
-
-                                @*<th>ยกเลิกเคลม</th>*@
-                                @*<th>Edit</th>
-                                    <th>Tech staff</th>*@
-                                @*<th>ตรวจสอบ<br />รับสินค้า</th>
-                                    <th>Tech1</th>
-                                    <th>Tech2</th>
-                                    <th>PM</th>*@
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-
-            @*<button class="SendEmail">Send Email</button>*@
-            <div class="card-header">
-                <i class="fa fa-table"></i> Edit by Technical<li id="clickmetec" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
-            </div>
-            <div class="col-md-12" id="myDIVtecedit" style="display:none">
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-
+                                    </tr>
+                                    <tr>
+                                        <td>จำนวนที่ท่านเลือก</td>
+                                        <td><div id="rowcountuse"></div></td>
+                                        <td>รายการ</td>
+                                        <td>จำนวนเบอร์สินค้า</td>
+                                        <td><div id="rowcountstl"></div></td>
+                                        <td>เบอร์</td>
+                                        <td>จำนวนสินค้า</td>
+                                        <td><div id="rowcountstlitem"></div></td>
+                                        <td>ชิ้น</td>
+                                        <td style="display:none">จำนวนเงินทั้งหมด</td>
+                                        <td style="display:none"><div id="rowcountamt"></div></td>
+                                        <td style="display:none">บาท</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>เลขที่ส่งเคลม Supplier.:</span>
-                            <span><select id="_suppliernosendedit"></select></span>
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div class="form-group">
-                            <button type="button" class="btn btn-success" id="_btnsearchsupedit">Search</button>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <button type="button" class="btn btn-success" id="_updatesupedit">Update รายการ</button>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <button type="button" class="btn btn-success" id="_btnoksupedit">ยืนยันส่งเรื่องส่ง Supplier</button>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <button type="button" class="btn btn-success" id="_btnprintdocsupedit">Print เอกสาร </button>
-                        </div>
-                    </div>
-
-
-                    @*<div class="col-md-4">
-                            <div class="form-group">
-                                <button type="button" class="btn btn-success" id="_btnsearchdisposaltec">Search</button>
-                            </div>
-                        </div>*@
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            @*<button id="_printdisposalafter">Print รายงานทำลายสินค้า</button>*@
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i>Search Internal Claim No.:</span>
-                                <input type='text' id='txt_nameedit'>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i>Search Item No.:</span>
-                                <input type='text' id='txt_nameedititem'>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="table-responsive">
-                                <table class="table grid" id="alldeltb" style="display:none">
-                                    <tbody>
-                                        <tr>
-                                            <td>เลือกลบรายการทำลายทั้งหมด:</td>
-                                            <td> <input type="checkbox" id="select_dellalledit" style="width:70px;" /></td>
-                                            <td><button type="button" class="btn btn-outline-danger" id="_btndelall" style="display:none">Delete All</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="table-responsive">
-                                <table class="table grid" id="alldeltb" style="display:none">
-                                    <tbody>
-                                        <tr>
-                                            <td>เลือกลบรายการทำลายทั้งหมด:</td>
-                                            <td> <input type="checkbox" id="select_dellall" style="width:70px;" /></td>
-                                            <td><button type="button" class="btn btn-outline-danger" id="_btndelall" style="display:none">Delete All</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="fixed-table-container-4" class="fixed-table-container" style="display:block">
-                        <table id="exampletbedit">
+                    <div id="fixed-table-container-3" class="fixed-table-container" style="display:block">
+                        <table id="exampletb">
                             <thead>
                                 <tr>
                                     <th>Internal Claim No.</th>
                                     <th>Select</th>
-                                    <th>Delete</th>
                                     <th>Claim Date</th>
                                     <th>Pm Approve</th>
                                     <th>Item No.</th>
                                     <th>Description</th>
-                                    <th>Claim Qty.</th>    
+                                    <th>Claim Qty.</th>
                                     <th>Invoice <br />Qty Supplier</th>
                                     <th>Invoice <br />Cur Supplier</th>
-                                    <th>Invoice <br />RATE Supplier</th>                               
+                                    <th>Invoice <br />RATE Supplier</th>
                                     <th>Unit Cost</th>
                                     <th>Amount</th>
                                     <th>Invoice Supplier</th>
                                     <th>Invoice Date Supplier</th>
                                     <th>WE/WR/WF</th>
                                     <th>Supplier</th>
+
                                     <th>Internal Log No.</th>
+                                    @*<th>ดำเนินเรื่อง</th>*@
                                     <th>ผู้ดูแล</th>
+                                    @*<th>Customer</th>
+                                <th>Sales Man</th>*@
                                     <th>UOM</th>
+                                    @*<th>สถานะเคลม</th>*@
+                                    @*<<th>last update date</th>*@
+                                    @*<<th>last update by</th>*@
+                                    @*<th>สถานะเคลม</th>*@
+                                    @*<th>สถานะ<br />รับของเคม</th>*@
+                                    @*<th>Claim<br /> supplier</th>*@
+
+                                    @*<th>ยกเลิกเคลม</th>*@
+                                    @*<th>Edit</th>
+                                <th>Tech staff</th>*@
+                                    @*<th>ตรวจสอบ<br />รับสินค้า</th>
+                                <th>Tech1</th>
+                                <th>Tech2</th>
+                                <th>PM</th>*@
                                 </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
                     </div>
                 </div>
-            </div>
-            <div class="card-header">
-                <i class="fa fa-table"></i> ยืนยันเรื่องตอบกลับจาก supplier<li id="clickme" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
-            </div>
-            <div class="card-body" id="myDIV">
-                <table class="table grid">
-                    <tbody></tbody>
-                </table>
-                <div style="">
-                    <div class="row" style="padding-top: 10px;">
 
-                        <div class="table-responsive">
-                            <table class="table grid">
-                                <tbody>
-                                    <tr>
-                                        <td style="width:30%">เลขที่ส่งเคลม Supplier.:<select id="_suppliernosend"></select></td>
-                                        <td><button type="button" class="btn btn-success" id="_btnsearchdocsup">Search</button></td>
-                                        <td><button type="button" class="btn btn-success" id="_btnprintdocsup">Print เอกสาร </button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                @*<button class="SendEmail">Send Email</button>*@
+                <div class="card-header">
+                    <i class="fa fa-table"></i> Edit by Technical<li id="clickmetec" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+                </div>
+                <div class="col-md-12" id="myDIVtecedit" style="display:none">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>เลขที่ส่งเคลม Supplier.:</span>
+                                <span><select id="_suppliernosendedit"></select></span>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" id="_btnsearchsupedit">Search</button>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" id="_updatesupedit">Update รายการ</button>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" id="_btnoksupedit">ยืนยันส่งเรื่องส่ง Supplier</button>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" id="_btnprintdocsupedit">Print เอกสาร </button>
+                            </div>
                         </div>
 
-                        <div class="table-responsive" id="fucntec" style="display:none">
-                            <table class="table grid">
-                                <tbody>
-                                    <tr>
-                                        <td style="">เปิดFuntion Reopen:</td>
-                                        <td>
-                                            <select id="_stareopentec" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;float:inherit;">
-                                                <option value="0" selected>เลือก option</option>
-                                                <option value="Y">Yes</option>
-                                                <option value="N">No</option>
-                                            </select>
-                                        </td>
-                                        <td>@*<button type="button" class="btn btn-success" id="close_btnsupplier">ปิดงาน</button>*@</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
 
-                                    <tr>
-                                        <td style="">เลือกรายการ Reopen ทั้งหมด:</td>
-                                        <td><input type="checkbox" id="close_allsupplier" style="width:40px;" disabled="disabled" /></td>
-                                        <td>@*<button type="button" class="btn btn-success" id="close_btnsupplier">ปิดงาน</button>*@</td>
-                                        <td><button type="button" class="btn btn-success" id="open_btnsupplier" disabled="disabled">Reopen</button></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        @*<div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-success" id="_btnsearchdisposaltec">Search</button>
                         </div>
-
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table grid">
-                            <tbody>
-                                <tr style="border-top: 5px solid rgba(199, 112, 38, 0.72);">
-                                    <td style="">เลือกรายการยืนยันจาก Supplier ทั้งหมด:</td>
-                                    <td><input type="checkbox" id="select_allsupplier" style="width:40px;" /></td>
-                                    <td><button type="button" class="btn btn-success" id="_btnsupplier">บันทึกรายการเคลมจากSupplier</button></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>@*<button type="button" class="btn btn-success" id="close_btnsupplier">ปิดงาน</button>*@</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>จำนวนรอยืนยันจาก Supplier</td>
-                                    <td><div id="rowcountsupplier"></div></td>
-                                    <td>รายการ</td>
-                                </tr>
-                                <tr style="border-bottom: 5px solid rgba(199, 112, 38, 0.72);">
-                                    <td>จำนวนที่ท่านเลือก</td>
-                                    <td><div id="rowcountselectsupplier"></div></td>
-                                    <td>รายการ</td>
-                                    <td>จำนวนเบอร์สินค้า</td>
-                                    <td><div id="rowcountstlsupplier"></div></td>
-                                    <td>เบอร์</td>
-                                    <td>จำนวนสินค้า</td>
-                                    <td><div id="rowcountstlitemsupplier"></div></td>
-                                    <td>ชิ้น</td>
-
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="table-responsive">
-
+                    </div>*@
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @*<button id="_printdisposalafter">Print รายงานทำลายสินค้า</button>*@
+                            </div>
                         </div>
                     </div>
+                    <div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
 
-                    <div class="row" style="padding-top: 10px;">
-                        <div class="table-responsive">
-                            <table class="table grid">
-                                <tbody>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-pencil"></i>Search Internal Claim No.:</span>
+                                    <input type='text' id='txt_nameedit'>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-pencil"></i>Search Item No.:</span>
+                                    <input type='text' id='txt_nameedititem'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="table-responsive">
+                                    <table class="table grid" id="alldeltb" style="display:none">
+                                        <tbody>
+                                            <tr>
+                                                <td>เลือกลบรายการทำลายทั้งหมด:</td>
+                                                <td> <input type="checkbox" id="select_dellalledit" style="width:70px;" /></td>
+                                                <td><button type="button" class="btn btn-outline-danger" id="_btndelall" style="display:none">Delete All</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="table-responsive">
+                                    <table class="table grid" id="alldeltb" style="display:none">
+                                        <tbody>
+                                            <tr>
+                                                <td>เลือกลบรายการทำลายทั้งหมด:</td>
+                                                <td> <input type="checkbox" id="select_dellall" style="width:70px;" /></td>
+                                                <td><button type="button" class="btn btn-outline-danger" id="_btndelall" style="display:none">Delete All</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="fixed-table-container-4" class="fixed-table-container" style="display:block">
+                            <table id="exampletbedit">
+                                <thead>
                                     <tr>
-                                        <td><i class="fa fa-pencil"></i><span>Search Internal Claim No.:</span><input type='text' id='txt_searchall'></td>
-                                        <td></td>
-                                        <td><i class="fa fa-pencil"></i><span>Search Item No.:</span><input type='text' id='txt_name'></td>
+                                        <th>Internal Claim No.</th>
+                                        <th>Select</th>
+                                        <th>Delete</th>
+                                        <th>Claim Date</th>
+                                        <th>Pm Approve</th>
+                                        <th>Item No.</th>
+                                        <th>Description</th>
+                                        <th>Claim Qty.</th>
+                                        <th>Invoice <br />Qty Supplier</th>
+                                        <th>Invoice <br />Cur Supplier</th>
+                                        <th>Invoice <br />RATE Supplier</th>
+                                        <th>Unit Cost</th>
+                                        <th>Amount</th>
+                                        <th>Invoice Supplier</th>
+                                        <th>Invoice Date Supplier</th>
+                                        <th>WE/WR/WF</th>
+                                        <th>Supplier</th>
+                                        <th>Internal Log No.</th>
+                                        <th>ผู้ดูแล</th>
+                                        <th>UOM</th>
                                     </tr>
-
-                                </tbody>
+                                </thead>
+                                <tbody></tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <div id="fixed-table-container-5" class="fixed-table-container" style="display:block">
-                    <table id="recsupp">
-                        <thead>
-                            <tr>
-                                <th>Select</th>
-                                <th>No.</th>
-                                <th>Item No.</th>
-                                <th>Claim Qty.</th>
-                                <th>Internal Claim No.</th>
-                                <th>Invoice Supplier.</th>
-                                <th>Invoice Date Supplier.</th>
-                                <th>Invoice No.</th>
-                                <th>Qty_Inv</th>
-                                <th>Upload_Inv</th>
-                                <th>CN No.</th>
-                                <th>Qty_CN</th>
-                                <th>Amt_CN</th>
-                                <th>Cur Supplier</th>
-                                <th>Upload_Cn</th>
-                                <th>QtyInv_Cancel</th>
-                                <th>QtyCn_Cancel</th>
-                                <th>Description</th>
-                                <th>Supplier</th>
-                                <th>UOM</th>
-                                <th>Status</th>
-                                <th>Status</th>
-
-                            </tr>
-                        </thead>
+                <div class="card-header">
+                    <i class="fa fa-table"></i> ยืนยันเรื่องตอบกลับจาก supplier<li id="clickme" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+                </div>
+                <div class="card-body" id="myDIV">
+                    <table class="table grid">
                         <tbody></tbody>
-
                     </table>
+                    <div style="">
+                        <div class="row" style="padding-top: 10px;">
 
+                            <div class="table-responsive">
+                                <table class="table grid">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:30%">เลขที่ส่งเคลม Supplier.:<select id="_suppliernosend"></select></td>
+                                            <td><button type="button" class="btn btn-success" id="_btnsearchdocsup">Search</button></td>
+                                            <td><button type="button" class="btn btn-success" id="_btnprintdocsup">Print เอกสาร </button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="table-responsive" id="fucntec" style="display:none">
+                                <table class="table grid">
+                                    <tbody>
+                                        <tr>
+                                            <td style="">เปิดFuntion Reopen:</td>
+                                            <td>
+                                                <select id="_stareopentec" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;float:inherit;">
+                                                    <option value="0" selected>เลือก option</option>
+                                                    <option value="Y">Yes</option>
+                                                    <option value="N">No</option>
+                                                </select>
+                                            </td>
+                                            <td>@*<button type="button" class="btn btn-success" id="close_btnsupplier">ปิดงาน</button>*@</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="">เลือกรายการ Reopen ทั้งหมด:</td>
+                                            <td><input type="checkbox" id="close_allsupplier" style="width:40px;" disabled="disabled" /></td>
+                                            <td>@*<button type="button" class="btn btn-success" id="close_btnsupplier">ปิดงาน</button>*@</td>
+                                            <td><button type="button" class="btn btn-success" id="open_btnsupplier" disabled="disabled">Reopen</button></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table grid">
+                                <tbody>
+                                    <tr style="border-top: 5px solid rgba(199, 112, 38, 0.72);">
+                                        <td style="">เลือกรายการยืนยันจาก Supplier ทั้งหมด:</td>
+                                        <td><input type="checkbox" id="select_allsupplier" style="width:40px;" /></td>
+                                        <td><button type="button" class="btn btn-success" id="_btnsupplier">บันทึกรายการเคลมจากSupplier</button></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>@*<button type="button" class="btn btn-success" id="close_btnsupplier">ปิดงาน</button>*@</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>จำนวนรอยืนยันจาก Supplier</td>
+                                        <td><div id="rowcountsupplier"></div></td>
+                                        <td>รายการ</td>
+                                    </tr>
+                                    <tr style="border-bottom: 5px solid rgba(199, 112, 38, 0.72);">
+                                        <td>จำนวนที่ท่านเลือก</td>
+                                        <td><div id="rowcountselectsupplier"></div></td>
+                                        <td>รายการ</td>
+                                        <td>จำนวนเบอร์สินค้า</td>
+                                        <td><div id="rowcountstlsupplier"></div></td>
+                                        <td>เบอร์</td>
+                                        <td>จำนวนสินค้า</td>
+                                        <td><div id="rowcountstlitemsupplier"></div></td>
+                                        <td>ชิ้น</td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="table-responsive">
+
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-top: 10px;">
+                            <div class="table-responsive">
+                                <table class="table grid">
+                                    <tbody>
+                                        <tr>
+                                            <td><i class="fa fa-pencil"></i><span>Search Internal Claim No.:</span><input type='text' id='txt_searchall'></td>
+                                            <td></td>
+                                            <td><i class="fa fa-pencil"></i><span>Search Item No.:</span><input type='text' id='txt_name'></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="fixed-table-container-5" class="fixed-table-container" style="display:block">
+                        <table id="recsupp">
+                            <thead>
+                                <tr>
+                                    <th>Select</th>
+                                    <th>No.</th>
+                                    <th>Item No.</th>
+                                    <th>Claim Qty.</th>
+                                    <th>Internal Claim No.</th>
+                                    <th>Invoice Supplier.</th>
+                                    <th>Invoice Date Supplier.</th>
+                                    <th>Invoice No.</th>
+                                    <th>Qty_Inv</th>
+                                    <th>Upload_Inv</th>
+                                    <th>CN No.</th>
+                                    <th>Qty_CN</th>
+                                    <th>Amt_CN</th>
+                                    <th>Cur Supplier</th>
+                                    <th>Upload_Cn</th>
+                                    <th>QtyInv_Cancel</th>
+                                    <th>QtyCn_Cancel</th>
+                                    <th>Description</th>
+                                    <th>Supplier</th>
+                                    <th>UOM</th>
+                                    <th>Status</th>
+                                    <th>Status</th>
+
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+
+                        </table>
+
+                    </div>
                 </div>
+
             </div>
-        </div>
+            </div>
 
     </div>
     <!-- The Modal -->
@@ -1928,6 +1925,7 @@
                     });
                 }
             });
+
             $.ajax({
                 url: '@Url.Action("GetSupplierReceiveNo", "Process_Supplier")',
                 data: {
@@ -2751,6 +2749,8 @@
                     Doc = 'SUA'
                 } else if (com == "OMP") {
                     Doc = 'SUO'
+                } else if (com == "TAM") {
+                    Doc = 'SUM'
                 }
                 else if (com == "ALL") {
                     alert("กรุณาเลือก Company");
