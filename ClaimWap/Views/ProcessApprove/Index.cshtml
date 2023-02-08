@@ -3543,18 +3543,15 @@
                 var nosubkey = $("#subNospan").text();
                 var pm = $("#_PM").val();  // Product Manager
                 var pmdate = $("#_pmdate").val(); //วันที่PM พิจารณา
-                var pmtstus = $("#_pmtstus").val(); //สถานะอนุมัติ
+                var pmtstus = $("#_pmtstus").val(); //สถานะอนุมัติ app, rej
                 var pmremake = $("#remakepm").val();
                 var pmreplacpn = $("#_pmnewpn").val();
                 var userlogin = $("#_uderlogin").val();
-                var anlysstatustecpm = $("#_anlysstatustecpm").val();
+                var anlysstatustecpm = $("#_anlysstatustecpm").val(); //WR,WE,WF
                 var anlysafterprotecpm = $("#_anlysafterprotecpm").val();
                 var scrapdatetecpm = $("#_scrapdatetecpm").val();
                 var claimtypecke = $("input[name='vehicle']:checked").val();
-
-
                 if (pmtstus == "1") { //อนุมัติ
-
                     if (anlysstatustecpm == "4") {
                         $("#textAlertWarning").empty();
                         $("#textAlertWarning").text("กรุณาเลือก สถานะการวิเคราะห์ WR,WE,WF");
@@ -3616,12 +3613,12 @@
                         aj_REQ_NO: nokey,
                         aj_CLM_NO_SUB: nosubkey,
                         aj_PM_NAME: pm,
-                        aj_PM_APPRV_STATUS: pmtstus,
+                        aj_PM_APPRV_STATUS: pmtstus,//สถานะอนุมัติ app, rej
                         aj_PM_REMARK: pmremake,
                         aj_PM_APPRV_DATE: pmdate,
                         aj_PM_Replacement: pmreplacpn,
                         aj_userlogin: userlogin,
-                        aj_anlysstatustecpm: anlysstatustecpm,
+                        aj_anlysstatustecpm: anlysstatustecpm,//WR,WE,WF
                         aj_anlysafterprotecpm: anlysafterprotecpm,
                         aj_scrapdatetecpm: scrapdatetecpm,
                         clamtyp: claimtypecke

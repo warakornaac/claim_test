@@ -49,7 +49,7 @@
     <script src="~/Content/Login_v2/vendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
     <script src="~/Content/Login_v2/js/main.js"></script>
-   
+
 </head>
 
 <body>
@@ -75,9 +75,7 @@
                                 <div class="editor-field">
                                     @Html.TextBoxFor(u => u.Usre)
                                     @Html.ValidationMessageFor(u => u.Usre)
-                                    
                                 </div>
-                               
                             </div>
 
                             <div class="wrap-input100 validate-input" data-validate="Enter password">
@@ -103,30 +101,22 @@
                                 </div>
                             </div>
                             <br />
-                            
-                          @*<div id="singup">สมัครสมาชิก</div>*@
+
+                            @*<div id="singup">สมัครสมาชิก</div>*@
                             <strong><div id="reset" style="color: red;float:right;">ลืมรหัสผ่าน</div></strong>
-                            
+
                             <div class="text-center p-t-115">
                                 <div id="meassagetext" style="color: red;float:right;"></div>
 
                             </div>
                         </form>
-                     </fieldset>
+                    </fieldset>
                     <div style="color:red">@Html.ValidationSummary(true, "Login Failed, check details")</div>
-
-
-
-
                     <div class="col-md-10" style="text-align:center;">
-                        Version 1.0/2018
+                        Version 2.0/2023
                     </div>
-
-
                 }
-
             </div>
-
         </div>
     </div>
 
@@ -147,7 +137,7 @@
                 <!--Body-->
                 <div class="modal-body">
                     <div class="md-form">
-                       <!--<i class="fas fa-envelope prefix grey-text"></i>-->
+                        <!--<i class="fas fa-envelope prefix grey-text"></i>-->
                         <input type="email" id="formemailsiup" class="form-control validate">
                         <label data-error="wrong" data-success="right" for="form2">Your email</label>
                     </div>
@@ -157,13 +147,13 @@
                         <label data-error="wrong" data-success="right" for="form3">Your name</label>
                     </div>
 
-                   
+
                 </div>
 
                 <!--Footer-->
                 @*<div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-outline-warning waves-effect" id="reqpassword">รับ Password <i class="fas fa-paper-plane-o ml-1"></i></button>
-                </div>*@
+                        <button type="button" class="btn btn-outline-warning waves-effect" id="reqpassword">รับ Password <i class="fas fa-paper-plane-o ml-1"></i></button>
+                    </div>*@
             </div>
             <!--/.Content-->
         </div>
@@ -205,62 +195,62 @@
     </div>
 
     @*<script src="~/Scripts/notview.js"></script>*@
-   
-     <script type="text/javascript">
-         $(document).ready(function () {
-             $(".toggle-passwordCur").click(function () {
-                 $(this).toggleClass("fa-eye fa-eye-slash");
-                 var input =$("#Password").attr("type");
-               
-                 if (input == "password") {
-                     $("#Password").attr("type","text")
-                 } else {
-                     $("#Password").attr("type", "password");
-                 }
-             });
-             $("#reset").on("click", function (e) {
-                // $("#orangeModalSubscription").modal();
-             });
-             $("#reset").on("click", function (e) {
-                 $("#orangeModalchange").modal();
-             });
-             $("#reqpassword").on("click", function (e) {
 
-                 var email = $("#formemail").val();
-                 if (email == "") {
-                     alert("กรุณาใส่ Email ที่ใช้ลงทะเบียน");
-                     $("#orangeModalchange").modal('hide');
-                     $("#formemail").val("");
-                     return false
-                 }
-                 var charsPattern = email.substr(email.length - 9);
-                
-                 if (charsPattern == "aac.co.th") {
-                     $("#orangeModalchange").modal('hide');
-                     alert("ใช้ได้สำหรับลูกค้าเท่านั้น");
-                     
-                     $("#formemail").val("");
-                     return false
-                 }
-                 $("#orangeModalchange").modal('hide');
-                  $.ajax({
-                     url: '@Url.Action("Forgotpassword","Account")',
-                      data: {
-                          mlie: email
-                      },
-                      type: "POST",
-                      dataType: "JSON",
-                      success: function (data) {
-                          console.log(data)
-                          $("#orangeModalchange").modal('hide');
-                          alert(data.message)
-                          $("#meassagetext").html(data.message);
-                          $("#formemail").val("");
-                      }
-                  });
-             });
-         });
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".toggle-passwordCur").click(function () {
+                $(this).toggleClass("fa-eye fa-eye-slash");
+                var input = $("#Password").attr("type");
+
+                if (input == "password") {
+                    $("#Password").attr("type", "text")
+                } else {
+                    $("#Password").attr("type", "password");
+                }
+            });
+            $("#reset").on("click", function (e) {
+                // $("#orangeModalSubscription").modal();
+            });
+            $("#reset").on("click", function (e) {
+                $("#orangeModalchange").modal();
+            });
+            $("#reqpassword").on("click", function (e) {
+
+                var email = $("#formemail").val();
+                if (email == "") {
+                    alert("กรุณาใส่ Email ที่ใช้ลงทะเบียน");
+                    $("#orangeModalchange").modal('hide');
+                    $("#formemail").val("");
+                    return false
+                }
+                var charsPattern = email.substr(email.length - 9);
+
+                if (charsPattern == "aac.co.th") {
+                    $("#orangeModalchange").modal('hide');
+                    alert("ใช้ได้สำหรับลูกค้าเท่านั้น");
+
+                    $("#formemail").val("");
+                    return false
+                }
+                $("#orangeModalchange").modal('hide');
+                $.ajax({
+                    url: '@Url.Action("Forgotpassword","Account")',
+                    data: {
+                        mlie: email
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data)
+                        $("#orangeModalchange").modal('hide');
+                        alert(data.message)
+                        $("#meassagetext").html(data.message);
+                        $("#formemail").val("");
+                    }
+                });
+            });
+        });
     </script>
-   
+
 </body>
 </html>

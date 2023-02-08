@@ -852,7 +852,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    @*<div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <span> <i class="fa fa-pencil"></i> Warranty claim type by saleman:</span>
@@ -861,7 +861,7 @@
                                 </span>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -884,6 +884,49 @@
                     <i class="fa fa-table"></i>Saleman Approve <li id="clickmeSaleman" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="col-md-12" id="myDIVSM" style="display:none;">
+                    <div class="row pt-2 pb-1">
+                        <div class="col-md-12 text-left">
+                            <span class="alert-success"><i class="fa fa-user"></i> Cliam Type by PM</span><br />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Warranty claim type:</span>
+                                <span>
+                                    <select class="bar" id="_anlysstatustecpm_pm"></select>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-sort-down"></i>Status</span>
+                                <span>
+                                    <select class="bar" id="_pmtstus_pm"></select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="padding: 0px;">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row pb-1">
+                        <div class="col-md-12 text-left">
+                            <span class="alert-warning"><i class="fa fa-user"></i> Cliam Type by Salesman</span><br />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Warranty claim type:</span>
+                                <span>
+                                    <select class="bar" id="_anlysstatus_sm"></select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -1486,6 +1529,9 @@
             });
             $(document).ready(function () {
                 $('#_anlysstatustecpm_sm').attr('disabled', true);
+                $('#_anlysstatustecpm_pm').attr('disabled', true);  
+                $('#_anlysstatus_sm').attr('disabled', true);
+                $('#_pmtstus_pm').attr('disabled', true);
 
                 //ถ้าเป็น TAM -> company = TAM
                 var company = '@company';
@@ -1998,7 +2044,6 @@
 
                         select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
                     });
-                    //Saleman view
                     var select = $("#_anlysstatustecpm_sm");
                     select.children().remove();
                     // select.append($("<option>").val("0").text("เลือกCUSCOD"));
@@ -2006,6 +2051,23 @@
 
                         select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
                     });
+                    var select = $("#_anlysstatustecpm_pm");
+                    select.children().remove();
+                    // select.append($("<option>").val("0").text("เลือกCUSCOD"));
+                    $(data).each(function (index, item) {
+
+                        select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                    });  
+                    
+                    //Saleman view
+                    var select = $("#_anlysstatus_sm");
+                    select.children().remove();
+                    // select.append($("<option>").val("0").text("เลือกCUSCOD"));
+                    $(data).each(function (index, item) {
+
+                        select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                    }); 
+
                     var select = $("#_anlysstatustectech");
                     select.children().remove();
                     // select.append($("<option>").val("0").text("เลือกCUSCOD"));
@@ -2066,6 +2128,14 @@
                 success: function (data) {
 
                     var select = $("#_pmtstus");
+                    select.children().remove();
+                    // select.append($("<option>").val("0").text("เลือกCUSCOD"));
+                    $(data).each(function (index, item) {
+
+                        select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                    });
+
+                    var select = $("#_pmtstus_pm");
                     select.children().remove();
                     // select.append($("<option>").val("0").text("เลือกCUSCOD"));
                     $(data).each(function (index, item) {
@@ -2441,16 +2511,15 @@
                                 }
                                 SubmithtmlPage += '</tr>';
                                 //$('table #_tbclmline  tbody:last-child').append(SubmithtmlPage);
-                                // $('#_tbclmline  tbody:last-child').append(SubmithtmlPage
-
+                                //$('#_tbclmline  tbody:last-child').append(SubmithtmlPage
                                 SubmithtmlPage += '</tr>';
                                 $('#fixed-table-container-2  tbody:last-child').append(SubmithtmlPage);
 
                             }
                         } else {
                             $("#textAlertWarning").empty();
-                            $("#textAlertWarning").text("No approval from saleman ");
-                            $("#myModalWarning").modal();
+                            $("#textAlertWarning").text("No approval from saleman");
+                            $("#myModalWarning").modal(); return false;
                             //  location.reload();
                         }
                         var fixedTable2 = fixTable(document.getElementById('fixed-table-container-2'));
@@ -2916,7 +2985,13 @@
                                     } else {
                                         $("#_pmdate").val(data.Getdata[0].val.PM_APPRV_DATE); //วันที่PM พิจารณา
                                     }
-                                    $("#_pmtstus").val(data.Getdata[0].val.PM_APPRV_STATUS); //สถานะอนุมัติ
+                                    $("#_pmtstus").val(data.Getdata[0].val.PM_APPRV_STATUS); //สถานะอนุมัติ Approve, Not Approve, Re
+                                    $("#_pmtstus_pm").val(data.Getdata[0].val.PM_APPRV_STATUS); //สถานะอนุมัติ Approve, Not Approve, Re
+
+                                    $("#_anlysstatustecpm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
+                                    $("#_anlysstatustecpm_pm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
+                                    $("#_anlysstatus_sm").val(data.Getdata[0].val.SM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
+                                   
                                     $("#remakepm").val(data.Getdata[0].val.PM_REMARK);
                                     $("#_pmnewpn").val(data.Getdata[0].val.PM_Replacemen);
 
@@ -3565,17 +3640,9 @@
                         $("#textAlertSucces").text("บันทึกข้อมูลสำเร็จ/Save successfully");
                         $("#myModalSucces").modal();
 
-                        var valpm = $("#_PM").val();
-                        var valststus = $("#_status").val();
-                        var valDoc = $("#searchclaimno").val();
-                        var valcom = $("#_company").val();
-                        var valstkgrp = $("#_stkgrp").val();
-                        var valstatdate = $("#_statdate").val();
-                        var valenddate = $("#_enddate").val();
-                        var valstatdatecus = $("#_statdate").val();
-                        var valenddatecus = $("#_enddate").val();
-                        var itemno = $("#_itemnosearch").val || "";
-                        Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus);
+                        $("#myModalSucces").click(function () {
+                            CheckUsrClmStaff();
+                        });
                     }
                 });
             });

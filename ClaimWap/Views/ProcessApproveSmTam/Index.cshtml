@@ -228,7 +228,7 @@
                             <tr>
                                 <th style=" min-width: 115px; height: 60px; border: 1px solid #222;">Invoice No</th>
                                 @*
-                                <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Sel</th>*@
+                                    <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Sel</th>*@
                                 <th style=" min-width: 85px; height: 60px; border: 1px solid #222;">Invoice Date</th>
                                 <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Item No.</th>
                                 <th style=" min-width: 200px; height: 60px; border: 1px solid #222;">Description</th>
@@ -268,7 +268,7 @@
                             <tr>
                                 <th style="min-width: 645px;height: 60px;border: 1px solid #222;text-align: center;">Image</th>
                                 @*
-                                <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Sel</th>*@
+                                    <th style=" min-width: 80px; height: 60px; border: 1px solid #222;">Sel</th>*@
                                 <th style="min-width: 134px;height: 60px;border: 1px solid #222;text-align: center;">Delete</th>
                             </tr>
                         </thead>
@@ -405,20 +405,20 @@
 
 
             @*<div class="row">
-                <div class="col-md-5">
-                    <div class="input-group">
-                        <span>
-                            <i class="fa fa-pencil"></i>Search Claim No : &nbsp;
-                        </span>
-                        <input class="form-control" type="text" id="searchclaimno">
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button" id="_btnsearchclaimno">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <span>
+                                <i class="fa fa-pencil"></i>Search Claim No : &nbsp;
+                            </span>
+                            <input class="form-control" type="text" id="searchclaimno">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button" id="_btnsearchclaimno">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
                     </div>
-                </div>
-            </div>*@
+                </div>*@
 
             <div class="row">
                 <div class="col-md-4">
@@ -459,7 +459,7 @@
                                 ปี/เดือน/วัน/ชม./Period of use<br />
                             </th>
                             @*
-                            <th>Edit</th>*@
+                                <th>Edit</th>*@
                             <th style="text-align:center">หมายเหตุ<br />รับสินค้า/Remark receive part</th>
                             <th>ตรวจสอบ<br />รับสินค้า//Check pick claim part</th>
                             <th>Tech<br />1</th>
@@ -827,6 +827,49 @@
                     <i class="fa fa-table"></i>Saleman Approve <li id="clickme0" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="col-md-12" id="myDIV0" style="display:block;">
+                    <div class="row pt-2 pb-1">
+                        <div class="col-md-12 text-left">
+                            <span class="alert-success"><i class="fa fa-user"></i> Cliam Type by PM</span><br />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Warranty claim type:</span>
+                                <span>
+                                    <select class="bar" id="_anlysstatustecpm_pm"></select>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-sort-down"></i>Status</span>
+                                <span>
+                                    <select class="bar" id="_pmtstus_pm"></select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="padding: 0px;">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row pb-1">
+                        <div class="col-md-12 text-left">
+                            <span class="alert-warning"><i class="fa fa-user"></i> Cliam Type by Salesman</span><br />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Warranty claim type:</span>
+                                <span>
+                                    <select class="bar" id="_anlysstatus_sm"></select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -857,21 +900,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i> Warranty claim type:</span>
-                                <span>
-                                    <select class="bar" id="_anlysstatustecpm_sm"></select>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <span> <i class="fa fa-edit"></i>Saleman Remark:</span>
-                                <span><textarea class="form-control" rows="6" cols="100" id="saleman_remark" placeholder="remark"></textarea></span>
+                                <span><textarea class="form-control" rows="6" cols="100" id="saleman_remark" placeholder="Saleman remark"></textarea></span>
                             </div>
                         </div>
                     </div>
@@ -990,13 +1024,13 @@
                         </div>
                     </div>
                     @*<div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="col-md-6">
+                                <div class="form-group">
 
-                                <button class="btn-info" id="_btnsaveapprove">บันทึกผล</button>
+                                    <button class="btn-info" id="_btnsaveapprove">บันทึกผล</button>
+                                </div>
                             </div>
-                        </div>
-                    </div>*@
+                        </div>*@
                 </div>
 
 
@@ -1265,9 +1299,9 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 @*<span> <i class="fa fa-pencil"></i> UOM:</span>
-                                <span>
-                                    <input type="text" id="_rcuom" />
-                                </span>*@
+                                    <span>
+                                        <input type="text" id="_rcuom" />
+                                    </span>*@
                             </div>
                         </div>
                     </div>
@@ -1302,9 +1336,9 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 @*<span> <i class="fa fa-calendar"></i> วันที่ตรวจสอบ:</span>
-                                <span>
-                                    <input type="date" data-date-format="dd/mm/yy" id="_datechecktec" />
-                                </span>*@
+                                    <span>
+                                        <input type="date" data-date-format="dd/mm/yy" id="_datechecktec" />
+                                    </span>*@
                             </div>
                         </div>
                     </div>
@@ -1369,7 +1403,7 @@
 
         <script type="text/javascript">
             function chkClaimWe(salemanApproveAtatusID){
-                var claimTypeCur = $('#_anlysstatustecpm_sm').val();
+                var claimTypeCur = $('#_anlysstatus_sm').val();
                 //alert(claimTypeCur);
                 //PM ไม่อนุมัติ ต้องปรับเป็น WE=PM_ANLYS_STATUS
                 var pmApproveStatus = $("#_pmtstus").val(); //1=อนุมัตื, 2=ไม่อนุมัติ
@@ -1389,18 +1423,18 @@
                             focusConfirm: false,
                         }).then((result) => {
                             if (result.value) {
-                                $('#_anlysstatustecpm_sm').val('2').change(); //2=WE
+                                $('#_anlysstatus_sm').val('2').change(); //2=WE
                     } else {
                         $('#saleman_approve_status').val('0').change();
                     }
-                });
+                   });
 
-            } else {
-            //สถานะเดิม
-                        var anlysstatustecpm = $('#_anlysstatustecpm').val();
-            $('#_anlysstatustecpm_sm').val(anlysstatustecpm).change();
-            }
-            }
+                } else {
+                //สถานะเดิม
+                    var anlysstatustecpm = $('#_anlysstatustecpm').val();
+                $('#_anlysstatus_sm').val(anlysstatustecpm).change();
+                }
+               }
             }
 
             $("#_itemnosearch").autocomplete({
@@ -1470,7 +1504,9 @@
 
 
             $(document).ready(function () {
-                $('#_anlysstatustecpm_sm').attr('disabled', true);
+                $('#_anlysstatustecpm_pm').attr('disabled', true);  
+                $('#_anlysstatus_sm').attr('disabled', true);
+                $('#_pmtstus_pm').attr('disabled', true);
 
                 //ถ้าเป็น TAM -> company = TAM
                 var company = '@company';
@@ -1578,14 +1614,14 @@
                         //รอ Saleman อนุมัติ
                         $("#_status").val("9")
                         //disable สถานะที่ไม่เกี่ยวข้อง
-                        var arrStatus = ['9', '10', '11'];
-                        document.querySelectorAll("#_status option").forEach(opt => {
-                            if (arrStatus.includes(opt.value)) {
-                                opt.disabled = false;
-                    } else {
-                                opt.disabled = true;
-            }
-            });
+                    //    var arrStatus = ['9', '10', '11'];
+                    //    document.querySelectorAll("#_status option").forEach(opt => {
+                    //        if (arrStatus.includes(opt.value)) {
+                    //            opt.disabled = false;
+                    //        } else {
+                    //                    opt.disabled = true;
+                    //        }
+                    //});
             }
             });
             function getdate() {
@@ -1975,8 +2011,16 @@
 
                         select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
                     });
+                    
+                    var select = $("#_anlysstatustecpm_pm");
+                    select.children().remove();
+                    // select.append($("<option>").val("0").text("เลือกCUSCOD"));
+                    $(data).each(function (index, item) {
+
+                        select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                    });       
                     //Saleman view
-                    var select = $("#_anlysstatustecpm_sm");
+                    var select = $("#_anlysstatus_sm");
                     select.children().remove();
                     // select.append($("<option>").val("0").text("เลือกCUSCOD"));
                     $(data).each(function (index, item) {
@@ -2046,7 +2090,13 @@
                     select.children().remove();
                     // select.append($("<option>").val("0").text("เลือกCUSCOD"));
                     $(data).each(function (index, item) {
+                        select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                    });
 
+                    var select = $("#_pmtstus_pm");
+                    select.children().remove();
+                    // select.append($("<option>").val("0").text("เลือกCUSCOD"));
+                    $(data).each(function (index, item) {
                         select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
                     });
                     //  var CUSCODt = $("#CUSCOD option:selected").text();
@@ -2890,7 +2940,8 @@
                                     } else {
                                         $("#_pmdate").val(data.Getdata[0].val.PM_APPRV_DATE); //วันที่PM พิจารณา
                                     }
-                                    $("#_pmtstus").val(data.Getdata[0].val.PM_APPRV_STATUS); //สถานะอนุมัติ
+                                    $("#_pmtstus").val(data.Getdata[0].val.PM_APPRV_STATUS); //สถานะอนุมัติ Approve, Not Approve, Re
+                                    $("#_pmtstus_pm").val(data.Getdata[0].val.PM_APPRV_STATUS); //สถานะอนุมัติ Approve, Not Approve, Re
                                     $("#remakepm").val(data.Getdata[0].val.PM_REMARK);
                                     $("#_pmnewpn").val(data.Getdata[0].val.PM_Replacemen);
 
@@ -2908,8 +2959,9 @@
 
                                     //alert(data.Getdata[0].val.PM_ANLYS_STATUS);
                                     //ที่เพิ่มของ Saleman
-                                    $("#_anlysstatustecpm_sm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
                                     $("#_anlysstatustecpm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
+                                    $("#_anlysstatustecpm_pm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
+                                    $("#_anlysstatus_sm").val(data.Getdata[0].val.SM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
                                     if (tyclom == "1") {
                                         $("#a").prop('checked', true);
                                         $("#b").prop('checked', false);
@@ -3454,7 +3506,7 @@
                 var anlysafterprotecpm = $("#_anlysafterprotecpm").val();
                 var scrapdatetecpm = $("#_scrapdatetecpm").val();
                 var claimtypecke = $("input[name='vehicle']:checked").val();
-                var claimTypeSm = $("#_anlysstatustecpm_sm").val();
+                var claimTypeSm = $("#_anlysstatus_sm").val();
                 //console.log('saleman_approve_status ' + saleman_approve_status);
                 if (saleman_approve_date == "") {
                     ++error;
@@ -3476,7 +3528,38 @@
                             //msg += '<br>' + error + '. Please specify additional notes.';
                             $("#textAlertWarning").empty();
                             $("#textAlertWarning").text("Please specify additional note.");
-                            $("#myModalWarning").modal(); return false;
+                            $("#myModalWarning").modal(); 
+                            $("#myModalSucces").click(function () {
+                                var select = $("#_PM");
+                                select.children().remove();
+                                select.append($("<option>").val("ALL").text("ALL"));
+                                $(data).each(function (index, item) {
+
+                                    select.append($("<option>").val(item.PROD).text(item.PROD + "/" + item.PRODNAM));
+                                });
+
+                                var valpm = $("#_PM").val();
+                                var valststus = $("#_status").val();
+                                var valDoc = $("#searchclaimno").val();
+                                var valcom = $("#_company").val();
+                                var valstkgrp = $("#_stkgrp").val();
+                                var valstatdate = $("#_statdate").val();
+                                var valenddate = $("#_enddate").val();
+                                var valstatdatecus = $("#_statdate").val();
+                                var valenddatecus = $("#_enddate").val();
+                                var itemno = $("#_itemnosearch").val();
+                                //get stkgrp
+                                getStkByPm(valpm);
+
+                                if (itemno != "") {
+                                    itemno = splitval(itemno);
+                                } else {
+                                    itemno = "";
+                                }
+                                Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdate, valenddate)
+
+                            });
+
                         }
                     }
                 }
@@ -3502,8 +3585,8 @@
                             $("#textAlertSucces").empty();
                             $("#textAlertSucces").text("บันทึกข้อมูลสำเร็จ/Save successfully");
                             $("#myModalSucces").modal();
-                           // LoadingShow();
-                           // location.href = location.href;
+                            // LoadingShow();
+                            // location.href = location.href;
 
                         }
                     }

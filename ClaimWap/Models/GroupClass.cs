@@ -597,6 +597,7 @@ namespace ClaimWap.Models
                 public string SM_APPRV_DATE { get; set; }
                 public string SM_PROCESS_STATUS { get; set; }
                 public string SM_REMARK { get; set; }
+                public string SM_ANLYS_STATUS { get; set; }
 
                 public string GM_NAME { get; set; }
                 public string GM_APPRV_DATE { get; set; }

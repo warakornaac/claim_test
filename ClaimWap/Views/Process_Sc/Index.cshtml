@@ -681,9 +681,8 @@
                 <i class="fa fa-table"></i>ข้อมูลเคลมสำหรับรุ่นรถ/Claim detail <li id="clickme5" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
             </div>
             <div class="card-body" id="myDIV5">
-                <div id="fixed-table-container-4" class="fixed-table-container" style="overflow-x: auto;">
+                <div id="fixed-table-container-4" class="fixed-table-container" style="overflow-x: auto; height: auto;">
                     <table id="_tbvehcar">
-
                         <tbody>
                             <tr>
                                 <td style="background: white;">1.สำหรับรถ Vehicle/Machine:<select id="_vemac"></select></td>
@@ -779,7 +778,7 @@
                                         ชม.:<input type="time" id="_worktime" style="width: 70px;height: 31px;" />
                                     </div>
                                 </td>
-                                <td style="background: white;">12.รหัสการผลิต Batch Code:<input type="text" id="_batcod" /></td>
+                                <td style="background: white;">12.รหัสการผลิต Batch Code:<input type="text" id="_batcod" style="border-bottom: 5px solid #b33c0f;" /></td>
                             </tr>
                             <tr>
                                 <td style="background: white;">13.วันที่ติดตั้ง/Installation date: <input type="date" id="_installdate" /></td>
@@ -798,7 +797,7 @@
                     </table>
                 </div>
             </div>
-            <div class="card-header">
+            <div class="card-header" id="tab_tecadmin_receive">
                 <i class="fa fa-table"></i>Admin Tech1 ตรวจสอบรับสินค้าเคลม/Admin TECH1 Received Detail: <li id="clickme1" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
             </div>
             <div class="card-body" id="myDIV1">
@@ -904,7 +903,7 @@
             </div>
 
 
-            <div class="card-header">
+            <div class="card-header" id="tab_tec1_receive">
                 <i class="fa fa-table"></i>Technic 1 : วิเคราะห์สินค้าเคลม/TECH1 Investigation <li id="clickme2" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
             </div>
             <div class="card-body" id="myDIV2">
@@ -1023,8 +1022,8 @@
                     <div class="col-xs-6 col-md-12">
                         <div class="containe" id="appvideo">
                             <div class="card">
-                                <div class="card-header bg-danger text-white">
-                                    <h6 class="text-uppercase"><i class="fa fa-video-camera"></i> Upload video ไม่เกิน 50 MB/Upload VIDEO < 50 MB</h6>
+                                <div class="card-header bg-info text-white">
+                                    <h6 class="text-uppercase"><i class="fa fa-video-camera"></i> Upload VIDEO < 50 MB</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -1110,7 +1109,7 @@
                 </div>
 
             </div>
-            <div class="card-header">
+            <div class="card-header" id="tab_tec2_analy">
                 <i class="fa fa-table"></i>Technic 2 : ผลการพิจารณา/TECH2 Investigation <li id="clickme3" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
             </div>
             <div class="card-body" id="myDIV3">
@@ -1197,7 +1196,7 @@
                         </div>
                     </div>
             </div>
-            <div class="card-header">
+            <div class="card-header" id="tab_pm_analy">
                 <i class="fa fa-table"></i>Product Manager Approval/Product Manager Judgement <li id="clickme4" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
             </div>
             <div class="col-md-12" id="myDIV4">
@@ -1573,7 +1572,7 @@
                             });
                         }
                         //alert(data.UsrClmStaff);
-                        if (data.UsrClmStaff == "1") {
+                        if (data.UsrClmStaff == "1") {  //tech1
                             $("#_admintec").val(userlog);
                             $("#_nametec1").val(userlog);
                             $("#_name2tec").attr("disabled", "disabled"); //รับรองการตรวจสอบโดย
@@ -1594,7 +1593,10 @@
                             $("#_btnsaveconsider").css("display", "none");
                             $("#_btnsavecheck").css("display", "block");
                             $("#_btnsavete1").css("display", "block");
-                        } else if (data.UsrClmStaff == "2") {
+
+                            $("#tab_tecadmin_receive").addClass('bg-head-work');
+                            $("#tab_tec1_receive").addClass('bg-head-work');
+                        } else if (data.UsrClmStaff == "2") {   //tech2
                             $("#_name2tec").val(userlog);
                             $("#_btnsaveconsider").css("display", "block");
                             // $("#_btnsavecheck").css("display", "none");
@@ -1614,6 +1616,7 @@
                             $("#_btnsavete1").attr("disabled", "disabled");
                             $("#_btnsaveapprove").attr("disabled", "disabled");
 
+                            $("#tab_tec2_analy").addClass('bg-head-work');
 
                             //ข้อมูลเคลมสำหรับรุ่นรถ//
                             //$("#_vemac").attr("disabled", "disabled");
@@ -1659,11 +1662,7 @@
                             //$("# _scrapdatetec1").attr("disabled", "disabled");//วันที่ทำลาย:
                             //$("#remaketec1").attr("disabled", "disabled"); //ผลการตรวจสอบ
 
-                        }
-                        else if (data.UsrClmStaff == "3") {
-
-                            //alert(data.UsrClmStaff)
-
+                        } else if (data.UsrClmStaff == "3") {   //pm,gm
                             //ข้อมูลเคลมสำหรับรุ่นรถ//
                             $("#_vemac").attr("disabled", "disabled");
                             $("#_moty").attr("disabled", "disabled");
@@ -1721,6 +1720,8 @@
                             $("#_pmnewpn").removeAttr('disabled');
 
                             $("#_btnsaveapprove").removeAttr('disabled');
+
+                            $("#tab_pm_analy").addClass('bg-head-work');
 
                         }
                     }
@@ -2740,8 +2741,12 @@
                                 $("#_installdate").val(data.Getdata[0].val.CLM_Installdate);
                                 $("#_claimcontact").val(data.Getdata[0].val.CLM_Contact);
                                 $("#_contact").val(data.Getdata[0].val.CLM_ContactTel);
+                                //alert(data.Getdata[0].val.CLM_DATE);
+                                if (data.Getdata[0].val.CLM_DATE != "") {
+                                   $("#tab_tecadmin_receive").removeClass("bg-head-work");
+                                }
                                 if (_AdminProststus != "0") {
-                                //alert(data.Getdata[0].val.CLM_REMARK);
+                                    //alert(data.Getdata[0].val.CLM_REMARK);
                                     $("#_proceedtotec").val(data.Getdata[0].val.CLM_RCVSTATUS);  ///สถานะการรับสินค้า
                                     $("#_rcvbyte").val(data.Getdata[0].val.CLM_RCVBY);      //ผู้รับสินค้าเคลม
                                     $("#_rcvdatetec").val(data.Getdata[0].val.CLM_RCVDATE);//วันที่รับสินค้าเคลม:
@@ -2804,6 +2809,7 @@
 
                                     // $("#_btnprintfro").attr("disabled", "disabled"); //บันทึกรับสินค้า & พิมพ์แบบฟอร์มสำหรับช่างตรวจสอบ
                                     //$("#_btnsavete1").attr("disabled", "disabled"); //บัททึกการตรวจสอบ
+                                    //$("#tab_tecadmin_receive").removeClass("bg-head-work");
                                     $("#_proceedtotec").val(data.Getdata[0].val.CLM_RCVSTATUS);  ///สถานะการรับสินค้า
                                     $("#_rcvbyte").val(data.Getdata[0].val.CLM_RCVBY);      //ผู้รับสินค้าเคลม
                                     $("#_rcvdatetec").val(data.Getdata[0].val.CLM_RCVDATE);//วันที่รับสินค้าเคลม:
@@ -3936,7 +3942,6 @@
                             $("#btnuploadsales").click();
                             // $("#PrintlabalModal").modal();
                             //$("#myModalSucces").click(function () {
-
                             //    $("#_btnsearchclaimno").click();
                             //    $("table tr #xxx").click();
                             //});

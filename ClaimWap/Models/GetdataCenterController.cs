@@ -1503,6 +1503,7 @@ namespace ClaimWap.Models
                 model.SM_APPRV_DATE = dr["SM_APPRV_DATE"].ToString();
                 model.SM_PROCESS_STATUS = dr["SM_PROCESS_STATUS"].ToString();
                 model.SM_REMARK = dr["SM_REMARK"].ToString();
+                model.SM_ANLYS_STATUS = dr["SM_ANLYS_STATUS"].ToString();
 
                 model.GM_NAME = dr["GM_NAME"].ToString();
                 model.GM_APPRV_DATE = dr["GM_APPRV_DATE"].ToString();

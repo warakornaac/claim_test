@@ -735,7 +735,7 @@
                     <i class="fa fa-table"></i>ข้อมูลเคลมสำหรับรุ่นรถ/Claim details <li id="clickme1" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="card-body" id="myDIV1">
-                    <div id="fixed-table-container-4" class="fixed-table-container" style="overflow-x: auto;">
+                    <div id="fixed-table-container-4" class="fixed-table-container" style="overflow-x: auto; height: auto;">
                         <table id="_tbvehcar">
 
                             <tbody>
@@ -850,106 +850,104 @@
                     <i class="fa fa-table"></i>Admin Tech1 ตรวจสอบรับสินค้าเคลม/Admin TECH1 Received Detail: <li id="clickme2" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="card-body" id="myDIV2" style="display:none">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <span> <i class="fa fa-pencil"></i> สถานะการรับสินค้า/Received status:</span>
-                                    <span>
-                                        <select class="bar" id="_proceedtotec"></select>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <span> <i class="fa fa-user"></i> ผู้รับสินค้าเคลม/Admin name:</span>
-                                    <span>
-                                        <input type="text" id="_rcvbyte" />
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <span> <i class="fa fa-calendar"></i> วันที่รับสินค้าเคลม/Received claim date:</span>
-                                    <span>
-
-                                        <input type="date" id="_rcvdatetec" />
-                                    </span>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> สถานะการรับสินค้า/Received status:</span>
+                                <span>
+                                    <select class="bar" id="_proceedtotec"></select>
+                                </span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <span> <i class="fa fa-pencil"></i> จำนวนที่รับเคลม/Qty received:</span>
-                                    <span>
-
-                                        <input type="text" id="_rvqtytec" />
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <span> <i class="fa fa-calendar"></i> Claim date:</span>
-                                    <span>
-                                        <input type="text" id="_clmdatetec" />
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <span> <i class="fa fa-calendar"></i> Due date:</span>
-                                    <span>
-                                        <input type="text" id="_duedatetec" />
-                                    </span>
-                                </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-user"></i> ผู้รับสินค้าเคลม/Admin name:</span>
+                                <span>
+                                    <input type="text" id="_rcvbyte" />
+                                </span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> วันที่รับสินค้าเคลม/Received claim date:</span>
+                                <span>
 
-                                    <span><textarea rows="6" cols="100" id="causeclaimtec" placeholder="หมายเหตุ รับสินค้า/Received remark"></textarea></span>
-                                </div>
+                                    <input type="date" id="_rcvdatetec" />
+                                </span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <span> <i class="fa fa-user"></i> Admin:</span>
-                                    <span>
-                                        <input type="text" id="_admintec" style="background: border-box border-box; color: blue;" disabled="disabled">
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> จำนวนที่รับเคลม/Qty received:</span>
+                                <span>
 
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    @*<span> <i class="fa fa-calendar"></i> วันที่ตรวจสอบ:</span>
-                                                        <span>
-                                            <input type="date" data-date-format="dd/mm/yy" id="_datechecktec" />
-                                        </span>*@
-                                </div>
+                                    <input type="text" id="_rvqtytec" />
+                                </span>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> Claim date:</span>
+                                <span>
+                                    <input type="text" id="_clmdatetec" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> Due date:</span>
+                                <span>
+                                    <input type="text" id="_duedatetec" />
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <span><textarea rows="6" cols="100" id="causeclaimtec" placeholder="หมายเหตุ รับสินค้า/Received remark"></textarea></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span> <i class="fa fa-user"></i> Admin:</span>
+                                <span>
+                                    <input type="text" id="_admintec" style="background: border-box border-box; color: blue;" disabled="disabled">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @*<span> <i class="fa fa-calendar"></i> วันที่ตรวจสอบ:</span>
+                                                    <span>
+                                        <input type="date" data-date-format="dd/mm/yy" id="_datechecktec" />
+                                    </span>*@
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
 
 
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -1054,7 +1052,6 @@
                     <i class="fa fa-table"></i>Technic 2 : ผลการพิจารณา/TECH2 Investigation<li id="clickme4" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="card-body" id="myDIV4" style="display:none">
-                    <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -1099,7 +1096,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
                 <div class="card-header">
                     <i class="fa fa-table"></i>Product Manager Approval <li id="clickme5" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
@@ -2571,7 +2567,7 @@
                             var slmcod = $("#slmcod").val();
                             GetClimline("", company, "1", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
                         }
-                   }, 1000);
+                    }, 1000);
                 }
             });
             var _status = $("#_status").val();
