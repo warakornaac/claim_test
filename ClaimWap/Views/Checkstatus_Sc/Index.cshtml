@@ -2176,6 +2176,7 @@
             }
 
             function GetClimline(claimnokey, company, status, cusno, itemno, statdate, enddate, slmcod, statusrec, statusclaimafter, stkgrp, proceedtofter, statusprint) {
+                //GetClimline("", company, "1", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
                 // var valclim = $("#searchclaimno").val();
                 var _user = $("#_uderlogin").val();
                 //var _status = $("#_status").val();
@@ -2530,6 +2531,7 @@
                 success: function (data) {
                     var _tpy = $("#_udertype").val();
                     setTimeout(function () {
+                        var companyId = $("#_company").val() || "";
                         var select = $("#slmcod");
                         select.children().remove();
                         if (_tpy == "4") {
@@ -2537,35 +2539,35 @@
                                 select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
                             });
                             var slmcod = $("#slmcod").val();
-                            GetClimline("", company, "1", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
+                            GetClimline("", companyId, "1", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
                         } else if (_tpy == "1") {
                             select.append($("<option>").val("ALL").text("ALL"));
                             $(data).each(function (index, item) {
                                 select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
                             });
                             var slmcod = $("#slmcod").val();
-                            GetClimline("", company, "1", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
+                            GetClimline("", companyId, "1", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
                         } else if (_tpy == "2") {
                             select.append($("<option>").val("ALL").text("ALL"));
                             $(data).each(function (index, item) {
                                 select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
                             });
                             var slmcod = $("#slmcod").val();
-                            GetClimline("", company, "3", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
+                            GetClimline("", companyId, "3", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
                         } else if (_tpy == "3") {
                             select.append($("<option>").val("ALL").text("ALL"));
                             $(data).each(function (index, item) {
                                 select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
                             });
                             var slmcod = $("#slmcod").val();
-                            GetClimline("", company, "4", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
+                            GetClimline("", companyId, "4", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
                         } else if (_tpy == "5") {
                             select.append($("<option>").val("ALL").text("ALL"));
                             $(data).each(function (index, item) {
                                 select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
                             });
                             var slmcod = $("#slmcod").val();
-                            GetClimline("", company, "1", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
+                            GetClimline("", companyId, "1", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
                         }
                     }, 1000);
                 }

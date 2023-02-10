@@ -3393,14 +3393,14 @@
                         var xcusno = $("#_cusno").val();
                         if (xcusno == "") {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณาระบุลูกค้า");
+                            $("#textAlertWarningmes").text("กรุณาระบุลูกค้า/Please specify customer.");
                             $("#myModalWarning").modal();
                             return false;
                         }
                         var xitemno = $("#_itemno").val();
                         if (xitemno == "") {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณาระบุเบอร์สินค้า");
+                            $("#textAlertWarningmes").text("กรุณาระบุเบอร์สินค้า/Please specify product number.");
                             $("#myModalWarning").modal();
                             return false;
                         }
@@ -3408,7 +3408,7 @@
                         if (xinvoiceno == "") {
 
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณาระบุเลขที่ Invoice");
+                            $("#textAlertWarningmes").text("กรุณาระบุเลขที่ Invoice/Please enter the invoice number.");
                             $("#myModalWarning").modal();
                             return false;
                         }
