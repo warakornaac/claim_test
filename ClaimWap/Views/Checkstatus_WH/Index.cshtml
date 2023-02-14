@@ -2723,13 +2723,6 @@
                                                     SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
                                                 }
 
-
-                                               
-
-
-
-                                               
-
                                             } else if (ADMIN_ANLYS_STATUS == "1") {
                                                 // SubmithtmlPage += '<td>' + data.Getdata[i].val.Log_No + '</td>';
                                                 SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="ตรวจรับสินค้าเรียบร้อย"></span></td>';
@@ -2887,6 +2880,15 @@
                         }
                         var fixedTable1 = fixTable(document.getElementById('fixed-table-container-1'));
                         var fixedTable2 = fixTable(document.getElementById('fixed-table-container-2'));
+                    }, error: function (jqXHR, textStatus, errorThrown) {
+                        setTimeout(function () {
+                            console.log('Error GetClimcheckdata : ' + textStatus, errorThrown);
+                            waitingDialog.hide();
+                        }, 2000);
+                    }, complete: function () {
+                        setTimeout(function () {
+                            waitingDialog.hide();
+                        }, 2000);
                     }
                 });
 
