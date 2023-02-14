@@ -817,142 +817,192 @@
                         </table>
                     </div>
                 </div>
-                @*Gm อนุมัติ*@
-                <div class="card-header bg-head-work">
-                    <i class="fa fa-table"></i>GM Approve <li id="clickmeGm" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
-                </div>
-                <div class="col-md-12" id="myDIVGM" style="display:block;">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class='fa fa-user'></i> GM name:</span>
-                                <span>
-                                    <input type="text" id="gm_approve_name" disabled="disabled" style="background: border-box border-box; color: blue;" />
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-calendar"></i> GM approve date:</span>
-                                <span>
-                                    <input type="date" data-date-format="dd/mm/yy" id="gm_approve_date" />
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-sort-down"></i>GM Status:</span>
-                                <span>
-                                    <select class="bar" id="gm_approve_status">
-                                        <option value="0">Choose option</option>
-                                        <option value="1">Claim approve</option>
-                                        <option value="2">Claim not approve</option>
-                                    </select>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    @*<div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i> Warranty claim type by saleman:</span>
-                                <span>
-                                    <select class="bar" id="_anlysstatustecpm_sm"></select>
-                                </span>
-                            </div>
-                        </div>
-                    </div>*@
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <span> <i class="fa fa-edit"></i>GM Remark:</span>
-                                <span><textarea class="form-control" rows="6" cols="100" id="gm_remark" placeholder="remark"></textarea></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 text-left">
-                            <div class="form-group">
-                                <button class="btn btn-info" id="btn_save_gm">Submit</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                @*saleman อนุมัติ*@
+                @*ตรวจสอบรับสินค้าเคลม*@
                 <div class="card-header">
-                    <i class="fa fa-table"></i>Saleman Approve <li id="clickmeSaleman" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+                    <i class="fa fa-table"></i>ตรวจสอบรับสินค้าเคลม/Check pick claim part <li id="clickme4" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
-                <div class="col-md-12" id="myDIVSM" style="display:none;">
-                    <div class="row pt-2 pb-1">
-                        <div class="col-md-12 text-left">
-                            <span class="alert-success"><i class="fa fa-user"></i> Cliam Type by PM</span><br />
-                        </div>
-                    </div>
+                <div class="card-body" id="myDIV4" style="display:none">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i> Warranty claim type:</span>
+                                <span> <i class="fa fa-pencil"></i> สถานะการรับสินค้า/Status pick claim part:</span>
                                 <span>
-                                    <select class="bar" id="_anlysstatustecpm_pm"></select>
+                                    <select class="bar" id="_proceedtotec"></select>
                                 </span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-sort-down"></i>Status</span>
+                                <span> <i class="fa fa-user"></i> ผู้รับสินค้าเคลม/Receive claim by:</span>
                                 <span>
-                                    <select class="bar" id="_pmtstus_pm"></select>
+                                    <input type="text" id="_rcvbyte" />
                                 </span>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12" style="padding: 0px;">
-                            <hr>
-                        </div>
-                    </div>
-                    <div class="row pb-1">
-                        <div class="col-md-12 text-left">
-                            <span class="alert-warning"><i class="fa fa-user"></i> Cliam Type by Salesman</span><br />
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i> Warranty claim type:</span>
+                                <span> <i class="fa fa-calendar"></i> วันที่รับสินค้าเคลม//Receive claim date:</span>
                                 <span>
-                                    <select class="bar" id="_anlysstatus_sm"></select>
+
+                                    <input type="date" id="_rcvdatetec" />
                                 </span>
                             </div>
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> จำนวนที่รับเคลม/Receive claim qty.:</span>
+                                <span>
+
+                                    <input type="text" id="_rvqtytec" />
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> Claim date:</span>
+                                <span>
+                                    <input type="text" id="_clmdatetec" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> Due date:</span>
+                                <span>
+                                    <input type="text" id="_duedatetec" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @*<span> <i class="fa fa-pencil"></i> UOM:</span>
+                                    <span>
+                                        <input type="text" id="_rcuom" />
+                                    </span>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <span><textarea class="form-control" rows="6" cols="100" id="causeclaimtec" placeholder="หมายเหตุการรับเคลม/Received remark"></textarea></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span> <i class="fa fa-user"></i> Admin:</span>
+                                <span>
+                                    <input type="text" id="_admintec" style="background: border-box border-box; color: blue;" disabled="disabled">
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @*<span> <i class="fa fa-calendar"></i> วันที่ตรวจสอบ:</span>
+                                                    <span>
+                                        <input type="date" data-date-format="dd/mm/yy" id="_datechecktec" />
+                                    </span>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                @*<button class="btn-info" id="_btnsavecheck">บัททึกการตรวจสอบ</button>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*Technic 1*@
+                <div class="card-header">
+                    <i class="fa fa-table"></i>Technic 1 : วิเคราะห์สินค้าเคลม/TECH1 Investigation <li id="clickme3" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+                </div>
+                <div class="card-body" id="myDIV3" style="display:none">
+                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class='fa fa-user'></i> Saleman name:</span>
+                                <span> <i class="fa fa-user"></i> ช่างที่รับผิดชอบ/TECH1 Name:</span>
                                 <span>
-                                    <input type="text" id="saleman_approve_name" disabled="disabled" style="background: border-box border-box; color: blue;" />
+                                    <input class="bar" id="_tecwork">
                                 </span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-calendar"></i> Saleman approve date:</span>
+                                <span> <i class="fa fa-pencil"></i>Shelf Location:</span>
                                 <span>
-                                    <input type="date" data-date-format="dd/mm/yy" id="saleman_approve_date" />
+                                    <input type="text" id="_shelfloctec" />
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-user"></i> บันทึกโดย/Record by:</span>
+                                <span>
+                                    <input type="text" id="_nametec1" disabled="disabled" style="background: border-box border-box; color: blue;" />
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> วันที่วิเคราะห์ปัญหา/Investigation date:</span>
+                                <span>
+                                    <input type="date" data-date-format="dd/mm/yy" id="_anlysdatetec1" />
                                 </span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-sort-down"></i>Saleman Status</span>
+                                <span> <i class="fa fa-user"></i> ดำเนินการ/CN/Replacement:</span>
                                 <span>
-                                    <select class="bar" id="saleman_approve_status">
-                                        <option value="0">Choose option</option>
-                                        <option value="1">Claim approve</option>
-                                        <option value="2">Claim not approve</option>
-                                    </select>
+                                    <select class="bar" id="_perfromtec1"></select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> สถานะการวิเคราะห์ WR,WE,WF/Warranty claim type:</span>
+                                <span>
+                                    <select class="bar" id="_anlysstatustec1"></select>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> หลังเสร็จสิ้นกระบวนการเคลม/Action after finished claim:</span>
+                                <span>
+                                    <select class="bar" id="_anlysafterprotec1"></select>
+                                </span>
+                            </div>
+                        </div>
+                        <div id="displ" style="display:none">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> วันที่ทำลาย/Destroy date:</span>
+                                <span>
+                                    <input type="date" data-date-format="dd/mm/yy" id="_scrapdatetec1" />
                                 </span>
                             </div>
                         </div>
@@ -960,13 +1010,134 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <span> <i class="fa fa-edit"></i>Saleman Remark:</span>
-                                <span><textarea class="form-control" rows="6" cols="100" id="saleman_remark" placeholder="remark"></textarea></span>
+                                <span><textarea class="form-control" rows="6" cols="100" id="remaketec1" placeholder="ผลการตรวจสอบ/Investigation details"></textarea></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <button class="btn-info" id="_btnsavecheck" style="display:none">บันทึกผลการตรวจสอบ & วิเคาระห์/Submit</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                @*ประวัติ*@
+                @*Technic 2*@
+                <div class="card-header">
+                    <i class="fa fa-table"></i>Technic 2 : ผลการพิจารณา/TECH2 Investigation <li id="clickme2" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+                </div>
+                <div class="card-body" id="myDIV2" style="display:none">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class='fa fa-user'></i> รับรองการตรวจสอบโดย/TECH2 Name:</span>
+
+                                <span>
+                                    <input type="text" id="_name2tec" disabled="disabled" style="background: border-box border-box; color: blue;" />
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> วันที่เทคนิคพิจารณา/Investigation date:</span>
+                                <span>
+                                    <input type="date" data-date-format="dd/mm/yy" id="_appdatetec" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> สถานะ/Warranty claim type:</span>
+                                <span>
+                                    <select class="bar" id="_apprvststus"></select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="alert-warning"><i class="fa fa-pencil"></i>Warranty Cliam Type</span><br />
+                    <div class="row">
+
+                        <div style="border-bottom: 1px solid rgba(0,0,0,.125); "></div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <form>
+                                    <input type="checkbox" name="vehicle" value="1" style="zoom: 2.5;margin-left: -10px;" id="atech">Specific<br>
+                                    <input type="checkbox" name="vehicle" value="3" style="zoom: 2.5;margin-left: -10px;" id="ctech">Good Will<br>
+
+                                </form>
+
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <form>
+                                    <input type="checkbox" name="vehicle" value="2" style="zoom: 2.5;margin-left: -10px;" id="btech">Manufacturing Defect<br>
+                                    <input type="checkbox" name="vehicle" value="4" style="zoom: 2.5;margin-left: -10px;" id="dtech">Wrong Using<br>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <form>
+                                    <input type="checkbox" name="vehicle" value="5" style="zoom: 2.5;margin-left: -10px;" id="etech">Handing Damage<br>
+                                    <input type="checkbox" name="vehicle" value="6" style="zoom: 2.5;margin-left: -10px;" checked id="ftech">Other<br>
+
+                                </form>
+
+                            </div>
+                        </div>
+                        <div style="border-bottom: 1px solid rgba(0,0,0,.125); "></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> สถานะการวิเคราะห์/Warranty claim type:</span>
+                                <span>
+                                    <select class="bar" id="_anlysstatustectech"></select>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> หลังเสร็จสิ้นกระบวนการเคลม/Action after finished claim:</span>
+                                <span>
+                                    <select class="bar" id="_anlysafterprotectech"></select>
+                                </span>
+                            </div>
+                        </div>
+                        <div id="displtech" style="display:none">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> วันที่จะทำลาย/Destroy date:</span>
+                                <span>
+                                    @*<input type="date" data-date-format="dd/mm/yy" id="_scrapdatetec1" />*@
+                                    <input type="text" id="_scrapdatetectech" />
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <span><textarea class="form-control" rows="6" cols="100" id="remaketec2" placeholder="หมายเหตุ/TECH2 comment"></textarea></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <button class="btn-info" id="_btnsaveconsider" style="display:none">บัททึกผลการพิจารณา/Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*ประวัติ Product Manager Approval *@
                 <div class="card-header">
                     <i class="fa fa-table"></i>Product Manager Approval <li id="clickme1" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
@@ -1093,100 +1264,80 @@
                             </div>
                         </div>*@
                 </div>
-
-
+                @*saleman อนุมัติ*@
                 <div class="card-header">
-                    <i class="fa fa-table"></i>Technic 2 : ผลการพิจารณา/TECH2 Investigation <li id="clickme2" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+                    <i class="fa fa-table"></i>Salesman Approval <li id="clickmeSaleman" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
-                <div class="card-body" id="myDIV2" style="display:none">
+                <div class="col-md-12" id="myDIVSM" style="display:none;">
+                    <div class="row pt-2 pb-1">
+                        <div class="col-md-12 text-left">
+                            <span class="alert-success"><i class="fa fa-user"></i> Cliam Type by PM</span><br />
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class='fa fa-user'></i> รับรองการตรวจสอบโดย/TECH2 Name:</span>
-
+                                <span> <i class="fa fa-pencil"></i> Warranty claim type:</span>
                                 <span>
-                                    <input type="text" id="_name2tec" disabled="disabled" style="background: border-box border-box; color: blue;" />
-
+                                    <select class="bar" id="_anlysstatustecpm_pm"></select>
                                 </span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-calendar"></i> วันที่เทคนิคพิจารณา/Investigation date:</span>
+                                <span> <i class="fa fa-sort-down"></i>Status</span>
                                 <span>
-                                    <input type="date" data-date-format="dd/mm/yy" id="_appdatetec" />
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i> สถานะ/Warranty claim type:</span>
-                                <span>
-                                    <select class="bar" id="_apprvststus"></select>
+                                    <select class="bar" id="_pmtstus_pm"></select>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <span class="alert-warning"><i class="fa fa-pencil"></i>Warranty Cliam Type</span><br />
                     <div class="row">
-
-                        <div style="border-bottom: 1px solid rgba(0,0,0,.125); "></div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <form>
-                                    <input type="checkbox" name="vehicle" value="1" style="zoom: 2.5;margin-left: -10px;" id="atech">Specific<br>
-                                    <input type="checkbox" name="vehicle" value="3" style="zoom: 2.5;margin-left: -10px;" id="ctech">Good Will<br>
-
-                                </form>
-
-                            </div>
+                        <div class="col-md-12" style="padding: 0px;">
+                            <hr>
                         </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <form>
-                                    <input type="checkbox" name="vehicle" value="2" style="zoom: 2.5;margin-left: -10px;" id="btech">Manufacturing Defect<br>
-                                    <input type="checkbox" name="vehicle" value="4" style="zoom: 2.5;margin-left: -10px;" id="dtech">Wrong Using<br>
-
-                                </form>
-
-                            </div>
+                    </div>
+                    <div class="row pb-1">
+                        <div class="col-md-12 text-left">
+                            <span class="alert-warning"><i class="fa fa-user"></i> Cliam Type by Salesman</span><br />
                         </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <form>
-                                    <input type="checkbox" name="vehicle" value="5" style="zoom: 2.5;margin-left: -10px;" id="etech">Handing Damage<br>
-                                    <input type="checkbox" name="vehicle" value="6" style="zoom: 2.5;margin-left: -10px;" checked id="ftech">Other<br>
-
-                                </form>
-
-                            </div>
-                        </div>
-                        <div style="border-bottom: 1px solid rgba(0,0,0,.125); "></div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i> สถานะการวิเคราะห์/Warranty claim type:</span>
+                                <span> <i class="fa fa-pencil"></i> Warranty claim type:</span>
                                 <span>
-                                    <select class="bar" id="_anlysstatustectech"></select>
+                                    <select class="bar" id="_anlysstatus_sm"></select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class='fa fa-user'></i> Saleman name:</span>
+                                <span>
+                                    <input type="text" id="saleman_approve_name" disabled="disabled" style="background: border-box border-box; color: blue;" />
                                 </span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i> หลังเสร็จสิ้นกระบวนการเคลม/Action after finished claim:</span>
+                                <span> <i class="fa fa-calendar"></i> Saleman approve date:</span>
                                 <span>
-                                    <select class="bar" id="_anlysafterprotectech"></select>
+                                    <input type="date" data-date-format="dd/mm/yy" id="saleman_approve_date" />
                                 </span>
                             </div>
                         </div>
-                        <div id="displtech" style="display:none">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-calendar"></i> วันที่จะทำลาย/Destroy date:</span>
+                                <span> <i class="fa fa-sort-down"></i>Saleman Status</span>
                                 <span>
-                                    @*<input type="date" data-date-format="dd/mm/yy" id="_scrapdatetec1" />*@
-                                    <input type="text" id="_scrapdatetectech" />
+                                    <select class="bar" id="saleman_approve_status">
+                                        <option value="0">Choose option</option>
+                                        <option value="1">Claim approve</option>
+                                        <option value="2">Claim not approve</option>
+                                    </select>
                                 </span>
                             </div>
                         </div>
@@ -1194,220 +1345,69 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-
-                                <span><textarea class="form-control" rows="6" cols="100" id="remaketec2" placeholder="หมายเหตุ/TECH2 comment"></textarea></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-
-                                <button class="btn-info" id="_btnsaveconsider" style="display:none">บัททึกผลการพิจารณา/Submit</button>
+                                <span> <i class="fa fa-edit"></i>Saleman Remark:</span>
+                                <span><textarea class="form-control" rows="6" cols="100" id="saleman_remark" placeholder="remark"></textarea></span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-header">
-                    <i class="fa fa-table"></i>Technic 1 : วิเคราะห์สินค้าเคลม/TECH1 Investigation <li id="clickme3" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+                @*Gm อนุมัติ*@
+                <div class="card-header bg-head-work">
+                    <i class="fa fa-table"></i>GM Approval <li id="clickmeGm" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
-                <div class="card-body" id="myDIV3" style="display:none">
+                <div class="col-md-12" id="myDIVGM" style="display:block;">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-user"></i> ช่างที่รับผิดชอบ/TECH1 Name:</span>
+                                <span> <i class='fa fa-user'></i> GM name:</span>
                                 <span>
-                                    <input class="bar" id="_tecwork">
+                                    <input type="text" id="gm_approve_name" disabled="disabled" style="background: border-box border-box; color: blue;" />
                                 </span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i>Shelf Location:</span>
+                                <span> <i class="fa fa-calendar"></i> GM approve date:</span>
                                 <span>
-                                    <input type="text" id="_shelfloctec" />
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-user"></i> บันทึกโดย/Record by:</span>
-                                <span>
-                                    <input type="text" id="_nametec1" disabled="disabled" style="background: border-box border-box; color: blue;" />
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-calendar"></i> วันที่วิเคราะห์ปัญหา/Investigation date:</span>
-                                <span>
-                                    <input type="date" data-date-format="dd/mm/yy" id="_anlysdatetec1" />
+                                    <input type="date" data-date-format="dd/mm/yy" id="gm_approve_date" />
                                 </span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-user"></i> ดำเนินการ/CN/Replacement:</span>
+                                <span> <i class="fa fa-sort-down"></i>GM Status:</span>
                                 <span>
-                                    <select class="bar" id="_perfromtec1"></select>
+                                    <select class="bar" id="gm_approve_status">
+                                        <option value="0">Choose option</option>
+                                        <option value="1">Claim approve</option>
+                                        <option value="2">Claim not approve</option>
+                                    </select>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i> สถานะการวิเคราะห์ WR,WE,WF/Warranty claim type:</span>
-                                <span>
-                                    <select class="bar" id="_anlysstatustec1"></select>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i> หลังเสร็จสิ้นกระบวนการเคลม/Action after finished claim:</span>
-                                <span>
-                                    <select class="bar" id="_anlysafterprotec1"></select>
-                                </span>
-                            </div>
-                        </div>
-                        <div id="displ" style="display:none">
-                            <div class="form-group">
-                                <span> <i class="fa fa-calendar"></i> วันที่ทำลาย/Destroy date:</span>
-                                <span>
-                                    <input type="date" data-date-format="dd/mm/yy" id="_scrapdatetec1" />
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <span><textarea class="form-control" rows="6" cols="100" id="remaketec1" placeholder="ผลการตรวจสอบ/Investigation details"></textarea></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-
-                                <button class="btn-info" id="_btnsavecheck" style="display:none">บันทึกผลการตรวจสอบ & วิเคาระห์/Submit</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="card-header">
-                    <i class="fa fa-table"></i>ตรวจสอบรับสินค้าเคลม/Check pick claim part <li id="clickme4" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
-                </div>
-                <div class="card-body" id="myDIV4" style="display:none">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i> สถานะการรับสินค้า/Status pick claim part:</span>
-                                <span>
-                                    <select class="bar" id="_proceedtotec"></select>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-user"></i> ผู้รับสินค้าเคลม/Receive claim by:</span>
-                                <span>
-                                    <input type="text" id="_rcvbyte" />
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-calendar"></i> วันที่รับสินค้าเคลม//Receive claim date:</span>
-                                <span>
-
-                                    <input type="date" id="_rcvdatetec" />
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i> จำนวนที่รับเคลม/Receive claim qty.:</span>
-                                <span>
-
-                                    <input type="text" id="_rvqtytec" />
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <span> <i class="fa fa-calendar"></i> Claim date:</span>
-                                <span>
-                                    <input type="text" id="_clmdatetec" />
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <span> <i class="fa fa-calendar"></i> Due date:</span>
-                                <span>
-                                    <input type="text" id="_duedatetec" />
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                @*<span> <i class="fa fa-pencil"></i> UOM:</span>
+                    @*<div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-pencil"></i> Warranty claim type by saleman:</span>
                                     <span>
-                                        <input type="text" id="_rcuom" />
-                                    </span>*@
+                                        <select class="bar" id="_anlysstatustecpm_sm"></select>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </div>*@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-
-                                <span><textarea class="form-control" rows="6" cols="100" id="causeclaimtec" placeholder="หมายเหตุการรับเคลม/Received remark"></textarea></span>
+                                <span> <i class="fa fa-edit"></i>GM Remark:</span>
+                                <span><textarea class="form-control" rows="6" cols="100" id="gm_remark" placeholder="remark"></textarea></span>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-12 text-left">
                             <div class="form-group">
-                                <span> <i class="fa fa-user"></i> Admin:</span>
-                                <span>
-                                    <input type="text" id="_admintec" style="background: border-box border-box; color: blue;" disabled="disabled">
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                @*<span> <i class="fa fa-calendar"></i> วันที่ตรวจสอบ:</span>
-                                                    <span>
-                                        <input type="date" data-date-format="dd/mm/yy" id="_datechecktec" />
-                                    </span>*@
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-
-                                @*<button class="btn-info" id="_btnsavecheck">บัททึกการตรวจสอบ</button>*@
+                                <button class="btn btn-info" id="btn_save_gm">Submit</button>
                             </div>
                         </div>
                     </div>
@@ -1529,7 +1529,7 @@
             });
             $(document).ready(function () {
                 $('#_anlysstatustecpm_sm').attr('disabled', true);
-                $('#_anlysstatustecpm_pm').attr('disabled', true);  
+                $('#_anlysstatustecpm_pm').attr('disabled', true);
                 $('#_anlysstatus_sm').attr('disabled', true);
                 $('#_pmtstus_pm').attr('disabled', true);
 
@@ -2057,8 +2057,8 @@
                     $(data).each(function (index, item) {
 
                         select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
-                    });  
-                    
+                    });
+
                     //Saleman view
                     var select = $("#_anlysstatus_sm");
                     select.children().remove();
@@ -2066,7 +2066,7 @@
                     $(data).each(function (index, item) {
 
                         select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
-                    }); 
+                    });
 
                     var select = $("#_anlysstatustectech");
                     select.children().remove();
@@ -2991,7 +2991,7 @@
                                     $("#_anlysstatustecpm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
                                     $("#_anlysstatustecpm_pm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
                                     $("#_anlysstatus_sm").val(data.Getdata[0].val.SM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
-                                   
+
                                     $("#remakepm").val(data.Getdata[0].val.PM_REMARK);
                                     $("#_pmnewpn").val(data.Getdata[0].val.PM_Replacemen);
 
