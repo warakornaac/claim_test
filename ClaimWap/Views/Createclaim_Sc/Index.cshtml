@@ -443,11 +443,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="input-group">
                                         @*<span class="input-group-addon" id="btnok" style="background-color: #7FC1A9;cursor: pointer;color: white;">Ship To Code<span class=" glyphicon glyphicon-hand-right"></span></span>*@
-                                        <input type="button" id="btnok" class="btn btn-default" name="example" value="ส่งตรวจสอบ/Send check" style="background-color: aqua;">
+                                        <input type="button" id="btnok" class="btn btn-default" name="example" value="ยืนยันส่งให้ Technic ตรวจสอบ/Submit to Technical Dept." style="background-color: aqua;">
                                         <span class="input-group-addon "><span id="scs" style="color: cyan;display:none"></span><span></span></span>
                                     </div>
                                 </div>
@@ -908,7 +908,7 @@
                                     ชม.:<input type="time" id="_worktime" style="width: 70px;height: 33px;border-bottom: 5px solid #b33c0f;" value="00:00" />
                                 </div>
                             </td>
-                            <td>12.รหัสการผลิต Batch Code:<input type="text" id="_batcod" style="border-bottom: 5px solid #b33c0f;" /></td>
+                            <td>12.รหัสการผลิต Batch Code:<input type="text" id="_batcod" @*style="border-bottom: 5px solid #b33c0f;"*@ /></td>
                         </tr>
                         <tr>
                             <td style="background: white;">13.วันที่ติดตั้ง/Installation date: <input type="date" id="_installdate" /></td>
@@ -994,7 +994,7 @@
             <div class="row">
                 <div class="col-xs-6 col-md-12">
                     <div class="card">
-                        <div class="card-header bg-info text-white">
+                        <div class="card-header bg-danger text-white">
                             <h6 class="text-uppercase"><i class="fa fa-picture-o"></i> Upload images</h6>
                         </div>
                         <div class="card-body">
@@ -1030,7 +1030,7 @@
                     <button type="button" class="btn btn-lg btn-primary" id="_btnsave"><i class="fa fa-cart-arrow-down"></i> บันทึกลงตระกร้า/Add to Cart</button>
                 </div>
                 <div class="col-md-4" style="margin-top: 5px;">
-                    <button type="button" class="btn btn-lg btn-warning" style="" id="_btnsenclim"><i class="fa fa-check-circle"></i> ส่งให้ Technic ตรวจสอบ/Submit to Technical Dept</button>
+                    <button type="button" class="btn btn-lg btn-warning" style="" id="_btnsenclim"><i class="fa fa-check-circle"></i> ยืนยันส่งให้ Technic ตรวจสอบ/Submit to Technical Dept.</button>
                 </div>
                 <div class="col-md-4" style="margin-top: 5px;">
                     <button type="button" class="btn btn-info btn-lg" id="refresh" style="width:30%;"><i class="fa fa-refresh"></i> Refresh</button>
@@ -1156,7 +1156,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         @*<span class="input-group-addon" id="btnok" style="background-color: #7FC1A9;cursor: pointer;color: white;">Ship To Code<span class=" glyphicon glyphicon-hand-right"></span></span>*@
-                                        <input type="button" id="save" class="btn-default" name="example" value="ส่งตรวจสอบ/Send check" style="background-color: aqua; margin-right: -3px;">
+                                        <input type="button" id="save" class="btn-default" name="example" value="ยืนยันส่งให้ Technic ตรวจสอบ/Submit to Technical Dept." style="background-color: aqua; margin-right: -3px;">
                                         <span class="input-group-addon"><span id="scs" style="color: cyan; display: none;"></span><span></span></span>
                                     </div>
                                 </div>
@@ -2865,7 +2865,7 @@
 
                     if (data == "0") {
                         $("#textAlertWarningmes").empty();
-                        $("#textAlertWarningmes").text("ไม่มีรายการสำหรับส่งตรวจสอบ");
+                        $("#textAlertWarningmes").text("ไม่มีรายการสำหรับส่งตรวจสอบ/No items to confirm.");
                         $("#myModalWarning").modal();
                         return false;
                     }

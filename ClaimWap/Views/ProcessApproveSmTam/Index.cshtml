@@ -2956,12 +2956,15 @@
                                         $("#displpm").css("display", "none")
                                     }
                                     var tyclom = data.Getdata[0].val.Clmtype;
-
-                                    //alert(data.Getdata[0].val.PM_ANLYS_STATUS);
                                     //ที่เพิ่มของ Saleman
                                     $("#_anlysstatustecpm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
                                     $("#_anlysstatustecpm_pm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
-                                    $("#_anlysstatus_sm").val(data.Getdata[0].val.SM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
+                                    //alert(data.Getdata[0].val.SM_ANLYS_STATUS);
+                                    if(data.Getdata[0].val.SM_ANLYS_STATUS == null || data.Getdata[0].val.SM_ANLYS_STATUS == ""){
+                                        $("#_anlysstatus_sm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
+                                    } else {
+                                        $("#_anlysstatus_sm").val(data.Getdata[0].val.SM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
+                                    }
                                     if (tyclom == "1") {
                                         $("#a").prop('checked', true);
                                         $("#b").prop('checked', false);

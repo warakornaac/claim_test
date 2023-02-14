@@ -278,19 +278,19 @@
 
             </div>
             <div class="row">
-                <div class="col-md-4">
+                @*<div class="col-md-4">
                     <div class="form-group">
                         <span> <i class="fa fa-pencil"></i>สถานะสินค้าหลังเคลม/Status after claim:</span>
                         <span>
                             <select id="_statusclaimafter" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;"></select>
                         </span>
                     </div>
-                </div>
+                </div>*@
                 <div class="col-md-4">
                     <div class="form-group">
                         <span> <i class="fa fa-pencil"></i>Status.:</span>
                         <span>
-                            <select id="_status" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;"></select>
+                            <select id="_status" style="font-size: 16px; padding: 8px 0px 0px 2px; display: block; border: none; border-bottom: 1px solid #1b1919; width: 310px;"></select>
                         </span>
                     </div>
                 </div>
@@ -298,7 +298,7 @@
                     <div class="form-group">
                         <span> <i class="fa fa-pencil"></i>สถานะรับของเคลม/Defect status:</span>
                         <span>
-                            <select id="_statusclaimdisplay" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;"></select>
+                            <select id="_statusclaimdisplay" style="font-size: 16px; padding: 8px 0px 0px 2px; display: block; border: none; border-bottom: 1px solid #1b1919; width: 310px; "></select>
                         </span>
                     </div>
                 </div>
@@ -311,7 +311,7 @@
                         <div class="form-group">
                             <span> <i class="fa fa-pencil"></i>CN/สินค้าทดแทน</span>
                             <span>
-                                <select id="_proceedtofter" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;"></select>
+                                <select id="_proceedtofter" style="font-size: 16px; padding: 8px 0px 0px 2px; display: block; border: none; border-bottom: 1px solid #1b1919; width: 310px; "></select>
                             </span>
                         </div>
                     </div>
@@ -319,7 +319,7 @@
                         <div class="form-group">
                             <span> <i class="fa fa-pencil"></i>Status Print .:</span>
                             <span>
-                                <select id="_statusprint" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;">
+                                <select id="_statusprint" style="font-size: 16px; padding: 8px 0px 0px 2px; display: block; border: none; border-bottom: 1px solid #1b1919; width: 310px; ">
                                     <option value="2">เลือก Status Print</option>
                                     <option value="1">Y</option>
                                     <option value="0">N</option>
@@ -1819,13 +1819,15 @@
                         $("#_btnprint").css("display", "none");
                         GetClimline(claimnokey, company, status, cusno, itemno, statdate, enddate, slmcod, statusrec, statusclaimafter, stkgrp, proceedtofter, statusprint)
                     }
-                    if (statusclaimafter == "1") {
-                        // $("#modalconfirmdate").modal();
-                        // $("#displ").css("display", "block");
-                    } else {
-                        //  $("#displ").css("display", "none");
-                        // GetClimline(claimnokey, company, status, cusno, itemno, statdate, enddate, slmcod, statusrec, statusclaimafter)
-                    }
+
+                    //if (statusclaimafter == "1") {
+                    //    $("#modalconfirmdate").modal();
+                    //    $("#displ").css("display", "block");
+                    //} else {
+                    //    $("#displ").css("display", "none");
+                    //    GetClimline(claimnokey, company, status, cusno, itemno, statdate, enddate, slmcod, statusrec, statusclaimafter)
+                    //}
+
                 } else {
                     //alert(slmcod)
                     GetClimline(claimnokey, company, status, cusno, itemno, statdate, enddate, slmcod, statusrec, statusclaimafter, stkgrp, "0", "2")
@@ -2569,7 +2571,7 @@
                             var slmcod = $("#slmcod").val();
                             GetClimline("", companyId, "1", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
                         }
-                    }, 1000);
+                    }, 2500);
                 }
             });
             var _status = $("#_status").val();
