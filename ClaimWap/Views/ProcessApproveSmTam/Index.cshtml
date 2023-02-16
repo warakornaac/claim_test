@@ -2962,14 +2962,17 @@
                                     $("#_anlysstatustecpm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
                                     $("#_anlysstatustecpm_pm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
                                     //alert(data.Getdata[0].val.SM_ANLYS_STATUS);
-                                    if(data.Getdata[0].val.SM_ANLYS_STATUS == null || data.Getdata[0].val.SM_ANLYS_STATUS == ""){
+                                    if(data.Getdata[0].val.SM_ANLYS_STATUS == "0" || data.Getdata[0].val.SM_ANLYS_STATUS == "" || data.Getdata[0].val.SM_ANLYS_STATUS == null){
                                         $("#_anlysstatus_sm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
                                     } else {
                                         $("#_anlysstatus_sm").val(data.Getdata[0].val.SM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
                                     }
                                     //ปิดปุ่ม submit saleman
-                                    if(data.Getdata[0].val.GM_APPRV_DATE != null || data.Getdata[0].val.GM_APPRV_DATE != ""){
+                                    console.log('GM = ' + data.Getdata[0].val.GM_APPRV_DATE);
+                                    if(data.Getdata[0].val.GM_APPRV_DATE != ""){
                                         $("#btn_save_saleman").css("display", "none");
+                                    } else {
+                                        $("#btn_save_saleman").css("display", "block");
                                     }
 
                                     if (tyclom == "1") {
