@@ -279,13 +279,13 @@
             </div>
             <div class="row">
                 @*<div class="col-md-4">
-                    <div class="form-group">
-                        <span> <i class="fa fa-pencil"></i>สถานะสินค้าหลังเคลม/Status after claim:</span>
-                        <span>
-                            <select id="_statusclaimafter" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;"></select>
-                        </span>
-                    </div>
-                </div>*@
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>สถานะสินค้าหลังเคลม/Status after claim:</span>
+                            <span>
+                                <select id="_statusclaimafter" style="font-size: 16px;padding: 8px 0px 0px 2px;display: block;border: none;border-bottom: 1px solid #1b1919;width: 217px;"></select>
+                            </span>
+                        </div>
+                    </div>*@
                 <div class="col-md-4">
                     <div class="form-group">
                         <span> <i class="fa fa-pencil"></i>Status.:</span>
@@ -514,7 +514,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card mb-12">
+            <div class="card mb-12" id="divShowSearch" style="display: none;">
                 <div class="card-header">
                     <i class="fa fa-table"></i>รายละเอียดสินค้าเคลม/Claim details <li id="clickme" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
@@ -1052,50 +1052,50 @@
                     <i class="fa fa-table"></i>Technic 2 : ผลการพิจารณา/TECH2 Investigation<li id="clickme4" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="card-body" id="myDIV4" style="display:none">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <span> <i class='fa fa-user'></i> รับรองการตรวจสอบโดย/TECH2 Name:</span>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class='fa fa-user'></i> รับรองการตรวจสอบโดย/TECH2 Name:</span>
 
-                                    <span>
-                                        <input type="text" id="_name2tec" disabled="disabled" style="background: border-box border-box; color: blue;" />
+                                <span>
+                                    <input type="text" id="_name2tec" disabled="disabled" style="background: border-box border-box; color: blue;" />
 
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <span> <i class="fa fa-calendar"></i> วันที่เทคนิคพิจารณา/Investigation date:</span>
-                                    <span>
-                                        <input type="date" data-date-format="dd/mm/yy" id="_appdatetec" />
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <span> <i class="fa fa-pencil"></i> สถานะ/Warranty claim type:</span>
-                                    <span>
-                                        <select class="bar" id="_apprvststus"></select>
-                                    </span>
-                                </div>
+                                </span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-
-                                    <span><textarea rows="6" cols="100" id="remaketec2" placeholder="หมายเหตุ/TECH2 comment"></textarea></span>
-                                </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> วันที่เทคนิคพิจารณา/Investigation date:</span>
+                                <span>
+                                    <input type="date" data-date-format="dd/mm/yy" id="_appdatetec" />
+                                </span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-
-
-                                </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> สถานะ/Warranty claim type:</span>
+                                <span>
+                                    <select class="bar" id="_apprvststus"></select>
+                                </span>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <span><textarea rows="6" cols="100" id="remaketec2" placeholder="หมายเหตุ/TECH2 comment"></textarea></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-header">
                     <i class="fa fa-table"></i>Product Manager Approval <li id="clickme5" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
@@ -1154,8 +1154,153 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
+                @*saleman อนุมัติ*@
+                <div id="divMainSaleman">
+                <div class="card-header">
+                    <i class="fa fa-table"></i>Salesman Approval <li id="clickmeSaleman" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+                </div>
+                <div class="col-md-12" id="myDIVSM" style="display:none;">
+                    <div class="row pt-2 pb-1">
+                        <div class="col-md-12 text-left">
+                            <span class="alert-success"><i class="fa fa-user"></i> Cliam Type by PM</span><br />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Warranty claim type:</span>
+                                <span>
+                                    <select class="bar" id="_anlysstatustecpm_pm"></select>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-sort-down"></i>Status</span>
+                                <span>
+                                    <select class="bar" id="_pmtstus_pm"></select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="padding: 0px;">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row pb-1">
+                        <div class="col-md-12 text-left">
+                            <span class="alert-warning"><i class="fa fa-user"></i> Cliam Type by Salesman</span><br />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Warranty claim type:</span>
+                                <span>
+                                    <select class="bar" id="_anlysstatus_sm"></select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class='fa fa-user'></i> Saleman name:</span>
+                                <span>
+                                    <input type="text" id="saleman_approve_name" disabled="disabled" style="background: border-box border-box; color: blue;" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> Saleman approve date:</span>
+                                <span>
+                                    <input type="date" data-date-format="dd/mm/yy" id="saleman_approve_date" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-sort-down"></i>Saleman Status</span>
+                                <span>
+                                    <select class="bar" id="saleman_approve_status">
+                                        <option value="0">Choose option</option>
+                                        <option value="1">Claim approve</option>
+                                        <option value="2">Claim not approve</option>
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <span> <i class="fa fa-edit"></i>Saleman Remark:</span>
+                                <span><textarea class="form-control" rows="6" cols="100" id="saleman_remark" placeholder="remark"></textarea></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                @*Gm อนุมัติ*@
+                <div id="divMainGm">
+                    <div class="card-header">
+                        <i class="fa fa-table"></i>GM Approval <li id="clickmeGm" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+                    </div>
+                    <div class="col-md-12" id="myDIVGM" style="display:none;">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class='fa fa-user'></i> GM name:</span>
+                                    <span>
+                                        <input type="text" id="gm_approve_name" disabled="disabled" style="background: border-box border-box; color: blue;" />
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-calendar"></i> GM approve date:</span>
+                                    <span>
+                                        <input type="date" data-date-format="dd/mm/yy" id="gm_approve_date" />
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-sort-down"></i>GM Status:</span>
+                                    <span>
+                                        <select class="bar" id="gm_approve_status">
+                                            <option value="0">Choose option</option>
+                                            <option value="1">Claim approve</option>
+                                            <option value="2">Claim not approve</option>
+                                        </select>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i> Warranty claim type by saleman:</span>
+                            <span>
+                                <select class="bar" id="_anlysstatustecpm_sm"></select>
+                            </span>
+                        </div>
+                    </div>
+                </div>*@
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-edit"></i>GM Remark:</span>
+                                    <span><textarea class="form-control" rows="6" cols="100" id="gm_remark" placeholder="remark"></textarea></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
         </div>
     </div>
     <!-- Logout Modal-->
@@ -1400,6 +1545,11 @@
         });
 
         $(document).ready(function () {
+            $('#_anlysstatustecpm_sm').attr('disabled', true);
+            $('#_anlysstatustecpm_pm').attr('disabled', true);
+            $('#_anlysstatus_sm').attr('disabled', true);
+            $('#_pmtstus_pm').attr('disabled', true);
+
             //ถ้าเป็น TAM -> company = TAM
             var company = '@company';
             if (company != "") {
@@ -1521,6 +1671,30 @@
             });
             function myFunction5() {
                 var x = document.getElementById("myDIV5");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+            //Saleman
+            $("#clickmeSaleman").on("click", function (e) {
+                divSalemane();
+            });
+            function divSalemane() {
+                var x = document.getElementById("myDIVSM");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+            //GM
+            $("#clickmeGm").on("click", function (e) {
+                divGm();
+            });
+            function divGm() {
+                var x = document.getElementById("myDIVGM");
                 if (x.style.display === "none") {
                     x.style.display = "block";
                 } else {
@@ -2791,7 +2965,40 @@
 
                         select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
                     });
-                    //  var CUSCODt = $("#CUSCOD option:selected").text();
+                    //status saleman
+                    var select = $("#_pmtstus_pm");
+                    select.children().remove();
+                    // select.append($("<option>").val("0").text("เลือกCUSCOD"));
+                    $(data).each(function (index, item) {
+
+                        select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                    });
+                }
+            });
+            //claim type saleman
+            $.ajax({
+                url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
+                data: {
+                    Name: 3
+                },
+                type: "POST",
+                dataType: "JSON",
+                success: function (data) {
+
+                    var select = $("#_anlysstatustecpm_pm");
+                    select.children().remove();
+                    $(data).each(function (index, item) {
+
+                        select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                    });
+                    //Saleman view
+                    var select = $("#_anlysstatus_sm");
+                    select.children().remove();
+                    // select.append($("<option>").val("0").text("เลือกCUSCOD"));
+                    $(data).each(function (index, item) {
+
+                        select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                    });
                 }
             });
 
@@ -2810,6 +3017,11 @@
                 }
             });
             $("table").on("click", "tr #_btnview", function () {
+                LoadingShow();
+               
+                //แสดงข้อมูลที่กดค้นหา
+                $("#divShowSearch").css("display", "block");
+
                 var req_no = $(this).attr('claimno');
                 var statuclm = $(this).attr('statuclm');
                 var clm_no_sub = $(this).attr('claimsupno');
@@ -2922,7 +3134,7 @@
                     type: "POST",
                     dataType: "JSON",
                     success: function (data) {
-                        console.log(data);
+                        console.log('GetdataInvoicestatud : ' + data.Getdata[0].COMP);
                         // $("#Nospankey").text(nokey);
                         //  $("#subNospan").text(clmnoup);
                         $("#_itemnotex").text(data.Getdata[0].val.STKCOD);
@@ -3082,12 +3294,58 @@
                             $("#_pmtstus").attr("disabled", "disabled");  //สถานะอนุมัติ
                             $("#remakepm").attr("disabled", "disabled");
                             $("#_pmnewpn").attr("disabled", "disabled");
-                            LoadingHide();
+                            /*=======Saleman TAM =========*/
+                            if (company != "0" || company != "") {
+                                if (company != "TAM") {
+                                    $("#divMainSaleman").css('display', 'none');
+                                    $("#divMainGm").css('display', 'none');
+                                } else {
+                                    $("#divMainSaleman").css('display', 'block');
+                                    $("#divMainGm").css('display', 'block');
+                                }
+                            }
+                            //console.log("PM claim type = " + data.Getdata[0].val.PM_ANLYS_STATUS);
+                            var _SMProstatus = data.Getdata[0].val.SM_PROCESS_STATUS;
+                            $("#_anlysstatustecpm_pm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
+                            $("#_pmtstus_pm").val(data.Getdata[0].val.PM_APPRV_STATUS); //สถานะอนุมัติ Approve, Not Approve, Re
+                            $("#_anlysstatus_sm").val(data.Getdata[0].val.SM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
+                            //console.log(data.Getdata[0].val)
+                            if (_SMProstatus != "" && _SMProstatus != "0" && _SMProstatus !== undefined) { //อนุมัติแล้ว
+                                $("#saleman_approve_name").val(data.Getdata[0].val.SM_NAME);        //sale ผู้อนุมัติ
+                                $("#saleman_approve_date").val(data.Getdata[0].val.SM_APPRV_DATE);  //วันที่อนุมัติ
+                                $("#saleman_approve_status").val(data.Getdata[0].val.SM_PROCESS_STATUS);    //สถานะ
+                                $("#saleman_remark").val(data.Getdata[0].val.SM_REMARK);            //หมายเหตุ
+                                //disable field SM
+                                $("#saleman_approve_name").attr("disabled", "disabled");
+                                $("#saleman_approve_date").attr("disabled", "disabled");
+                                $("#saleman_approve_status").attr("disabled", "disabled");
+                                $("#saleman_remark").attr("disabled", "disabled");
+                            } else { //ยังไม่อนุมัติแล้ว
+                                $("#saleman_approve_name").val('');
+                                $("#saleman_approve_date").val('');  //วันที่อนุมัติ
+                            }
+                            /*======== GM TAM ========*/
+                            var _GMProstatus = data.Getdata[0].val.GM_PROCESS_STATUS;
+                            //alert(_GMProstatus);
+                            if (_GMProstatus != '' && _GMProstatus != "0" && _GMProstatus !== undefined) {           //อนุมัติแล้ว
+                                $("#gm_approve_name").val(data.Getdata[0].val.GM_NAME);        //sale ผู้อนุมัติ
+                                $("#gm_approve_date").val(data.Getdata[0].val.GM_APPRV_DATE);  //วันที่อนุมัติ
+                                $("#gm_approve_status").val(data.Getdata[0].val.GM_PROCESS_STATUS);    //สถานะ
+                                $("#gm_remark").val(data.Getdata[0].val.GM_REMARK);
+                                //disable field GM
+                                $("#gm_approve_name").attr("disabled", "disabled");
+                                $("#gm_approve_date").attr("disabled", "disabled");
+                                $("#gm_approve_status").attr("disabled", "disabled");
+                                $("#gm_remark").attr("disabled", "disabled");
+                            } else {
+                                $("#gm_approve_name").val('');
+                                $("#gm_approve_date").val('');  //วันที่อนุมัติ
+                            }
                         }
-                    },
-                    error: function () {
+                    }, error: function () {
                         LoadingHide();
-                        alert('An error has occured try again..');
+                    }, complete: function () {
+                        LoadingHide();
                     }
                 });
 

@@ -421,7 +421,7 @@
                 <div class="col-md-4">
                     <i class="fa fa-pencil"></i>Search Claim No :
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Claim No" aria-label="Claim No" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control" placeholder="Claim No" aria-label="Claim No" aria-describedby="basic-addon2" id="searchclaimno">
                         <div class="input-group-append">
                             <button id="_btnsearchclaimno" class="btn btn-primary" type="button" style="margin-left: -2px;">
                                 <i class="fa fa-search"></i>
@@ -467,9 +467,7 @@
                     </thead>
                     <tbody></tbody>
                 </table>
-
             </div>
-
             <div class="card mb-12" id="divShowSearch" style="display: none;">
                 <div class="card-header">
                     <i class="fa fa-table"></i>รายละเอียดสินค้าเคลม <li id="clickme" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
@@ -2990,7 +2988,9 @@
 
                                     $("#_anlysstatustecpm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
                                     $("#_anlysstatustecpm_pm").val(data.Getdata[0].val.PM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
-                                    $("#_anlysstatus_sm").val(data.Getdata[0].val.SM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
+                                    setTimeout(function (){
+                                        $("#_anlysstatus_sm").val(data.Getdata[0].val.SM_ANLYS_STATUS); //สถานะการวิเคราะห์ WR,WE,WF
+                                    }, 1500);
 
                                     $("#remakepm").val(data.Getdata[0].val.PM_REMARK);
                                     $("#_pmnewpn").val(data.Getdata[0].val.PM_Replacemen);
