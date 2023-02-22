@@ -3048,6 +3048,7 @@
                 if (_usertype != "4" && _usertype != "5") {
                     if (_usertype != "3") {
                         if (statuclm != "7") {
+                            LoadingHide();
                             $("#modalconfirmProcess").modal();
                         } else {
                             $("#textAlertWarningmes").empty();
@@ -3342,6 +3343,8 @@
                                 $("#gm_approve_date").val('');  //วันที่อนุมัติ
                             }
                         }
+                    }, beforeSend: function () {
+                        //LoadingShow();
                     }, error: function () {
                         LoadingHide();
                     }, complete: function () {

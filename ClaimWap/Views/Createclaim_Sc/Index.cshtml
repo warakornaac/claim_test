@@ -2591,7 +2591,7 @@
                                     console.log(data);
                                     if (data.message == "true") {
 
-                                        alert("ลบ image รายการเรียบร้อย");
+                                        alert("ลบ image เรียบร้อย/Successfully deleted image.");
 
                                         var control = $("#FileUpload3");
 
@@ -2643,7 +2643,7 @@
                                     console.log(data);
                                     if (data.message == "true") {
 
-                                        alert("ลบ image รายการเรียบร้อย");
+                                        alert("ลบ image เรียบร้อย/Successfully deleted image");
 
                                         var control = $("#FileUpload4");
 
@@ -2713,7 +2713,7 @@
                         //console.log(signaturePad)
                         var imgsignature;
                         if (signaturePad.isEmpty()) {
-                            alert("กรุณาให้ลูกค้าเซ็นยืนยันรับสินค้า");
+                            alert("กรุณาให้ลูกค้าเซ็นยืนยันรับสินค้า/Please the customer sign to confirm receipt of the product.");
                             return false;
                         } else {
 
@@ -2726,7 +2726,7 @@
                         var dataman = signaturePadman.toDataURL('image/png');
                         var imgsignatureman;
                         if (signaturePadman.isEmpty()) {
-                            alert("กรุณาเซ็นยืนยันรับสินค้าจากลูกค้า");
+                            alert("กรุณาเซ็นยืนยันรับสินค้าจากลูกค้า/Please sign to confirm the product from the customer.");
                             return false;
                         } else {
 
@@ -2759,7 +2759,7 @@
                     }
                     if (data == "0") {
                         $("#textAlertWarningmes").empty();
-                        $("#textAlertWarningmes").text("ไม่มีรายการสำหรับส่งตรวจสอบ");
+                        $("#textAlertWarningmes").text("ไม่มีรายการสำหรับส่งตรวจสอบ/No items to submit review.");
                         $("#myModalWarning").modal();
                         return false;
                     }
@@ -2881,7 +2881,7 @@
                     }
                     if (_splitocus == "") {
                         $("#textAlertWarningmes").empty();
-                        $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อเลือก Ship-to");
+                        $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อเลือก Ship-to/Please press search history to select Ship-to.");
                         $("#myModalWarning").modal();
                         return false;
                     }
@@ -2956,7 +2956,7 @@
                     }
                     if (_splitocus == "") {
                         $("#textAlertWarningmes").empty();
-                        $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อเลือก Ship-to");
+                        $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อเลือก Ship-to/Please press search history to select Ship-to.");
                         $("#myModalWarning").modal();
                         return false;
                     }
@@ -3088,7 +3088,7 @@
                                         console.log(data);
                                         if (data.message == "true") {
 
-                                            alert("ลบ image รายการเรียบร้อย");
+                                            alert("ลบ image รายการเรียบร้อย/Successfully deleted the image");
                                             $("#receclaim #btngetshowdata").trigger("click");
 
                                             var control = $("#fileInput");
@@ -3423,25 +3423,25 @@
                         }
                         if (_splitocus == "") {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อระบุรายละเอียดสินค้าเคลม");
+                            $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อระบุรายละเอียดสินค้าเคลม/Please press search history to product details");
                             $("#myModalWarning").modal();
                             return false;
                         }
                         if (_splitocus == 'undefined') {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อระบุรายละเอียดสินค้าเคลม");
+                            $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อระบุรายละเอียดสินค้าเคลม/Please press search history to product details");
                             $("#myModalWarning").modal();
                             return false;
                         };
                         if (_splitocus == null) {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อระบุรายละเอียดสินค้าเคลม");
+                            $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อระบุรายละเอียดสินค้าเคลม/Please press search history to product details");
                             $("#myModalWarning").modal();
                             return false;
                         };
                         if (_splitocus == "null") {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อระบุรายละเอียดสินค้าเคลม");
+                            $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อระบุรายละเอียดสินค้าเคลม/Please press search history to product details");
                             $("#myModalWarning").modal();
                             return false;
                         };
@@ -3449,52 +3449,52 @@
 
                         if (slmcod == "") {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณาระบุ SalesMan");
+                            $("#textAlertWarningmes").text("กรุณาระบุ SalesMan/Please specify SalesMan.");
                             $("#myModalWarning").modal();
                             return false;
                         }
                         if (slmcod == null) {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณาระบุ SalesMan");
+                            $("#textAlertWarningmes").text("กรุณาระบุ SalesMan/Please specify SalesMan.");
                             $("#myModalWarning").modal();
                             return false;
                         }
                         if (slmcod == "null") {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณาระบุ SalesMan");
+                            $("#textAlertWarningmes").text("กรุณาระบุ SalesMan/Please specify SalesMan.");
                             $("#myModalWarning").modal();
                             return false;
                         }
                         if (slmcod == 'undefined') {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณาระบุ SalesMan");
+                            $("#textAlertWarningmes").text("กรุณาระบุ SalesMan/Please specify SalesMan.");
                             $("#myModalWarning").modal();
                             return false;
                         }
                         var _itemno = $("#_itemnodes").val();
                         if (_itemno == "") {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อเลือกรายละเอียดสินค้าเคลม");
+                            $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อเลือกรายละเอียดสินค้าเคลม/Please press search history to claim details.");
                             $("#myModalWarning").modal();
                             return false;
                         }
                         if (_itemno == "null") {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อเลือกรายละเอียดสินค้าเคลม");
+                            $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อเลือกรายละเอียดสินค้าเคลม/Please press search history to claim details.");
                             $("#myModalWarning").modal();
                             return false;
                         }
                         var invoiceno = $("#_invoicenodes").val();
                         if (invoiceno == "") {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อเลือกรายละเอียดสินค้าเคลม");
+                            $("#textAlertWarningmes").text("กรุณากด ค้นหาประวัติ เพื่อเลือกรายละเอียดสินค้าเคลม/Please press search history to claim details.");
                             $("#myModalWarning").modal();
                             return false;
                         }
                         var xclaimqty = $("#_claimqty").val();
                         if (xclaimqty == "") {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณาระบุจำนวนที่ต้องการเคลม");
+                            $("#textAlertWarningmes").text("กรุณาระบุจำนวนที่ต้องการเคลม/Please specify Claim Qty");
                             $("#myModalWarning").modal();
                             return false;
                         }
@@ -3502,14 +3502,14 @@
                         var xvehicle = $("#_vemac").val();
                         if (xvehicle == "") {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณาระบุข้อมูลสำหรับรถ Vehicle/Machine");
+                            $("#textAlertWarningmes").text("กรุณาระบุข้อมูลสำหรับรถ Vehicle/Machine/Please enter Vehicle/Machine");
                             $("#myModalWarning").modal();
                             return false;
                         }
                         var xmodeltype = $("#_moty").val();
                         if (xmodeltype == "") {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณาระบุข้อมูล รุ่น Model/Type");
+                            $("#textAlertWarningmes").text("กรุณาระบุข้อมูล รุ่น Model/Type/Please enter Model/Type");
                             $("#myModalWarning").modal();
                             return false;
                         }
@@ -3523,7 +3523,7 @@
                         var xdateofdamage = $("#_datofdam").val();
                         if (xdateofdamage == "") {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณาระบุวันที่ชำรุด Date of Damage");
+                            $("#textAlertWarningmes").text("กรุณาระบุวันที่ชำรุด Date of Damage/Please enter Date of Damage");
                             $("#myModalWarning").modal();
                             return false;
                         }
@@ -3598,7 +3598,7 @@
                             //alert(req)
                             if (req != xstatusclaim) {
                                 $("#textAlertWarningmes").empty();
-                                $("#textAlertWarningmes").text("กรุณาระบุ สถานะรับของเคลมให้เหมือนกันทุกรายการ");
+                                $("#textAlertWarningmes").text("กรุณาระบุ สถานะรับของเคลมให้เหมือนกันทุกรายการ/Please specify the claim receiving status for all items.");
                                 $("#myModalWarning").modal();
                                 return false;
                             }
@@ -3608,7 +3608,7 @@
                         //alert(leng);
                         if (leng == 1) {
                             $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณา Upload image เพื่อประกอบพิจารณาเคลม");
+                            $("#textAlertWarningmes").text("กรุณา Upload image เพื่อประกอบพิจารณาเคลม/Please upload image to consider.");
                             $("#myModalWarning").modal();
                             return false;
                         }
@@ -3646,7 +3646,7 @@
                                     var claimnokey = $("#_claimno").val();
                                     if (claimnokey == "") {
                                         $("#textAlertWarningmes").empty();
-                                        $("#textAlertWarningmes").text("กรุณากดสร้างรายการเคลมอีกรอบ");
+                                        $("#textAlertWarningmes").text("กรุณากดสร้างรายการเคลมอีกรอบ/Please click to create claim list.");
                                         $("#myModalWarning").modal();
                                         return false;
                                     } else {
@@ -3960,7 +3960,7 @@
                                         //$("#btnUpload3").click();
                                         //$("#btnUpload4").click();
                                         $("#btnUpload").click();
-                                        alert("บีนทึกรายการสำเร็จ")
+                                        alert("บีนทึกรายการสำเร็จ/Save successfully.")
                                         $("#FilesList tbody").empty();
                                         clearval()
                                         clearimage()
@@ -4230,7 +4230,7 @@
                         var select = $("#_statusclaim");
                         select.children().remove();
 
-                        select.append($("<option>").val("0").text("สถานะรับของเคลม/"));
+                        select.append($("<option>").val("0").text("สถานะรับของเคลม"));
                         $(data).each(function (index, item) {
                             if (item.CODE == "2" || item.CODE == "4") {
                                 select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
