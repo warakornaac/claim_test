@@ -80,11 +80,13 @@ namespace ClaimWap
                 SqlDataReader dr = cmd.ExecuteReader();
                  while (dr.Read())
                  {
-                     cusre = dr["CUSNAM"].ToString() + '-' + Regex.Replace(cusre, "\"[^\"]*\"", string.Empty);
-                     Cus = dr["CUSCOD"].ToString() + '-' +   Regex.Replace(cusre, "\"[^\"]*\"", string.Empty);
-                     
+                    
+                     //cusre = dr["CUSNAM"].ToString() + '-' + Regex.Replace(cusre, "\"[^\"]*\"", string.Empty);
+                     //Cus = dr["CUSCOD"].ToString(); + '-' +   Regex.Replace(cusre, "\"[^\"]*\"", string.Empty);
+                     Cus = dr["CUSCOD"].ToString() + '-' + Regex.Replace(dr["CUSNAM"].ToString(),  "\"[^\"]*\"", string.Empty);
+                                 
                      //cusre = dr["CUSNAM"].ToString();
-                    // Cus = dr["CUSCOD"].ToString() + '-' + Regex.Replace(cusre, "\"[^\"]*\"", string.Empty);
+                     //Cus = dr["CUSCOD"].ToString() + '-' + Regex.Replace(cusre, "\"[^\"]*\"", string.Empty);
                      //Cus = dr["CUSCOD"].ToString(); 
                      slm = dr["SLMCOD"].ToString() + '-' + dr["SLMNAM"].ToString();
                      item = dr["STKCOD"].ToString() + '-' + dr["STKDES"].ToString();

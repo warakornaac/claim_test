@@ -1328,16 +1328,13 @@ namespace ClaimWap.Models
             Connection.Open();
             string company = Session["company"].ToString();
             string whCompany = string.Empty;
+            whCompany = " AND company <> 'TAM'";
             if (company == "TAM")
             {
-                whCompany = company;
-            }
-            else
-            {
-                whCompany = "TAC";
+                whCompany = " AND company = 'TAM'";
             }
 
-            SqlCommand cmd = new SqlCommand("select * From TechLocation where DefineCode = '" + Name + "' AND Company = '" + whCompany + "'", Connection);
+            SqlCommand cmd = new SqlCommand("select * From TechLocation where DefineCode = '" + Name + "'" + whCompany, Connection);
             SqlDataReader dr = cmd.ExecuteReader();
 
             while (dr.Read())
