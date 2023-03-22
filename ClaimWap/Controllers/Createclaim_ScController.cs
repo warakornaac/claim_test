@@ -312,7 +312,7 @@ namespace ClaimWap.Controllers
             return Json(new { Docnocm }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult SaveClimtemp(string incontactcus, string inclaimcontactcus, string installdatecus, string inreminqtynew, string infoc, string inINV_QTY, string inCLM_ID, string CLM_NO, string InCom, string CUSCOD, string inSTKCOD, string inSTKDES, string inCLM_UOM, string inCLM_INVNO, string inCLM_INVDATE, string inCLM_QTY, string inCLM_USEDAY, string inCLM_CAUSE, string inCLM_PERFORM, string inCLM_RCVSTATUS, string inCLM_RCVBY, string inCLM_RCVDATE, string vehicle, string modeltype, string modelyear, string enginecode, string chassisno, string pump, string typeofProduct, string warrantycardno, string milage, string dateofdamage, string BatchCode)
+        public JsonResult SaveClimtemp(string incontactcus, string inclaimcontactcus, string installdatecus, string inreminqtynew, string infoc, string inINV_QTY, string inCLM_ID, string CLM_NO, string InCom, string CUSCOD, string inSTKCOD, string inSTKDES, string inCLM_UOM, string inCLM_INVNO, string inCLM_INVDATE, string inCLM_QTY, string inCLM_USEDAY, string inCLM_CAUSE, string inCLM_PERFORM, string inCLM_RCVSTATUS, string inCLM_RCVBY, string inCLM_RCVDATE, string vehicle, string modeltype, string modelyear, string enginecode, string chassisno, string pump, string typeofProduct, string warrantycardno, string milage, string dateofdamage, string BatchCode, string customer_claim_note)
         {
             string message = string.Empty;
             string subno = string.Empty;
@@ -356,6 +356,7 @@ namespace ClaimWap.Controllers
                 command.Parameters.AddWithValue("@installdatecus", installdatecus);
                 command.Parameters.AddWithValue("@inclaimcontactcus", inclaimcontactcus);
                 command.Parameters.AddWithValue("@incontactcus", incontactcus);
+                command.Parameters.AddWithValue("@inClaimNote", customer_claim_note);
                 SqlParameter returnValuedoc = new SqlParameter("@outGenstatus", SqlDbType.NVarChar, 100);
                 returnValuedoc.Direction = System.Data.ParameterDirection.Output;
                 command.Parameters.Add(returnValuedoc);
@@ -377,7 +378,7 @@ namespace ClaimWap.Controllers
 
             return Json(new { message, subno }, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult SaveClim(string imgsignatureman, string imgsignature, string inqtybox, string inCLM_ID, string inCLM_RCVBY, string inCusShipping, string incodeShipping, string inremakeclaim)
+        public JsonResult SaveClim(string imgsignatureman, string imgsignature, string inqtybox, string inqtyunit, string inCLM_ID, string inCLM_RCVBY, string inCusShipping, string incodeShipping, string inremakeclaim)
         {
             string message = string.Empty;
             string cmid = string.Empty;
@@ -394,6 +395,7 @@ namespace ClaimWap.Controllers
                 command.Parameters.AddWithValue("@incodeShipping", incodeShipping);
                 command.Parameters.AddWithValue("@inremakeclaim", inremakeclaim);
                 command.Parameters.AddWithValue("@inqtybox", inqtybox);
+                command.Parameters.AddWithValue("@inqtyunit", inqtyunit);
                 command.Parameters.AddWithValue("@inimgsignature", imgsignature);
                 command.Parameters.AddWithValue("@inimgsignatureman", imgsignatureman);
                 SqlParameter returnValuedoc = new SqlParameter("@outGenDoc", SqlDbType.NVarChar, 100);
@@ -531,6 +533,7 @@ namespace ClaimWap.Controllers
                 model.CLM_Installdate = dr["CLM_Installdate"].ToString();
                 model.CLM_Contact = dr["CLM_Contact"].ToString();
                 model.CLM_ContactTel = dr["CLM_ContactTel"].ToString();
+                model.CLM_ClaimNote = dr["CLM_ClaimNote"].ToString();
                 Getdata.Add(new ClimetempListDetail { val = model });
             }
             dr.Close();

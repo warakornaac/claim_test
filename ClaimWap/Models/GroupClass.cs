@@ -499,6 +499,7 @@ namespace ClaimWap.Models
         public string GM_APPRV_DATE { get; set; }
         public string GM_PROCESS_STATUS { get; set; }
         public string GM_REMARK { get; set; }
+        public string CLM_ClaimNote { get; set; }
     }
     public class ClimetempListDetail
     {

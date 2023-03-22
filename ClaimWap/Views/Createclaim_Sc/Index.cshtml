@@ -403,7 +403,7 @@
                 <div class="card mb-12">
                     <div id="openShipping" style="display:block;">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon">ระบุจำนวนกล่องที่จะให้รถไปรับ/Receive to Qty.<span class="glyphicon glyphicon-hand-right"></span></span>
@@ -430,6 +430,8 @@
                                             <option>19</option>
                                             <option>20</option>
                                         </select>
+
+                                        <select id="qtyunit" style="border-bottom: 2px solid #c51717;"> </select>
                                     </div>
                                 </div>
                             </div>
@@ -698,7 +700,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Customer Invoice.:</span>
+                            <span> <i class="fa fa-pencil"></i>Customer Number.:</span>
                             <span><input type="text" id="_invcustomer" disabled="disabled" /></span>
                         </div>
                     </div>
@@ -773,15 +775,14 @@
                             <span> <i class="fa fa-pencil"></i>Claim Qty.:</span>
                             <span><input type="text" id="_claimqty" style="border-bottom: 5px solid #b33c0f;" /></span>
                         </div>
+                    </div>  
+                    <div class="col-md-4" id="divFieldClaimNote" style="display: none;">
+                        <div class="form-group">
+                            <span> <i class="fa fa-pencil"></i>Customer claim note:</span>
+                            <span><input type="text" id="customer_claim_note" /></span>
+                        </div>
                     </div>
                 </div>
-                <div class="col-xs-6">
-                    <div class="form-group">
-
-                    </div>
-                </div>
-
-
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="form-group">
@@ -1220,6 +1221,18 @@
                     if (company == "TAM") {
                         $("#_company").val("TAM");
                         $('#_company').attr('disabled', true);
+                        $('#divFieldClaimNote').css('display', 'block');
+                        //ยี่ห้อรถ
+                        $('#_vemac').css('border-bottom', 'none');
+                        //รุ่นรถ
+                        $('#_moty').css('border-bottom', 'none');
+                        //วันที่ชำรุด
+                        $('#_datofdam').css('border-bottom', 'none');
+                        //ชั่วโมงการทำงาน
+                        $('#_workda').css('border-bottom', 'none');
+                        $('#_workmonth').css('border-bottom', 'none');
+                        $('#_workday').css('border-bottom', 'none');
+                        $('#_worktime').css('border-bottom', 'none');
                     }
                 }
                 //close modal reload
@@ -2766,6 +2779,7 @@
                     var CusShipping = $('#CustomerShipping').val();
                     var codeShipping = $('#codeShipping').val();
                     var remakeclaim = $('#remakeclaim').val();
+                    var qtyunit = $('#qtyunit').val();
                     //var imgsignature = "";
                     //imgsignature = $('#imgCapture').attr('src');
                     //if (imgsignature == null) {
@@ -2792,6 +2806,7 @@
                             incodeShipping: codeShipping,
                             inremakeclaim: remakeclaim,
                             inqtybox: qtybox,
+                            inqtyunit: qtyunit,
                             imgsignature: imgsignature,
                             imgsignatureman: imgsignatureman
 
@@ -3498,61 +3513,63 @@
                             $("#myModalWarning").modal();
                             return false;
                         }
+                        //ที่ TAM ไม่ต้อง mandatory field 1,2,10,11
+                        if (company != "TAM") {
+                            var xvehicle = $("#_vemac").val();
+                            if (xvehicle == "") {
+                                $("#textAlertWarningmes").empty();
+                                $("#textAlertWarningmes").text("กรุณาระบุข้อมูลสำหรับรถ Vehicle/Machine/Please enter Vehicle/Machine");
+                                $("#myModalWarning").modal();
+                                return false;
+                            }
+                            var xmodeltype = $("#_moty").val();
+                            if (xmodeltype == "") {
+                                $("#textAlertWarningmes").empty();
+                                $("#textAlertWarningmes").text("กรุณาระบุข้อมูล รุ่น Model/Type/Please enter Model/Type");
+                                $("#myModalWarning").modal();
+                                return false;
+                            }
+                            //var mil = $("#_milage").val();
+                            //if (mil == "") {
+                            //    $("#textAlertWarningmes").empty();
+                            //    $("#textAlertWarningmes").text("กรุณาระบุระยะทางการใช้งาน Milage(Km./Mile)");
+                            //    $("#myModalWarning").modal();
+                            //    return false;
+                            //}
+                            var xdateofdamage = $("#_datofdam").val();
+                            if (xdateofdamage == "") {
+                                $("#textAlertWarningmes").empty();
+                                $("#textAlertWarningmes").text("กรุณาระบุวันที่ชำรุด Date of Damage/Please enter Date of Damage");
+                                $("#myModalWarning").modal();
+                                return false;
+                            }
+                            var xyear = $("#_workda").val();
+                            var xmonth = $("#_workmonth").val();
+                            var xday = $("#_workday").val();
+                            var xtime = $("#_worktime").val();
+                            if (xyear == null) {
+                                xyear = "0";
+                            }
+                            if (xmonth == null) {
+                                xmonth = "0";
+                            }
+                            if (xday == null) {
+                                xday = "0";
+                            }
+                            if (xtime == null) {
+                                xtime = "00:00";
+                            } else if (xtime == "") {
+                                xtime = "00:00";
+                            }
 
-                        var xvehicle = $("#_vemac").val();
-                        if (xvehicle == "") {
-                            $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณาระบุข้อมูลสำหรับรถ Vehicle/Machine/Please enter Vehicle/Machine");
-                            $("#myModalWarning").modal();
-                            return false;
-                        }
-                        var xmodeltype = $("#_moty").val();
-                        if (xmodeltype == "") {
-                            $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณาระบุข้อมูล รุ่น Model/Type/Please enter Model/Type");
-                            $("#myModalWarning").modal();
-                            return false;
-                        }
-                        //var mil = $("#_milage").val();
-                        //if (mil == "") {
-                        //    $("#textAlertWarningmes").empty();
-                        //    $("#textAlertWarningmes").text("กรุณาระบุระยะทางการใช้งาน Milage(Km./Mile)");
-                        //    $("#myModalWarning").modal();
-                        //    return false;
-                        //}
-                        var xdateofdamage = $("#_datofdam").val();
-                        if (xdateofdamage == "") {
-                            $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณาระบุวันที่ชำรุด Date of Damage/Please enter Date of Damage");
-                            $("#myModalWarning").modal();
-                            return false;
-                        }
-                        var xyear = $("#_workda").val();
-                        var xmonth = $("#_workmonth").val();
-                        var xday = $("#_workday").val();
-                        var xtime = $("#_worktime").val();
-                        if (xyear == null) {
-                            xyear = "0";
-                        }
-                        if (xmonth == null) {
-                            xmonth = "0";
-                        }
-                        if (xday == null) {
-                            xday = "0";
-                        }
-                        if (xtime == null) {
-                            xtime = "00:00";
-                        } else if (xtime == "") {
-                            xtime = "00:00";
-                        }
+                            var xworktime = xyear + "/" + xmonth + "/" + xday + "/" + xtime;
 
-                        var xworktime = xyear + "/" + xmonth + "/" + xday + "/" + xtime;
-
-                        if (xworktime == "0/0/0/00:00") {
-                            $("#textAlertWarningmes").empty();
-                            $("#textAlertWarningmes").text("กรุณาระบุ ข้อมูลชั่วโมงการทำงาน Hour of Operation/period of use");
-                            $("#myModalWarning").modal();
-                            return false;
+                            if (xworktime == "0/0/0/00:00") {
+                                $("#textAlertWarningmes").empty();
+                                $("#textAlertWarningmes").text("กรุณาระบุ ข้อมูลชั่วโมงการทำงาน Hour of Operation/period of use");
+                                $("#myModalWarning").modal();
+                                return false;
+                            }
                         }
                         var dropxcauseclaim = $("#deopcauseclaim").val();
                         if (dropxcauseclaim == "0") {
@@ -3738,6 +3755,7 @@
 
                                         var BatchCode = $("#_batcod").val();
                                         var _cqty = $('#_hqty').val();
+                                        var customer_claim_note = $('#customer_claim_note').val();
                                         var valfoc = $('#_foc').val();
                                         var sefoc;
                                         if (valfoc == "0") {
@@ -3783,7 +3801,8 @@
                                                 inreminqtynew: reminqtynew,
                                                 incontactcus: contactcus,
                                                 inclaimcontactcus: claimcontactcus,
-                                                installdatecus: installdatecus
+                                                installdatecus: installdatecus,
+                                                customer_claim_note: customer_claim_note
                                             },
                                             type: "POST",
                                             dataType: "JSON",
@@ -3903,6 +3922,7 @@
                             //  }
                             var _cqty = $('#_hqty').val();
                             var valfoc = $('#_foc').val();
+                            var customer_claim_note = $('#customer_claim_note').val();
                             var sefoc;
                             if (valfoc != "0") {
                                 sefoc = "FOC";
@@ -3946,7 +3966,8 @@
                                     inreminqtynew: reminqtynew,
                                     incontactcus: contactcus,
                                     inclaimcontactcus: claimcontactcus,
-                                    installdatecus: installdatecus
+                                    installdatecus: installdatecus,
+                                    customer_claim_note: customer_claim_note
                                 },
                                 type: "POST",
                                 dataType: "JSON",
@@ -4277,6 +4298,22 @@
                         //  var CUSCODt = $("#CUSCOD option:selected").text();
                     }
                 });
+                //unit
+                 $.ajax({
+                    url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
+                    data: {
+                        Name: 42
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        var select = $("#qtyunit");
+                        select.children().remove();
+                        $(data).each(function (index, item) {
+                            select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                        });
+                    }
+                });
 
                 $('#receclaim tbody').scroll(function (e) { //detect a scroll event on the tbody
 
@@ -4537,6 +4574,7 @@
                                     $("#requestdate").val(data.Getdata[0].val.CLM_RCVDATE);
                                     $("#_company").val(data.Getdata[0].val.CLM_COMPANY);
                                     $("#_invcustomer").val(data.Getdata[0].val.CUSCOD);
+                                    $("#customer_claim_note").val(data.Getdata[0].val.CLM_ClaimNote);
                                     GetShipto()
 
                                     var SubmithtmlPage = '';

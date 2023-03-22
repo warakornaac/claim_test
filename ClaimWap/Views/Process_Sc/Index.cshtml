@@ -3832,15 +3832,18 @@
                     $("#textAlertWarning").text("กรุณาระบุช่างที่รับผิดชอบ/Please specify the TECH");
                     $("#myModalWarning").modal(); return false;
                 }
-                if (shelfloctec == "") {
-                    $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("กรุณาระบุ Shelf Location");
-                    $("#myModalWarning").modal(); return false;
-                }
-                if (shelfloctec == "0") {
-                    $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("กรุณาระบุ Shelf Location");
-                    $("#myModalWarning").modal(); return false;
+                //ที่ TAM ไม่ต้อง shelf
+                if (company != "TAM") {
+                    if (shelfloctec == "") {
+                        $("#textAlertWarning").empty();
+                        $("#textAlertWarning").text("กรุณาระบุ Shelf Location");
+                        $("#myModalWarning").modal(); return false;
+                    }
+                    if (shelfloctec == "0") {
+                        $("#textAlertWarning").empty();
+                        $("#textAlertWarning").text("กรุณาระบุ Shelf Location");
+                        $("#myModalWarning").modal(); return false;
+                    }
                 }
 
                 if (perfromtec1 == "0") {
