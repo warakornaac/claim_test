@@ -55,7 +55,6 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox6</rd:DefaultName>
-                          <Top>0cm</Top>
                           <Left>0.0209cm</Left>
                           <Height>0.75in</Height>
                           <Width>7.97418in</Width>
@@ -543,10 +542,10 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox10</rd:DefaultName>
-                          <Top>0.76209in</Top>
+                          <Top>0.78709in</Top>
                           <Left>5.728in</Left>
                           <Height>0.20833in</Height>
-                          <Width>0.92609in</Width>
+                          <Width>0.34514in</Width>
                           <ZIndex>11</ZIndex>
                           <Style>
                             <Border>
@@ -857,10 +856,10 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox10</rd:DefaultName>
-                          <Top>0.76209in</Top>
+                          <Top>0.78709in</Top>
                           <Left>6.10092in</Left>
                           <Height>0.20833in</Height>
-                          <Width>1.79622in</Width>
+                          <Width>0.36827in</Width>
                           <ZIndex>18</ZIndex>
                           <Style>
                             <Border>
@@ -894,6 +893,38 @@
                           <Height>0.19736in</Height>
                           <Width>2.69773in</Width>
                           <ZIndex>19</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <Textbox Name="Textbox62">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!CLM_QtyUnit.Value)</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox10</rd:DefaultName>
+                          <Top>0.78709in</Top>
+                          <Left>6.40838in</Left>
+                          <Height>0.20833in</Height>
+                          <Width>0.64755in</Width>
+                          <ZIndex>20</ZIndex>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -1567,6 +1598,10 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
+        <Field Name="REQ_ID">
+          <DataField>REQ_ID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="CUSCOD">
           <DataField>CUSCOD</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -1581,6 +1616,30 @@
         </Field>
         <Field Name="SLMCOD">
           <DataField>SLMCOD</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SLMNAM">
+          <DataField>SLMNAM</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ADDR_01">
+          <DataField>ADDR_01</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ADDR_02">
+          <DataField>ADDR_02</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TELNUM">
+          <DataField>TELNUM</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CONTACT">
+          <DataField>CONTACT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TRWAdd">
+          <DataField>TRWAdd</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="REQ_BY">
@@ -1622,6 +1681,10 @@
         <Field Name="CLM_QTY">
           <DataField>CLM_QTY</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CLM_UOM">
+          <DataField>CLM_UOM</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="CLM_INVNO">
           <DataField>CLM_INVNO</DataField>
@@ -1679,61 +1742,33 @@
           <DataField>TECH1_ANLYS_DATE</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
-        <Field Name="REQ_ID">
-          <DataField>REQ_ID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="SLMNAM">
-          <DataField>SLMNAM</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ADDR_01">
-          <DataField>ADDR_01</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ADDR_02">
-          <DataField>ADDR_02</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TELNUM">
-          <DataField>TELNUM</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CONTACT">
-          <DataField>CONTACT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TRWAdd">
-          <DataField>TRWAdd</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CLM_UOM">
-          <DataField>CLM_UOM</DataField>
+        <Field Name="CLM_Ship_Customer">
+          <DataField>CLM_Ship_Customer</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="CLM_Ship_Code">
           <DataField>CLM_Ship_Code</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="CLM_Ship_Customer">
-          <DataField>CLM_Ship_Customer</DataField>
+        <Field Name="ShipAddr">
+          <DataField>ShipAddr</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="CLM_Remake_Shipto">
           <DataField>CLM_Remake_Shipto</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ShipAddr">
-          <DataField>ShipAddr</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="Imgsignature">
           <DataField>Imgsignature</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Imgsignature_Sales">
+          <DataField>Imgsignature_Sales</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="CLM_QtyShip">
           <DataField>CLM_QtyShip</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="Shipcontact">
           <DataField>Shipcontact</DataField>
@@ -1743,10 +1778,14 @@
           <DataField>ShipName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CLM_QtyUnit">
+          <DataField>CLM_QtyUnit</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>CLAIMDataSet</rd:DataSetName>
-        <rd:SchemaPath>D:\Projects\work spaces\Claimwarranty\ClaimWap\ClaimWap\CLAIMDataSet.xsd</rd:SchemaPath>
+        <rd:DataSetName>Claim_TestDataSet</rd:DataSetName>
+        <rd:SchemaPath>D:\dotnet\ClaimWapGit\ClaimWap\Claim_TestDataSet1.xsd</rd:SchemaPath>
         <rd:TableName>P_GetReqClaim_ByDoc</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
