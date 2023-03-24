@@ -2604,8 +2604,9 @@
                 var statuscancel = $(this).attr('statuclm');
                 if (statuscancel == "7") {
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("รายการถูกยกเลิกการเคลมกรุณาเลือกรายการใหม่");
+                    $("#textAlertWarning").text("รายการถูกยกเลิกการเคลมกรุณาเลือกรายการใหม่/Item has been canceled.");
                     $("#myModalWarning").modal();
+                    LoadingHide();
                     return false;
                 }
                 var cusno = $("#_cusno").text();
@@ -3548,7 +3549,9 @@
                 if (nokey == "" && nosubkey == "") {
                     $("#textAlertWarning").empty();
                     $("#textAlertWarning").text("กรุณาเลือกรายการเคลมที่ต้องการบันทึก Comment");
-                    $("#myModalWarning").modal(); return false;
+                    $("#myModalWarning").modal();
+                    LoadingHide();
+                    return false;
                 }
 
                 var commentt1 = $("#updateremaketec1").val();
@@ -3576,6 +3579,7 @@
                             //$("#textAlertWarning").empty();
                             //$("#textAlertWarning").text(data.message);
                             //$("#myModalWarning").modal(); return false;
+                            LoadingHide();
                             return false;
                         }
                     }
@@ -3586,8 +3590,10 @@
                 var nosubkey = $("#subNospan").text();
                 if (nokey == "" && nosubkey == "") {
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("กรุณาเลือกรายการวิเคราะห์สินค้าเคลม");
-                    $("#myModalWarning").modal(); return false;
+                    $("#textAlertWarning").text("กรุณาเลือกรายการวิเคราะห์สินค้าเคลม/Please select the analysis of product claim.");
+                    $("#myModalWarning").modal();
+                    LoadingHide();
+                    return false;
                 }
                 ///Detail Invoice///
                 var invoicelineamt;
