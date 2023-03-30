@@ -1545,6 +1545,7 @@ namespace ClaimWap.Models
                 model.CLM_Contact = dr["CLM_Contact"].ToString();
                 model.CLM_ContactTel = dr["CLM_ContactTel"].ToString();
                 model.CLM_COMMENT = dr["CLM_COMMENT"].ToString();
+                model.CLM_CLAIMNOTE = dr["CLM_ClaimNote"].ToString();
                 Getdata.Add(new ClimeListDetail { val = model });
             }
             dr.Close();

@@ -366,6 +366,10 @@
                             <th>Request date</th>
                             <th>Due date</th>
                             <th>Invoice No</th>
+                            @if (Session["company"].ToString() == "TAM")
+                            {
+                                <th>Customer Return No.</th>
+                            }
                             <th>Customer</th>
                             <th>Sales Man</th>
                             <th>Item No.</th>
@@ -411,6 +415,10 @@
                             <th>Request date</th>
                             <th>Due date</th>
                             <th>Invoice No</th>
+                            @if (Session["company"].ToString() == "TAM")
+                            {
+                                <th>Customer Return No.</th>
+                            }
                             <th>Customer</th>
                             <th>Sales Man</th>
                             <th>Item No.</th>
@@ -464,6 +472,10 @@
                             <th>Request date</th>
                             <th>Due date</th>
                             <th>Invoice No</th>
+                            @if (Session["company"].ToString() == "TAM")
+                            {
+                                <th>Customer Return No.</th>
+                            }
                             <th>Customer</th>
                             <th>Sales Man</th>
                             <th>Item No.</th>
@@ -641,6 +653,12 @@
                                 <div class="form-group">
                                     <span> <i class="fa fa-pencil"></i> Type.:</span>
                                     <span style="color: blue;text-decoration: underline;font-weight: bold" id="_foc"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 divFieldClaimNote" style="display: none;">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-pencil"></i> Customer Return No.	:</span>
+                                    <span style="color: blue;text-decoration: underline;font-weight: bold" id="claim_note"></span>
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -1157,92 +1175,92 @@
 
                 @*saleman อนุมัติ*@
                 <div id="divMainSaleman">
-                <div class="card-header">
-                    <i class="fa fa-table"></i>Salesman Approval <li id="clickmeSaleman" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
-                </div>
-                <div class="col-md-12" id="myDIVSM" style="display:none;">
-                    <div class="row pt-2 pb-1">
-                        <div class="col-md-12 text-left">
-                            <span class="alert-success"><i class="fa fa-user"></i> Cliam Type by PM</span><br />
-                        </div>
+                    <div class="card-header">
+                        <i class="fa fa-table"></i>Salesman Approval <li id="clickmeSaleman" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i> Warranty claim type:</span>
-                                <span>
-                                    <select class="bar" id="_anlysstatustecpm_pm"></select>
-                                </span>
+                    <div class="col-md-12" id="myDIVSM" style="display:none;">
+                        <div class="row pt-2 pb-1">
+                            <div class="col-md-12 text-left">
+                                <span class="alert-success"><i class="fa fa-user"></i> Cliam Type by PM</span><br />
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-sort-down"></i>Status</span>
-                                <span>
-                                    <select class="bar" id="_pmtstus_pm"></select>
-                                </span>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-pencil"></i> Warranty claim type:</span>
+                                    <span>
+                                        <select class="bar" id="_anlysstatustecpm_pm"></select>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-sort-down"></i>Status</span>
+                                    <span>
+                                        <select class="bar" id="_pmtstus_pm"></select>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="padding: 0px;">
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row pb-1">
+                            <div class="col-md-12 text-left">
+                                <span class="alert-warning"><i class="fa fa-user"></i> Cliam Type by Salesman</span><br />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-pencil"></i> Warranty claim type:</span>
+                                    <span>
+                                        <select class="bar" id="_anlysstatus_sm"></select>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class='fa fa-user'></i> Saleman name:</span>
+                                    <span>
+                                        <input type="text" id="saleman_approve_name" disabled="disabled" style="background: border-box border-box; color: blue;" />
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-calendar"></i> Saleman approve date:</span>
+                                    <span>
+                                        <input type="date" data-date-format="dd/mm/yy" id="saleman_approve_date" />
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-sort-down"></i>Saleman Status</span>
+                                    <span>
+                                        <select class="bar" id="saleman_approve_status">
+                                            <option value="0">Choose option</option>
+                                            <option value="1">Claim approve</option>
+                                            <option value="2">Claim not approve</option>
+                                        </select>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-edit"></i>Saleman Remark:</span>
+                                    <span><textarea class="form-control" rows="6" cols="100" id="saleman_remark" placeholder="remark"></textarea></span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12" style="padding: 0px;">
-                            <hr>
-                        </div>
-                    </div>
-                    <div class="row pb-1">
-                        <div class="col-md-12 text-left">
-                            <span class="alert-warning"><i class="fa fa-user"></i> Cliam Type by Salesman</span><br />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i> Warranty claim type:</span>
-                                <span>
-                                    <select class="bar" id="_anlysstatus_sm"></select>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class='fa fa-user'></i> Saleman name:</span>
-                                <span>
-                                    <input type="text" id="saleman_approve_name" disabled="disabled" style="background: border-box border-box; color: blue;" />
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-calendar"></i> Saleman approve date:</span>
-                                <span>
-                                    <input type="date" data-date-format="dd/mm/yy" id="saleman_approve_date" />
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span> <i class="fa fa-sort-down"></i>Saleman Status</span>
-                                <span>
-                                    <select class="bar" id="saleman_approve_status">
-                                        <option value="0">Choose option</option>
-                                        <option value="1">Claim approve</option>
-                                        <option value="2">Claim not approve</option>
-                                    </select>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <span> <i class="fa fa-edit"></i>Saleman Remark:</span>
-                                <span><textarea class="form-control" rows="6" cols="100" id="saleman_remark" placeholder="remark"></textarea></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 </div>
                 @*Gm อนุมัติ*@
                 <div id="divMainGm">
@@ -1281,15 +1299,15 @@
                             </div>
                         </div>
                         @*<div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> Warranty claim type by saleman:</span>
-                            <span>
-                                <select class="bar" id="_anlysstatustecpm_sm"></select>
-                            </span>
-                        </div>
-                    </div>
-                </div>*@
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <span> <i class="fa fa-pencil"></i> Warranty claim type by saleman:</span>
+                                        <span>
+                                            <select class="bar" id="_anlysstatustecpm_sm"></select>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>*@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -1300,7 +1318,7 @@
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
         </div>
     </div>
     <!-- Logout Modal-->
@@ -1556,6 +1574,7 @@
                 if (company == "TAM") {
                     $("#_company").val("TAM");
                     $('#_company').attr('disabled', true);
+                    $('.divFieldClaimNote').css('display', 'block');
                 }
             }
 
@@ -2253,6 +2272,9 @@
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.REQ_DATE + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_DUEDATE + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_INVNO + '</td>';
+                                if (company == 'TAM') {
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_CLAIMNOTE + '</td>';
+                                }
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.Customer + "/<br>" + data.Getdata[i].val.CUSNAM + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.SLMCOD + "/<br>" + data.Getdata[i].val.SLMNAM + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
@@ -2445,6 +2467,9 @@
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.REQ_DATE + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_DUEDATE + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_INVNO + '</td>';
+                                    if (company == 'TAM') {
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_CLAIMNOTE + '</td>';
+                                    }
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.Customer + "/<br>" + data.Getdata[i].val.CUSNAM + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.SLMCOD + "/<br>" + data.Getdata[i].val.SLMNAM + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
@@ -2580,6 +2605,9 @@
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.REQ_DATE + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_DUEDATE + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_INVNO + '</td>';
+                                    if (company == 'TAM') {
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_CLAIMNOTE + '</td>';
+                                    }
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.Customer + '/<br>' + data.Getdata[i].val.CUSNAM + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.SLMCOD + '/<br>' + data.Getdata[i].val.SLMNAM + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
@@ -3018,7 +3046,7 @@
             });
             $("table").on("click", "tr #_btnview", function () {
                 LoadingShow();
-               
+
                 //แสดงข้อมูลที่กดค้นหา
                 $("#divShowSearch").css("display", "block");
 
@@ -3196,6 +3224,7 @@
                             $("#_worktime").val(dateofsp[3]);
                             $("#_datofdam").val(data.Getdata[0].val.CLM_DateDamage);
                             $("#_batcod").val(data.Getdata[0].val.CLM_BatchCode);
+                            $("#claim_note").text(data.Getdata[0].val.CLM_CLAIMNOTE);
 
                             ///lock Display///
                             $("#_vemac").attr("disabled", "disabled");

@@ -624,9 +624,10 @@
                             <span style="color: blue;text-decoration: underline;font-weight: bold" id="_workda"></span>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" id="divFieldClaimNote" style="display: none;">
                         <div class="form-group">
-
+                            <span> <i class="fa fa-pencil"></i> Customer Return No.	:</span>
+                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="claim_note"></span>
                         </div>
                     </div>
                 </div>
@@ -1421,6 +1422,7 @@
                         $("#_company").val("TAM");
                         $('#_company').attr('disabled', true);
                         $('.comTam').css('display', 'block');
+                        $('#divFieldClaimNote').css('display', 'block');
                     }
                 }
             });
@@ -2742,6 +2744,7 @@
                                 $("#_installdate").val(data.Getdata[0].val.CLM_Installdate);
                                 $("#_claimcontact").val(data.Getdata[0].val.CLM_Contact);
                                 $("#_contact").val(data.Getdata[0].val.CLM_ContactTel);
+                                $("#claim_note").text(data.Getdata[0].val.CLM_CLAIMNOTE);
                                 //alert(data.Getdata[0].val.CLM_DATE);
                                 if (data.Getdata[0].val.CLM_DATE != "") {
                                    $("#tab_tecadmin_receive").removeClass("bg-head-work");

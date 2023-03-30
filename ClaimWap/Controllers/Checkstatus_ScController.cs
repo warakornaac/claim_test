@@ -306,6 +306,7 @@ namespace ClaimWap.Controllers
                 model.CS_No = dr["CS_No"].ToString();
                 model.Log_No = dr["Log_No"].ToString();
                 model.Print_statusCN = dr["Print_statusCN"].ToString();
+                model.CLM_CLAIMNOTE = dr["CLM_ClaimNote"].ToString();
                 Getdata.Add(new ClimeListDetail { val = model });
             }
             dr.Close();
