@@ -44,14 +44,14 @@ namespace ClaimWap.Report
             string fileReport = string.Empty;
             //รายการนี้มาจาก com ไหน
             var connectionString = ConfigurationManager.ConnectionStrings["CLAIM_ConnectionString"].ConnectionString;
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
-            {
-                sqlConnection.Open();
-                SqlCommand sqlCmd = new SqlCommand("SELECT CLM_COMPANY from Claim_Line where  pc.SLMCOD ='" + Doc, sqlConnection);
-                SqlDataReader reader = sqlCmd.ExecuteReader();
-                clmCompany = reader["CLM_COMPANY"].ToString();
-                sqlConnection.Close();
-            }
+            //using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            //{
+            //    sqlConnection.Open();
+            //    SqlCommand sqlCmd = new SqlCommand("SELECT CLM_COMPANY from Claim_Line where  pc.SLMCOD ='" + Doc, sqlConnection);
+            //    SqlDataReader reader = sqlCmd.ExecuteReader();
+            //    clmCompany = reader["CLM_COMPANY"].ToString();
+            //    sqlConnection.Close();
+            //}
 
             //string Doc_subdisplay = string.Empty;
             Docdisplay = Request.QueryString["ClmNUM"];
@@ -77,13 +77,13 @@ namespace ClaimWap.Report
             using (SqlConnection con = new SqlConnection(conString))
             {
                 fileReport = "~/Report/rptClaimWH.rdlc";
-                if (clmCompany != "")
-                {
-                    if (clmCompany == "TAM")
-                    {
-                        fileReport = "~/Report/rptRequestClaimWH_TAM.rdlc";
-                    }
-                }
+                //if (clmCompany != "")
+                //{
+                //    if (clmCompany == "TAM")
+                //    {
+                //        fileReport = "~/Report/rptRequestClaimWH_TAM.rdlc";
+                //    }
+                //}
                 ReportViewer.ProcessingMode = ProcessingMode.Local;
                 ReportViewer.LocalReport.ReportPath = Server.MapPath(fileReport);
                 con.Open();
