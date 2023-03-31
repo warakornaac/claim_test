@@ -357,6 +357,10 @@
           <DataField>GRPNAM</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="SLMNAM">
+          <DataField>SLMNAM</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="CS_DOC">
           <DataField>CS_DOC</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -364,6 +368,10 @@
         <Field Name="CS_PSTDAT">
           <DataField>CS_PSTDAT</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="CS_USERID">
+          <DataField>CS_USERID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="LOG_DOC">
           <DataField>LOG_DOC</DataField>
@@ -373,20 +381,12 @@
           <DataField>LOG_PSTDAT</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
-        <Field Name="CS_USERID">
-          <DataField>CS_USERID</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="LOG_LOCCODE">
           <DataField>LOG_LOCCODE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="LOG_PREFIXDOC">
           <DataField>LOG_PREFIXDOC</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SLMNAM">
-          <DataField>SLMNAM</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="LOG_USERID">
@@ -397,10 +397,14 @@
           <DataField>WarrantyClmType</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="CLM_ClaimNote">
+          <DataField>CLM_ClaimNote</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>CLAIMDataSet</rd:DataSetName>
-        <rd:SchemaPath>D:\Project\CLAIM\ClaimProject\ClaimWap\ClaimWap\CLAIMDataSet.xsd</rd:SchemaPath>
+        <rd:DataSetName>DataSet2</rd:DataSetName>
+        <rd:SchemaPath>D:\dotnet\ClaimWapGit\ClaimWap\DataSet2.xsd</rd:SchemaPath>
         <rd:TableName>P_GetClaim_ByDocSub</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
@@ -5879,10 +5883,97 @@
                   <PaddingBottom>2pt</PaddingBottom>
                 </Style>
               </Textbox>
+              <Tablix Name="Tablix4">
+                <TablixBody>
+                  <TablixColumns>
+                    <TablixColumn>
+                      <Width>2.57261in</Width>
+                    </TablixColumn>
+                  </TablixColumns>
+                  <TablixRows>
+                    <TablixRow>
+                      <Height>0.2107in</Height>
+                      <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Textbox29">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Customer Return No. </Value>
+                                      <Style />
+                                    </TextRun>
+                                    <TextRun>
+                                      <Value>=Fields!CLM_ClaimNote.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox26</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                      </TablixCells>
+                    </TablixRow>
+                  </TablixRows>
+                </TablixBody>
+                <TablixColumnHierarchy>
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
+                </TablixColumnHierarchy>
+                <TablixRowHierarchy>
+                  <TablixMembers>
+                    <TablixMember>
+                      <Group Name="Details2" />
+                      <TablixMembers>
+                        <TablixMember />
+                      </TablixMembers>
+                    </TablixMember>
+                  </TablixMembers>
+                </TablixRowHierarchy>
+                <DataSetName>DataSet1</DataSetName>
+                <Top>1.62834in</Top>
+                <Left>5.54494in</Left>
+                <Height>0.2107in</Height>
+                <Width>2.57261in</Width>
+                <ZIndex>32</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>Solid</Style>
+                  </Border>
+                </Style>
+              </Tablix>
+              <Line Name="Line6">
+                <Top>2.94884in</Top>
+                <Left>3.20185in</Left>
+                <Height>0in</Height>
+                <Width>1.4967in</Width>
+                <ZIndex>33</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>Dotted</Style>
+                  </Border>
+                </Style>
+              </Line>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
             <Left>0.03401in</Left>
-            <Height>25.45315cm</Height>
+            <Height>26.41011cm</Height>
             <Width>20.70202cm</Width>
             <Style>
               <Border>
@@ -5891,7 +5982,7 @@
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>25.48611cm</Height>
+        <Height>26.41011cm</Height>
         <Style />
       </Body>
       <Width>20.78841cm</Width>
