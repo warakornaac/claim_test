@@ -1857,7 +1857,7 @@
                     success: function (data) {
                         var select = $("#_shelfloctec");
                         select.children().remove();
-                        select.append($("<option>").val("0").text("เลือก Shelf Location"));
+                        select.append($("<option>").val("0").text("เลือก Shelf Location/Select Shelf Location."));
                         $(data).each(function (index, item) {
                             select.append($("<option>").val(item.Location).text(item.Location));
                         });
@@ -2789,7 +2789,7 @@
                                     } else {
                                         $('#_tecwork').val("0");
                                         var select = $("#_shelfloctec");
-                                        select.append($("<option>").val("0").text("เลือก Shelf Location"));
+                                        select.append($("<option>").val("0").text("เลือก Shelf Location/Select Shelf Location."));
                                     }
                                 } else if (_AdminProststus == "0") {
                                     $("#_proceedtotec").val(statusclaimup);  ///สถานะการรับสินค้า
@@ -3186,7 +3186,7 @@
                             } else {
 
                                 $("#textAlertWarning").empty();
-                                $("#textAlertWarning").text("ไม่มีรายการเคลม...");
+                                $("#textAlertWarning").text("ไม่มีรายการเคลม../No claim list..");
                                 $("#myModalWarning").modal();
                             }
                             LoadingHide();
@@ -3290,7 +3290,7 @@
                                 $("#FilesList tbody").empty();
                                 $('#boximage').html("");
                                 SubmithtmlPage = '<div class="col-sm-3" style="color: red;">';
-                                SubmithtmlPage += 'ไม่มีภาพประกอบการเคลมสินค้า';
+                                SubmithtmlPage += 'ไม่มีภาพประกอบการเคลมสินค้า/There is no product claim picture';
                                 SubmithtmlPage += '</div>';
                                 $('#boximage').append(SubmithtmlPage);
                             }
@@ -3436,7 +3436,7 @@
                                 console.log(data);
                                 if (data.message == "true") {
 
-                                    alert("ลบ VIDEOS รายการเรียบร้อย");
+                                    alert("ลบ VIDEOS รายการเรียบร้อย/Successfully deleted the VIDEOS list.");
                                     location.reload();
                                     var control = $("#FileUpload");
 
@@ -3480,7 +3480,7 @@
                                 console.log(data);
                                 if (data.message == "true") {
 
-                                    alert("ลบ image รายการเรียบร้อย");
+                                    alert("ลบ image รายการเรียบร้อย/The image has been deleted successfully.");
                                     location.reload();
 
                                 } else {
@@ -3551,7 +3551,7 @@
                 var nosubkey = $("#subNospan").text();
                 if (nokey == "" && nosubkey == "") {
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("กรุณาเลือกรายการเคลมที่ต้องการบันทึก Comment");
+                    $("#textAlertWarning").text("กรุณาเลือกรายการเคลมที่ต้องการบันทึก Comment/Please select the list of claims that you want to record. Comment");
                     $("#myModalWarning").modal();
                     LoadingHide();
                     return false;
@@ -3668,27 +3668,27 @@
 
                 if (proceedtotec == "0") {
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("กรุณาระบุสถานะรับของเคลม");
+                    $("#textAlertWarning").text("กรุณาระบุสถานะรับของเคลม/Please specify received status.");
                     $("#myModalWarning").modal(); return false;
                 }
                 if (rcvbyte == "0") {
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("กรุณาระบุผู้รับสินค้าเคลม");
+                    $("#textAlertWarning").text("กรุณาระบุผู้รับสินค้าเคลม/Please specify admin name.");
                     $("#myModalWarning").modal(); return false;
                 }
                 if (rvqtytec == "0") {
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("กรุณาระบุจำนวนรับเคลม");
+                    $("#textAlertWarning").text("กรุณาระบุจำนวนรับเคลม/Please specify Qty claim received.");
                     $("#myModalWarning").modal(); return false;
                 }
                 if (rvqtytec == "") {
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("กรุณาระบุจำนวนรับเคลม");
+                    $("#textAlertWarning").text("กรุณาระบุจำนวนรับเคลม/Please specify Qty claim received.");
                     $("#myModalWarning").modal(); return false;
                 } else if (rvqtytec != "") {
                     if (proceedtotec != "1") {
                         $("#textAlertWarning").empty();
-                        $("#textAlertWarning").text("กรุณาเปลี่ยนสถานะการรับสินค้า");
+                        $("#textAlertWarning").text("กรุณาเปลี่ยนสถานะการรับสินค้า/Please specify change received status.");
                         $("#myModalWarning").modal(); return false;
                     }
                 }
@@ -3798,14 +3798,14 @@
                 var BatchCode = $("#_batcod").val();
                 if (BatchCode == "") {
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("กรุณาระบุ รหัสการผลิต Batch Code");
+                    $("#textAlertWarning").text("กรุณาระบุ รหัสการผลิต Batch Code/Please specify Batch Code");
                     $("#myModalWarning").modal(); return false;
 
                 }
                 var adminststud = $("#_admin").val();
                 if (adminststud == "1") {
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("ยังไม่ตรวจรับสินค้า");
+                    $("#textAlertWarning").text("ยังไม่ตรวจรับสินค้า/I haven't receive the product.");
                     $("#myModalWarning").modal(); return false;
 
                 }
@@ -3857,12 +3857,12 @@
 
                 if (perfromtec1 == "0") {
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("ต้องการให้ดำเนินการ ?");
+                    $("#textAlertWarning").text("ต้องการให้ดำเนินการ ?/want to take action ?");
                     $("#myModalWarning").modal(); return false;
                 }
                 if (anlysstatustec1 == "0") {
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("กรุณาระบุสถานะการวิเคราะห์");
+                    $("#textAlertWarning").text("กรุณาระบุสถานะการวิเคราะห์/Please specify warranty claim type");
                     $("#myModalWarning").modal(); return false;
                 }
                 if (anlysafterprotec1 == "0") {
@@ -4973,14 +4973,14 @@
                 if (nokey == "" && nosubkey == "") {
 
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("ไม่มีรายการบันทึกผลการพิจารณา");
+                    $("#textAlertWarning").text("ไม่มีรายการบันทึกผลการพิจารณา/There is no record of the results of consideration.");
                     $("#myModalWarning").modal(); return false;
                 }
 
                 if (ckt2 == "0") {
 
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("รอ ผลการพิจารณา.....");
+                    $("#textAlertWarning").text("รอ ผลการพิจารณา.../waiting for the result.");
                     $("#myModalWarning").modal(); return false;
                 }
                 $.ajax({
