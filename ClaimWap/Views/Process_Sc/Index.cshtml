@@ -2601,7 +2601,6 @@
                 }
             });
             $("table").on("click", "tr #xxx", function () {
-                LoadingShow();
                 $("#claimDetail").css('display', 'block');
                 var statuscancel = $(this).attr('statuclm');
                 if (statuscancel == "7") {
@@ -2707,6 +2706,10 @@
                         },
                         type: "POST",
                         dataType: "JSON",
+                        beforeSend: function () {
+                            LoadingShow();
+                            LoadingHide();
+                        },
                         success: function (data) {
                             // console.log(data);
                             if (data.Getdata.length > 0) {
@@ -3189,7 +3192,6 @@
                                 $("#textAlertWarning").text("ไม่มีรายการเคลม../No claim list..");
                                 $("#myModalWarning").modal();
                             }
-                            LoadingHide();
                         }
                     });
                     $.ajax({
@@ -3572,6 +3574,7 @@
                     success: function (data) {
                         console.log(data);
                         // waitingDialog.hide();
+                            LoadingHide();
                         if (data.message == "true") {
                             alert("บันทึกข้อมูลสำเร็จ/Save successfully")
                             //$("#textAlertWarning").empty();
@@ -3945,6 +3948,7 @@
                         console.log(data.message);
                         console.log(data);
                         // waitingDialog.hide();
+                        LoadingHide();
                         if (data.message == "true") {
                             //  waitingDialog.hide();
                             $("#textAlertSucces").empty();
