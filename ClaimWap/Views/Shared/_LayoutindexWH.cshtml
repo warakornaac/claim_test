@@ -20,6 +20,14 @@
     <link href="~/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
     <!-- Custom styles for this template-->
     <link href="~/Content/css/sb-admin.css" rel="stylesheet" />
+    <style>
+        .modal {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .modal-backdrop {
+            display: none;
+        }
+    </style>
 </head>
 <body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
     <!-- Navigation-->
@@ -91,11 +99,11 @@
                             <span class="nav-link-text">สร้างใบตรวจสอบ</span>
                         </a>
                     </li>
-                   <li class="nav-item" data-toggle="tooltip" data-placement="right" title="รายการค้างส่งตรวจสอบ">
-                       <a class="nav-link" href="~/CreatecfreezesWh/Index">
-                           <i class="fa fa-fw fa-area-chart"></i>
-                           <span class="nav-link-text">รายการค้างส่งตรวจสอบ</span>
-                       </a>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="รายการค้างส่งตรวจสอบ">
+                        <a class="nav-link" href="~/CreatecfreezesWh/Index">
+                            <i class="fa fa-fw fa-area-chart"></i>
+                            <span class="nav-link-text">รายการค้างส่งตรวจสอบ</span>
+                        </a>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ตรวจสอบ&พิจารณา">
                         <a class="nav-link" href="~/Process_Wh/Index">
@@ -142,7 +150,7 @@
                             <span class="nav-link-text">สร้างใบตรวจสอบ</span>
                         </a>
                     </li>
-                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="รายการค้างส่งตรวจสอบ">
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="รายการค้างส่งตรวจสอบ">
                         <a class="nav-link" href="~/CreatecfreezesWh/Index">
                             <i class="fa fa-fw fa-area-chart"></i>
                             <span class="nav-link-text">รายการค้างส่งตรวจสอบ</span>
@@ -160,7 +168,7 @@
                             <span class="nav-link-text">Approve By PM</span>
                         </a>
                     </li>
-                    
+
                 }
 
                 else if (@Session["UserType"].ToString() == "8" || @Session["UserType"].ToString() == "9")
@@ -266,7 +274,8 @@
                     <i class="fa fa-area-chart" style="color:white">
                         Warehouse  >>>@Session["DatetoExpire"]
                     </i>
-                }else if (Session["UserType"].ToString() == "6")
+                }
+                else if (Session["UserType"].ToString() == "6")
                 {
                     <i class="fa fa-area-chart" style="color:white">
                         Logistic  >>>@Session["DatetoExpire"]
@@ -362,17 +371,17 @@
                             </a>
                         </div>
                     </div>
-                   <div class="col-xl-2 col-sm-6 mb-3">
+                    <div class="col-xl-2 col-sm-6 mb-3">
 
-                      <div class="card text-white bg-primary o-hidden">
+                        <div class="card text-white bg-primary o-hidden">
                             <a class="card-footer text-white clearfix small z-1" id="Createcfreezes" href="~/CreatecfreezesWh/Index">
                                 <span class="float-left">รายการค้างส่งตรวจสอบ</span>
                                 <span class="float-right">
-                                  
+
                                 </span>
                             </a>
                         </div>
-                    </div> 
+                    </div>
                     <div class="col-xl-2 col-sm-6 mb-3">
 
                         <div class="card text-white bg-primary o-hidden">
@@ -428,7 +437,7 @@
                             <a class="card-footer text-white clearfix small z-1" id="Createcfreezes" href="~/CreatecfreezesWh/Index">
                                 <span class="float-left">รายการค้างส่งตรวจสอบ</span>
                                 <span class="float-right">
-                                 
+
                                 </span>
                             </a>
                         </div>
@@ -489,7 +498,7 @@
                             <a class="card-footer text-white clearfix small z-1" id="Createcfreezes" href="~/CreatecfreezesWh/Index">
                                 <span class="float-left">รายการค้างส่งตรวจสอบ</span>
                                 <span class="float-right">
-                                
+
                                 </span>
                             </a>
                         </div>
@@ -520,7 +529,7 @@
 
                     </div>
                 }
-              
+
                 else if (@Session["UserType"].ToString() == "10")
                 {
                     <div class="col-xl-2 col-sm-6 mb-3">
@@ -533,18 +542,18 @@
                             </a>
                         </div>
                     </div>
-                      <div class="col-xl-2 col-sm-6 mb-3">
+                    <div class="col-xl-2 col-sm-6 mb-3">
 
                         <div class="card text-white bg-primary o-hidden">
                             <a class="card-footer text-white clearfix small z-1" id="Createcfreezes" href="~/CreatecfreezesWh/Index">
                                 <span class="float-left">รายการค้างส่งตรวจสอบ</span>
                                 <span class="float-right">
-                                 
+
                                 </span>
                             </a>
                         </div>
                     </div>
-               
+
                     <div class="col-xl-2 col-sm-6 mb-3">
                         <div class="card text-white bg-primary o-hidden">
 
@@ -583,13 +592,13 @@
                             </a>
                         </div>
                     </div>
-                      <div class="col-xl-2 col-sm-6 mb-3">
+                    <div class="col-xl-2 col-sm-6 mb-3">
 
                         <div class="card text-white bg-primary o-hidden">
                             <a class="card-footer text-white clearfix small z-1" id="Createcfreezes" href="~/CreatecfreezesWh/Index">
                                 <span class="float-left">รายการค้างส่งตรวจสอบ</span>
                                 <span class="float-right">
-                                 
+
                                 </span>
                             </a>
                         </div>
