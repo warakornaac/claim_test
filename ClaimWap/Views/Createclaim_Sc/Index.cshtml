@@ -3102,19 +3102,17 @@
                                     success: function (data) {
                                         console.log(data);
                                         if (data.message == "true") {
-
                                             alert("ลบ image รายการเรียบร้อย/Successfully deleted the image");
-                                            $("#receclaim #btngetshowdata").trigger("click");
-
-                                            var control = $("#fileInput");
-
-                                            control.replaceWith(control.val('').clone(true));
-
-                                            // Some bound handlers to preserve when cloning
-                                            control.on({
-                                                change: function () { console.log("Changed") },
-                                                focus: function () { console.log("Focus") }
-                                            });
+                                            //del row by id
+                                            $('#FilesList tr[id="' + idimag +'"]').remove();
+                                            //$("#receclaim #btngetshowdata").trigger("click");
+                                            //var control = $("#fileInput");
+                                            //control.replaceWith(control.val('').clone(true));
+                                            //// Some bound handlers to preserve when cloning
+                                            //control.on({
+                                            //    change: function () { console.log("Changed") },
+                                            //    focus: function () { console.log("Focus") }
+                                            //});
                                         } else {
                                             alert(data.message);
                                         }
@@ -3317,7 +3315,6 @@
                             },
                         });
                         //Getimage//
-
                         var nokey = $("#_claimno").val();
                         $.ajax({
                             url: '@Url.Action("GetPathImage", "GetdataCenter")',
@@ -3330,7 +3327,8 @@
                             success: function (result) {
 
                                 if (result.Getdata.length > 0) {
-                                    $("#FilesList tbody").empty();
+                                    //$("#FilesList tbody").empty();
+                                    $("#FilesList tbody tr:not(:first)").empty();
                                     for (var i = 0; i < result.Getdata.length; i++) {
                                         resultObj = eval(result.Getdata);
                                         var markup = "<tr id='" + resultObj[i].val.IMAGE_ID + "'><td><img src='" + resultObj[i].val.PATH + "' id='myImg' style='width: 25%'></td>\
@@ -3345,7 +3343,8 @@
 
                                     chkatchtbl();
                                 } else {
-                                    $("#FilesList tbody").empty();
+                                    //$("#FilesList tbody").empty();
+                                    $("#FilesList tbody tr:not(:first)").empty();
 
                                 }
                             },
@@ -3604,9 +3603,9 @@
                         var claimcontactcus = $("#_claimcontact").val();
                         var contactcus = $("#_contact").val();
                         var nokey = $("#_claimno").val();
-
+                        //จำนวนข้างล่าง
                         var leng = $('#receclaim > tbody:last-child').children().length;
-
+                        //alert('leng จำนวนข้างล่าง = ' + leng);
                         if (leng != 0) {
                             var req = "";
                             $('#receclaim tr').each(function () {
@@ -3620,10 +3619,10 @@
                                 return false;
                             }
                         }
-
-                        var leng = $('#FilesList > tbody:last-child').children().length;
-                        //alert(leng);
-                        if (leng == 1) {
+                        //จำนวนรูปที่จะอัพ
+                        var lengImg = $('#FilesList > tbody:last-child').children().length;
+                        //alert('leng จำนวนรูป = ' + lengImg);
+                        if (lengImg == 1) {
                             $("#textAlertWarningmes").empty();
                             $("#textAlertWarningmes").text("กรุณา Upload image เพื่อประกอบพิจารณาเคลม/Please upload image to consider.");
                             $("#myModalWarning").modal();
@@ -3816,7 +3815,8 @@
                                                     //$("#btnUpload4").click();
                                                     $("#btnUpload").click();
                                                     alert("สร้างรายการสำเร็จ/Item created success")
-                                                    $("#FilesList tbody").empty();
+                                                    //$("#FilesList tbody").empty();
+                                                    $("#FilesList tbody tr:not(:first)").remove();
                                                     clearval()
                                                     clearimage()
                                                     GetClimtemp(claimno)
@@ -3982,7 +3982,8 @@
                                         //$("#btnUpload4").click();
                                         $("#btnUpload").click();
                                         alert("บีนทึกรายการสำเร็จ/Save successfully.")
-                                        $("#FilesList tbody").empty();
+                                        //$("#FilesList tbody").empty();
+                                        $("#FilesList tbody tr:not(:first)").empty();
                                         clearval()
                                         clearimage()
                                         GetClimtemp(claimno)
