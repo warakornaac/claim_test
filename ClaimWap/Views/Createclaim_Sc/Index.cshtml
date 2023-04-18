@@ -3622,7 +3622,7 @@
                         //จำนวนรูปที่จะอัพ
                         var lengImg = $('#FilesList > tbody:last-child').children().length;
                         //alert('leng จำนวนรูป = ' + lengImg);
-                        if (lengImg == 1) {
+                        if (lengImg <= 1) {
                             $("#textAlertWarningmes").empty();
                             $("#textAlertWarningmes").text("กรุณา Upload image เพื่อประกอบพิจารณาเคลม/Please upload image to consider.");
                             $("#myModalWarning").modal();
