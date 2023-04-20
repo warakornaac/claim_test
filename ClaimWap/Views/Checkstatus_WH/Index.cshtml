@@ -3218,8 +3218,8 @@
                 var nokey = $("#Nospankey").text();
                 var nosubkey = $("#subNospan").text();
                 if (nokey == "" && nosubkey == "") {
-                    $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("กรุณาเลือกรายการเคลมที่ต้องการบันทึกปิดงาน");
+                    $("#textAlertWarningmes").empty();
+                    $("#textAlertWarningmes").text("กรุณาเลือกรายการเคลมที่ต้องการบันทึกปิดงาน");
                     $("#myModalWarning").modal(); return false;
                 }
                 var closeworkwh = $("#closeworkwh").val();
@@ -3245,8 +3245,8 @@
                             $("#myModalSucces").modal();
                             location.reload(true);
                         } else {
-                            $("#textAlertWarning").empty();
-                            $("#textAlertWarning").text(data.message);
+                            $("#textAlertWarningmes").empty();
+                            $("#textAlertWarningmes").text(data.message);
                             $("#myModalWarning").modal(); return false;
                         }
                     }
