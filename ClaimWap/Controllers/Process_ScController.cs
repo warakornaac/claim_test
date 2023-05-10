@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -58,7 +60,7 @@ namespace ClaimWap.Controllers
             return View();
         }
 
-        public JsonResult SaveProcessClaimDetailTec2(string clamtyp, string aj_REQ_NO, string aj_CLM_NO_SUB, string aj_TECH2_NAME, string aj_TECH2_APPRV_STATUS, string aj_TECH2_REMARK, string aj_TECH2_APPRV_DATE)
+        public JsonResult SaveProcessClaimDetailTec2(string clamtyp, string aj_REQ_NO, string aj_CLM_NO_SUB, string aj_TECH2_NAME, string aj_TECH2_APPRV_STATUS, string aj_TECH2_REMARK, string aj_TECH2_APPRV_DATE, string aj_TECH2_QTY_ORG, string aj_TECH2_QTY_PASS, string aj_TECH2_QTY_REJECT)
         {
             string message = string.Empty;
             string subno = string.Empty;
@@ -75,6 +77,9 @@ namespace ClaimWap.Controllers
                  command.Parameters.AddWithValue("@inTECH2_APPRV_STATUS", aj_TECH2_APPRV_STATUS);
                  command.Parameters.AddWithValue("@inTECH2_REMARK", aj_TECH2_REMARK);
                  command.Parameters.AddWithValue("@inTECH2_APPRV_DATE", aj_TECH2_APPRV_DATE);
+                 command.Parameters.AddWithValue("@inTECH2_QTY_ORG", aj_TECH2_QTY_ORG);
+                 command.Parameters.AddWithValue("@inTECH2_QTY_PASS", aj_TECH2_QTY_PASS);
+                 command.Parameters.AddWithValue("@inTECH2_QTY_REJECT", aj_TECH2_QTY_REJECT);
                  command.Parameters.AddWithValue("@inWarrantyClmType", clamtyp);
                
                
@@ -292,12 +297,9 @@ namespace ClaimWap.Controllers
             for (int i = 0; i < files.Count; i++)
             {
 
-
                 string name = formCollection["uploadername"];
                 string inCim_NoSub = formCollection["inCim_NoSub"];
                 string No = formCollection["No"];
-
-
                 //Pathimg = name + "-" + pussend + ".png";
                 var command = new SqlCommand("P_Save_PathImage_tec", Connection);
                 command.CommandType = CommandType.StoredProcedure;
@@ -315,15 +317,29 @@ namespace ClaimWap.Controllers
                 //pus = i;
                 //pussend = (pus + 1);
                 HttpPostedFileBase file = files[i];
+                string fullPath = Server.MapPath("~/ImgUpload/" + uname);
                 string fileName = file.FileName;
-                // file.SaveAs(path + file.FileName);
-                file.SaveAs(Server.MapPath(@"~\ImgUpload\" + uname));
-
-
+                file.SaveAs(fullPath);
+                int byteCount = file.ContentLength;
+                if (byteCount > 1048576)
+                { //เกิน 1 MB
+                    System.Web.Helpers.WebImage img = new System.Web.Helpers.WebImage(fullPath);
+                    if (img.Width > 1000) {
+                        img.Resize(1024, 768);
+                        FileInfo fileInfo = new FileInfo(fullPath);
+                        long sizeAfter = fileInfo.Length;
+                        if (sizeAfter > 1048576)
+                        { //เกิน 1 MB
+                            img.Resize(800, 600);
+                        }
+                        img.Save(fullPath, "png", true);               
+                    }
+                }
             }
             Connection.Close();
             return Json(files.Count + " Files Uploaded!");
         }
+
         public JsonResult SaveProcessClaimDetailAdmin(string aj_REQ_NO, string aj_CLM_NO_SUB, string aj_CLM_LineAMT, string aj_stkgrp, string aj_CLM_LineDiscountAMT, string aj_CLM_LineDiscPercent, string aj_CLM_RCVSTATUS, string aj_CLM_RCVBY,
              string aj_CLM_QTY, string aj_CLM_DATE, string aj_CLM_ADMIN, string aj_CLM_SHELF_LOCATION, string aj_CLM_REMARK, string aj_CLM_RCVDATE, string aj_CLM_UOM, string aj_CLM_DUEDATE, string aj_Technician,
             string vehicle, string modeltype, string modelyear, string enginecode, string chassisno, string pump, string typeofProduct, string warrantycardno, string milage, string dateofdamage, string inCLM_USEDAY, string BatchCode, string aj_ADMIN_ANLYS_STATUS,string aj_TECH1_PROCESS_STATUS,

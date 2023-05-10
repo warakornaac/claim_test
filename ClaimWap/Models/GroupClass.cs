@@ -511,7 +511,10 @@ namespace ClaimWap.Models
                 public string CLM_ADMIN { get; set; }
                 public string CLM_SHELF_LOCATION{ get; set; }
                 public string CLM_RCVSTATUS { get; set; }
+                public string CLM_QTY_ORG { get; set; }
                 public string CLM_QTY { get; set; }
+                public string CLM_QTY_PASS { get; set; }
+                public string CLM_QTY_REJECT { get; set; }
                 public string CLM_REQQTY { get; set; }
                 public string CLM_REMARK{ get; set; }
                 public string CLM_RCVDATE { get; set; }

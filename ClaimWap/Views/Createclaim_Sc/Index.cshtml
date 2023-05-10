@@ -565,6 +565,28 @@
             </div>
         </div>
     </div>
+    @*confirm image size ove*@
+    <div class="modal fade" role="dialog" id="modalSizeImage" data-backdrop="static" data-keyboard="false" style="padding-top: 10%;">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 600px;">
+                <div class="modal-header" style="justify-content: flex-start;">
+                    <h5 class="modal-title" id="exampleModalLabel">Cannot upload picture (more than 1 MB)</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="textModalSizeImage"></div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+                            @*<span class="text-left" style="color: red;"> System resize image to 1 MB </span>*@
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Trigger the modal with a button -->
     <div class="card mb-12">
         <div class="card-header bg-info text-white">
@@ -692,118 +714,118 @@
             <i class="fa fa-table"></i> รายละเอียดสินค้าเคลม/Claim Details <li id="clickme" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
         </div>
         <div class="card-body" id="myDIV">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="col-xs-4"><span id="_claimnosub"></span></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-xs-4"><span id="_claimnosub"></span></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <span> <i class="fa fa-pencil"></i>Customer No.:</span>
+                        <span><input type="text" id="_invcustomer" disabled="disabled" /></span>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Customer No.:</span>
-                            <span><input type="text" id="_invcustomer" disabled="disabled" /></span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Item No.:</span>
-                            <span><input type="text" id="_itemnodes" disabled="disabled" /></span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Description:</span>
-                            <span><input type="text" id="_descriptiondes" disabled="disabled" /></span>
-                        </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <span> <i class="fa fa-pencil"></i>Item No.:</span>
+                        <span><input type="text" id="_itemnodes" disabled="disabled" /></span>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Uom:</span>
-                            <span><input type="text" id="_uom" disabled="disabled" style="width: 200px;"></span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Type:</span>
-                            <span><input type="text" id="_focdis" disabled="disabled" style="width: 200px;"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Invoice No.:</span>
-                            <span><input type="text" id="_invoicenodes" disabled="disabled" /></span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Invoice Date:</span>
-                            <span><input type="text" id="_psdate" disabled="disabled" /></span>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Pm.:</span>
-                            <span><input type="text" id="_prd" disabled="disabled" /></span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-
-                            <span> <i class="fa fa-user"></i>Request by:</span>
-                            <span><input type="text" id="requestby" disabled="disabled" /></span>
-
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-user"></i>Request Date:</span>
-                            <span><input type="text" id="requestdate" disabled="disabled" /></span>
-
-                        </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <span> <i class="fa fa-pencil"></i>Description:</span>
+                        <span><input type="text" id="_descriptiondes" disabled="disabled" /></span>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Claim Qty.:</span>
-                            <span><input type="text" id="_claimqty" style="border-bottom: 5px solid #b33c0f;" /></span>
-                        </div>
-                    </div>  
-                    <div class="col-md-4" id="divFieldClaimNote" style="display: none;">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Reference No.:</span>
-                            <span><input type="text" id="customer_claim_note" /></span>
-                        </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <span> <i class="fa fa-pencil"></i>Uom:</span>
+                        <span><input type="text" id="_uom" disabled="disabled" style="width: 200px;"></span>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            @*<span> <i class="fa fa-pencil"></i>Received by :</span>
-                                <span><input type="text" id="_receivedby1" /></span>*@
-                        </div>
-                    </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            @*<span> <i class="fa fa-pencil"></i>Received date:</span>
-                                <span><input type="text" id="_receiveddate1" /></span>*@
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6">
-                        <div class="form-group">
-
-                        </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <span> <i class="fa fa-pencil"></i>Type:</span>
+                        <span><input type="text" id="_focdis" disabled="disabled" style="width: 200px;"></span>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <span> <i class="fa fa-pencil"></i>Invoice No.:</span>
+                        <span><input type="text" id="_invoicenodes" disabled="disabled" /></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <span> <i class="fa fa-pencil"></i>Invoice Date:</span>
+                        <span><input type="text" id="_psdate" disabled="disabled" /></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <span> <i class="fa fa-pencil"></i>Pm.:</span>
+                        <span><input type="text" id="_prd" disabled="disabled" /></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+
+                        <span> <i class="fa fa-user"></i>Request by:</span>
+                        <span><input type="text" id="requestby" disabled="disabled" /></span>
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <span> <i class="fa fa-user"></i>Request Date:</span>
+                        <span><input type="text" id="requestdate" disabled="disabled" /></span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <span> <i class="fa fa-pencil"></i>Claim Qty.:</span>
+                        <span><input type="text" id="_claimqty" style="border-bottom: 5px solid #b33c0f;" /></span>
+                    </div>
+                </div>
+                <div class="col-md-4" id="divFieldClaimNote" style="display: none;">
+                    <div class="form-group">
+                        <span> <i class="fa fa-pencil"></i>Reference No.:</span>
+                        <span><input type="text" id="customer_claim_note" /></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        @*<span> <i class="fa fa-pencil"></i>Received by :</span>
+                            <span><input type="text" id="_receivedby1" /></span>*@
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @*<span> <i class="fa fa-pencil"></i>Received date:</span>
+                            <span><input type="text" id="_receiveddate1" /></span>*@
+                    </div>
+                </div>
+
+                <div class="col-xs-6">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -996,7 +1018,7 @@
                 <div class="col-xs-6 col-md-12">
                     <div class="card">
                         <div class="card-header bg-danger text-white">
-                            <h6 class="text-uppercase"><i class="fa fa-picture-o"></i> Upload images</h6>
+                            <h6 class="text-uppercase"><i class="fa fa-picture-o"></i> Upload images < 1 MB </h6>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -3034,33 +3056,71 @@
                 var formdata = new FormData();
                 var dataimage = [];
                 $("#fileInput").on("change", function () {
+                    var noImgOver = 0;
+                    var msgImgOver = "";
                     var fileInput = document.getElementById('fileInput');
-
-                    //Iterating through each files selected in fileInput
                     for (i = 0; i < fileInput.files.length; i++) {
+                        var cssRowColor = 'background-color: #c9e1cf;';
+                        var iconRow = 'fa fa-check-circle fa-2x text-success';
+
+                        var imageSizeArr = 0;
+                        var imageSizeOver = 0;
+                        var imageType = ' MB';
+                        var imageSize = fileInput.files[i].size;
+                        var imageName = fileInput.files[i].name;
+                        //เช็คขนาดไฟล์
+                        if (imageSize > 1048576) { //1 mb
+                            var imageSizeArr = 1;
+                        }
+                        if (imageSize < 1048576) {
+                            imageSizeOver = imageSize / 1024;
+                            imageType = ' KB';
+                        } else {
+                            imageSizeOver = imageSize / 1048576;
+                            imageType = ' MB';
+                        }
+                        //console.log(imageSizeOver);
+                        if (imageSizeArr == 1) {
+                            imageToBig = true;
+                            //สี row
+                            cssRowColor = 'background-color: #f9c3c8;';
+                            iconRow = 'fa fa-window-close fa-2x text-danger';
+                            ++noImgOver;
+                            msgImgOver += noImgOver + '. This picture name <b><u>' + imageName + '(' + imageSizeOver.toFixed(1) + imageType + ')</u></b> <br>';
+                        }
+
                         var src = "";
                         var sfilename = fileInput.files[i].name;
                         let srandomid = Math.random().toString(36).substring(7);
                         src = URL.createObjectURL(fileInput.files[i]);
-                        //formdata.append(sfilename, fileInput.files[i], a1 + "-" + inCim_NoSub);
                         formdata.append(sfilename, fileInput.files[i]);
-                        var markup = "<tr id='" + srandomid + "'><td><img src='" + src + "' style='width: 25%'></td>\
-                                  <td>\
-                                 <button type='button' style='float: right;' class='delimagsal' faxdel=1 ic=" + srandomid + " name=" + sfilename + ">Cancel</button></td>\
-                                  </tr>"; // Binding the file name
+                        var markup = "<tr id='" + srandomid + "' data-name='" + sfilename + "' data-check='" + imageSizeArr + "' data-size='" + imageSizeOver.toFixed(2) + "'> <td style=''><img src='" + src + "' style='width: 30%;' id='myImg'> <br>  <span style='font-size: 13px;font-weight: bold; text-decoration: underline;'>" + imageName + ' (' + imageSizeOver.toFixed(1) + imageType + ') </span> &nbsp;' + "</span> </td>\
+                                    <td style='vertical-align: middle;'>\
+                                    <button type='button' style='float: right;' class='delimagsal' faxdel=1 ic=" + srandomid + " name=" + sfilename + ">Cancel</button></td>\
+                                    </tr>"; // Binding the file name
                         $("#FilesList tbody").append(markup);
-                        //var ItemList = {
-                        //    Img: clm_no_supplier,
-                        //    inCim_NoSub: clm_no_sub,
-                        //    Cim_No: stkcod,
-                        //    Im_No: _user
-
-                        //}
-                        //dataimage.push(ItemList);
                     }
+                    if (msgImgOver != '') {
+                        $('#modalSizeImage').modal({ backdrop: 'static', keyboard: false });
+                        $('#modalSizeImage').modal({ backdrop: 'static', keyboard: false });
+                        $('#modalSizeImage').on('shown.bs.modal', function () {
+                            $("#textModalSizeImage").empty();
+                            $("#textModalSizeImage").html(msgImgOver + '<br> <span style="color: red;">*System resize image to 1 MB.</span>');
+                            return false;
+                        })
+                    }
+                    //var ItemList = {
+                    //    Img: clm_no_supplier,
+                    //    inCim_NoSub: clm_no_sub,
+                    //    Cim_No: stkcod,
+                    //    Im_No: _user
+
+                    //}
+                    //dataimage.push(ItemList);
                     chkatchtbl();
                     $('#fileInput').val('');
                 });
+
                 $("#FilesList").on("click", "tr .delimagsal", function () {
                     var Fileid = $(this).attr("ic");
                     var FileName = $(this).attr("name");

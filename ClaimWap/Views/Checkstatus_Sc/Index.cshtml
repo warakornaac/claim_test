@@ -1099,9 +1099,34 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-bars"></i> จำนวนเคลมทั้งหมด/Qty claim total:</span>
+                                <span>
+                                    <input type="text" id="tec2_clm_qty" disabled/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-check-square-o"></i> จำนวนที่รับเคลมได้/Qty pass claim:</span>
+                                <span>
+                                    <input type="number" id="tec2_clm_qty_pass" disabled/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-window-close-o"></i> จำนวนที่ไม่รับเคลม(เคลม Supplier ไม่ได้)/Qty not claim:</span>
+                                <span>
+                                    <input type="number" id="tec2_clm_qty_reject" value="0" disabled/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-
                                 <span><textarea rows="6" cols="100" id="remaketec2" placeholder="หมายเหตุ/TECH2 comment"></textarea></span>
                             </div>
                         </div>
@@ -3192,6 +3217,10 @@
                     success: function (data) {
                         console.log(data);
                         if (data.Getdata.length > 0) {
+                            //จำนวนเคลมทั้งหมด
+                            $("#tec2_clm_qty").val(data.Getdata[0].val.CLM_QTY);    
+                            $("#tec2_clm_qty_pass").val(data.Getdata[0].val.CLM_QTY_PASS);
+                            $("#tec2_clm_qty_reject").val(data.Getdata[0].val.CLM_QTY_REJECT);
                             ////Get input display ///////
 
                             $("#_claimqty").text(data.Getdata[0].val.CLM_REQQTY);//Qty//
@@ -3247,7 +3276,12 @@
                             $("#_proceedtotec").val(data.Getdata[0].val.CLM_RCVSTATUS);  ///สถานะการรับสินค้า
                             $("#_rcvbyte").val(data.Getdata[0].val.CLM_RCVBY);      //ผู้รับสินค้าเคลม
                             $("#_rcvdatetec").val(data.Getdata[0].val.CLM_RCVDATE);//วันที่รับสินค้าเคลม:
-                            $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY); //จำนวนที่รับเคลม:
+                            //$("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY); //จำนวนที่รับเคลม:
+                            if (data.Getdata[0].val.CLM_QTY_PASS > 0) {
+                                $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY_ORG); //จำนวนที่รับเคลม:
+                            } else {
+                                $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY);
+                            }
                             // $("#_rcuom").val(data.Getdata[0].val.CLM_UOM); //UOM
                             $("#_clmdatetec").val(data.Getdata[0].val.CLM_DATE);//Claim date:
                             $("#_duedatetec").val(data.Getdata[0].val.CLM_DUEDATE); //Due date

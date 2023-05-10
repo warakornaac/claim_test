@@ -31,8 +31,9 @@
         .modal-backdrop {
             display: none;
         }
+
         #myImg {
-            border-radius: 5px;
+            border-radius: 2px;
             cursor: pointer;
             transition: 0.3s;
         }
@@ -248,6 +249,12 @@
         .gi-4x {
             font-size: 2em;
         }
+
+        .overlay_2 {
+            position: absolute;
+            /*   top: 26%;
+            left: 34%;*/
+        }
     </style>
 </head>
 
@@ -347,6 +354,7 @@
         </div>
     </div>
 
+
     <!-- Print Modal-->
     <div class="modal fade" id="PrintModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -383,10 +391,32 @@
             </div>
         </div>
     </div>
+    @*confirm image size ove*@
+    <div class="modal fade" role="dialog" id="modalSizeImage" data-backdrop="static" data-keyboard="false" style="padding-top: 10%;">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 600px;">
+                <div class="modal-header" style="justify-content: flex-start;">
+                    <h5 class="modal-title" id="exampleModalLabel">Cannot upload picture (more than 1 MB)</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="textModalSizeImage"></div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                       
+                        <div class="col-sm-12">
+                            @*<span class="text-left" style="color: red;"> System resize image to 1 MB </span>*@
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card mb-12">
         <div class="card-header">
             <i class="fa fa-table"></i> ตรวจสอบ & พิจารณา/Check&Consider <li id="clickmeheader" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
-
         </div>
         <div class="card-body" id="myDIVheader">
 
@@ -494,321 +524,321 @@
             </div>
 
 
-        <div class="card mb-12" id="claimDetail" style="display: none;">
-            <div class="card-header">
-                <i class="fa fa-table"></i>รายละเอียดสินค้าเคลม/Claim detail <li id="clickme" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
-            </div>
-            <div class="card-body" id="myDIV">
-                <div><span id="Nospankey" style="color: blue;text-decoration: underline;font-weight: bold"></span> </div>
-                <div><span id="subNospan" style="color: blue;text-decoration: underline;font-weight: bold"></span> </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> Item No.:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_itemno"></span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> Description:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_description"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> Uom:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_uom"></span>
-                        </div>
-                    </div>
-
+            <div class="card mb-12" id="claimDetail" style="display: none;">
+                <div class="card-header">
+                    <i class="fa fa-table"></i>รายละเอียดสินค้าเคลม/Claim detail <li id="clickme" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> Invoice No.:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoiceno"></span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-calendar"></i> Invoice Date:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_psdate"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> Invoice Qty:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoiceqty"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Unit Price.:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoicelineamt"></span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> Line Discount %:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoicelinedis"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> Line discount Amount:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoicelinedisamt"></span>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Amount.:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_lineamtsum"></span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> Stock Group:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_stkgup"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Stock Group Name:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="stkgrpnam"></span>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>แผนก Dep :</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimsec"></span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Product Name</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="prdnam"></span>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Type</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="foc"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> Claim Qty.:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty"></span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-clock-o"></i> ระยะการใช้งาน Y/M/D/hh/Period of use:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_workda"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-4" id="divFieldClaimNote" style="display: none;">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> Reference No.	:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="claim_note"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> สาเหตุการ Claim/Problem:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="causeclaim"></span>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> ดำเนินการ/CN/Replacement:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_proceedto"></span>
-
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> สถานะรับของเคลม/Received status:</span>
-                            <span style="color: blue;text-decoration: underline;font-weight: bold" id="_statusclaim"></span>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <span class="fa fa-image">Problem VDO:</span>
-                    <div class="py-4" id="appvideosales">
-
-                    </div>
-                </div>
-                <div class="col-md-12">
+                <div class="card-body" id="myDIV">
+                    <div><span id="Nospankey" style="color: blue;text-decoration: underline;font-weight: bold"></span> </div>
+                    <div><span id="subNospan" style="color: blue;text-decoration: underline;font-weight: bold"></span> </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span class="fa fa-image">Problem photo:</span>
+                                <span> <i class="fa fa-pencil"></i> Item No.:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_itemno"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Description:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_description"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Uom:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_uom"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Invoice No.:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoiceno"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> Invoice Date:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_psdate"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Invoice Qty:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoiceqty"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>Unit Price.:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoicelineamt"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Line Discount %:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoicelinedis"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Line discount Amount:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoicelinedisamt"></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
 
                             </div>
                         </div>
                     </div>
-                    <div class="row" id="boximage">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>Amount.:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_lineamtsum"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Stock Group:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_stkgup"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>Stock Group Name:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="stkgrpnam"></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>แผนก Dep :</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimsec"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>Product Name</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="prdnam"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>Type</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="foc"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Claim Qty.:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-clock-o"></i> ระยะการใช้งาน Y/M/D/hh/Period of use:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_workda"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4" id="divFieldClaimNote" style="display: none;">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Reference No.	:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="claim_note"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> สาเหตุการ Claim/Problem:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="causeclaim"></span>
+                            </div>
+                        </div>
 
                     </div>
-                </div>
-            </div>
-            <div class="card-header">
-                <i class="fa fa-table"></i>ข้อมูลเคลมสำหรับรุ่นรถ/Claim detail <li id="clickme5" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
-            </div>
-            <div class="card-body" id="myDIV5">
-                <div id="fixed-table-container-4" class="fixed-table-container" style="overflow-x: auto; height: auto;">
-                    <table id="_tbvehcar">
-                        <tbody>
-                            <tr>
-                                <td style="background: white;">1.สำหรับรถ Vehicle/Machine:<select id="_vemac"></select></td>
-                                <td>2.รุ่น Model/Type:<input type="text" id="_moty" /></td>
-                                <td>3.ปีผลิต Model Year:<input type="text" id="_modyear" /></td>
-                            </tr>
-                            <tr>
-                                <td style="background: white;">4.รหัสเครื่องยนต์ Engine Code:<input type="text" id="_encod" /></td>
-                                <td>5.หมายเลขตัวถังรถ Chassis No.:<input type="text" id="_chno" /></td>
-                                <td>6.รหัสปั้มเชื้อเพลิง Pump:<input type="text" id="_pump" /></td>
-                            </tr>
-                            <tr>
-                                <td style="background: white;">7.ประเภทสินค้า Type of Product:<input type="text" id="_typpro" /></td>
-                                <td>8.ใบรับประกันเลขที่เคลม Warranty Card No.:<input type="text" id="_warcarno" /></td>
-                                <td>9.ระยะทางการใช้งาน Milage(Km./Mile):<input type="text" id="_milage" /></td>
-                            </tr>
-                            <tr>
-                                <td style="background: white;">10.วันที่ชำรุด Date of Damage:<input type="date" id="_datofdam" /></td>
-                                <td style="background: white;">
-                                    11.ชั่วโมงการทำงาน Hour of Operation/Period of use:<br />
-                                    <div style="float: left;">
-                                        ปี:<select id="_workdacar" style="width: 70px;">
-                                            <option>0</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                            <option>6</option>
-                                            <option>7</option>
-                                            <option>8</option>
-                                            <option>9</option>
-                                            <option>10</option>
-                                            <option>11</option>
-                                            <option>12</option>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> ดำเนินการ/CN/Replacement:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_proceedto"></span>
 
-                                        </select>
-                                    </div>
-                                    <div style="float: left;">
-                                        เดือน:<select id="_workmonth" style="width: 70px;">
-                                            <option>0</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                            <option>6</option>
-                                            <option>7</option>
-                                            <option>8</option>
-                                            <option>9</option>
-                                            <option>10</option>
-                                            <option>11</option>
-                                            <option>12</option>
-                                        </select>
-                                    </div>
-                                    <div style="float: left;">
-                                        วัน:<select id="_workday" style="width: 70px;">
-                                            <option>0</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                            <option>6</option>
-                                            <option>7</option>
-                                            <option>8</option>
-                                            <option>9</option>
-                                            <option>10</option>
-                                            <option>11</option>
-                                            <option>12</option>
-                                            <option>13</option>
-                                            <option>14</option>
-                                            <option>15</option>
-                                            <option>16</option>
-                                            <option>17</option>
-                                            <option>18</option>
-                                            <option>19</option>
-                                            <option>20</option>
-                                            <option>21</option>
-                                            <option>22</option>
-                                            <option>23</option>
-                                            <option>24</option>
-                                            <option>25</option>
-                                            <option>26</option>
-                                            <option>27</option>
-                                            <option>28</option>
-                                            <option>29</option>
-                                            <option>30</option>
-                                            <option>31</option>
-                                        </select>
-                                    </div>
-                                    <div style="float: left;">
-                                        ชม.:<input type="time" id="_worktime" style="width: 70px;height: 31px;" />
-                                    </div>
-                                </td>
-                                <td style="background: white;">12.รหัสการผลิต Batch Code:<input type="text" id="_batcod" style="border-bottom: 5px solid #b33c0f;" /></td>
-                            </tr>
-                            <tr>
-                                <td style="background: white;">13.วันที่ติดตั้ง/Installation date: <input type="date" id="_installdate" /></td>
-                                <td>14.ชื่อผู้ติดต่อรับสินค้าเคลม/Contact person for pick claim part <input type="text" id="_claimcontact" /></td>
-                                <td>15.เบอร์ติดต่อ/Tel <input type="text" id="_contact" /></td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td style="background: white;"></td>
-                                <td></td>
-                                <td style="background: white;"></td>
+                            </div>
+                        </div>
 
-                            </tr>
-                        </tfoot>
-                    </table>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> สถานะรับของเคลม/Received status:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_statusclaim"></span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <span class="fa fa-image">Problem VDO:</span>
+                        <div class="py-4" id="appvideosales">
+
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span class="fa fa-image">Problem photo:</span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="boximage">
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="card-header" id="tab_tecadmin_receive">
-                <i class="fa fa-table"></i>Admin Tech1 ตรวจสอบรับสินค้าเคลม/Admin TECH1 Received Detail: <li id="clickme1" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
-            </div>
-            <div class="card-body" id="myDIV1">
+                <div class="card-header">
+                    <i class="fa fa-table"></i>ข้อมูลเคลมสำหรับรุ่นรถ/Claim detail <li id="clickme5" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+                </div>
+                <div class="card-body" id="myDIV5">
+                    <div id="fixed-table-container-4" class="fixed-table-container" style="overflow-x: auto; height: auto;">
+                        <table id="_tbvehcar">
+                            <tbody>
+                                <tr>
+                                    <td style="background: white;">1.สำหรับรถ Vehicle/Machine:<select id="_vemac"></select></td>
+                                    <td>2.รุ่น Model/Type:<input type="text" id="_moty" /></td>
+                                    <td>3.ปีผลิต Model Year:<input type="text" id="_modyear" /></td>
+                                </tr>
+                                <tr>
+                                    <td style="background: white;">4.รหัสเครื่องยนต์ Engine Code:<input type="text" id="_encod" /></td>
+                                    <td>5.หมายเลขตัวถังรถ Chassis No.:<input type="text" id="_chno" /></td>
+                                    <td>6.รหัสปั้มเชื้อเพลิง Pump:<input type="text" id="_pump" /></td>
+                                </tr>
+                                <tr>
+                                    <td style="background: white;">7.ประเภทสินค้า Type of Product:<input type="text" id="_typpro" /></td>
+                                    <td>8.ใบรับประกันเลขที่เคลม Warranty Card No.:<input type="text" id="_warcarno" /></td>
+                                    <td>9.ระยะทางการใช้งาน Milage(Km./Mile):<input type="text" id="_milage" /></td>
+                                </tr>
+                                <tr>
+                                    <td style="background: white;">10.วันที่ชำรุด Date of Damage:<input type="date" id="_datofdam" /></td>
+                                    <td style="background: white;">
+                                        11.ชั่วโมงการทำงาน Hour of Operation/Period of use:<br />
+                                        <div style="float: left;">
+                                            ปี:<select id="_workdacar" style="width: 70px;">
+                                                <option>0</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                <option>9</option>
+                                                <option>10</option>
+                                                <option>11</option>
+                                                <option>12</option>
+
+                                            </select>
+                                        </div>
+                                        <div style="float: left;">
+                                            เดือน:<select id="_workmonth" style="width: 70px;">
+                                                <option>0</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                <option>9</option>
+                                                <option>10</option>
+                                                <option>11</option>
+                                                <option>12</option>
+                                            </select>
+                                        </div>
+                                        <div style="float: left;">
+                                            วัน:<select id="_workday" style="width: 70px;">
+                                                <option>0</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                <option>9</option>
+                                                <option>10</option>
+                                                <option>11</option>
+                                                <option>12</option>
+                                                <option>13</option>
+                                                <option>14</option>
+                                                <option>15</option>
+                                                <option>16</option>
+                                                <option>17</option>
+                                                <option>18</option>
+                                                <option>19</option>
+                                                <option>20</option>
+                                                <option>21</option>
+                                                <option>22</option>
+                                                <option>23</option>
+                                                <option>24</option>
+                                                <option>25</option>
+                                                <option>26</option>
+                                                <option>27</option>
+                                                <option>28</option>
+                                                <option>29</option>
+                                                <option>30</option>
+                                                <option>31</option>
+                                            </select>
+                                        </div>
+                                        <div style="float: left;">
+                                            ชม.:<input type="time" id="_worktime" style="width: 70px;height: 31px;" />
+                                        </div>
+                                    </td>
+                                    <td style="background: white;">12.รหัสการผลิต Batch Code:<input type="text" id="_batcod"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="background: white;">13.วันที่ติดตั้ง/Installation date: <input type="date" id="_installdate" /></td>
+                                    <td>14.ชื่อผู้ติดต่อรับสินค้าเคลม/Contact person for pick claim part <input type="text" id="_claimcontact" /></td>
+                                    <td>15.เบอร์ติดต่อ/Tel <input type="text" id="_contact" /></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td style="background: white;"></td>
+                                    <td></td>
+                                    <td style="background: white;"></td>
+
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-header" id="tab_tecadmin_receive">
+                    <i class="fa fa-table"></i>Admin Tech1 ตรวจสอบรับสินค้าเคลม/Admin TECH1 Received Detail: <li id="clickme1" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+                </div>
+                <div class="card-body" id="myDIV1">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -908,141 +938,142 @@
 
 
                         </div>*@
-            </div>
-
-
-            <div class="card-header" id="tab_tec1_receive">
-                <i class="fa fa-table"></i>Technic 1 : วิเคราะห์สินค้าเคลม/TECH1 Investigation <li id="clickme2" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
-            </div>
-            <div class="card-body" id="myDIV2">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-user"></i> ช่างที่รับผิดชอบ/TECH1 Name:</span>
-                            <span>
-                                @*<input type="text" id="_tecwork" />*@
-                                <select class="bar" id="_tecwork"></select>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>Shelf Location:</span>
-                            <span>
-
-                                <select id="_shelfloctec"></select>
-
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-user"></i> บันทึกโดย/Record by:</span>
-                            <span>
-
-                                <input type="text" id="_nametec1" disabled="disabled" style="color: blue;" />
-                            </span>
-                        </div>
-                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-calendar"></i> วันที่วิเคราะห์ปัญหา/Investigation date:</span>
-                            <span>
-                                <input type="date" data-date-format="dd/mm/yy" id="_anlysdatetec1" />
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-user"></i> ดำเนินการ/CN/Replacement:</span>
-                            <span>
-                                <select class="bar" id="_perfromtec1"></select>
-                            </span>
-                        </div>
-                    </div>
+
+
+                <div class="card-header" id="tab_tec1_receive">
+                    <i class="fa fa-table"></i>Technic 1 : วิเคราะห์สินค้าเคลม/TECH1 Investigation <li id="clickme2" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> สถานะการวิเคราะห์/Warranty claim type:</span>
-                            <span>
-                                <select class="bar" id="_anlysstatustec1"></select>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i>หลังเสร็จสิ้นกระบวนการเคลม/Action after finished claim:</span>
-                            <span>
-                                <select class="bar" id="_anlysafterprotec1"></select>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div id="displ" style="display:none">
+                <div class="card-body" id="myDIV2">
+                    <div class="row">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-calendar"></i> วันที่จะทำลาย/Destroy Date:</span>
+                                <span> <i class="fa fa-user"></i> ช่างที่รับผิดชอบ/TECH1 Name:</span>
                                 <span>
-                                    @*<input type="date" data-date-format="dd/mm/yy" id="_scrapdatetec1" />*@
-                                    <input type="text" id="_scrapdatetec1" />
+                                    @*<input type="text" id="_tecwork" />*@
+                                    <select class="bar" id="_tecwork"></select>
                                 </span>
                             </div>
                         </div>
-                        </div>
-                    </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>Shelf Location:</span>
+                                <span>
 
-                            <span><textarea rows="6" cols="10" id="remaketec1" placeholder="ผลการตรวจสอบ/Investigation details" style="width: 100%;"></textarea></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="display:none">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-calendar"></i> วันที่คืนสินค้า/Return date:</span>
-                            <span>
-                                <input type="date" data-date-format="dd/mm/yy" id="_datereturn" />
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-user"></i> ผู้รับสินค้า/TECH1 Name:</span>
-                            <span>
+                                    <select id="_shelfloctec"></select>
 
-                                <input type="text" id="_namereturn" />
-                            </span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-user"></i> บันทึกโดย/Record by:</span>
+                                <span>
+
+                                    <input type="text" id="_nametec1" disabled="disabled" style="color: blue;" />
+                                </span>
+                            </div>
                         </div>
                     </div>
-                    @*<div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> วันที่วิเคราะห์ปัญหา/Investigation date:</span>
+                                <span>
+                                    <input type="date" data-date-format="dd/mm/yy" id="_anlysdatetec1" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-user"></i> ดำเนินการ/CN/Replacement:</span>
+                                <span>
+                                    <select class="bar" id="_perfromtec1"></select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> สถานะการวิเคราะห์/Warranty claim type:</span>
+                                <span>
+                                    <select class="bar" id="_anlysstatustec1"></select>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i>หลังเสร็จสิ้นกระบวนการเคลม/Action after finished claim:</span>
+                                <span>
+                                    <select class="bar" id="_anlysafterprotec1"></select>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div id="displ" style="display:none">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-calendar"></i> วันที่จะทำลาย/Destroy Date:</span>
+                                    <span>
+                                        @*<input type="date" data-date-format="dd/mm/yy" id="_scrapdatetec1" />*@
+                                        <input type="text" id="_scrapdatetec1" />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="form-group">
 
-                                <button class="btn-info" id="_btnsavereturn" style="display: block;">บันทึก</button>
+                                <span><textarea rows="6" cols="10" id="remaketec1" placeholder="ผลการตรวจสอบ/Investigation details" style="width: 100%;"></textarea></span>
                             </div>
-                        </div>*@
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-xs-6 col-md-12">
-                        <div class="containe" id="appvideo">
-                            <div class="card">
-                                <div class="card-header bg-info text-white">
-                                    <h6 class="text-uppercase"><i class="fa fa-video-camera"></i> Upload VIDEO < 50 MB</h6>
+                        </div>
+                    </div>
+                    <div class="row" style="display:none">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> วันที่คืนสินค้า/Return date:</span>
+                                <span>
+                                    <input type="date" data-date-format="dd/mm/yy" id="_datereturn" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-user"></i> ผู้รับสินค้า/TECH1 Name:</span>
+                                <span>
+
+                                    <input type="text" id="_namereturn" />
+                                </span>
+                            </div>
+                        </div>
+                        @*<div class="col-md-4">
+                                <div class="form-group">
+
+                                    <button class="btn-info" id="_btnsavereturn" style="display: block;">บันทึก</button>
                                 </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" id="fileupload" name="fileupload" @*class="custom-file-input"*@ accept="video/*" />
-                                                    <label class="custom-file-label"></label>
-                                                </div>
-                                                <div class="input-group-append">
-                                                    <input type="submit" id="btnUpload" class="btn btn-secondary" value="Upload" style="display:none" />
+                            </div>*@
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-6 col-md-12">
+                            <div class="containe" id="appvideo">
+                                <div class="card">
+                                    <div class="card-header bg-info text-white">
+                                        <h6 class="text-uppercase"><i class="fa fa-video-camera"></i> Upload VIDEO < 50 MB</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" id="fileupload" name="fileupload" @*class="custom-file-input"*@ accept="video/*" />
+                                                        <label class="custom-file-label"></label>
+                                                    </div>
+                                                    <div class="input-group-append">
+                                                        <input type="submit" id="btnUpload" class="btn btn-secondary" value="Upload" style="display:none" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1051,81 +1082,79 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-xs-6 col-md-12">
-                        <div class="card">
-                            <div class="card-header bg-danger text-white">
-                                <h6 class="text-uppercase"><i class="fa fa-picture-o"></i> Upload images</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <form id="uploader">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <br />
-                                                <input id="fileInput" type="file" multiple>
-                                                <br />            <br />
-                                                <table class="table" id="FilesList" style="visibility:hidden">
-                                                    <tr>
-                                                        <th>
-                                                            Attachment(s)
-                                                        </th>
-                                                        <th>
-                                                            Action
-                                                        </th>
-                                                    </tr>
-                                                </table>
-                                                <input type="button" id="btnuploadsales" value="Upload" style="float:right;display:none;" />
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-6 col-md-12">
+                            <div class="card">
+                                <div class="card-header bg-danger text-white">
+                                    <h6 class="text-uppercase"><i class="fa fa-picture-o"></i> Upload images < 1 MB </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <form id="uploader">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <br />
+                                                    <input id="fileInput" type="file" multiple>
+                                                    <br />            <br />
+                                                    <table class="table" id="FilesList" style="visibility:hidden">
+                                                        <tr>
+                                                            <th>
+                                                                Attachment(s)
+                                                            </th>
+                                                            <th>
+                                                                Action
+                                                            </th>
+                                                        </tr>
+                                                    </table>
+                                                    <input type="button" id="btnuploadsales" value="Upload" style="float:right;display:none;" />
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-xs-6">
+                    <div class="col-xs-6">
 
-                    @*<input type='file' id="FileUpload3" accept="image/*" /><span id="ststus3" style="color: brown; font-size: larger;"></span>
-                        <input type='file' id="FileUpload4" accept="image/*" /><span id="ststus4" style="color: brown; font-size: larger;"></span>
-                        <input type="button" id="btnUpload3" value="Upload Files" style="display:none" />
-                        <input type="button" id="btnUpload4" value="Upload Files" style="display:none" />*@
+                        @*<input type='file' id="FileUpload3" accept="image/*" /><span id="ststus3" style="color: brown; font-size: larger;"></span>
+                            <input type='file' id="FileUpload4" accept="image/*" /><span id="ststus4" style="color: brown; font-size: larger;"></span>
+                            <input type="button" id="btnUpload3" value="Upload Files" style="display:none" />
+                            <input type="button" id="btnUpload4" value="Upload Files" style="display:none" />*@
 
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <span> <i class="fa fa-calendar"></i> Image จากการ วิเคราะห์ Technic:</span>
-                            <div class="row" id="boximageTech">
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> Image จากการ วิเคราะห์ Technic:</span>
+                                <div class="row" id="boximageTech">
+
+                                </div>
 
                             </div>
-
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
 
-                            <button class="btn-info" id="_btnsavecheck">บันทึกผลการวิเคราะห์/Submit</button>
+                                <button class="btn-info" id="_btnsavecheck">บันทึกผลการวิเคราะห์/Submit</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
-            <div class="card-header" id="tab_tec2_analy">
-                <i class="fa fa-table"></i>Technic 2 : ผลการพิจารณา/TECH2 Investigation <li id="clickme3" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
-            </div>
-            <div class="card-body" id="myDIV3">
+                </div>
+                <div class="card-header" id="tab_tec2_analy">
+                    <i class="fa fa-table"></i>Technic 2 : ผลการพิจารณา/TECH2 Investigation <li id="clickme3" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+                </div>
+                <div class="card-body" id="myDIV3">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <span> <i class='fa fa-user'></i> รับรองการตรวจสอบโดย/TECH2 Name:</span>
-
                                 <span>
                                     <input type="text" id="_name2tec" disabled="disabled" style="background: border-box border-box; color: blue;" />
 
@@ -1149,9 +1178,35 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-bars"></i> จำนวนเคลมทั้งหมด/Qty claim total:</span>
+                                <span>
+                                    <input type="text" id="tec2_clm_qty" disabled />
+                                    <input type="hidden" id="tec2_clm_qty_org" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-check-square-o"></i> จำนวนที่รับเคลมได้/Qty pass claim:</span>
+                                <span>
+                                    <input type="number" id="tec2_clm_qty_pass" value="0" onkeyup="tech2ChekQty()" style="border-bottom: 5px solid #b33c0f;" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-window-close-o"></i> จำนวนที่ไม่รับเคลม(เคลม Supplier ไม่ได้)/Qty not claim:</span>
+                                <span>
+                                    <input type="number" id="tec2_clm_qty_reject" value="0" onkeyup="tech2ChekQty()" style="border-bottom: 5px solid #b33c0f;" />
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                     <span><i class="fa fa-pencil"></i>Warranty Cliam Type</span><br />
                     <div class="row">
-
                         <div style="border-bottom: 1px solid rgba(0,0,0,.125); "></div>
                         <div class="col-md-2">
                             <div class="form-group">
@@ -1203,189 +1258,234 @@
                             </div>
                         </div>
                     </div>
-            </div>
-            <div class="card-header" id="tab_pm_analy">
-                <i class="fa fa-table"></i>Product Manager Approval/Product Manager Judgement <li id="clickme4" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
-            </div>
-            <div class="col-md-12" id="myDIV4">
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> สถานะการวิเคราะห์ WR,WE,WF/Warranty claim type:</span>
-                            <span>
-                                <select class="bar" id="_anlysstatustecpm"></select>
-                            </span>
+                </div>
+                <div class="card-header" id="tab_pm_analy">
+                    <i class="fa fa-table"></i>Product Manager Approval/Product Manager Judgement <li id="clickme4" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+                </div>
+                <div class="col-md-12" id="myDIV4">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> สถานะการวิเคราะห์ WR,WE,WF/Warranty claim type:</span>
+                                <span>
+                                    <select class="bar" id="_anlysstatustecpm"></select>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> หลังเสร็จสิ้นกระบวนการเคลม/Action after finished claim:</span>
+                                <span>
+                                    <select class="bar" id="_anlysafterprotecpm"></select>
+                                </span>
+                            </div>
+                        </div>
+                        <div id="displpm" style="display:none">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> วันที่จะทำลาย/Destroy Date:</span>
+                                <span>
+                                    @*<input type="date" data-date-format="dd/mm/yy" id="_scrapdatetec1" />*@
+                                    <input type="text" id="_scrapdatetecpm" />
+                                </span>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> หลังเสร็จสิ้นกระบวนการเคลม/Action after finished claim:</span>
-                            <span>
-                                <select class="bar" id="_anlysafterprotecpm"></select>
-                            </span>
+                    <span><i class="fa fa-pencil"></i>Warranty Cliam Type</span><br />
+                    <div class="row">
+
+                        <div style="border-bottom: 1px solid rgba(0,0,0,.125); "></div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <form>
+                                    <input type="checkbox" name="vehicle" value="1" style="zoom: 2.5;margin-left: -10px;" id="apm">Specific<br>
+                                    <input type="checkbox" name="vehicle" value="3" style="zoom: 2.5;margin-left: -10px;" id="cpm">Good Will<br>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <form>
+                                    <input type="checkbox" name="vehicle" value="2" style="zoom: 2.5;margin-left: -10px;" id="bpm">Manufacturing Defect<br>
+                                    <input type="checkbox" name="vehicle" value="4" style="zoom: 2.5;margin-left: -10px;" id="dpm">Wrong Using<br>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <form>
+                                    <input type="checkbox" name="vehicle" value="5" style="zoom: 2.5;margin-left: -10px;" id="epm">Handing Damage<br>
+                                    <input type="checkbox" name="vehicle" value="6" style="zoom: 2.5;margin-left: -10px;" checked id="fpm">Other<br>
+
+                                </form>
+
+                            </div>
+                        </div>
+                        <div style="border-bottom: 1px solid rgba(0,0,0,.125); "></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-user"></i> Product Manager: </span>
+                                <span>
+                                    <select class="bar" id="_PM"></select>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-calendar"></i> วันที่PM พิจารณา/PM judgement date:</span>
+                                <span>
+                                    <input type="date" data-date-format="dd/mm/yy" id="_pmdate" />
+                                </span>
+                            </div>
                         </div>
                     </div>
-                    <div id="displpm" style="display:none">
-                        <div class="form-group">
-                            <span> <i class="fa fa-calendar"></i> วันที่จะทำลาย/Destroy Date:</span>
-                            <span>
-                                @*<input type="date" data-date-format="dd/mm/yy" id="_scrapdatetec1" />*@
-                                <input type="text" id="_scrapdatetecpm" />
-                            </span>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-sort-down"></i>........</span>
+                                <span>
+                                    <select class="bar" id="_pmtstus"></select>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> เปลี่ยนสินค้าเบอร์ใหม่ทดแทน P/N/Replace by new PN(if have) :</span>
+                                <span>
+                                    <input type="text" id="_pmnewpn" />
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <span><textarea rows="6" cols="10" id="remakepm" placeholder="หมายเหตุ/PM comment" style="width: 100%;"></textarea></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <button class="btn-info" id="_btnsaveapprove" style="display:none">บันทึกการอนุมัติ/Submit</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <span><i class="fa fa-pencil"></i>Warranty Cliam Type</span><br />
-                <div class="row">
-
-                    <div style="border-bottom: 1px solid rgba(0,0,0,.125); "></div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <form>
-                                <input type="checkbox" name="vehicle" value="1" style="zoom: 2.5;margin-left: -10px;" id="apm">Specific<br>
-                                <input type="checkbox" name="vehicle" value="3" style="zoom: 2.5;margin-left: -10px;" id="cpm">Good Will<br>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <form>
-                                <input type="checkbox" name="vehicle" value="2" style="zoom: 2.5;margin-left: -10px;" id="bpm">Manufacturing Defect<br>
-                                <input type="checkbox" name="vehicle" value="4" style="zoom: 2.5;margin-left: -10px;" id="dpm">Wrong Using<br>
-
-                            </form>
-
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <form>
-                                <input type="checkbox" name="vehicle" value="5" style="zoom: 2.5;margin-left: -10px;" id="epm">Handing Damage<br>
-                                <input type="checkbox" name="vehicle" value="6" style="zoom: 2.5;margin-left: -10px;" checked id="fpm">Other<br>
-
-                            </form>
-
-                        </div>
-                    </div>
-                    <div style="border-bottom: 1px solid rgba(0,0,0,.125); "></div>
+                <div class="card-header">
+                    <i class="fa fa-table"></i> Admin Tech1 : <li id="clickme1" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-user"></i> Product Manager: </span>
-                            <span>
-                                <select class="bar" id="_PM"></select>
-                            </span>
+                <div class="card-body" id="myDIV1">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <span><textarea rows="6" cols="10" id="updateremaketec1" placeholder="หมายเหตุ/Tech1 comment" style="width: 100%;"></textarea></span>
+                            </div>
+                            <button class="btn-info" id="_btnupdateremaketec1">บันทึก/Save</button>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-calendar"></i> วันที่PM พิจารณา/PM judgement date:</span>
-                            <span>
-                                <input type="date" data-date-format="dd/mm/yy" id="_pmdate" />
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-sort-down"></i>........</span>
-                            <span>
-                                <select class="bar" id="_pmtstus"></select>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span> <i class="fa fa-pencil"></i> เปลี่ยนสินค้าเบอร์ใหม่ทดแทน P/N/Replace by new PN(if have) :</span>
-                            <span>
-                                <input type="text" id="_pmnewpn" />
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-
-                            <span><textarea rows="6" cols="10" id="remakepm" placeholder="หมายเหตุ/PM comment" style="width: 100%;"></textarea></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-
-                            <button class="btn-info" id="_btnsaveapprove" style="display:none">บันทึกการอนุมัติ/Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-header">
-                <i class="fa fa-table"></i> Admin Tech1 : <li id="clickme1" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
-            </div>
-            <div class="card-body" id="myDIV1">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <span><textarea rows="6" cols="10" id="updateremaketec1" placeholder="หมายเหตุ/Tech1 comment" style="width: 100%;"></textarea></span>
-                        </div>
-                        <button class="btn-info" id="_btnupdateremaketec1">บันทึก/Save</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- The Modal -->
-    <!-- The Modal -->
-    <div id="myModalzoom" class="modalx" style="z-index: 11;">
+        <!-- The Modal -->
+        <!-- The Modal -->
+        <div id="myModalzoom" class="modalx" style="z-index: 11;">
 
-        <!-- The Close Button -->
-        @*<span class="close">&times;</span>*@
+            <!-- The Close Button -->
+            @*<span class="close">&times;</span>*@
 
-        <!-- Modal Content (The Image) -->
-        <img class="modal-contentx" id="img01">
-        <div class="modal-contentx" id="img01" style="background-color: #191919;"><button class="btn btn-secondary" type="button" data-dismiss="modal" id="closeimg" style="margin-left: 91%;">Close</button></div>
-        <!-- Modal Caption (Image Text) -->
-        <div id="caption"></div>
+            <!-- Modal Content (The Image) -->
+            <img class="modal-contentx" id="img01">
+            <div class="modal-contentx" id="img01" style="background-color: #191919;"><button class="btn btn-secondary" type="button" data-dismiss="modal" id="closeimg" style="margin-left: 91%;">Close</button></div>
+            <!-- Modal Caption (Image Text) -->
+            <div id="caption"></div>
 
-    </div>
-    <input type="text" hidden id="_hqty" />
-    <input type="text" hidden id="_cmnosub" />
-    <input type="hidden" id="_uderlogin" value="@user" />
-    <input type="hidden" id="_udertype" value="@usertype" />
-    <input type="hidden" id="_subnoclaim" />
-    <input type="hidden" id="_admin" />
-    <input type="hidden" id="_t1" />
-    <input type="hidden" id="_t2" />
-    <input type="hidden" id="_t3" />
-    <!-- Modal -->
-    <!-- Modal -->
-    <div class="modal fade" id="myModalWarning" role="dialog">
-        <div class="modal-dialog">
+        </div>
+        <input type="text" hidden id="_hqty" />
+        <input type="text" hidden id="_cmnosub" />
+        <input type="hidden" id="_uderlogin" value="@user" />
+        <input type="hidden" id="_udertype" value="@usertype" />
+        <input type="hidden" id="_subnoclaim" />
+        <input type="hidden" id="_admin" />
+        <input type="hidden" id="_t1" />
+        <input type="hidden" id="_t2" />
+        <input type="hidden" id="_t3" />
+        <!-- Modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="myModalWarning" role="dialog">
+            <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content " id="ColorboxError">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" style="color:black;">Message Error</h4>
+                <!-- Modal content-->
+                <div class="modal-content " id="ColorboxError">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" style="color:black;">Message Error</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="textAlertWarning">Some text in the modal.</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <div id="textAlertWarning">Some text in the modal.</div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+
             </div>
-
         </div>
     </div>
     <!-- EndModal -->
     <script type="text/javascript">
+        async function tech2ChekQty() {
+            var qty_all = 0, qty_pass = 0, qty_reject = 0, qty_sum = 0;
+            var tec2_clm_qty_org = $("#tec2_clm_qty_org").val();//ยอดทั้งหมด
+            var tec2_clm_qty = $("#tec2_clm_qty").val();//ยอดทั้งหมด
+            var tec2_clm_qty_pass = $("#tec2_clm_qty_pass").val();//ยอดที่เคลมได้
+            var tec2_clm_qty_reject = $("#tec2_clm_qty_reject").val();//ยอดที่เคลมไม่ได้
+
+            if (tec2_clm_qty_pass > 0) {
+                if (tec2_clm_qty_pass > tec2_clm_qty) {
+                    $("#textAlertWarning").empty();
+                    $("#textAlertWarning").text("จำนวนที่เคลมได้ (" + tec2_clm_qty + ") เกินจำนวนเคลมทั้งหมด");
+                    $("#myModalWarning").modal();
+                    //tec2_clm_qty_pass = 0;
+                    $("#tec2_clm_qty_pass").val(0);
+                    return false;
+                }
+                tec2_clm_qty = tec2_clm_qty_org - tec2_clm_qty_pass;
+            } else {
+                tec2_clm_qty = tec2_clm_qty_org;
+            }
+
+            if (tec2_clm_qty_org > tec2_clm_qty) {
+                tec2_clm_qty = tec2_clm_qty;
+            } else {
+                tec2_clm_qty = tec2_clm_qty_org;
+            }
+
+            console.log('tec2_clm_qty = ' + tec2_clm_qty);
+
+            if (tec2_clm_qty_reject > 0) {
+                if (tec2_clm_qty_reject > tec2_clm_qty) {
+                    $("#textAlertWarning").empty();
+                    $("#textAlertWarning").text("จำนวนที่เคลมไม่ได้ (" + tec2_clm_qty + ") เกินจำนวนเคลมทั้งหมด");
+                    $("#myModalWarning").modal();
+                    //tec2_clm_qty_reject = 0;
+                    $("#tec2_clm_qty_reject").val(0);
+                    return false;
+                }
+                tec2_clm_qty = tec2_clm_qty - tec2_clm_qty_reject;
+            }
+
+            //ผลรวม
+            //$("#tec2_clm_qty").val(tec2_clm_qty);
+            //$("#tec2_clm_qty_pass").val();
+            //$("#tec2_clm_qty_reject").val();
+        }
 
         $("#_pmnewpn").autocomplete({
             selectFirst: true,
@@ -1420,7 +1520,7 @@
 
             minLength: 2//minLength as 2, it means when ever user enter 2 character in TextBox the AutoComplete method will fire and get its source data.
         });
-        $(document).ready(function () {
+            $(document).ready(function () {
             //ถ้าเป็น TAM -> company = TAM
             var company = '@company';
             $(document).ready(function () {
@@ -1588,6 +1688,8 @@
                             $("#_appdatetec").attr("disabled", "disabled");  //วันที่เทคนิคพิจารณา
                             $("#_apprvststus").attr("disabled", "disabled"); // สถานะ
                             $("#remaketec2").attr("disabled", "disabled");   //หมายเหตุ
+                            $("#tec2_clm_qty_pass").attr("disabled", "disabled");   //เคลมได้
+                            $("#tec2_clm_qty_reject").attr("disabled", "disabled");   //เคลมไม่ได้
                             $("#_btnsaveconsider").attr("disabled", "disabled");
 
                             $("#_PM").attr("disabled", "disabled");  // Product Manager
@@ -1614,6 +1716,8 @@
                             $("#_appdatetec").removeAttr('disabled');  //วันที่เทคนิคพิจารณา
                             $("#_apprvststus").removeAttr('disabled'); // สถานะ
                             $("#remaketec2").removeAttr('disabled');   //หมายเหตุ
+                            $("#tec2_clm_qty_pass").removeAttr("disabled");   //เคลมได้
+                            $("#tec2_clm_qty_reject").removeAttr("disabled");   //เคลมไม่ได้
                             $("#_btnsaveconsider").removeAttr('disabled');
 
                             $("#_PM").attr("disabled", "disabled");  // Product Manager
@@ -1719,6 +1823,8 @@
                             $("#_appdatetec").attr("disabled", "disabled");  //วันที่เทคนิคพิจารณา
                             $("#_apprvststus").attr("disabled", "disabled"); // สถานะ
                             $("#remaketec2").attr("disabled", "disabled");   //หมายเหตุ
+                            $("#tec2_clm_qty_pass").attr("disabled", "disabled");   //เคลมได้
+                            $("#tec2_clm_qty_reject").attr("disabled", "disabled");   //เคลมไม่ได้
                             $("#_btnsaveconsider").attr("disabled", "disabled");
 
 
@@ -2608,6 +2714,7 @@
                 }
             });
             $("table").on("click", "tr #xxx", function () {
+
                 $("#claimDetail").css('display', 'block');
                 var statuscancel = $(this).attr('statuclm');
                 if (statuscancel == "7") {
@@ -2720,6 +2827,30 @@
                         success: function (data) {
                             // console.log(data);
                             if (data.Getdata.length > 0) {
+                                //จำนวนเคลมทั้งหมด
+                                var clm_qty = data.Getdata[0].val.CLM_QTY;
+                                if (clm_qty != '') {
+                                    if (data.Getdata[0].val.CLM_QTY_ORG > 0) {
+                                        $("#tec2_clm_qty").val(data.Getdata[0].val.CLM_QTY_ORG);
+                                    } else {
+                                        $("#tec2_clm_qty").val(clm_qty);
+                                    }
+
+                                    $("#tec2_clm_qty_org").val(data.Getdata[0].val.CLM_QTY_ORG);
+                                }
+                                //ถ้ายังไม่มีข้อมูลเคลมได้ จะดึงจำนวน tech1 รับมา default ให้
+                                if (data.Getdata[0].val.CLM_QTY_PASS == "" || data.Getdata[0].val.CLM_QTY_PASS == 0) {
+                                    $("#tec2_clm_qty_pass").val(clm_qty);
+                                } else {
+                                    $("#tec2_clm_qty_pass").val(data.Getdata[0].val.CLM_QTY_PASS);
+                                }
+                                //alert($("#tec2_clm_qty_reject").val());
+                                if (data.Getdata[0].val.CLM_QTY_REJECT == "" || data.Getdata[0].val.CLM_QTY_REJECT == 0) {
+                                    $("#tec2_clm_qty_reject").val(0);
+                                } else {
+                                    $("#tec2_clm_qty_reject").val(data.Getdata[0].val.CLM_QTY_REJECT);
+                                }
+
                                 ///ตรวจสอบรับสินค้าเคลม////
                                 var today = new Date();
                                 var _cktype = $("#_udertype").val();
@@ -2764,12 +2895,17 @@
                                     $("#_proceedtotec").val(data.Getdata[0].val.CLM_RCVSTATUS);  ///สถานะการรับสินค้า
                                     $("#_rcvbyte").val(data.Getdata[0].val.CLM_RCVBY);      //ผู้รับสินค้าเคลม
                                     $("#_rcvdatetec").val(data.Getdata[0].val.CLM_RCVDATE);//วันที่รับสินค้าเคลม:
-                                    $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY); //จำนวนที่รับเคลม:
+                                    if (data.Getdata[0].val.CLM_QTY_PASS > 0) {
+                                        $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY_ORG); //จำนวนที่รับเคลม:
+                                    } else {
+                                        $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY);
+                                    }
+
                                     $("#_clmdatetec").val(data.Getdata[0].val.CLM_DATE);//Claim date:
                                     $("#_duedatetec").val(data.Getdata[0].val.CLM_DUEDATE); //Due date
                                     $("#_admintec").val(data.Getdata[0].val.CLM_ADMIN);//Admin:
                                     $("#causeclaimtec").val(data.Getdata[0].val.CLM_REMARK);//หมายเหตุการรับเคลม
-                                   
+
 
                                     var shelf = data.Getdata[0].val.CLM_SHELF_LOCATION;
                                     $("#_shelfloctec").val(shelf);//Shelf Location
@@ -2827,7 +2963,11 @@
                                     $("#_proceedtotec").val(data.Getdata[0].val.CLM_RCVSTATUS);  ///สถานะการรับสินค้า
                                     $("#_rcvbyte").val(data.Getdata[0].val.CLM_RCVBY);      //ผู้รับสินค้าเคลม
                                     $("#_rcvdatetec").val(data.Getdata[0].val.CLM_RCVDATE);//วันที่รับสินค้าเคลม:
-                                    $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY); //จำนวนที่รับเคลม:
+                                    if (data.Getdata[0].val.CLM_QTY_PASS > 0) {
+                                        $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY_ORG); //จำนวนที่รับเคลม:
+                                    } else {
+                                        $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY);
+                                    }
                                     // $("#_rcuom").val(data.Getdata[0].val.CLM_UOM); //UOM
                                     $("#_clmdatetec").val(data.Getdata[0].val.CLM_DATE);//Claim date:
                                     $("#_duedatetec").val(data.Getdata[0].val.CLM_DUEDATE); //Due date
@@ -2919,7 +3059,11 @@
                                         $("#_rcvbyte").val("0");      //ผู้รับสินค้าเคลม
 
                                         $("#_rcvdatetec").val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));//วันที่รับสินค้าเคลม:
-                                        $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY); //จำนวนที่รับเคลม:
+                                        if (data.Getdata[0].val.CLM_QTY_PASS > 0) {
+                                            $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY_ORG); //จำนวนที่รับเคลม:
+                                        } else {
+                                            $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY);
+                                        }
                                         //$("#_rcuom").val(data.Getdata[0].val.Uom);//UOM
                                         $("#_clmdatetec").val(('0' + today.getDate()).slice(-2) + '/' + ('0' + (today.getMonth() + 1)).slice(-2) + '/' + today.getFullYear());//Claim date:
 
@@ -2956,6 +3100,7 @@
                                         $("#_scrapdatetec1").val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
                                         $("#remaketec1").val("");
                                     }
+
                                 }
                                 var _tec2Proststus = data.Getdata[0].val.TECH2_ANLYS_STATUS;//approve tec2
                                 var _PMProststus = data.Getdata[0].val.PM_PROCESS_STATUS;//approve PM
@@ -3283,15 +3428,14 @@
                                         SubmithtmlPage += '</div>';
                                         $('#boximage').append(SubmithtmlPage);
                                     } else if (res == "TEC") {
-                                        var markup = "<tr id='" + resultObj[i].val.IMAGE_ID + "'><td><img src='" + resultObj[i].val.PATH + "' id='myImg' style='width: 25%'></td>\
-                                  <td>\
-                                 <button type='button' style='float: right;' class='delimagsalsccess'  faxdel=2 ic=" + resultObj[i].val.IMAGE_ID + " name=" + resultObj[i].val.IMAGE_NAME + " remoimage=" + resultObj[i].val.IMAGE_ID + " img=" + resultObj[i].val.IMAGE_NAME + " >Cancel</button></td>\
-                                  </tr>"; // Binding the file name
+                                        var markup = "<tr id='" + resultObj[i].val.IMAGE_ID + "'> <td><img src='" + resultObj[i].val.PATH + "' id='myImg' style='width: 30%'></td>\
+                                          <td style='vertical-align: middle;'>\
+                                         <button type='button' style='float: right;' class='delimagsalsccess'  faxdel=2 ic=" + resultObj[i].val.IMAGE_ID + " name=" + resultObj[i].val.IMAGE_NAME + " remoimage=" + resultObj[i].val.IMAGE_ID + " img=" + resultObj[i].val.IMAGE_NAME + " >Cancel</button></td>\
+                                          </tr>";
                                         $("#FilesList tbody").append(markup);
                                     }
                                     //var sfilename = resultObj[i].val.IMAGE_NAME;
                                     //formdata.append(sfilename, resultObj[i]);
-
                                 }
 
                                 chkatchtbl();
@@ -3365,10 +3509,6 @@
 
 
                 }
-
-
-
-
 
             });
             // Get the modal
@@ -3771,10 +3911,36 @@
                     }
                 });
             });
+
+            function checkSizeImage() {
+                    var msg = '';
+                    var no = 0;
+                    $('#FilesList > tbody > tr').each(function (data) {
+                        var imageSizeOver = 0;
+                        var $this = $(this);
+                        var checkImg = $this.data('check'); //0=pass, 1=nopass
+                        var nameImg = $this.data('name');
+                        var sizeImg = $this.data('size');
+                        if (checkImg) {
+                            ++no;
+                            //imageSizeOver = sizeImg / 1048576;
+                            msg += no + '. This picture name <b><u>' + nameImg + '(' + sizeImg.toFixed(1) + ' MB)</u></b> <br>';
+                        }
+                    });
+                    if (msg != '') {
+                        $('#modalSizeImage').modal({ backdrop: 'static', keyboard: false });
+                        $('#modalSizeImage').on('shown.bs.modal', function () {
+                            $("#textModalSizeImage").empty();
+                            $("#textModalSizeImage").html(msg);
+                        })
+                        return false;
+                    }
+
+            }
+
             $("#_btnsavecheck").click(function () {
                 var nokey = $("#Nospankey").text();
                 var nosubkey = $("#subNospan").text();
-
                 var vehicle = $("#_vemac").val();
                 var modeltype = $("#_moty").val();
                 var modelyear = $("#_modyear").val();
@@ -3806,12 +3972,12 @@
                 }
                 var worktime = year + "/" + month + "/" + day + "/" + time;
                 var BatchCode = $("#_batcod").val();
-                if (BatchCode == "") {
-                    $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("กรุณาระบุ รหัสการผลิต Batch Code/Please specify Batch Code");
-                    $("#myModalWarning").modal(); return false;
+                //if (BatchCode == "") {
+                //    $("#textAlertWarning").empty();
+                //    $("#textAlertWarning").text("กรุณาระบุ รหัสการผลิต Batch Code/Please specify Batch Code");
+                //    $("#myModalWarning").modal(); return false;
 
-                }
+                //}
                 var adminststud = $("#_admin").val();
                 if (adminststud == "1") {
                     $("#textAlertWarning").empty();
@@ -3867,7 +4033,7 @@
 
                 if (perfromtec1 == "0") {
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("ต้องการให้ดำเนินการ ?/want to take action ?");
+                    $("#textAlertWarning").text("ต้องการให้ดำเนินการ !/Please enter CN/Replacement!");
                     $("#myModalWarning").modal(); return false;
                 }
                 if (anlysstatustec1 == "0") {
@@ -4049,25 +4215,63 @@
             var formdata = new FormData();
             var dataimage = [];
             $("#fileInput").on("change", function () {
+                var noImgOver = 0;
+                var msgImgOver = "";
                 var fileInput = document.getElementById('fileInput');
-
-                //Iterating through each files selected in fileInput
                 for (i = 0; i < fileInput.files.length; i++) {
+                    var cssRowColor = 'background-color: #c9e1cf;';
+                    var iconRow = 'fa fa-check-circle fa-2x text-success';
+
+                    var imageSizeArr = 0;
+                    var imageSizeOver = 0;
+                    var imageType = ' MB';
+                    var imageSize = fileInput.files[i].size;
+                    var imageName = fileInput.files[i].name;
+                    //เช็คขนาดไฟล์
+                    if (imageSize > 1048576) { //1 mb
+                        var imageSizeArr = 1;
+                    }
+                    if (imageSize < 1048576) {
+                        imageSizeOver = imageSize / 1024;
+                        imageType = ' KB';
+                    } else {
+                        imageSizeOver = imageSize / 1048576;
+                        imageType = ' MB';
+                    }
+                    //console.log(imageSizeOver);
+                    if (imageSizeArr == 1) {
+                        imageToBig = true;
+                        //สี row
+                        cssRowColor = 'background-color: #f9c3c8;';
+                        iconRow = 'fa fa-window-close fa-2x text-danger';
+                        ++noImgOver;
+                        msgImgOver += noImgOver + '. This picture name <b><u>' + imageName + '(' + imageSizeOver.toFixed(1) + imageType +')</u></b> <br>';
+                    }
+
                     var src = "";
                     var sfilename = fileInput.files[i].name;
                     let srandomid = Math.random().toString(36).substring(7);
                     src = URL.createObjectURL(fileInput.files[i]);
-                    //formdata.append(sfilename, fileInput.files[i], a1 + "-" + inCim_NoSub);
                     formdata.append(sfilename, fileInput.files[i]);
-                    var markup = "<tr id='" + srandomid + "'><td><img src='" + src + "' style='width: 25%'></td>\
-                                  <td>\
-                                 <button type='button' style='float: right;' class='delimagsal' faxdel=1 ic=" + srandomid + " name=" + sfilename + ">Cancel</button></td>\
-                                  </tr>"; // Binding the file name
+                    var markup = "<tr id='" + srandomid + "' data-name='" + sfilename + "' data-check='" + imageSizeArr + "' data-size='" + imageSizeOver.toFixed(2) + "'> <td style=''><img src='" + src + "' style='width: 30%;' id='myImg'> <br>  <span style='font-size: 13px;font-weight: bold; text-decoration: underline;'>" + imageName + ' (' + imageSizeOver.toFixed(1) + imageType +') </span> &nbsp;' + " </td>\
+                                    <td style='vertical-align: middle;'>\
+                                    <button type='button' style='float: right;' class='delimagsal' faxdel=1 ic=" + srandomid + " name=" + sfilename + ">Cancel</button></td>\
+                                    </tr>"; // Binding the file name
                     $("#FilesList tbody").append(markup);
                 }
+                if (msgImgOver != '') {
+                    $('#modalSizeImage').modal({ backdrop: 'static', keyboard: false });
+                    $('#modalSizeImage').on('shown.bs.modal', function () {
+                        $("#textModalSizeImage").empty();
+                        $("#textModalSizeImage").html(msgImgOver + '<br> <span style="color: red;">*System resize image to 1 MB.</span>');
+                        return false;
+                    })
+                }
+
                 chkatchtbl();
                 $('#fileInput').val('');
             });
+
             $("#FilesList").on("click", "tr .delimagsal", function () {
                 var Fileid = $(this).attr("ic");
                 var FileName = $(this).attr("name");
@@ -4093,6 +4297,7 @@
                     $("#FilesList").css("visibility", "hidden");
                 }
             }
+
             $("#btnuploadsales").click(function () {
                 var No = $("#Nospankey").text();
                 var inCim_NoSub = $("#subNospan").text();
@@ -4907,6 +5112,9 @@
                 var appdatetec = $("#_appdatetec").val();  //วันที่เทคนิคพิจารณา
                 var apprvststus = $("#_apprvststus").val(); // สถานะ
                 var remaketec2 = $("#remaketec2").val();   //หมายเหตุ
+                var qty_pass_org = $("#tec2_clm_qty_org").val();   //จำนวนเคลมทั้งหมด
+                var qty_pass = $("#tec2_clm_qty_pass").val();      //จำนวนเคลมได้
+                var qty_reject = $("#tec2_clm_qty_reject").val();  //จำนวนเคลมไม่ได้
                 var favorite = [];
                 $.each($("input[name='vehicle']:checked"), function () {
                     favorite.push($(this).val());
@@ -4946,7 +5154,9 @@
                         aj_TECH2_APPRV_STATUS: apprvststus,
                         aj_TECH2_REMARK: remaketec2,
                         aj_TECH2_APPRV_DATE: appdatetec,
-
+                        aj_TECH2_QTY_ORG: qty_pass_org,
+                        aj_TECH2_QTY_PASS: qty_pass,
+                        aj_TECH2_QTY_REJECT: qty_reject,
                     },
                     type: "POST",
                     dataType: "JSON",

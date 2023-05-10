@@ -1466,6 +1466,9 @@ namespace ClaimWap.Models
                 model.CLM_SHELF_LOCATION = dr["CLM_SHELF_LOCATION"].ToString();
                 model.CLM_REMARK = dr["CLM_REMARK"].ToString();
                 model.CLM_QTY = dr["CLM_QTY"].ToString();
+                model.CLM_QTY_ORG = dr["CLM_QTY_ORG"].ToString();
+                model.CLM_QTY_PASS = dr["CLM_QTY_PASS"].ToString();
+                model.CLM_QTY_REJECT = dr["CLM_QTY_REJECT"].ToString();
                 model.CLM_REQQTY = dr["CLM_REQQTY"].ToString();
                 model.CLM_RCVSTATUS = dr["CLM_RCVSTATUS"].ToString();
                 model.CLM_RCVBY = dr["CLM_RCVBY"].ToString();

@@ -245,10 +245,25 @@ namespace ClaimWap.Controllers
                 //pussend = (pus + 1);
                 HttpPostedFileBase file = files[i];
                 string fileName = file.FileName;
-                 //file.SaveAs(path + file.FileName);
-                 file.SaveAs(Server.MapPath(@"~\ImgUpload\" + uname));
-
-
+                //file.SaveAs(path + file.FileName);
+                string fullPath = Server.MapPath("~/ImgUpload/" + uname);
+                file.SaveAs(fullPath);
+                int byteCount = file.ContentLength;
+                if (byteCount > 1048576)
+                { //เกิน 1 MB
+                    System.Web.Helpers.WebImage img = new System.Web.Helpers.WebImage(fullPath);
+                    if (img.Width > 1000)
+                    {
+                        img.Resize(1024, 768);
+                        FileInfo fileInfo = new FileInfo(fullPath);
+                        long sizeAfter = fileInfo.Length;
+                        if (sizeAfter > 1048576)
+                        { //เกิน 1 MB
+                            img.Resize(800, 600);
+                        }
+                        img.Save(fullPath, "png", true);
+                    }
+                }
             }
             Connection.Close();
             return Json(files.Count + " Files Uploaded!");
