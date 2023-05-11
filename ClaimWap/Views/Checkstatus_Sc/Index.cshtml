@@ -1219,7 +1219,7 @@
                     <div class="col-md-12" id="myDIVSM" style="display:none;">
                         <div class="row pt-2 pb-1">
                             <div class="col-md-12 text-left">
-                                <span class="alert-success"><i class="fa fa-user"></i> Cliam Type by PM</span><br />
+                                <span class="alert-success"><i class="fa fa-user"></i> Claim Type by PM</span><br />
                             </div>
                         </div>
                         <div class="row">
@@ -1247,7 +1247,7 @@
                         </div>
                         <div class="row pb-1">
                             <div class="col-md-12 text-left">
-                                <span class="alert-warning"><i class="fa fa-user"></i> Cliam Type by Salesman</span><br />
+                                <span class="alert-warning"><i class="fa fa-user"></i> Claim Type by Salesman</span><br />
                             </div>
                         </div>
                         <div class="row">
@@ -2517,7 +2517,11 @@
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.FCLM_QTY + '</td>';
                                     //SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_PERFORMTEXT + '</td>';
                                     if (cktyp == "1") {
-                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_PERFORMTEXT + "/<br>" + data.Getdata[i].val.Print_statusCN + '</td>';
+                                        if (company == 'TAM') {
+                                            SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_PERFORMTEXT + '</td>';
+                                        } else {
+                                            SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_PERFORMTEXT + "/<br>" + data.Getdata[i].val.Print_statusCN + '</td>';
+                                        }
                                     } else {
                                         SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_PERFORMTEXT + '</td>';
                                     }
