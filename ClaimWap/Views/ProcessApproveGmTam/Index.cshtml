@@ -613,10 +613,22 @@
 
                     </div>
                     <div class="row">
-                        <div class=" col-md-4">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i> Claim Qty.:</span>
+                                <span> <i class="fa fa-pencil"></i> Qty claim total.:</span>
                                 <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Qty claim.:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty_pass"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Qty not claim:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty_reject"></span>
                             </div>
                         </div>
                     </div>
@@ -1114,6 +1126,32 @@
                                 <span>
                                     @*<input type="date" data-date-format="dd/mm/yy" id="_scrapdatetec1" />*@
                                     <input type="text" id="_scrapdatetectech" />
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-bars"></i> จำนวนเคลมทั้งหมด/Qty claim total:</span>
+                                <span>
+                                    <input type="text" id="tec2_clm_qty" disabled />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-check-square-o"></i> จำนวนที่รับเคลมได้/Qty claim:</span>
+                                <span>
+                                    <input type="number" id="tec2_clm_qty_pass" disabled />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-window-close-o"></i> จำนวนที่ไม่รับเคลม(เคลม Supplier ไม่ได้)/Qty not claim:</span>
+                                <span>
+                                    <input type="number" id="tec2_clm_qty_reject" value="0" disabled />
                                 </span>
                             </div>
                         </div>
@@ -2666,6 +2704,17 @@
                         success: function (data) {
                             //console.log('DATA = ' + data);
                             if (data.Getdata.length > 0) {
+                                //จำนวนเคลมทั้งหมด
+                                $("#tec2_clm_qty").val(data.Getdata[0].val.CLM_QTY_ORG);
+                                $("#tec2_clm_qty_pass").val(data.Getdata[0].val.CLM_QTY_PASS);
+                                $("#tec2_clm_qty_reject").val(data.Getdata[0].val.CLM_QTY_REJECT);
+                                if (data.Getdata[0].val.CLM_QTY_ORG > 0) {
+                                    $("#_claimqty").text(data.Getdata[0].val.CLM_QTY_ORG);//Qty//
+                                } else {
+                                    $("#_claimqty").text(data.Getdata[0].val.CLM_REQQTY);//Qty//
+                                }
+                                $("#_claimqty_pass").text(data.Getdata[0].val.CLM_QTY_PASS);//Qty pass//
+                                $("#_claimqty_reject").text(data.Getdata[0].val.CLM_QTY_REJECT);//Qty reject//
                                 ///ตรวจสอบรับสินค้าเคลม////
                                 var today = new Date();
                                 var _cktype = $("#_udertype").val();

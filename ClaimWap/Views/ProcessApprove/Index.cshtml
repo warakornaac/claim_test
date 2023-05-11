@@ -1112,6 +1112,32 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-bars"></i> จำนวนเคลมทั้งหมด/Qty claim total:</span>
+                            <span>
+                                <input type="text" id="tec2_clm_qty" disabled />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-check-square-o"></i> จำนวนที่รับเคลมได้/Qty claim:</span>
+                            <span>
+                                <input type="number" id="tec2_clm_qty_pass" disabled />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-window-close-o"></i> จำนวนที่ไม่รับเคลม(เคลม Supplier ไม่ได้)/Qty not claim:</span>
+                            <span>
+                                <input type="number" id="tec2_clm_qty_reject" value="0" disabled />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
 
@@ -2428,6 +2454,10 @@
                             console.log(data);
                             if (data.Getdata.length > 0) {
                                 LoadingHide();
+                                //จำนวนเคลมทั้งหมด
+                                $("#tec2_clm_qty").val(data.Getdata[0].val.CLM_QTY_ORG);
+                                $("#tec2_clm_qty_pass").val(data.Getdata[0].val.CLM_QTY_PASS);
+                                $("#tec2_clm_qty_reject").val(data.Getdata[0].val.CLM_QTY_REJECT);
                                 ///ตรวจสอบรับสินค้าเคลม////
                                 var today = new Date();
                                 var _cktype = $("#_udertype").val();

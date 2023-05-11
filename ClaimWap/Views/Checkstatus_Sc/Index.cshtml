@@ -645,10 +645,23 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <span> <i class="fa fa-pencil"></i> Claim Qty.:</span>
+                                    <span> <i class="fa fa-pencil"></i> Qty claim total.:</span>
                                     <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty"></span>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-pencil"></i> Qty claim.:</span>
+                                    <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty_pass"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span> <i class="fa fa-pencil"></i> Qty not claim:</span>
+                                    <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty_reject"></span>
+                                </div>
+                            </div>
+
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <span> <i class="fa fa-pencil"></i> Type.:</span>
@@ -1109,7 +1122,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-check-square-o"></i> จำนวนที่รับเคลมได้/Qty pass claim:</span>
+                                <span> <i class="fa fa-check-square-o"></i> จำนวนที่รับเคลมได้/Qty claim:</span>
                                 <span>
                                     <input type="number" id="tec2_clm_qty_pass" disabled/>
                                 </span>
@@ -3218,12 +3231,18 @@
                         console.log(data);
                         if (data.Getdata.length > 0) {
                             //จำนวนเคลมทั้งหมด
-                            $("#tec2_clm_qty").val(data.Getdata[0].val.CLM_QTY);    
+                            $("#tec2_clm_qty").val(data.Getdata[0].val.CLM_QTY_ORG);    
                             $("#tec2_clm_qty_pass").val(data.Getdata[0].val.CLM_QTY_PASS);
                             $("#tec2_clm_qty_reject").val(data.Getdata[0].val.CLM_QTY_REJECT);
                             ////Get input display ///////
+                            if (data.Getdata[0].val.CLM_QTY_ORG > 0) {
+                                $("#_claimqty").text(data.Getdata[0].val.CLM_QTY_ORG);//Qty//
+                            } else {
+                                $("#_claimqty").text(data.Getdata[0].val.CLM_REQQTY);//Qty//
+                            }
+                            $("#_claimqty_pass").text(data.Getdata[0].val.CLM_QTY_PASS);//Qty pass//
+                            $("#_claimqty_reject").text(data.Getdata[0].val.CLM_QTY_REJECT);//Qty reject//
 
-                            $("#_claimqty").text(data.Getdata[0].val.CLM_REQQTY);//Qty//
                             $("#_workda").text(data.Getdata[0].val.CLM_USEDAY);//ระยะใช้งาน//
                             $("#causeclaim").text(data.Getdata[0].val.CLM_CAUSE);//เหตุผลเคลม//
                             $("#_proceedto").text(proceedtoupdes);//ดำเนินการ//
