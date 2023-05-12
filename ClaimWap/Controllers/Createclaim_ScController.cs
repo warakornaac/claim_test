@@ -210,6 +210,7 @@ namespace ClaimWap.Controllers
         {
             //int pussend = 0;
             //int pus = 0;
+            int countError = 0;
             string uname = string.Empty;
             string Pathimg = string.Empty;
             string path = Server.MapPath(@"~\ImgUpload\");
@@ -219,13 +220,10 @@ namespace ClaimWap.Controllers
             Connection.Open();
             for (int i = 0; i < files.Count; i++)
             {
-
-
+                bool allowSave = true;
                 string name = formCollection["uploadername"];
                 string inCim_NoSub = formCollection["inCim_NoSub"];
                 string No = formCollection["No"];
-
-
                 //Pathimg = name + "-" + pussend + ".png";
                 var command = new SqlCommand("P_Save_PathImage", Connection);
                 command.CommandType = CommandType.StoredProcedure;
@@ -249,24 +247,42 @@ namespace ClaimWap.Controllers
                 string fullPath = Server.MapPath("~/ImgUpload/" + uname);
                 file.SaveAs(fullPath);
                 int byteCount = file.ContentLength;
-                if (byteCount > 1048576)
-                { //เกิน 1 MB
-                    System.Web.Helpers.WebImage img = new System.Web.Helpers.WebImage(fullPath);
-                    if (img.Width > 1000)
-                    {
-                        img.Resize(1024, 768);
-                        FileInfo fileInfo = new FileInfo(fullPath);
-                        long sizeAfter = fileInfo.Length;
-                        if (sizeAfter > 1048576)
-                        { //เกิน 1 MB
-                            img.Resize(800, 600);
+                if (file.ContentType.Contains("image"))
+                {
+                    if (byteCount > 1048576)
+                    { //เกิน 1 MB
+                        try
+                        {
+                            System.Web.Helpers.WebImage img = new System.Web.Helpers.WebImage(fullPath);
+                            if (img.Width > 1000)
+                            {
+                                img.Resize(1024, 768);
+                                FileInfo fileInfo = new FileInfo(fullPath);
+                                long sizeAfter = fileInfo.Length;
+                                if (sizeAfter > 1048576)
+                                { //เกิน 1 MB
+                                    img.Resize(800, 600);
+                                }
+                                img.Save(fullPath, "png", true);
+                            }
                         }
-                        img.Save(fullPath, "png", true);
+                        catch (Exception ex)
+                        {
+                            allowSave = false;
+                            ++countError;
+                            FileInfo fileInfo = new FileInfo(fullPath);
+                            fileInfo.Delete();
+                            command = new SqlCommand("P_Delete_PathImage", Connection);
+                            command.CommandType = CommandType.StoredProcedure;
+                            command.Parameters.AddWithValue("@imageName", uname);
+                            command.ExecuteNonQuery();
+                            command.Dispose();
+                        }
                     }
                 }
             }
             Connection.Close();
-            return Json(files.Count + " Files Uploaded!");
+            return Json(files.Count + " Files uploaded!" + " \n" + countError + " Unable upload file!");
         }
         [HttpPost]
         public JsonResult Upload(HttpPostedFileBase filex, string UserID)

@@ -287,6 +287,7 @@ namespace ClaimWap.Controllers
         {
             //int pussend = 0;
             //int pus = 0;
+            int countError = 0;
             string uname = string.Empty;
             string Pathimg = string.Empty;
             string path = Server.MapPath(@"~\ImgUpload\");
@@ -296,12 +297,12 @@ namespace ClaimWap.Controllers
             Connection.Open();
             for (int i = 0; i < files.Count; i++)
             {
-
+                bool allowSave = true;
                 string name = formCollection["uploadername"];
                 string inCim_NoSub = formCollection["inCim_NoSub"];
                 string No = formCollection["No"];
                 //Pathimg = name + "-" + pussend + ".png";
-                var command = new SqlCommand("P_Save_PathImage_tec", Connection);
+                var command = new SqlCommand("P_Save_PathImage", Connection);
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@inim_name", "");
                 command.Parameters.AddWithValue("@inCim_NoSub", inCim_NoSub);
@@ -312,32 +313,53 @@ namespace ClaimWap.Controllers
                 returnValuedoc.Direction = System.Data.ParameterDirection.Output;
                 command.Parameters.Add(returnValuedoc);
                 command.ExecuteNonQuery();
+                //text sql
                 uname = returnValuedoc.Value.ToString();
                 command.Dispose();
                 //pus = i;
                 //pussend = (pus + 1);
                 HttpPostedFileBase file = files[i];
-                string fullPath = Server.MapPath("~/ImgUpload/" + uname);
                 string fileName = file.FileName;
+                //file.SaveAs(path + file.FileName);
+                string fullPath = Server.MapPath("~/ImgUpload/" + uname);
                 file.SaveAs(fullPath);
                 int byteCount = file.ContentLength;
-                if (byteCount > 1048576)
-                { //เกิน 1 MB
-                    System.Web.Helpers.WebImage img = new System.Web.Helpers.WebImage(fullPath);
-                    if (img.Width > 1000) {
-                        img.Resize(1024, 768);
-                        FileInfo fileInfo = new FileInfo(fullPath);
-                        long sizeAfter = fileInfo.Length;
-                        if (sizeAfter > 1048576)
-                        { //เกิน 1 MB
-                            img.Resize(800, 600);
+                if (file.ContentType.Contains("image"))
+                {
+                    if (byteCount > 1048576)
+                    { //เกิน 1 MB
+                        try
+                        {
+                            System.Web.Helpers.WebImage img = new System.Web.Helpers.WebImage(fullPath);
+                            if (img.Width > 1000)
+                            {
+                                img.Resize(1024, 768);
+                                FileInfo fileInfo = new FileInfo(fullPath);
+                                long sizeAfter = fileInfo.Length;
+                                if (sizeAfter > 1048576)
+                                { //เกิน 1 MB
+                                    img.Resize(800, 600);
+                                }
+                                img.Save(fullPath, "png", true);
+                            }
                         }
-                        img.Save(fullPath, "png", true);               
+                        catch (Exception ex)
+                        {
+                            allowSave = false;
+                            ++countError;
+                            FileInfo fileInfo = new FileInfo(fullPath);
+                            fileInfo.Delete();
+                            command = new SqlCommand("P_Delete_PathImage", Connection);
+                            command.CommandType = CommandType.StoredProcedure;
+                            command.Parameters.AddWithValue("@imageName", uname);
+                            command.ExecuteNonQuery();
+                            command.Dispose();
+                        }
                     }
                 }
             }
             Connection.Close();
-            return Json(files.Count + " Files Uploaded!");
+            return Json(files.Count + " Files uploaded!" + " \n" + countError + " Unable upload file!");
         }
 
         public JsonResult SaveProcessClaimDetailAdmin(string aj_REQ_NO, string aj_CLM_NO_SUB, string aj_CLM_LineAMT, string aj_stkgrp, string aj_CLM_LineDiscountAMT, string aj_CLM_LineDiscPercent, string aj_CLM_RCVSTATUS, string aj_CLM_RCVBY,
