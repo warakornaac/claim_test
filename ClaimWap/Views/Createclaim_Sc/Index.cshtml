@@ -3096,7 +3096,7 @@
                         formdata.append(sfilename, fileInput.files[i]);
                         var markup = "<tr id='" + srandomid + "' data-name='" + sfilename + "' data-check='" + imageSizeArr + "' data-size='" + imageSizeOver.toFixed(2) + "'> <td style=''><img src='" + src + "' style='width: 30%;' id='myImg'> <br>  <span style='font-size: 13px;font-weight: bold; text-decoration: underline;'>" + imageName + ' (' + imageSizeOver.toFixed(1) + imageType + ') </span> &nbsp;' + "</span> </td>\
                                     <td style='vertical-align: middle;'>\
-                                    <button type='button' style='float: right;' class='delimagsal' faxdel=1 ic=" + srandomid + " name=" + sfilename + ">Cancel</button></td>\
+                                    <button type='button' style='float: right;' class='delimagsal' faxdel=1 id=" + srandomid + " name=" + sfilename + ">Cancel</button></td>\
                                     </tr>"; // Binding the file name
                         $("#FilesList tbody").append(markup);
                     }
@@ -3122,7 +3122,7 @@
                 });
 
                 $("#FilesList").on("click", "tr .delimagsal", function () {
-                    var Fileid = $(this).attr("ic");
+                    var Fileid = $(this).attr("id");
                     var FileName = $(this).attr("name");
                     var faxdel = $(this).attr("faxdel");
                     if (faxdel == "1") {
@@ -3393,7 +3393,7 @@
                                         resultObj = eval(result.Getdata);
                                         var markup = "<tr id='" + resultObj[i].val.IMAGE_ID + "'><td><img src='" + resultObj[i].val.PATH + "' id='myImg' style='width: 25%'></td>\
                                   <td>\
-                                 <button type='button' style='float: right;' class='delimagsalsccess'  faxdel=2 ic=" + resultObj[i].val.IMAGE_ID + " name=" + resultObj[i].val.IMAGE_NAME + " remoimage=" + resultObj[i].val.IMAGE_ID + " img=" + resultObj[i].val.IMAGE_NAME + " >Cancel</button></td>\
+                                 <button type='button' style='float: right;' class='delimagsalsccess'  faxdel=2 id=" + resultObj[i].val.IMAGE_ID + " name=" + resultObj[i].val.IMAGE_NAME + " remoimage=" + resultObj[i].val.IMAGE_ID + " img=" + resultObj[i].val.IMAGE_NAME + " >Cancel</button></td>\
                                   </tr>"; // Binding the file name
                                         $("#FilesList tbody").append(markup);
                                         //var sfilename = resultObj[i].val.IMAGE_NAME;
@@ -3414,9 +3414,9 @@
                     LoadingHide();
                 });
                 function DeleteFile(Fileid, FileName) {
-
                     formdata.delete(FileName)
                     $("#" + Fileid).remove();
+                    $("#" + Fileid).delete();
                     chkatchtbl();
                 }
                 function chkatchtbl() {
@@ -3438,7 +3438,8 @@
                     formdata.set('uploadername', No + "-" + inCim_NoSub);
                     formdata.set('inCim_NoSub', inCim_NoSub);
                     formdata.set('No', No);
-
+                    console.log(formdata);
+                    //return false;
                     $.ajax({
                         url: '@Url.Action("UploadFiles", "Createclaim_Sc")',
                         type: "POST",
@@ -3865,7 +3866,11 @@
                                             },
                                             type: "POST",
                                             dataType: "JSON",
+                                            beforeSend: function () {
+                                                LoadingShow();
+                                            },
                                             success: function (data) {
+                                                LoadingHide();
                                                 if (data.message == "true") {
                                                     $("#_claimnosub").text(data.subno);
                                                     $("#btnuploadsales").click();
@@ -3886,12 +3891,15 @@
                                                     $("#textAlertWarningmes").text(data.message);
                                                     $("#myModalWarning").modal();
                                                 }
+                                            },
+                                            complete: function (res) {
+                                                LoadingHide();
                                             }
                                         });
                                     }
                                 }
                             });
-                        } else {
+                        } else { //เลขเคลมไม่ว่าง
                             var claimno = $("#_claimno").val();
                             var _itemno = $("#_itemnodes").val();
                             var _splito = "";
@@ -4031,8 +4039,12 @@
                                 },
                                 type: "POST",
                                 dataType: "JSON",
+                                beforeSend: function () {
+                                    LoadingShow();
+                                },
                                 success: function (data) {
                                     //console.log(data);
+                                    LoadingHide();
                                     if (data.message == 'true') {
                                         $("#_claimnosub").text(data.subno);
                                         $("#btnuploadsales").click();
@@ -4053,6 +4065,9 @@
                                         $("#textAlertWarningmes").text(data.message);
                                         $("#myModalWarning").modal();
                                     }
+                                },
+                                complete: function (res) {
+                                    LoadingHide();
                                 }
                             });
                         }

@@ -424,10 +424,10 @@
 
                 <div class="row">
                     <div class="col-sm-4">
-                        <div class="input-group">
+                        <div class="input-group" style="z-index: 0 !important;">
                             <input class="form-control" type="text" id="searchclaimno" placeholder="Search Claim No...." value="@noclaim">
                             <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button" id="_btnsearchclaimno" style="display:block">
+                                <button class="btn btn-primary" type="button" id="_btnsearchclaimno">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -493,7 +493,7 @@
 
 
             </div>
-            <div id="fixed-table-container-2" class="fixed-table-container">
+            <div id="fixed-table-container-2" class="fixed-table-container" style="z-index: 0 !important;">
                 <table id="_tbclmline">
                     <thead>
                         <tr>
@@ -4069,7 +4069,7 @@
                 }
                 if (anlysafterprotec1 == "0") {
                     $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("กรุณาระบุหลังเสร็จสิ้นกระบวนการเคลม");
+                    $("#textAlertWarning").text("กรุณาระบุหลังเสร็จสิ้นกระบวนการเคลม/Please specify action after finished claim");
                     $("#myModalWarning").modal(); return false;
                 }
                 if (remaketec1 == "") {
@@ -4143,12 +4143,16 @@
                     },
                     type: "POST",
                     dataType: "JSON",
+                    beforeSend: function () {
+                        LoadingShow();
+                    },
                     success: function (data) {
-                        console.log(data.message);
-                        console.log(data);
+                        //console.log(data.message);
+                        //console.log(data);
                         // waitingDialog.hide();
                         LoadingHide();
                         if (data.message == "true") {
+                            LoadingHide();
                             waitingDialog.hide();
                             $("#textAlertSucces").empty();
                             $("#textAlertSucces").text("บันทึกข้อมูลสำเร็จ/Save successfully");
@@ -4162,11 +4166,15 @@
                             //});
 
                         } else {
+                            LoadingHide();
                             waitingDialog.hide();
                             $("#textAlertWarning").empty();
                             $("#textAlertWarning").text(data.message);
                             $("#myModalWarning").modal(); return false;
                         }
+                    },
+                    complete: function (res) {
+                        LoadingHide();
                     }
                 });
             });

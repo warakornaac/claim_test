@@ -287,6 +287,7 @@ namespace ClaimWap.Controllers
         {
             //int pussend = 0;
             //int pus = 0;
+            int countPass = 0;
             int countError = 0;
             string uname = string.Empty;
             string Pathimg = string.Empty;
@@ -359,7 +360,8 @@ namespace ClaimWap.Controllers
                 }
             }
             Connection.Close();
-            return Json(files.Count + " Files uploaded!" + " \n" + countError + " Unable upload file!");
+            countPass = files.Count - countError;
+            return Json(countPass + " Files uploaded!" + " \n" + countError + " Unable upload file!");
         }
 
         public JsonResult SaveProcessClaimDetailAdmin(string aj_REQ_NO, string aj_CLM_NO_SUB, string aj_CLM_LineAMT, string aj_stkgrp, string aj_CLM_LineDiscountAMT, string aj_CLM_LineDiscPercent, string aj_CLM_RCVSTATUS, string aj_CLM_RCVBY,

@@ -210,6 +210,7 @@ namespace ClaimWap.Controllers
         {
             //int pussend = 0;
             //int pus = 0;
+            int countPass = 0;
             int countError = 0;
             string uname = string.Empty;
             string Pathimg = string.Empty;
@@ -282,7 +283,8 @@ namespace ClaimWap.Controllers
                 }
             }
             Connection.Close();
-            return Json(files.Count + " Files uploaded!" + " \n" + countError + " Unable upload file!");
+            countPass = files.Count - countError;
+            return Json(countPass + " Files uploaded!" + " \n" + countError + " Unable upload file!");
         }
         [HttpPost]
         public JsonResult Upload(HttpPostedFileBase filex, string UserID)
