@@ -1584,6 +1584,7 @@ namespace ClaimWap.Models
                 model.CLM_UOM = dr["CLM_UOM"].ToString();
                 model.CLM_REQQTY = dr["CLM_REQQTY"].ToString();
                 model.CLM_QTY = dr["CLM_QTY"].ToString();
+                model.CLM_QTY_REJECT = dr["CLM_QTY_REJECT"].ToString();
                 model.CLM_INVNO = dr["CLM_INVNO"].ToString();
                 model.CLM_INVDATE = dr["CLM_INVDATE"].ToString();
                 model.CLM_USEDAY = dr["CLM_USEDAY"].ToString();
@@ -1919,6 +1920,7 @@ namespace ClaimWap.Models
                 model.CLM_UOM = dr["CLM_UOM"].ToString();
                 model.CLM_REQQTY = dr["CLM_REQQTY"].ToString();
                 model.CLM_QTY = dr["CLM_QTY"].ToString();
+                model.CLM_QTY_REJECT = dr["CLM_QTY_REJECT"].ToString();
                 model.CLM_INVNO = dr["CLM_INVNO"].ToString();
                 model.CLM_INVDATE = dr["CLM_INVDATE"].ToString();
                 model.CLM_USEDAY = dr["CLM_USEDAY"].ToString();

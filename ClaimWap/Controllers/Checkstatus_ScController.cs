@@ -238,6 +238,8 @@ namespace ClaimWap.Controllers
                 model.CLM_SHELF_LOCATION = dr["CLM_SHELF_LOCATION"].ToString();
                 model.CLM_REMARK = dr["CLM_REMARK"].ToString();
                 model.CLM_QTY = dr["CLM_REQQTY"].ToString();
+                model.FCLM_QTY = dr["FCLM_QTY"].ToString();
+                model.CLM_QTY_REJECT = dr["CLM_QTY_REJECT"].ToString();
                 model.CLM_RCVSTATUS = dr["CLM_RCVSTATUS"].ToString();
                 model.CLM_RCVBY = dr["CLM_RCVBY"].ToString();
                 model.CLM_RCVDATE = dr["CLM_RCVDATE"].ToString();
@@ -296,7 +298,6 @@ namespace ClaimWap.Controllers
                 model.CLM_FRMSUP_DATE = dr["CLM_FRMSUP_DATE"].ToString();
                 model.CLM_FRMSUP_NO = dr["CLM_FRMSUP_NO"].ToString();
                 model.SLMCOD = dr["SLMCOD"].ToString();
-                model.FCLM_QTY = dr["FCLM_QTY"].ToString();
                 model.CLM_COMPANY = dr["CLM_COMPANY"].ToString();
                 model.PERFORMDESCRIPTION = dr["PERFORMDESCRIPTION"].ToString();
                 model.RCVSTATUSDESCRIPTION = dr["RCVSTATUSDESCRIPTION"].ToString();

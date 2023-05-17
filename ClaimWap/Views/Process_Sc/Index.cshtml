@@ -491,7 +491,6 @@
                     </div>
                 </div>
 
-
             </div>
             <div id="fixed-table-container-2" class="fixed-table-container" style="z-index: 0 !important;">
                 <table id="_tbclmline">
@@ -501,8 +500,9 @@
                             <th style="width: 134px; height: 100%;" align="center">Line no</th>
                             <th>Item No.</th>
                             <th>UOM</th>
-                            <th>Claim<br /> Qty.</th>
                             <th>Receive<br /> Qty.</th>
+                            <th>Claim<br /> Qty.</th>
+                            <th>Claim Not<br /> Qty.</th>
                             <th>ระยะ<br />การใช้งาน<br />ปี/เดือน/วัน/ชม./Period of use</th>
                             <th>Invoice No</th>
                             <th style="text-align:center">สาเหตุการเคลม/Problem</th>
@@ -523,7 +523,6 @@
                     <tbody></tbody>
                 </table>
             </div>
-
 
             <div class="card mb-12" id="claimDetail" style="display: none;">
                 <div class="card-header">
@@ -2599,6 +2598,7 @@
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UOM + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_REQQTY + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_REJECT + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_USEDAY + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_INVNO + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_CAUSE + '</td>';
@@ -5149,6 +5149,8 @@
                 var qty_pass_org = $("#tec2_clm_qty_org").val();   //จำนวนเคลมทั้งหมด
                 var qty_pass = $("#tec2_clm_qty_pass").val();      //จำนวนเคลมได้
                 var qty_reject = $("#tec2_clm_qty_reject").val();  //จำนวนเคลมไม่ได้
+                var sumQty = 0;
+                 
                 var favorite = [];
                 $.each($("input[name='vehicle']:checked"), function () {
                     favorite.push($(this).val());
@@ -5175,6 +5177,21 @@
                     $("#textAlertWarning").text("กรุณาเลือกผลการพิจารณา/Select the consideration");
                     $("#myModalWarning").modal(); return false;
 
+                }
+                //รวมจำนวนที่เคลมได้, เคลมไม่ได้
+                if (qty_pass != "" || qty_reject != "") {
+                    sumQty = Number(qty_pass) + Number(qty_reject);
+                }
+                if (qty_pass == "" && qty_reject == "") {
+                    $("#textAlertWarning").empty();
+                    $("#textAlertWarning").text("กรุณากรอกจำนวนที่รับเคลม/ไม่รับเคลม/Please fill the amount that can be claim/can't claim.");
+                    $("#myModalWarning").modal(); return false;
+                } else {
+                    if (qty_pass_org != sumQty) {
+                        $("#textAlertWarning").empty();
+                        $("#textAlertWarning").text("กรุณากรอกจำนวนที่รับเคลม/ไม่รับเคลม ให้เท่ากับจำนวนทั้งหมด/Please fill the amount that can be claim/can't claim equal the total number.");
+                        $("#myModalWarning").modal(); return false;
+                    }
                 }
                 /// alert(claimtypecke);
 

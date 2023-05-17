@@ -375,8 +375,9 @@
                             <th>Item No.</th>
                             <th>Description</th>
                             <th>UOM</th>
-                            <th>Claim Qty.</th>
                             <th>Receive Qty.</th>
+                            <th>Claim Qty.</th>
+                            <th>Claim Not Qty.</th>
                             <th>CN/สินค้าทดแทน</th>
                             @*<th>สถานะเคลม</th>*@
                             <th>last update date</th>
@@ -387,7 +388,7 @@
                             <th>สินค้าหลังเคลม/Status after claim</th>
 
                             @*<th>Edit</th>
-                                <th>Tech staff</th>*@
+        <th>Tech staff</th>*@
                             <th>ตรวจสอบรับสินค้า<br />Check receive</th>
                             <th>Tech1</th>
                             <th>Tech2</th>
@@ -424,8 +425,9 @@
                             <th>Item No.</th>
                             <th>Description</th>
                             <th>UOM</th>
-                            <th>Claim Qty.</th>
                             <th>Receive Qty.</th>
+                            <th>Claim Qty.</th>
+                            <th>Claim Not Qty.</th>
                             <th>CN/สินค้าทดแทน</th>
                             @*<th>สถานะเคลม</th>*@
                             <th>last update date</th>
@@ -436,7 +438,7 @@
                             <th>สินค้าหลังเคลม/Status after claim</th>
                             <th>ยกเลิกเคลม/Claim cancel</th>
                             @*<th>Edit</th>
-                                <th>Tech staff</th>*@
+        <th>Tech staff</th>*@
                             <th>ตรวจสอบรับสินค้า<br />Check receive</th>
                             <th>Tech1</th>
                             <th>Tech2</th>
@@ -481,8 +483,9 @@
                             <th>Item No.</th>
                             <th>Description</th>
                             <th>UOM</th>
-                            <th>Claim Qty.</th>
                             <th>Receive Qty.</th>
+                            <th>Claim Qty.</th>
+                            <th>Claim Not Qty.</th>
                             <th>CN/สินค้าทดแทน</th>
                             @*<th>สถานะเคลม</th>*@
                             <th>last update date</th>
@@ -493,7 +496,7 @@
                             <th>สินค้าหลังเคลม/Status after claim</th>
                             <th>ยกเลิกเคลม/Claim cancel</th>
                             @*<th>Edit</th>
-                                <th>Tech staff</th>*@
+        <th>Tech staff</th>*@
                             <th>ตรวจสอบรับสินค้า<br />Check receive</th>
                             <th>Tech1</th>
                             <th>Tech2</th>
@@ -2320,6 +2323,7 @@
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UOM + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.FCLM_QTY + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_REJECT + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_PERFORMTEXT + '</td>';
 
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UPDATE_DATE + '</td>';
@@ -2515,6 +2519,7 @@
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UOM + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.FCLM_QTY + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_REJECT + '</td>';
                                     //SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_PERFORMTEXT + '</td>';
                                     if (cktyp == "1") {
                                         if (company == 'TAM') {
@@ -2657,6 +2662,7 @@
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UOM + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.FCLM_QTY + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_REJECT + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_PERFORMTEXT + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UPDATE_DATE + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UPDATE_BY + '</td>';

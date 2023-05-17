@@ -385,6 +385,7 @@ namespace ClaimWap.Models
        public string CLM_INVDATE { get; set; }
        public string CLM_REQQTY { get; set; }
        public string CLM_QTY { get; set; }
+       public string CLM_QTY_REJECT { get; set; }
        public string CLM_USEDAY { get; set; }
        public string CLM_CAUSE { get; set; }
        public string CLM_PERFORM { get; set; }
