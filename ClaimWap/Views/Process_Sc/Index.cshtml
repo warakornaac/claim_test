@@ -496,13 +496,13 @@
                 <table id="_tbclmline">
                     <thead>
                         <tr>
-
                             <th style="width: 134px; height: 100%;" align="center">Line no</th>
                             <th>Item No.</th>
                             <th>UOM</th>
-                            <th>Receive<br /> Qty.</th>
-                            <th>Claim<br /> Qty.</th>
-                            <th>Claim Not<br /> Qty.</th>
+                            <th>Request Qty.</th>
+                            <th>Receive Qty.</th>
+                            <th>Accept Qty.</th>
+                            <th>Reject Qty.</th>
                             <th>ระยะ<br />การใช้งาน<br />ปี/เดือน/วัน/ชม./Period of use</th>
                             <th>Invoice No</th>
                             <th style="text-align:center">สาเหตุการเคลม/Problem</th>
@@ -650,19 +650,19 @@
                     <div class="row">
                          <div class="col-md-4">
                                 <div class="form-group">
-                                    <span> <i class="fa fa-pencil"></i> Qty claim total.:</span>
+                                    <span> <i class="fa fa-pencil"></i> Request Qty:</span>
                                     <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <span> <i class="fa fa-pencil"></i> Qty claim.:</span>
+                                    <span> <i class="fa fa-pencil"></i> Accept Qty:</span>
                                     <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty_pass"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <span> <i class="fa fa-pencil"></i> Qty not claim:</span>
+                                    <span> <i class="fa fa-pencil"></i> Rejecy Qty:</span>
                                     <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty_reject"></span>
                                 </div>
                             </div>
@@ -2597,7 +2597,8 @@
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '/<br/>' + data.Getdata[i].val.STKDES + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UOM + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_REQQTY + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_ORG + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_PASS + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_REJECT + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_USEDAY + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_INVNO + '</td>';

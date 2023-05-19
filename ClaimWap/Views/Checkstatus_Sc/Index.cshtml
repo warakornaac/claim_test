@@ -375,9 +375,10 @@
                             <th>Item No.</th>
                             <th>Description</th>
                             <th>UOM</th>
+                            <th>Request Qty.</th>
                             <th>Receive Qty.</th>
-                            <th>Claim Qty.</th>
-                            <th>Claim Not Qty.</th>
+                            <th>Accept Qty.</th>
+                            <th>Reject Qty.</th>
                             <th>CN/สินค้าทดแทน</th>
                             @*<th>สถานะเคลม</th>*@
                             <th>last update date</th>
@@ -425,9 +426,10 @@
                             <th>Item No.</th>
                             <th>Description</th>
                             <th>UOM</th>
+                            <th>Request Qty.</th>
                             <th>Receive Qty.</th>
-                            <th>Claim Qty.</th>
-                            <th>Claim Not Qty.</th>
+                            <th>Accept Qty.</th>
+                            <th>Reject Qty.</th>
                             <th>CN/สินค้าทดแทน</th>
                             @*<th>สถานะเคลม</th>*@
                             <th>last update date</th>
@@ -483,9 +485,10 @@
                             <th>Item No.</th>
                             <th>Description</th>
                             <th>UOM</th>
+                            <th>Request Qty.</th>
                             <th>Receive Qty.</th>
-                            <th>Claim Qty.</th>
-                            <th>Claim Not Qty.</th>
+                            <th>Accept Qty.</th>
+                            <th>Reject Qty.</th>
                             <th>CN/สินค้าทดแทน</th>
                             @*<th>สถานะเคลม</th>*@
                             <th>last update date</th>
@@ -648,19 +651,19 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <span> <i class="fa fa-pencil"></i> Qty claim total.:</span>
+                                    <span> <i class="fa fa-pencil"></i>Request Qty:</span>
                                     <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <span> <i class="fa fa-pencil"></i> Qty claim.:</span>
+                                    <span> <i class="fa fa-pencil"></i>Accept Qty:</span>
                                     <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty_pass"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <span> <i class="fa fa-pencil"></i> Qty not claim:</span>
+                                    <span> <i class="fa fa-pencil"></i>Rejecy Qty:</span>
                                     <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty_reject"></span>
                                 </div>
                             </div>
@@ -1287,7 +1290,7 @@
                                         <select class="bar" id="saleman_approve_status">
                                             <option value="0">Choose option</option>
                                             <option value="1">Claim approve</option>
-                                            <option value="2">Claim not approve</option>
+                                            <option value="2">Not Claim approve</option>
                                         </select>
                                     </span>
                                 </div>
@@ -1333,7 +1336,7 @@
                                         <select class="bar" id="gm_approve_status">
                                             <option value="0">Choose option</option>
                                             <option value="1">Claim approve</option>
-                                            <option value="2">Claim not approve</option>
+                                            <option value="2">Not Claim approve</option>
                                         </select>
                                     </span>
                                 </div>
@@ -2321,8 +2324,9 @@
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.STKDES + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UOM + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.FCLM_QTY + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_REQQTY + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_ORG + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_PASS + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_REJECT + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_PERFORMTEXT + '</td>';
 
@@ -2517,8 +2521,9 @@
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.STKDES + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UOM + '</td>';
-                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY + '</td>';
-                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.FCLM_QTY + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_REQQTY + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_ORG + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_PASS + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_REJECT + '</td>';
                                     //SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_PERFORMTEXT + '</td>';
                                     if (cktyp == "1") {
@@ -2660,8 +2665,9 @@
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.STKDES + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UOM + '</td>';
-                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.FCLM_QTY + '</td>';
-                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_REQQTY + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_ORG + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_PASS + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_REJECT + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_PERFORMTEXT + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UPDATE_DATE + '</td>';
@@ -3245,11 +3251,11 @@
                             $("#tec2_clm_qty_pass").val(data.Getdata[0].val.CLM_QTY_PASS);
                             $("#tec2_clm_qty_reject").val(data.Getdata[0].val.CLM_QTY_REJECT);
                             ////Get input display ///////
-                            if (data.Getdata[0].val.CLM_QTY_ORG > 0) {
-                                $("#_claimqty").text(data.Getdata[0].val.CLM_QTY_ORG);//Qty//
-                            } else {
+                            //if (data.Getdata[0].val.CLM_QTY_ORG > 0) {
+                            //    $("#_claimqty").text(data.Getdata[0].val.CLM_QTY_ORG);//Qty//
+                            //} else {
                                 $("#_claimqty").text(data.Getdata[0].val.CLM_REQQTY);//Qty//
-                            }
+                            //}
                             $("#_claimqty_pass").text(data.Getdata[0].val.CLM_QTY_PASS);//Qty pass//
                             $("#_claimqty_reject").text(data.Getdata[0].val.CLM_QTY_REJECT);//Qty reject//
 

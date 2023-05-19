@@ -442,8 +442,10 @@
                             <th>Item No.</th>
                             <th>UOM</th>
                             <th>Stock<br />Group</th>
-                            <th>Claim<br /> Qty.</th>
+                            <th>Request<br /> Qty.</th>
                             <th>Receive<br /> Qty.</th>
+                            <th>Accept<br /> Qty.</th>
+                            <th>Reject<br /> Qty.</th>
                             <th>Customer.</th>
                             <th>Sales Man.</th>
                             <th>Invoice No <br />/Invoice Date</th>
@@ -621,19 +623,19 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i> Qty claim total.:</span>
+                                <span> <i class="fa fa-pencil"></i>Request Qty:</span>
                                 <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty"></span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i> Qty claim.:</span>
+                                <span> <i class="fa fa-pencil"></i>Accept Qty:</span>
                                 <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty_pass"></span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span> <i class="fa fa-pencil"></i> Qty not claim:</span>
+                                <span> <i class="fa fa-pencil"></i>Rejecy Qty:</span>
                                 <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty_reject"></span>
                             </div>
                         </div>
@@ -2422,7 +2424,9 @@
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UOM + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.STKGRP + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_REQQTY + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_ORG + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_PASS + '</td>';
+                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_REJECT + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CUSCOD + "/<br>" + data.Getdata[i].val.CUSNAM + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.SLMCOD + "/<br>" + data.Getdata[i].val.SLMNAM + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_INVNO + "<br>" + data.Getdata[i].val.CLM_INVDATE + '</td>';
@@ -2667,11 +2671,11 @@
                                 $("#tec2_clm_qty").val(data.Getdata[0].val.CLM_QTY_ORG);
                                 $("#tec2_clm_qty_pass").val(data.Getdata[0].val.CLM_QTY_PASS);
                                 $("#tec2_clm_qty_reject").val(data.Getdata[0].val.CLM_QTY_REJECT);
-                                if (data.Getdata[0].val.CLM_QTY_ORG > 0) {
-                                    $("#_claimqty").text(data.Getdata[0].val.CLM_QTY_ORG);//Qty//
-                                } else {
+                                //if (data.Getdata[0].val.CLM_QTY_ORG > 0) {
+                                //    $("#_claimqty").text(data.Getdata[0].val.CLM_QTY_ORG);//Qty//
+                                //} else {
                                     $("#_claimqty").text(data.Getdata[0].val.CLM_REQQTY);//Qty//
-                                }
+                                //}
                                 $("#_claimqty_pass").text(data.Getdata[0].val.CLM_QTY_PASS);//Qty pass//
                                 $("#_claimqty_reject").text(data.Getdata[0].val.CLM_QTY_REJECT);//Qty reject//
                                 ///ตรวจสอบรับสินค้าเคลม////

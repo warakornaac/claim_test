@@ -385,6 +385,8 @@ namespace ClaimWap.Models
        public string CLM_INVDATE { get; set; }
        public string CLM_REQQTY { get; set; }
        public string CLM_QTY { get; set; }
+       public string CLM_QTY_ORG { get; set; }
+       public string CLM_QTY_PASS { get; set; }
        public string CLM_QTY_REJECT { get; set; }
        public string CLM_USEDAY { get; set; }
        public string CLM_CAUSE { get; set; }
@@ -516,7 +518,7 @@ namespace ClaimWap.Models
                 public string CLM_QTY { get; set; }
                 public string CLM_QTY_PASS { get; set; }
                 public string CLM_QTY_REJECT { get; set; }
-                public string CLM_REQQTY { get; set; }
+                public string CLM_REQQTY { get; set; } 
                 public string CLM_REMARK{ get; set; }
                 public string CLM_RCVDATE { get; set; }
                 public string CLM_RCVBY { get; set; }
