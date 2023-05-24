@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:cl="http://schemas.microsoft.com/sqlserver/reporting/2010/01/componentdefinition" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
-  <AutoRefresh>0</AutoRefresh>
+<AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="CLAIMDataSet">
       <ConnectionProperties>
@@ -504,7 +504,7 @@
                 <Top>0.61222in</Top>
                 <Left>0.71833cm</Left>
                 <Height>0.17832in</Height>
-                <Width>3.22917in</Width>
+                <Width>1.80125in</Width>
                 <ZIndex>2</ZIndex>
                 <Style>
                   <Border>
@@ -1910,7 +1910,7 @@
                                     <PaddingBottom>2pt</PaddingBottom>
                                   </Style>
                                 </Textbox>
-                                <Textbox Name="Textbox175">
+                                <Textbox Name="CLM_RCVSTATUS">
                                   <CanGrow>true</CanGrow>
                                   <KeepTogether>true</KeepTogether>
                                   <Paragraphs>
@@ -1927,7 +1927,7 @@
                                       <Style />
                                     </Paragraph>
                                   </Paragraphs>
-                                  <rd:DefaultName>Textbox175</rd:DefaultName>
+                                  <rd:DefaultName>CLM_RCVSTATUS</rd:DefaultName>
                                   <Left>0.94179in</Left>
                                   <Height>0.21649in</Height>
                                   <Width>1.71933in</Width>
@@ -6728,6 +6728,95 @@ Result of inspection  </Value>
                   <PaddingBottom>1pt</PaddingBottom>
                 </Style>
               </Textbox>
+              <Tablix Name="Tablix4">
+                <TablixBody>
+                  <TablixColumns>
+                    <TablixColumn>
+                      <Width>0.35056in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.39348in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.37248in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.3736in</Width>
+                    </TablixColumn>
+                  </TablixColumns>
+                  <TablixRows>
+                    <TablixRow>
+                      <Height>0.23154in</Height>
+                      <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Textbox43">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF((Fields!CLM_RCVSTATUS.Value = 1),  "สินค้าอยู่ที่คลัง KDC", "สินค้าอยู่ที่คลัง PDC")</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox42</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <ColSpan>4</ColSpan>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell />
+                        <TablixCell />
+                        <TablixCell />
+                      </TablixCells>
+                    </TablixRow>
+                  </TablixRows>
+                </TablixBody>
+                <TablixColumnHierarchy>
+                  <TablixMembers>
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                  </TablixMembers>
+                </TablixColumnHierarchy>
+                <TablixRowHierarchy>
+                  <TablixMembers>
+                    <TablixMember>
+                      <Group Name="Details2" />
+                      <TablixMembers>
+                        <TablixMember />
+                      </TablixMembers>
+                    </TablixMember>
+                  </TablixMembers>
+                </TablixRowHierarchy>
+                <DataSetName>DataSet1</DataSetName>
+                <Top>0.58121in</Top>
+                <Left>3.30606in</Left>
+                <Height>0.23154in</Height>
+                <Width>1.4901in</Width>
+                <ZIndex>37</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>Solid</Style>
+                  </Border>
+                </Style>
+              </Tablix>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
             <Left>0.03401in</Left>
@@ -6749,122 +6838,6 @@ Result of inspection  </Value>
           <Height>1.36526cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
-          <ReportItems>
-            <Textbox Name="Textbox60">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>*การกรอกข้อมูลในการส่งสินค้าเคลมอย่างครบถ้วน จะเป็นประโยชน์ต่อการพิจารณาอนุมัติชดเชยสินค้า ติดต่อสอบถามเพิ่มเติมเกี่ยวกับสินค้าเคลมได้ที่ 0-2494-3800 ต่อฝ่ายบริการเทคนิคฯ</Value>
-                      <Style>
-                        <FontStyle>Italic</FontStyle>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>7.8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox60</rd:DefaultName>
-              <Left>0.01543in</Left>
-              <Height>0.17709in</Height>
-              <Width>8.13613in</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox61">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>จัดทำโดย TEC</Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox60</rd:DefaultName>
-              <Top>0.20486in</Top>
-              <Left>0.03401in</Left>
-              <Height>0.18888in</Height>
-              <Width>0.77381in</Width>
-              <ZIndex>1</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox62">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>FM-TEC-001 REV.03</Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontSize>7pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>15 พฤศจิกายน 2559</Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontSize>7pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox60</rd:DefaultName>
-              <Top>0.17708in</Top>
-              <Left>6.68468in</Left>
-              <Height>0.32291in</Height>
-              <Width>1.42812in</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-          </ReportItems>
           <Style>
             <Border>
               <Style>None</Style>
