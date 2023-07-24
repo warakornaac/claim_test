@@ -673,7 +673,7 @@
                                 <span style="color: blue;text-decoration: underline;font-weight: bold" id="_workda"></span>
                             </div>
                         </div>
-                        <div class="col-md-4" id="divFieldClaimNote" style="display: none;">
+                        <div class="col-md-4" id="divFieldClaimNote">
                             <div class="form-group">
                                 <span> <i class="fa fa-pencil"></i> Reference No.	:</span>
                                 <span style="color: blue;text-decoration: underline;font-weight: bold" id="claim_note"></span>
@@ -2730,7 +2730,7 @@
                 }
             });
             $("table").on("click", "tr #xxx", function () {
-
+                LoadingShow();
                 $("#claimDetail").css('display', 'block');
                 var statuscancel = $(this).attr('statuclm');
                 if (statuscancel == "7") {
@@ -2822,6 +2822,7 @@
                                 $("#_proceedtotec").val(statusclaimup);  ///สถานะการรับสินค้า
 
                                 $("#_perfromtec1").val(proceedtoup);  ///ดำเนินการ:
+                                LoadingHide();
                             }
                         }
                     });
@@ -2922,7 +2923,7 @@
                                     $("#_proceedtotec").val(data.Getdata[0].val.CLM_RCVSTATUS);  ///สถานะการรับสินค้า
                                     $("#_rcvbyte").val(data.Getdata[0].val.CLM_RCVBY);      //ผู้รับสินค้าเคลม
                                     $("#_rcvdatetec").val(data.Getdata[0].val.CLM_RCVDATE);//วันที่รับสินค้าเคลม:
-                                    if (data.Getdata[0].val.CLM_QTY_PASS > 0) {
+                                    if (data.Getdata[0].val.CLM_QTY_ORG > 0) {
                                         $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY_ORG); //จำนวนที่รับเคลม:
                                     } else {
                                         $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY);
@@ -2990,7 +2991,7 @@
                                     $("#_proceedtotec").val(data.Getdata[0].val.CLM_RCVSTATUS);  ///สถานะการรับสินค้า
                                     $("#_rcvbyte").val(data.Getdata[0].val.CLM_RCVBY);      //ผู้รับสินค้าเคลม
                                     $("#_rcvdatetec").val(data.Getdata[0].val.CLM_RCVDATE);//วันที่รับสินค้าเคลม:
-                                    if (data.Getdata[0].val.CLM_QTY_PASS > 0) {
+                                    if (data.Getdata[0].val.CLM_QTY_ORG > 0) {
                                         $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY_ORG); //จำนวนที่รับเคลม:
                                     } else {
                                         $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY);
@@ -3086,7 +3087,7 @@
                                         $("#_rcvbyte").val("0");      //ผู้รับสินค้าเคลม
 
                                         $("#_rcvdatetec").val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));//วันที่รับสินค้าเคลม:
-                                        if (data.Getdata[0].val.CLM_QTY_PASS > 0) {
+                                        if (data.Getdata[0].val.CLM_QTY_ORG > 0) {
                                             $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY_ORG); //จำนวนที่รับเคลม:
                                         } else {
                                             $("#_rvqtytec").val(data.Getdata[0].val.CLM_QTY);
@@ -3366,7 +3367,7 @@
                                     $("#_PM").val(data.Getdata[0].val.PROD);
                                 }
                             } else {
-
+                                LoadingHide();
                                 $("#textAlertWarning").empty();
                                 $("#textAlertWarning").text("ไม่มีรายการเคลม../No claim list..");
                                 $("#myModalWarning").modal();
@@ -3429,8 +3430,8 @@
                             }
                         },
                     });
-                    //  }
-                    //Getimage//
+                    //  } 
+                    //Getimage// CMM23020008-01-R1
                     var _cktype = $("#_udertype").val();
                     $.ajax({
                         url: '@Url.Action("GetPathImage", "GetdataCenter")',
@@ -3531,12 +3532,8 @@
                         //}
                     });
 
-
-
-
-
                 }
-
+               
             });
             // Get the modal
 
@@ -3791,7 +3788,7 @@
 
                 var stkgup = $("#_stkgup").text();
 
-                var proceedtotec = $("#_proceedtotec").val();  ///สถานะการรับสินค้า
+                var proceedtotec = $("#_proceedtotec option:selected").val();  ///สถานะการรับสินค้า
                 var rcvbyte = $("#_rcvbyte").val();      //ผู้รับสินค้าเคลม
                 var rcvdatetec = $("#_rcvdatetec").val();//วันที่รับสินค้าเคลม:
                 var rvqtytec = $("#_rvqtytec").val(); //จำนวนที่รับเคลม:
