@@ -114,14 +114,13 @@ namespace ClaimWap
             Response.Buffer = true;
             Response.Clear();
             Response.ContentType = mimeType;
-           // Response.AddHeader("content-disposition", "attachment; filename=RequestClaimWH" + cmsib +"-" + item + "." + fileNameExtension);
-            Response.AddHeader("content-disposition", "attachment; filename=RequestClaimWH" + cmsib +"." + fileNameExtension);
+            Response.AddHeader("content-disposition", "attachment; filename=RequestClaimWH" + cmsib +"-" + item + "." + fileNameExtension);
+
             Response.BinaryWrite(renderedBytes);
 
 
            // string path = (Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)) + @"\Downloads\rptRequestClaim" + ".pdf";
-            //string path = (Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)) + @"\Downloads\RequestClaimWH" + cmsib + "-" + item + ".pdf";
-            string path = (Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)) + @"\Downloads\RequestClaimWH" + cmsib + ".pdf";
+            string path = (Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)) + @"\Downloads\RequestClaimWH" + cmsib + "-" + item + ".pdf";
             //WebClient client = new WebClient();
             // Byte[] buffer = client.DownloadData(path);
             System.IO.File.Delete(path);

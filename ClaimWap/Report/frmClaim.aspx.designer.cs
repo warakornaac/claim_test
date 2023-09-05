@@ -10,7 +10,7 @@
 namespace ClaimWap.Report {
     
     
-    public partial class frmReceiveproduct {
+    public partial class frmReqClaim {
         
         /// <summary>
         /// form1 control.
@@ -19,6 +19,6 @@ namespace ClaimWap.Report {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form3;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
     }
 }

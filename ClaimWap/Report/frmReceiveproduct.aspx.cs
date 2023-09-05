@@ -36,8 +36,6 @@ namespace ClaimWap.Report
 
             Docdisplay = Request.QueryString["ClmNUM"];
             byte[] data = System.Convert.FromBase64String(Docdisplay);
-            string clmCompany = Session["company"].ToString();
-            string fileReport = string.Empty;
             Doc = System.Text.ASCIIEncoding.ASCII.GetString(data);
             //Doc = "CM18110019,CM18120036,CM18120037";
            // Doc = "CMT19050064";
@@ -51,22 +49,15 @@ namespace ClaimWap.Report
             string conString = ConfigurationManager.ConnectionStrings["CLAIM_ConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(conString))
             {
-                fileReport = "~/Report/rptReceiveproduct.rdlc";
-                if (clmCompany != "")
-                {
-                    if (clmCompany == "TAM")
-                    {
-                        fileReport = "~/Report/rptReceiveproductTam.rdlc";
-                    }
-                }
                 ReportViewer2.ProcessingMode = ProcessingMode.Local;
-                ReportViewer2.LocalReport.ReportPath = Server.MapPath(fileReport);
+                ReportViewer2.LocalReport.ReportPath = Server.MapPath("~/Report/rptReceiveproduct.rdlc");
              
                 con.Open();
 
                 SqlDataAdapter sda1 = new SqlDataAdapter();
 
-                SqlCommand cmd = new SqlCommand("P_GetReqClaim_ByDoc_test", con);
+
+                SqlCommand cmd = new SqlCommand("P_GetReqClaim_ByDoc", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@DOC", Doc.ToString());
                 sda1.SelectCommand = cmd;

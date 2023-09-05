@@ -32,10 +32,6 @@ namespace ClaimWap.Report
             string Docdisplay = string.Empty;
             string SubDocwords = string.Empty;
             string SubDoc = string.Empty;
-            string subClmCompany = string.Empty;
-            string clmCompany = string.Empty;
-            string fileReport = string.Empty;
-
             //string Doc_subdisplay = string.Empty;
             Docdisplay = Request.QueryString["ClmNUM"];
             string[] words = Docdisplay.Split('/');
@@ -47,26 +43,13 @@ namespace ClaimWap.Report
             SubDocwords = words[1];
             byte[] datasub = System.Convert.FromBase64String(SubDocwords);
             SubDoc = System.Text.ASCIIEncoding.ASCII.GetString(datasub);
-
-            //รายการนี้มาจาก com ไหน
-            subClmCompany = words[2];
-            byte[] dataCom = System.Convert.FromBase64String(subClmCompany);
-            clmCompany = System.Text.ASCIIEncoding.ASCII.GetString(dataCom);
-
+            
             DataSet ds1 = new DataSet();
             string conString = ConfigurationManager.ConnectionStrings["CLAIM_ConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(conString))
             {
-                fileReport = "~/Report/rptLabel.rdlc";
-                if (clmCompany != "")
-                {
-                    if (clmCompany == "TAM")
-                    {
-                        fileReport = "~/Report/rptLabelTam.rdlc";
-                    }
-                }
                 ReportViewer2.ProcessingMode = ProcessingMode.Local;
-                ReportViewer2.LocalReport.ReportPath = Server.MapPath(fileReport);
+                ReportViewer2.LocalReport.ReportPath = Server.MapPath("~/Report/rptLabel.rdlc");
                 con.Open();
                 SqlDataAdapter sda1 = new SqlDataAdapter();
 

@@ -78,7 +78,8 @@ namespace ClaimWap.Controllers
                     fileName = Path.GetFileName(file.FileName);
                     int fileSize = file.ContentLength;
                     Size = fileSize / 1000;
-                    file.SaveAs(Server.MapPath("~/VideoFileUpload/" + fileName + ".mp4"));
+                    file.SaveAs(Server.MapPath(@"~\VideoFileUpload\" + fileName + ".mp4"));
+
 
                 }
                 message = "true";

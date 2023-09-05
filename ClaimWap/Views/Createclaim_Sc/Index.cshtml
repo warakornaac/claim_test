@@ -570,7 +570,7 @@
         <div class="modal-dialog">
             <div class="modal-content" style="width: 600px;">
                 <div class="modal-header" style="justify-content: flex-start;">
-                    <h5 class="modal-title" id="exampleModalLabel">Cannot upload picture (more than 1 MB)</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Cannot upload picture (more than 30 MB)</h5>
                 </div>
                 <div class="modal-body">
                     <div id="textModalSizeImage"></div>
@@ -798,7 +798,7 @@
                         <span><input type="text" id="_claimqty" style="border-bottom: 5px solid #b33c0f;" /></span>
                     </div>
                 </div>
-                <div class="col-md-4" id="divFieldClaimNote" style="display: none;">
+                <div class="col-md-4" id="divFieldClaimNote">
                     <div class="form-group">
                         <span> <i class="fa fa-pencil"></i>Reference No.:</span>
                         <span><input type="text" id="customer_claim_note" /></span>
@@ -1018,7 +1018,7 @@
                 <div class="col-xs-6 col-md-12">
                     <div class="card">
                         <div class="card-header bg-danger text-white">
-                            <h6 class="text-uppercase"><i class="fa fa-picture-o"></i> Upload images < 1 MB </h6>
+                            <h6 class="text-uppercase"><i class="fa fa-picture-o"></i> Upload images < 30 MB </h6>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -2146,7 +2146,7 @@
                         // Adding one more key to FormData object
                         // fileData.append('username', 'gdb1100');
 
-
+                        //เก็บไฟล์เข้า folder
                         $.ajax({
                             url: '@Url.Action("UploadVideo", "Createclaim_Sc")',
                             type: "POST",
@@ -2154,7 +2154,6 @@
                             processData: false, // Not to process data
                             data: fileData,
                             success: function (result) {
-                                //console.log(result)
                                 if (result.message == "true") {
                                     var Img = result.fileName;
                                     if (Img != "") {
@@ -3058,16 +3057,26 @@
                 $("#fileInput").on("change", function () {
                     var noImgOver = 0;
                     var msgImgOver = "";
+                    var msgImgOver30 = "";
                     var fileInput = document.getElementById('fileInput');
                     for (i = 0; i < fileInput.files.length; i++) {
+
                         var cssRowColor = 'background-color: #c9e1cf;';
                         var iconRow = 'fa fa-check-circle fa-2x text-success';
 
+                        var flagImgFail = 0;
+                        var imageFailArr = 0;
+
+
                         var imageSizeArr = 0;
                         var imageSizeOver = 0;
+
+                        var imageSize30Arr = 0;
                         var imageType = ' MB';
                         var imageSize = fileInput.files[i].size;
                         var imageName = fileInput.files[i].name;
+                        console.log(fileInput.files[i].complete);
+
                         //เช็คขนาดไฟล์
                         if (imageSize > 1048576) { //1 mb
                             var imageSizeArr = 1;
@@ -3079,36 +3088,62 @@
                             imageSizeOver = imageSize / 1048576;
                             imageType = ' MB';
                         }
+                        //เช็คขนาดเกิน 30 MB
+                        if (imageSize > 31457280) { //30 mb 31457280
+                            imageSize30Arr = 1;
+                        }
+
                         //console.log(imageSizeOver);
-                        if (imageSizeArr == 1) {
-                            imageToBig = true;
+                        if (imageSize30Arr == 1) {
                             //สี row
                             cssRowColor = 'background-color: #f9c3c8;';
                             iconRow = 'fa fa-window-close fa-2x text-danger';
                             ++noImgOver;
-                            msgImgOver += noImgOver + '. This picture name <b><u>' + imageName + '(' + imageSizeOver.toFixed(1) + imageType + ')</u></b> <br>';
+                            //if (imageSize30Arr == 1) {
+                                msgImgOver30 = " <span style='color: red;'> Oversize 30 MB Can not save. Please resize.</span>";
+                            //}
+                            msgImgOver += noImgOver + '. This picture <b><u>' + imageName + '(' + imageSizeOver.toFixed(1) + imageType + ') </u> ' + msgImgOver30 + ' </b> <br>';
                         }
-
                         var src = "";
                         var sfilename = fileInput.files[i].name;
                         let srandomid = Math.random().toString(36).substring(7);
                         src = URL.createObjectURL(fileInput.files[i]);
-                        formdata.append(sfilename, fileInput.files[i]);
-                        var markup = "<tr id='" + srandomid + "' data-name='" + sfilename + "' data-check='" + imageSizeArr + "' data-size='" + imageSizeOver.toFixed(2) + "'> <td style=''><img src='" + src + "' style='width: 30%;' id='myImg'> <br>  <span style='font-size: 13px;font-weight: bold; text-decoration: underline;'>" + imageName + ' (' + imageSizeOver.toFixed(1) + imageType + ') </span> &nbsp;' + "</span> </td>\
-                                    <td style='vertical-align: middle;'>\
-                                    <button type='button' style='float: right;' class='delimagsal' faxdel=1 id=" + srandomid + " name=" + sfilename + ">Cancel</button></td>\
-                                    </tr>"; // Binding the file name
-                        $("#FilesList tbody").append(markup);
+                        if (src != "") {
+                            //var imgCheck = new Image();
+                            //imgCheck.src = src;
+                            //imgCheck.onload = function () {
+                            //    //return imageFailArr = 0;
+                            //   console.log('pass');
+                            //};
+                            //imgCheck.onerror = function () {
+                            //   //return imageFailArr = 1;
+                            //   console.log('fail');
+                            //};
+                        }
+                        var markup = "";
+                        if (imageSize30Arr != 1) {
+                            formdata.append(sfilename, fileInput.files[i]);
+                            var markup = "<tr id='" + srandomid + "' data-name='" + sfilename + "' data-check='" + imageSizeArr + "' data-size='" + imageSizeOver.toFixed(2) + "'> <td style=''><img src='" + src + "' style='width: 30%;' id='myImg'> <br>  <span style='font-size: 13px;font-weight: bold; text-decoration: underline;'>" + imageName + ' (' + imageSizeOver.toFixed(1) + imageType + ') </span> &nbsp;' + "</span> </td>\
+                                        <td style='vertical-align: middle;'>\
+                                        <button type='button' style='float: right;' class='delimagsal' faxdel=1 id=" + srandomid + " name=" + sfilename + ">Cancel</button></td>\
+                                        </tr>"; // Binding the file name
+                            $("#FilesList tbody").append(markup);
+                        }
+
                     }
                     if (msgImgOver != '') {
                         $('#modalSizeImage').modal({ backdrop: 'static', keyboard: false });
                         $('#modalSizeImage').modal({ backdrop: 'static', keyboard: false });
                         $('#modalSizeImage').on('shown.bs.modal', function () {
                             $("#textModalSizeImage").empty();
-                            $("#textModalSizeImage").html(msgImgOver + '<br> <span style="color: red;">*System resize image to 1 MB.</span>');
+                            $("#textModalSizeImage").html(msgImgOver);
                             return false;
                         })
                     }
+
+
+
+
                     //var ItemList = {
                     //    Img: clm_no_supplier,
                     //    inCim_NoSub: clm_no_sub,
@@ -3120,6 +3155,41 @@
                     chkatchtbl();
                     $('#fileInput').val('');
                 });
+
+                function IsImageLoadable(URL) {
+                    var check = false;
+                    var imageObj = new Image();
+                    imageObj.src = URL;
+
+                    imageObj.onload = function () {
+                        //check = true;
+                        return check;
+                    }
+                }
+
+                //async function checkImage(url) {
+                //    return new Promise(resolve => {
+                //        const image = new Image()
+                //        image.onload = () => resolve(!!image.width)
+                //        image.onerror = () => resolve(false)
+                //        image.src = url
+                //    })
+                //}
+
+                //function testImage(URL) {
+                //    var flagCheck = '99';
+                //    var tester = new Image();
+                //    tester.onload = function () {
+                //        flagCheck = '11';
+                //        return flagCheck;
+                //    };
+                //    tester.onerror = function () {
+                //        flagCheck = '99';
+                //        return flagCheck;
+                //    };
+                //    tester.src = URL;
+                //    //return flagCheck;
+                //}
 
                 $("#FilesList").on("click", "tr .delimagsal", function () {
                     var Fileid = $(this).attr("id");
@@ -3360,7 +3430,7 @@
                                     "<video controls='controls' style='width: 600px; max-width: 100%;'>" +
                                     "<source src=" + result.videolist[0].FilePath + ".mp4" + " type='video/mp4' videomode='720p' />" +
                                     " </video>" +
-                                     "<br/><span class=\"removevideo\"  remoimage=" + result.videolist[0].Name + " img=" + result.videolist[0].Name + " >Remove image</span>" +
+                                     "<br/><span class=\"removevideo\"  remoimage=" + result.videolist[0].Name + " img=" + result.videolist[0].Name + " >Remove video</span>" +
                                      "</span>").insertAfter("#appvideo");
 
                                     $(".removevideo").click(function () {
@@ -3691,7 +3761,7 @@
                         }
                         //alert('nokey = ' + nokey);
                         //เลขเคลมว่าง
-                        if (nokey == "") {
+                        if (nokey == "") { //เพิ่มใหม่
                             var Gendoc;
                             var Clno = nokey;
                             var Com = $("#_company").val();
@@ -3873,14 +3943,9 @@
                                                 LoadingHide();
                                                 if (data.message == "true") {
                                                     $("#_claimnosub").text(data.subno);
-                                                    $("#btnuploadsales").click();
-                                                    //$("#btnUpload1").click();
-                                                    //$("#btnUpload2").click();
-                                                    //$("#btnUpload3").click();
-                                                    //$("#btnUpload4").click();
-                                                    $("#btnUpload").click();
+                                                    $("#btnUpload").click(); //VDO
+                                                    $("#btnuploadsales").click(); //IMAGE
                                                     alert("สร้างรายการสำเร็จ/Item created success")
-                                                    //$("#FilesList tbody").empty();
                                                     $("#FilesList tbody tr:not(:first)").remove();
                                                     clearval()
                                                     clearimage()
@@ -3899,7 +3964,7 @@
                                     }
                                 }
                             });
-                        } else { //เลขเคลมไม่ว่าง
+                        } else { //แก้ไข
                             var claimno = $("#_claimno").val();
                             var _itemno = $("#_itemnodes").val();
                             var _splito = "";
@@ -4047,15 +4112,10 @@
                                     LoadingHide();
                                     if (data.message == 'true') {
                                         $("#_claimnosub").text(data.subno);
-                                        $("#btnuploadsales").click();
-                                        //$("#btnUpload1").click();
-                                        //$("#btnUpload2").click();
-                                        //$("#btnUpload3").click();
-                                        //$("#btnUpload4").click();
                                         $("#btnUpload").click();
+                                        $("#btnuploadsales").click();
                                         alert("บีนทึกรายการสำเร็จ/Save successfully.")
-                                        //$("#FilesList tbody").empty();
-                                        $("#FilesList tbody tr:not(:first)").empty();
+                                        $("#FilesList tbody tr:not(:first)").remove();
                                         clearval()
                                         clearimage()
                                         GetClimtemp(claimno)

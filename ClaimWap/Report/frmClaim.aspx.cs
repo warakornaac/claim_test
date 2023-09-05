@@ -14,7 +14,6 @@ using System.IO;
 
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Text.RegularExpressions;
 namespace ClaimWap.Report
 {
     public partial class frmReqClaim : System.Web.UI.Page
@@ -40,9 +39,6 @@ namespace ClaimWap.Report
             string SubDoc = string.Empty;
             string SubUsrtype = string.Empty;
             string Usrtype = string.Empty;
-            string subClmCompany = string.Empty;
-            string clmCompany = string.Empty;
-            string fileReport = string.Empty;
             //string Doc_subdisplay = string.Empty;
             Docdisplay = Request.QueryString["ClmNUM"];
             string[] words = Docdisplay.Split('/');
@@ -57,30 +53,15 @@ namespace ClaimWap.Report
             SubUsrtype = words[2];
             byte[] datasrtype = System.Convert.FromBase64String(SubUsrtype);
             Usrtype = System.Text.ASCIIEncoding.ASCII.GetString(datasrtype);
-            //รายการนี้มาจาก com ไหน
-            subClmCompany = words[3];
-            byte[] dataCom = System.Convert.FromBase64String(subClmCompany);
-            clmCompany = System.Text.ASCIIEncoding.ASCII.GetString(dataCom);
-     
             string Cus = string.Empty;
             string slm = string.Empty;
             string item = string.Empty;
-            string cusre = string.Empty;
-             string cmsib = string.Empty;
             DataSet ds1 = new DataSet();
             string conString = ConfigurationManager.ConnectionStrings["CLAIM_ConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(conString))
             {
-                fileReport = "~/Report/rptClaimTech.rdlc";
-                if (clmCompany != "")
-                {
-                    if (clmCompany == "TAM")
-                    {
-                        fileReport = "~/Report/rptClaimTechTam.rdlc";
-                    }
-                }
                 ReportViewer.ProcessingMode = ProcessingMode.Local;
-                ReportViewer.LocalReport.ReportPath = Server.MapPath(fileReport);
+                ReportViewer.LocalReport.ReportPath = Server.MapPath("~/Report/rptClaimTech.rdlc");
                 con.Open();
                 SqlDataAdapter sda1 = new SqlDataAdapter();
               
@@ -95,20 +76,15 @@ namespace ClaimWap.Report
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-
-                    cusre = dr["CUSNAM"].ToString() + '-' + Regex.Replace(cusre, "\"[^\"]*\"", string.Empty);
-                    Cus = dr["CUSCOD"].ToString() + '-' + Regex.Replace(cusre, "\"[^\"]*\"", string.Empty);
+                    Cus = dr["CUSCOD"].ToString() + '-' + dr["CUSNAM"].ToString();
                     slm = dr["SLMCOD"].ToString() + '-' + dr["SLMNAM"].ToString();
                     item = dr["STKCOD"].ToString();
-                    cmsib = dr["CLM_NO_SUB"].ToString();
                 }
                 dr.Close();
                 dr.Dispose();
                 cmd.Dispose();
                 con.Close();
             }
-            Cus = Cus.Replace(".", "");
-            Cus = Cus.Replace(",", "");
             ReportDataSource datasource2 = new ReportDataSource("DataSet1", ds1.Tables[0]);
             //ReportDataSource datasource3 = new ReportDataSource("DataSet2", ds1.Tables[1]);
             ReportViewer.LocalReport.DataSources.Clear();
@@ -155,7 +131,7 @@ namespace ClaimWap.Report
             out fileNameExtension,
             out streams,
             out warnings);
-            
+
             ////clear the response stream and write the bytes to the outputstream
             //set content-disposition to “attachment” so that user is prompted to take an action
             //on the file (open or save)
@@ -163,12 +139,12 @@ namespace ClaimWap.Report
             Response.Clear();
             Response.ContentType = mimeType;
             //Response.AddHeader("content-disposition", "attachment; filename=rptClaim"+ "." + fileNameExtension);
-            Response.AddHeader("content-disposition", "attachment; filename=rptClaim" + cmsib +"-("+ Cus+")-"+ slm+"." + fileNameExtension);
+            Response.AddHeader("content-disposition", "attachment; filename=rptClaim" + Cus+"-"+ slm+"." + fileNameExtension);
             Response.BinaryWrite(renderedBytes);
 
 
            //string path = (Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)) + @"\Downloads\rptClaim" +  ".pdf";
-            string path = (Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)) + @"\Downloads\rptClaim" + cmsib +"-" +Cus + "-" + slm + ".pdf";
+           string path = (Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)) + @"\Downloads\rptClaim" + Cus + "-" + slm +".pdf";
             //WebClient client = new WebClient();
             // Byte[] buffer = client.DownloadData(path);
             System.IO.File.Delete(path);

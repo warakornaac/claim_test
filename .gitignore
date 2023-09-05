@@ -50,3 +50,4 @@ $RECYCLE.BIN/
 
 # Config
 /ClaimWap/Web.config
+ClaimWap/Views/Createclaim_Sc/bk1306/Index.cshtml

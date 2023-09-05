@@ -366,10 +366,7 @@
                             <th>Request date</th>
                             <th>Due date</th>
                             <th>Invoice No</th>
-                            @if (Session["company"].ToString() == "TAM")
-                            {
-                                <th>Reference No.</th>
-                            }
+                            <th>Reference No.</th>
                             <th>Customer</th>
                             <th>Sales Man</th>
                             <th>Item No.</th>
@@ -417,10 +414,7 @@
                             <th>Request date</th>
                             <th>Due date</th>
                             <th>Invoice No</th>
-                            @if (Session["company"].ToString() == "TAM")
-                            {
-                                <th>Reference No.</th>
-                            }
+                            <th>Reference No.</th>
                             <th>Customer</th>
                             <th>Sales Man</th>
                             <th>Item No.</th>
@@ -476,10 +470,7 @@
                             <th>Request date</th>
                             <th>Due date</th>
                             <th>Invoice No</th>
-                            @if (Session["company"].ToString() == "TAM")
-                            {
-                                <th>Reference No.</th>
-                            }
+                            <th>Reference No.</th>
                             <th>Customer</th>
                             <th>Sales Man</th>
                             <th>Item No.</th>
@@ -674,7 +665,7 @@
                                     <span style="color: blue;text-decoration: underline;font-weight: bold" id="_foc"></span>
                                 </div>
                             </div>
-                            <div class="col-md-4 divFieldClaimNote" style="display: none;">
+                            <div class="col-md-4 divFieldClaimNote">
                                 <div class="form-group">
                                     <span> <i class="fa fa-pencil"></i> Reference No.	:</span>
                                     <span style="color: blue;text-decoration: underline;font-weight: bold" id="claim_note"></span>
@@ -2316,9 +2307,9 @@
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.REQ_DATE + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_DUEDATE + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_INVNO + '</td>';
-                                if (company == 'TAM') {
+                                //if (company == 'TAM') {
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_CLAIMNOTE + '</td>';
-                                }
+                                //}
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.Customer + "/<br>" + data.Getdata[i].val.CUSNAM + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.SLMCOD + "/<br>" + data.Getdata[i].val.SLMNAM + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
@@ -2513,9 +2504,9 @@
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.REQ_DATE + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_DUEDATE + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_INVNO + '</td>';
-                                    if (company == 'TAM') {
+                                    //if (company == 'TAM') {
                                         SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_CLAIMNOTE + '</td>';
-                                    }
+                                    //}
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.Customer + "/<br>" + data.Getdata[i].val.CUSNAM + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.SLMCOD + "/<br>" + data.Getdata[i].val.SLMNAM + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';
@@ -2657,9 +2648,9 @@
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.REQ_DATE + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_DUEDATE + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_INVNO + '</td>';
-                                    if (company == 'TAM') {
+                                    //if (company == 'TAM') {
                                         SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_CLAIMNOTE + '</td>';
-                                    }
+                                    //}
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.Customer + '/<br>' + data.Getdata[i].val.CUSNAM + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.SLMCOD + '/<br>' + data.Getdata[i].val.SLMNAM + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + '</td>';

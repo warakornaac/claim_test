@@ -303,7 +303,7 @@ namespace ClaimWap.Controllers
                 string inCim_NoSub = formCollection["inCim_NoSub"];
                 string No = formCollection["No"];
                 //Pathimg = name + "-" + pussend + ".png";
-                var command = new SqlCommand("P_Save_PathImage", Connection);
+                var command = new SqlCommand("P_Save_PathImage_tec", Connection);
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@inim_name", "");
                 command.Parameters.AddWithValue("@inCim_NoSub", inCim_NoSub);
@@ -390,13 +390,13 @@ namespace ClaimWap.Controllers
                 command.Parameters.AddWithValue("@inADMIN_ANLYS_STATUS", aj_ADMIN_ANLYS_STATUS);
                 command.Parameters.AddWithValue("@inTECH1_PROCESS_STATUS", aj_TECH1_PROCESS_STATUS);
                 command.Parameters.AddWithValue("@inCLM_ADMIN", aj_CLM_ADMIN);
-              //  command.Parameters.AddWithValue("@inCLM_SHELF_LOCATION", aj_CLM_SHELF_LOCATION);
+                //  command.Parameters.AddWithValue("@inCLM_SHELF_LOCATION", aj_CLM_SHELF_LOCATION);
                 command.Parameters.AddWithValue("@inCLM_REMARK", aj_CLM_REMARK);
                 command.Parameters.AddWithValue("@inCLM_RCVDATE", aj_CLM_RCVDATE);
                 command.Parameters.AddWithValue("@inCLM_UOM", aj_CLM_UOM);
                 command.Parameters.AddWithValue("@inCLM_DUEDATE", aj_CLM_DUEDATE);
                 command.Parameters.AddWithValue("@inCLM_DATE", aj_CLM_DATE);
-               // command.Parameters.AddWithValue("@inTechnician", aj_Technician);
+                // command.Parameters.AddWithValue("@inTechnician", aj_Technician);
                 command.Parameters.AddWithValue("@instkgrp", aj_stkgrp);
                 
 

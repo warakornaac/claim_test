@@ -268,13 +268,13 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <span> <i class="fa fa-pencil"></i>Request start date:</span>
-                                <span><input type="date" data-date-format="dd/mm/yy" id="_statdate"></span>
+                                <span><input type="date"  data-date-format="dd/mm/yyyy" id="_statdate"></span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <span> <i class="fa fa-pencil"></i>Request end date:</span>
-                                <span><input type="date" data-date-format="dd/mm/yy" id="_enddate"></span>
+                                <span><input type="date" data-date-format="dd/mm/yyyy" id="_enddate"></span>
                             </div>
                         </div>
                         <div class="col-md-4" style="display:none">
@@ -323,7 +323,7 @@
                                 </span>
                             </div>
                         </div>
-                       
+
                         <div class="col-md-4" style="display:none">
                             <div class="form-group">
                                 <span> <i class="fa fa-pencil"></i>สถานะ WH:</span>
@@ -410,7 +410,7 @@
                                 <th style="text-align:center">สถานะ<br />รับสินค้า</th>
                                 <th>สถานะ<br /> Sales Return</th>
                                 <th>ยกเลิกSales<br />Return</th>
-                                
+
                                 <th>Sales<br /> Managers</th>
                                 <th>PM</th>
                                 <th>WH <br />Admin</th>
@@ -546,7 +546,7 @@
                             </div>
                         </div>
                         <div class="row">
-                          
+
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <span> <i class="fa fa-pencil"></i> Stock Group:</span>
@@ -555,7 +555,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    
+
                                 </div>
                             </div>
                             <div class="col-md-4" style="display:none">
@@ -565,15 +565,15 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
-                 
+
                 </div>
                 <div class="card-header">
                     <i class="fa fa-table"></i> สาเหตุการคืนสินค้า<li id="clickme4" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
                 </div>
                 <div class="card-body" id="myDIV4">
-                    <div class ="col-md-12">
+                    <div class="col-md-12">
                         <div class="row">
                             <div class=" col-md-4">
                                 <div class="form-group">
@@ -663,9 +663,44 @@
                             </div>
 
                         </div>
-</div>
+                    </div>
                 </div>
             </div>
+            @*Product Manager Approve*@
+            <div class="card-header">
+                <i class="fa fa-table"></i> Product Manager Approval <li id="clickme2" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+            </div>
+            <div class="col-md-12" id="myDIV2" style="display:block">
+                <div class="row">
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-sort-down"></i>Status</span>
+                            <span>
+                                <select class="bar" id="_pmtstus" disabled></select>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-calendar"></i> วันที่PM พิจารณา:</span>
+                            <span>
+                                <input type="text" id="_pmdate" disabled/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <span><textarea class="form-control" rows="6" cols="100" id="remakepm" placeholder="หมายเหตุ" disabled></textarea></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="card-header">
                 <i class="fa fa-table"></i>Admin WH ตรวจสอบรับสินค้า: <li id="clickme1" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
             </div>
@@ -713,7 +748,7 @@
                                 <span> <i class="fa fa-calendar"></i> วันที่รับสินค้า:</span>
                                 <span>
 
-                                    <input type="text" id="_rcvdatetec"  disabled="disabled"/>
+                                    <input type="text" id="_rcvdatetec" disabled="disabled" />
                                 </span>
                             </div>
                         </div>
@@ -721,11 +756,11 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                               
+
                             </div>
                         </div>
-                       
-                       
+
+
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -746,14 +781,14 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                               
+
                             </div>
                         </div>
                     </div>
-                  
+
                     <div class="col-md-12">
                         <div id="fixed-table-container-3" class="fixed-table-container" style="display:block">
-                            <table id="exampletb" >
+                            <table id="exampletb">
                                 <thead>
                                     <tr>
                                         <th>RT No.</th>
@@ -769,7 +804,7 @@
                                 <tbody></tbody>
                             </table>
                         </div>
-                    </div>                
+                    </div>
                 </div>
             </div>
             <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -797,7 +832,7 @@
                         </div>
                         <div class="modal-body">
                             กรุณาใส่เหตุผลที่จะยกเลิก
-                           <select id="reasonwh"></select>
+                            <select id="reasonwh"></select>
                         </div>
                         <div class="modal-footer">
 
@@ -834,10 +869,10 @@
                         </div>
                         <div class="modal-body">คุณต้องการเข้าไปยืนยันรับสินค้าหรือไม่</div>
                         <div class="modal-footer">
-                            <input type="hidden" id="keyonex"/>
+                            <input type="hidden" id="keyonex" />
                             <input type="hidden" id="keytwox" />
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">ไม่ต้องการ</button>   
-                            <a class="btn btn-success" id="linkprocess">Confirm รับสินค้า</a>                        
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">ไม่ต้องการ</button>
+                            <a class="btn btn-success" id="linkprocess">Confirm รับสินค้า</a>
                         </div>
                     </div>
                 </div>
@@ -857,7 +892,7 @@
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" id="btnprintlabal">Print ใบสั่งรถ</button>
                             <button type="button" class="btn btn-primary" id="refromreqest">ใบคำขอคืนสินค้าเพื่อออกใบลดหนี้</button>
-                            <button type="button" class="btn btn-secondary" id="refrompredeli">ใบรับคืนสินค้า</button>                            
+                            <button type="button" class="btn btn-secondary" id="refrompredeli">ใบรับคืนสินค้า</button>
                         </div>
                     </div>
                 </div>
@@ -949,7 +984,7 @@
                         });
                     }
                 });
-               
+
                 $.ajax({
                     url: '@Url.Action("Getdateslm","GetdataCenter")',
                     data: {
@@ -959,7 +994,7 @@
                     type: "POST",
                     dataType: "JSON",
                     success: function (data) {
-                      
+
                         var _tpy = $("#_udertype").val();
                         var select = $("#slmcod");
                         select.children().remove();
@@ -1028,7 +1063,7 @@
                         var select = $("#reasonwh");
                         select.children().remove();
                         select.append($("<option>").val("99").text("กรุณาเลือกเหตุผลที่จะยกเลิก"));
-                    
+
                         $(data).each(function (index, item) {
                             select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
                         });
@@ -1086,7 +1121,7 @@
                     success: function (data) {
                         var select = $("#_proceedtowh");
                         select.children().remove();
-                   
+
                         select.append($("<option>").val("99").text("เลือก Status ทั้งหมด ที่ต้องการ"));
                         $(data).each(function (index, item) {
                             select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
@@ -1145,9 +1180,9 @@
 
                             select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
                         });
-                       
+
                         if (selectudertype == "10") {
-                            $("#_status").val("3");                          
+                            $("#_status").val("3");
                         } else if (selectudertype == "4") {
                             $("#_status").val("1");
 
@@ -1155,8 +1190,8 @@
                             $("#_status").val("4");
 
                         }
-                      
-                    } 
+
+                    }
                 });
                 $.ajax({
                     url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
@@ -1166,14 +1201,14 @@
                     type: "POST",
                     dataType: "JSON",
                     success: function (data) {
-                      
+
                         var select = $("#_stesare");
                         select.children().remove();
-                     
+
                         $(data).each(function (index, item) {
-                          
+
                                 select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
-                            
+
                         });
                         $("#_stesare").val('10');
                     }
@@ -1190,11 +1225,28 @@
                         select.children().remove();
                         select.append($("<option>").val("99").text("เลือก Status ที่ต้องการ"));
                         $(data).each(function (index, item) {
-                          
-                                select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
-                           
+                            select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
                         });
-
+                    }
+                });
+                //สถานะ PM
+                $.ajax({
+                    url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
+                    data: {
+                        Name: 28
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        var select = $("#_pmtstus");
+                        select.children().remove();
+                        select.append($("<option>").val("99").text("เลือกสถานะอนุมัติ/Final judgement"));
+                        $(data).each(function (index, item) {
+                            if (item.CODE != '0' && item.CODE != '3') {
+                                select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                            }
+                        });
+                        //  var CUSCODt = $("#CUSCOD option:selected").text();
                     }
                 });
                 function splitval(_val) {
@@ -1204,7 +1256,7 @@
                     return _splito[0];
                 }
                 $("#_btnsearch").click(function () {
-                  
+
                     var slmcod = $("#slmcod").val();
                     var claimnokey = $("#_cliamno").val();
                     var company = $("#_company").val();
@@ -1233,7 +1285,7 @@
                     var proceedtofter = $("#_proceedtofter").val();
                     var statusprint = $("#_statusprint").val();
                     var cktyp = $("#_udertype").val();
-                   
+
                     // $("#_btnprint").css("display", "block");
                     if (status == "4") {
                         if(statdate == "" | enddate == "") {
@@ -1242,7 +1294,7 @@
                             $("#myModalWarning").modal();
                             return false;
                         }
-                      
+
                     }
 
                     if (cktyp == "10") {
@@ -1255,23 +1307,23 @@
                               //else {
                               //    $("#_btnprint").css("display", "none");
                               //}
-                   
+
                             GetRtline(slmcod, claimnokey, company, cusno,itemno, stkgrp, statdate, enddate, statusrt, statdatepm, enddatepm, statuspm, staturec, status, statuswh, proceedtofter, statusprint,cktyp)
                        // } else {
                           //  $("#_btnprint").css("display", "none");
                             //GetRtline(slmcod, claimnokey, company, cusno,itemno, stkgrp, statdate, enddate, statusrt, statdatepm, enddatepm, statuspm, staturec, status, statuswh, proceedtofter, statusprint, cktyp)
                         //}
-                           
+
                     } else {
-               
+
                        $("#_btnprint").css("display", "none");
                         GetRtline(slmcod, claimnokey, company, cusno,itemno, stkgrp, statdate, enddate, statusrt, statdatepm, enddatepm, statuspm, staturec, status, statuswh, proceedtofter, statusprint, cktyp)
                     }
-                   
+
 
                 });
                 function GetRtline(slmcod, claimnokey, company, cusno, itemno, stkgrp, statdate, enddate, statusrt, statdatepm, enddatepm, statuspm, staturec, status, statuswh, proceedtofter, statusprint, cktyp) {
-                  
+
                     var valslmcod = slmcod;
                     var valclaimnokey = claimnokey;
                     var valcompany = company;
@@ -1291,8 +1343,8 @@
                     var valstatusprint = statusprint;
                     var valcktyp = cktyp
                     var ustyp = $('#_udertype').val();
-                   
-                 
+
+
                    // waitingDialog.show();
                     $('#fixed-table-container-2 tbody:last-child').html("");
                     $.ajax({
@@ -1316,7 +1368,7 @@
                             inproceedtofter :valproceedtofter,
                             instatusprint :valstatusprint,
                             incktyp: valcktyp,
-                            
+
                         },
                         type: "POST",
                         dataType: "JSON",
@@ -1331,11 +1383,11 @@
                                     var staspm = data.Getdata[i].val.PM_APPRV_STATUS;
                                     var stasadmin = data.Getdata[i].val.STMP_ADMIN;
                                     var sta = data.Getdata[i].val.STMP_STATUS;
-                                  
+
                                     if (sta != "5") {
                                         SubmithtmlPage = '<tr   fax="1" statuscenter="' + sta + '" cmno="' + data.Getdata[i].val.STMP_ID + '"  foc="' + data.Getdata[i].val.STMP_ID_SUB + '" >';
                                     } else {
-                                       
+
                                         SubmithtmlPage = '<tr class="table-warning" fax="1" statuscenter="' + sta + '" cmno="' + data.Getdata[i].val.STMP_ID + '" foc="' + data.Getdata[i].val.STMP_ID_SUB + '" >';
                                     }
                                         // if (_BtnApp == "2") {
@@ -1399,12 +1451,12 @@
                                                     SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
                                                     SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;" title="ไม่อนุมัติ"></span></td>';
                                                 }
-                                               
+
                                             } else if (stasmsup == "2") {
                                                 SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;" title="ไม่อนุมัติ"></span></td>';
                                                 SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;" title="ไม่อนุมัติ"></span></td>';
                                             }
-                                           
+
                                             SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"></span></td>';
                                             SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"></span></td>';
                                         }
@@ -1415,8 +1467,8 @@
                                         SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
                                         SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
                                     }
-                                                                      
-                                  //  SubmithtmlPage += '</tr>';                                
+
+                                  //  SubmithtmlPage += '</tr>';
                                     SubmithtmlPage += '</tr>';
                                     $('#fixed-table-container-2  tbody:last-child').append(SubmithtmlPage);
                                 }
@@ -1447,7 +1499,7 @@
 
                         $("#refrompredeli").attr("req_no", nokey);
                         $("#refrompredeli").attr("clm_no_sub", nosubkey);
-                    }                   
+                    }
                     if(udertype == "10"){
                         //if (_chk != "1") {
                            // $("#btnprintlabal").css("display", "none");
@@ -1491,11 +1543,11 @@
                             }
                             if (_udertype == "Sales") {
                                 udertype = 'SALES';
-                            } 
+                            }
 
 
                             if (nokey != "") {
-                               
+
                                 var wi = window.open("../Report/frmRequestConfirmRT.aspx?ClmNUM=" + btoa(nokey));
                                 wi.focus();
                                 $("#myModalconfrimprint").modal("hide");
@@ -1517,7 +1569,7 @@
                 //$("#_status").change(function () {
                 //    var cktyp = $("#_udertype").val();
                 //    var status = $(this).val();
-                  
+
                 //    var statuswh = $("#_statusclaimdisplay").val();
                 //    if (cktyp == "10") {
                 //        if (status == "3" && statuswh == "1" ) {
@@ -1533,7 +1585,7 @@
                 //    var cktyp = $("#_udertype").val();
                 //    var statuswh = $(this).val();
                 //    var status = $("#_status").val();
-                   
+
                 //    if (cktyp == "10") {
                 //        if (status == "3" && statuswh == "1") {
                 //             $("#_btnprint").css("display", "block");
@@ -1607,7 +1659,7 @@
                         return false;
                     }
 
-                   
+
                     console.log(strin);
                     if (strin != "") {
                         $.ajax({
@@ -1757,12 +1809,12 @@
                 }
                 $("#linkprocess").on("click", function () {
                     var _usertype = $("#_udertype").val();
-                 
+
                     var claimno = $("#keyonex").val();
                     var claimsupno = $("#keytwox").val();
-                   
-                 
-                 
+
+
+
                    // var statuPm = $(this).attr('staspm');
                    // if (_usertype == "1" && _usertype != "5") {
                        // if (statuclm != "7") {
@@ -1784,6 +1836,7 @@
                     var incompany = $(this).attr('company');
                     var instaspm = $(this).attr('staspm');
                     var statuscenter = $(this).attr('statuscenter');
+                    var statuspm = "";
                     $('#spinnerModal').modal('show');
                   if (usetyp == "10") {
                         $.ajax({
@@ -1806,23 +1859,23 @@
                                         // modal()
                                         $('#modalconfirmProcess').modal('show');
                                     }
-                                    
+
                                 }
                             }
                         });
                     }
-                    
+
                     $.ajax({
                         url: '@Url.Action("Getsalesreturndetail", "GetdataCenter")',
                         data: {
                             indoc: indoc,
                             indocsup: indocsup,
-                   
+
                         },
                         type: "POST",
                         dataType: "JSON",
                         success: function (data) {
-                            console.log(data.Getdata)                   
+                            console.log(data.Getdata)
                             if (data.Getdata.length > 0) {
                                 $("#myDIV").css('display', 'block');
                                 $("#myDIV4").css('display', 'block');
@@ -1845,17 +1898,23 @@
                                 $("#_claimnosub").text(data.Getdata[0].val.STMP_ID_SUB);
                                 $("#_produc").text(data.Getdata[0].val.PROD + '/' + data.Getdata[0].val.PRODNAM);
                                 statussup = data.Getdata[0].val.SMSUP_APPRV_STATUS;
+                                statuspm = data.Getdata[0].val.PM_APPRV_STATUS;
                                 if (statussup == "1") {
-                                
                                     // $("#_pmtstus").val(data.Getdata[0].val.SMSUP_APPRV_STATUS)
                                     $("#_pmtstus").val("1");
                                     $("#_pmdate").val(data.Getdata[0].val.SMSUP_APPRV_DATE);
                                     $("#remakepm").val(data.Getdata[0].val.SMSUP_REMARK);
-                                    $("#_btnsaveapprove").css("display", "none");                               
+                                    $("#_btnsaveapprove").css("display", "none");
                                 }else{
                                     $("#_btnsaveapprove").css("display", "block");
                                 }
-                           
+                                //สถานะ PM อนุมัติ
+                                if (statuspm != 0) {
+                                    $("#_pmtstus").val(data.Getdata[0].val.PM_APPRV_STATUS);
+                                    $("#_pmdate").val(data.Getdata[0].val.PM_APPRV_DATE);
+                                    $("#remakepm").val(data.Getdata[0].val.PM_REMARK);
+                                }
+
                                 $.ajax({
                                     url: '@Url.Action("Getdatahis_Date_2year", "GetdataCenter")',
                                     data: {
@@ -1902,7 +1961,7 @@
                     var No = $(this).attr('cmno');
                     $("#keyone").val(No)
                     if (typeof No != 'undefined' || No != null) {
-                       
+
                         $.ajax({
                             url: '@Url.Action("Getsalesreturndetail", "Process_Rt")',
                             data: {
@@ -1934,22 +1993,22 @@
 
                                     $('#_proceedtowh').val(data.Getdata[0].val.STMP_RCVSTATUS);
                                     $('#_rcvbyte').val(data.Getdata[0].val.STMP_ADMIN);
-                                    $('#_rcvdatetec').val(data.Getdata[0].val.STMP_ADMIN_REQ_DATE);                                 
+                                    $('#_rcvdatetec').val(data.Getdata[0].val.STMP_ADMIN_REQ_DATE);
                                     $('#causeclaimtec').val(data.Getdata[0].val.Remake_Admin);
                                     $('#_adminwh').val(data.Getdata[0].val.STMP_ADMIN);
                                     var fixedTable3 = fixTable(document.getElementById('fixed-table-container-3'));
                                 }else{
-                                                                       
+
                                     //$("#textAlertWarningmes").empty();
                                     //$("#textAlertWarningmes").text("ไม่มีข้อมูล");
                                     //$("#myModalWarning").modal();
                                 }
-                            
+
                                 var fixedTable3 = fixTable(document.getElementById('fixed-table-container-3'));
                             }
                         });
 
-                       
+
                     }
 
                     var nokey = $(this).attr('cmno');
@@ -2019,9 +2078,9 @@
                             }
                         }
                     });
-                    
-                    
-                   
+
+
+
                     $("#keyonex").val(indoc)
                     $("#keytwox").val(indocsup)
                 });
@@ -2072,7 +2131,7 @@
                 $("#myDIV").css('display', 'none');
                 $("#myDIV4").css('display', 'none');
             });
-            
+
         </script>
      </body>
 </html>

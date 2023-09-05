@@ -1621,7 +1621,7 @@
                     inDOC: valDoc,
                     inCOM: valcom,
                     inSTATS: valststus,
-                    instkgrp: valstkgrp,
+                    instkgrp: (valstkgrp == null) ? 'ALL' : valstkgrp,
                     instatdate: valstatdate,
                     inenddate: valenddate,
                     instatdatecus: valstatdatecus,
@@ -1816,16 +1816,14 @@
                         } else if (statuspm == "1" || statuspm == "2") {
                             $("#_btnsaveapprove").css("display", "none");
                         }
-                        if (statuspm == "1") {
-
+                        if (statuspm != 0) {
                             // $("#_pmtstus").val(data.Getdata[0].val.SMSUP_APPRV_STATUS)
                             $("#_pmtstus").val(data.Getdata[0].val.PM_APPRV_STATUS);
                             $("#_pmdate").val(data.Getdata[0].val.PM_APPRV_DATE);
                             $("#remakepm").val(data.Getdata[0].val.PM_REMARK);
                             $("#_btnsaveapprove").css("display", "none");
-
-
-                        } else if (statussup == "1") {
+                        }
+                        if (statussup == "1") {
                             $("#_btnsaveapprove").css("display", "block");
                         }
 
@@ -2094,18 +2092,11 @@
             var pmtstus = $("#_pmtstus").val(); //สถานะอนุมัติ
             var pmremake = $("#remakepm").val();
             var userlogin = $("#_uderlogin").val();
-
-
-
             if (pmtstus == "99") {
-
-
-                    $("#textAlertWarning").empty();
-                    $("#textAlertWarning").text("เลือกผลการอนุมัติคืนสินค้า");
-                    $("#myModalWarning").modal(); return false;
-
+                $("#textAlertWarning").empty();
+                $("#textAlertWarning").text("เลือกผลการอนุมัติคืนสินค้า");
+                $("#myModalWarning").modal(); return false;
             }
-
             $.ajax({
                 url: '@Url.Action("SaveProcessClaimDetailPM", "ProcessApproveRT")',
                 data: {
@@ -2116,7 +2107,6 @@
                     aj_PM_REMARK: pmremake,
                     aj_PM_APPRV_DATE: pmdate,
                     aj_userlogin: userlogin,
-
                 },
                 type: "POST",
                 dataType: "JSON",
