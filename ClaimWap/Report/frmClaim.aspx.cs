@@ -139,12 +139,12 @@ namespace ClaimWap.Report
             Response.Clear();
             Response.ContentType = mimeType;
             //Response.AddHeader("content-disposition", "attachment; filename=rptClaim"+ "." + fileNameExtension);
-            Response.AddHeader("content-disposition", "attachment; filename=rptClaim" + Cus+"-"+ slm+"." + fileNameExtension);
+            Response.AddHeader("content-disposition", "attachment; filename=rptClaim" + SubDoc + "-" + Cus +"-"+ slm+"." + fileNameExtension);
             Response.BinaryWrite(renderedBytes);
 
 
            //string path = (Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)) + @"\Downloads\rptClaim" +  ".pdf";
-           string path = (Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)) + @"\Downloads\rptClaim" + Cus + "-" + slm +".pdf";
+           string path = (Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)) + @"\Downloads\rptClaim" + SubDoc + "-" + Cus + "-" + slm +".pdf";
             //WebClient client = new WebClient();
             // Byte[] buffer = client.DownloadData(path);
             System.IO.File.Delete(path);

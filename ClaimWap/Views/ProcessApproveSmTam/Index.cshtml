@@ -318,6 +318,12 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
+                        <span> <i class="fa fa-pencil"></i>SlmCod:</span>
+                        <select class="bar" id="slmcod"></select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
                         <span> <i class="fa fa-user"></i> Product Manager:</span>
                         <span>
                             <select class="bar" id="_PM"></select>
@@ -836,8 +842,8 @@
                         </table>
                     </div>
                 </div>
-              
-              
+
+
                 @*ตรวจสอบรับสินค้าเคลม*@
                 <div class="card-header">
                     <i class="fa fa-table"></i>ตรวจสอบรับสินค้าเคลม/Check pick claim part <li id="clickme4" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
@@ -900,9 +906,9 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 @*<span> <i class="fa fa-pencil"></i> UOM:</span>
-                        <span>
-                            <input type="text" id="_rcuom" />
-                        </span>*@
+                                    <span>
+                                        <input type="text" id="_rcuom" />
+                                    </span>*@
                             </div>
                         </div>
                     </div>
@@ -937,9 +943,9 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 @*<span> <i class="fa fa-calendar"></i> วันที่ตรวจสอบ:</span>
-                        <span>
-                            <input type="date" data-date-format="dd/mm/yy" id="_datechecktec" />
-                        </span>*@
+                                    <span>
+                                        <input type="date" data-date-format="dd/mm/yy" id="_datechecktec" />
+                                    </span>*@
                             </div>
                         </div>
                     </div>
@@ -1291,13 +1297,13 @@
                         </div>
                     </div>
                     @*<div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
+                            <div class="col-md-6">
+                                <div class="form-group">
 
-                        <button class="btn-info" id="_btnsaveapprove">บันทึกผล</button>
-                    </div>
-                </div>
-            </div>*@
+                                    <button class="btn-info" id="_btnsaveapprove">บันทึกผล</button>
+                                </div>
+                            </div>
+                        </div>*@
                 </div>
                 @*saleman อนุมัติ*@
                 <div class="card-header bg-head-work">
@@ -1546,7 +1552,7 @@
 
 
             $(document).ready(function () {
-                $('#_anlysstatustecpm_pm').attr('disabled', true);  
+                $('#_anlysstatustecpm_pm').attr('disabled', true);
                 $('#_anlysstatus_sm').attr('disabled', true);
                 $('#_pmtstus_pm').attr('disabled', true);
 
@@ -1585,6 +1591,23 @@
                         }
                     });
                 }
+                //get slmcod
+                $.ajax({
+                    url: '@Url.Action("Getdateslm","GetdataCenter")',
+                    data: {
+                        UserId: Userlogin
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        var select = $("#slmcod");
+                        select.children().remove();
+                        //select.append($("<option>").val("ALL").text("ALL"));
+                        $(data).each(function (index, item) {
+                            select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
+                        });
+                    }
+                });
                 @*$.ajax({
                     url: '@Url.Action("Getdatastkgrp", "GetdataCenter")',
                     data: {
@@ -1637,8 +1660,7 @@
                 $('#_scrapdatetec1').val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
                 $('#_appdatetec').val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
                 $('#_pmdate').val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
-
-                // getdate()
+                //get status
                 $.ajax({
                     url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
                     data: {
@@ -1682,7 +1704,7 @@
                 document.getElementById('_duedatetec').value = someFormattedDate;
             }
 
-            //CheckUsrClmStaff()
+            CheckUsrClmStaff()
             function CheckUsrClmStaff() {
                 var userlog = $("#_uderlogin").val();
                 $.ajax({
@@ -1696,14 +1718,8 @@
                         //LoadingShow();
                     },
                     success: function (data) {
-
                         $("#_udertype").val(data.UsrClmStaff);
-
                         var type = $("#_udertype").val();
-
-                        //alert("vvvv"+type)
-                        //if (type == "3") {
-
                         $("#_status").val("9");
 
                         var UserId = $("#_uderlogin").val();
@@ -1735,15 +1751,15 @@
                                 var valstatdatecus = $("#_statdate").val();
                                 var valenddatecus = $("#_enddate").val();
                                 var itemno = $("#_itemnosearch").val();
+                                var slmcod = $("#slmcod option:selected").val();
                                 //get stkgrp
                                 getStkByPm(valpm);
-
                                 if (itemno != "") {
                                     itemno = splitval(itemno);
                                 } else {
                                     itemno = "";
                                 }
-                                Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdate, valenddate)
+                                Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdate, valenddate, slmcod)
                             }
                         });
 
@@ -2053,14 +2069,14 @@
 
                         select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
                     });
-                    
+
                     var select = $("#_anlysstatustecpm_pm");
                     select.children().remove();
                     // select.append($("<option>").val("0").text("เลือกCUSCOD"));
                     $(data).each(function (index, item) {
 
                         select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
-                    });       
+                    });
                     //Saleman view
                     var select = $("#_anlysstatus_sm");
                     select.children().remove();
@@ -2182,12 +2198,13 @@
                 var valstatdatecus = $("#_statdatecus").val();
                 var valenddatecus = $("#_enddatecus").val();
                 var itemno = $("#_itemnosearch").val();
+                var slmcod = $("#slmcod option:selected").val();
                 if (itemno != "") {
                     itemno = splitval(itemno);
                 } else {
                     itemno = "";
                 }
-                Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus)
+                Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus, slmcod)
             });
             $("#_btnsearchclaimno").on("click", function () {
                 //var claimnokey = $(this).val();
@@ -2198,7 +2215,8 @@
                 var valcom = $("#_company").val();
                 //  GetClimtemp(claimnokey)
                 var valstkgrp = $("#_stkgrp").val();
-                Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp)
+                var slmcod = $("#slmcod option:selected").val();
+                Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, '', '', '', '', '', slmcod)
             });
 
             $("#searchclaimno").on("keyup", function (e) {
@@ -2213,6 +2231,8 @@
                 var valstatdatecus = $("#_statdatecus").val();
                 var valenddatecus = $("#_enddatecus").val();
                 var itemno = $("#_itemnosearch").val();
+                var slmcod = $("#slmcod option:selected").val();
+
                 if (itemno != "") {
                     itemno = splitval(itemno);
                 } else {
@@ -2220,8 +2240,32 @@
                 }
 
                 if (e.keyCode == 13) {
-                    Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus)
+                    Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus, slmcod)
                 }
+            });
+            //slm change
+             $("#slmcod").on("change", function (e) {
+                var valpm = $("#_PM").val();
+                var valststus = $("#_status").val();
+                var valDoc = $("#searchclaimno").val();
+                var valcom = $("#_company").val();
+                var valstkgrp = $("#_stkgrp").val();
+                var valstatdate = $("#_statdate").val();
+                var valenddate = $("#_enddate").val();
+                var valstatdatecus = $("#_statdate").val();
+                var valenddatecus = $("#_enddate").val();
+                 var itemno = $("#_itemnosearch").val();
+                 var slmcod = $("#slmcod option:selected").val();
+
+                //get stkgrp
+                getStkByPm(valpm);
+
+                if (itemno != "") {
+                    itemno = splitval(itemno);
+                } else {
+                    itemno = "";
+                }
+                 Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus, slmcod)
             });
 
             $("#_PM").on("change", function (e) {
@@ -2230,7 +2274,6 @@
                 $("#subNospan").text("");
                 $("#_cusno").text("");
                 $("#_cusname").text("");
-                $("#slmcod").text("");
                 $("#sslmnam").text("");
                 $("#_itemno").text("");
                 $("#_description").text("");
@@ -2294,6 +2337,7 @@
                 var valstatdatecus = $("#_statdate").val();
                 var valenddatecus = $("#_enddate").val();
                 var itemno = $("#_itemnosearch").val();
+                var slmcod = $("#slmcod option:selected").val();
                 //get stkgrp
                 getStkByPm(valpm);
 
@@ -2302,7 +2346,7 @@
                 } else {
                     itemno = "";
                 }
-                Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus)
+                Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus, slmcod)
             });
             $("#_company").on("change", function (e) {
                 var valpm = $("#_PM").val();
@@ -2315,12 +2359,13 @@
                 var valstatdatecus = $("#_statdate").val();
                 var valenddatecus = $("#_enddate").val();
                 var itemno = $("#_itemnosearch").val();
+                var slmcod = $("#slmcod option:selected").val();
                 if (itemno != "") {
                     itemno = splitval(itemno);
                 } else {
                     itemno = "";
                 }
-                Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus)
+                Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus, slmcod)
             });
             $("#_stkgrp").on("change", function (e) {
                 var valpm = $("#_PM").val();
@@ -2333,12 +2378,14 @@
                 var valstatdatecus = $("#_statdate").val();
                 var valenddatecus = $("#_enddate").val();
                 var itemno = $("#_itemnosearch").val();
+                var slmcod = $("#slmcod option:selected").val();
+
                 if (itemno != "") {
                     itemno = splitval(itemno);
                 } else {
                     itemno = "";
                 }
-                Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus)
+                Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus, slmcod)
             });
             $("#_status").on("change", function (e) {
                 var valpm = $("#_PM").val();
@@ -2351,15 +2398,17 @@
                 var valstatdatecus = $("#_statdate").val();
                 var valenddatecus = $("#_enddate").val();
                 var itemno = $("#_itemnosearch").val();
+                var slmcod = $("#slmcod option:selected").val();
+
                 if (itemno != "") {
                     itemno = splitval(itemno);
                 } else {
                     itemno = "";
                 }
-                Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus)
+                Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus, slmcod)
             });
             //ค้นหาข้อมูล Saleman
-            function Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus) {
+            function Getclmimpm(valpm, valststus, valDoc, valcom, valstkgrp, valstatdate, valenddate, itemno, valstatdatecus, valenddatecus, slmcod) {
                 clearval()
                 if (valststus == null) {
                     valststus = "9";
@@ -2367,166 +2416,172 @@
                 if(valstkgrp == "" || valstkgrp == null){
                     valstkgrp = "ALL";
                 }
-                //alert(valststus);
-                $.ajax({
-                    url: '@Url.Action("GetClimdataSm", "GetdataCenter")',
-                    data: {
-                        inUser: userId,
-                        inPM: valpm,
-                        inDOC: valDoc,
-                        inCOM: valcom,
-                        inSTATS: valststus,
-                        instkgrp: valstkgrp,
-                        instatdate: valstatdate,
-                        inenddate: valenddate,
-                        instatdatecus: valstatdatecus,
-                        inenddatecus: valenddatecus,
-                        initem: itemno
-                    },
-                    type: "POST",
-                    dataType: "JSON",
-                    beforeSend : function(){
-                        LoadingShow();
-                    },
-                    success: function (data) {
-                        // console.log(data);
-                        $('#fixed-table-container-2  tbody:last-child').html("");
-                        if (data.Getdata.length > 0) {
+                console.log("slmcod before = " + slmcod);
+                setTimeout(function () {
+                    if (slmcod == '' || slmcod == null || slmcod === undefined) {
+                        slmcod = $("#slmcod option:selected").val();
+                    }
+                    console.log("slmcod = " + slmcod);
+                    $.ajax({
+                        url: '@Url.Action("GetClimdataSm", "GetdataCenter")',
+                        data: {
+                            inUser: slmcod,
+                            inPM: valpm,
+                            inDOC: valDoc,
+                            inCOM: valcom,
+                            inSTATS: valststus,
+                            instkgrp: valstkgrp,
+                            instatdate: valstatdate,
+                            inenddate: valenddate,
+                            instatdatecus: valstatdatecus,
+                            inenddatecus: valenddatecus,
+                            initem: itemno
+                        },
+                        type: "POST",
+                        dataType: "JSON",
+                        beforeSend : function(){
+                            LoadingShow();
+                        },
+                        success: function (data) {
+                            // console.log(data);
+                            $('#fixed-table-container-2  tbody:last-child').html("");
+                            if (data.Getdata.length > 0) {
 
-                            var SubmithtmlPage = '';
-                            var ADMIN_ANLYS_STATUS = '';
-                            var TECH1_PROCESS_STATUS = '';
-                            var TECH2_PROCESS_STATUS = '';
-                            var TECH2_ANLYS_STATUS = '';
-                            var PM_PROCESS_STATUS = '';
-                            var CLM_STATUS = '';
-                            var _BtnApp = '';
-                            for (var i = 0; i < data.Getdata.length; i++) {
-                                ADMIN_ANLYS_STATUS = data.Getdata[i].val.ADMIN_ANLYS_STATUS;
-                                TECH1_PROCESS_STATUS = data.Getdata[i].val.TECH1_PROCESS_STATUS;
-                                TECH2_PROCESS_STATUS = data.Getdata[i].val.TECH2_PROCESS_STATUS;
-                                TECH2_ANLYS_STATUS = data.Getdata[i].val.TECH2_ANLYS_STATUS;
-                                PM_PROCESS_STATUS = data.Getdata[i].val.PM_PROCESS_STATUS;
-                                CLM_STATUS = data.Getdata[i].val.CLM_STATUS;
-                                _BtnApp = data.Getdata[i].val.F_BtnApp;
-                                SM_PROCESS_STATUS = data.Getdata[i].val.SM_PROCESS_STATUS;
-                                GM_PROCESS_STATUS = data.Getdata[i].val.GM_PROCESS_STATUS;
-                                //alert(_BtnApp)
-                                SubmithtmlPage = '<tr   fax="1"   cmno="' + data.Getdata[i].val.CLM_ID + '"  foc="' + data.Getdata[i].val.CLM_FOC + '"  tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '"  cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_REQQTY + '" worktimeup="' + data.Getdata[i].val.CLM_USEDAY + '"invoicenoeup="' + data.Getdata[i].val.CLM_INVNO + '" invoicedete = "' + data.Getdata[i].val.CLM_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '">';
-                                if (_BtnApp == "2") {
-                                    SubmithtmlPage += '<td style="color: blue;text-decoration: underline;font-weight: bold;cursor:pointer;" id="xxx" fax="1" cmno="' + data.Getdata[i].val.CLM_ID + '" foc="' + data.Getdata[i].val.CLM_FOC + '" tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '"  perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '"  cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_REQQTY + '" worktimeup="' + data.Getdata[i].val.CLM_USEDAY + '"invoicenoeup="' + data.Getdata[i].val.CLM_INVNO + '" invoicedete = "' + data.Getdata[i].val.CLM_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '" rcvdate= "' + data.Getdata[i].val.CLM_RCVDATE + '"rcvby= "' + data.Getdata[i].val.CLM_RCVBY + '">' + data.Getdata[i].val.CLM_NO_SUB + '</td>';
-                                } else {
-                                    SubmithtmlPage += '<td style="color: blue;text-decoration: underline;font-weight: bold;cursor:pointer;" id="xxx" fax="1" cmno="' + data.Getdata[i].val.CLM_ID + '" foc="' + data.Getdata[i].val.CLM_FOC + '" tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '"  perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '"  cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_REQQTY + '" worktimeup="' + data.Getdata[i].val.CLM_USEDAY + '"invoicenoeup="' + data.Getdata[i].val.CLM_INVNO + '" invoicedete = "' + data.Getdata[i].val.CLM_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '" rcvdate= "' + data.Getdata[i].val.CLM_RCVDATE + '"rcvby= "' + data.Getdata[i].val.CLM_RCVBY + '">' + data.Getdata[i].val.CLM_NO_SUB + '   <span class="fa fa-edit gi-3x"></span></td>';
-                                }
-                                // SubmithtmlPage += '<td><button type="reset" id="delclmtemp" style="min-width: 50px;"  clmID="' + data.Getdata[0].val.CLM_ID + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '">X</button></td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_Ref + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + "<br>" + data.Getdata[i].val.STKDES + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UOM + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.STKGRP + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_REQQTY + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_ORG + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_PASS + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_REJECT + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CUSCOD + "/<br>" + data.Getdata[i].val.CUSNAM + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.SLMCOD + "/<br>" + data.Getdata[i].val.SLMNAM + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_INVNO + "<br>" + data.Getdata[i].val.CLM_INVDATE + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.Requestdatecus + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_DATE + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.Requestdate + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_CAUSE + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.PERFORMDESCRIPTION + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.TECH1ANLYSSTATUDESCRIPTION + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_USEDAY + '</td>';
-                                // SubmithtmlPage += '<td>xxxxx</td>';
-                                //SubmithtmlPage += '<td>' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '</td>';
-                                //alert(TECH2_ANLYS_STATUS)
+                                var SubmithtmlPage = '';
+                                var ADMIN_ANLYS_STATUS = '';
+                                var TECH1_PROCESS_STATUS = '';
+                                var TECH2_PROCESS_STATUS = '';
+                                var TECH2_ANLYS_STATUS = '';
+                                var PM_PROCESS_STATUS = '';
+                                var CLM_STATUS = '';
+                                var _BtnApp = '';
+                                for (var i = 0; i < data.Getdata.length; i++) {
+                                    ADMIN_ANLYS_STATUS = data.Getdata[i].val.ADMIN_ANLYS_STATUS;
+                                    TECH1_PROCESS_STATUS = data.Getdata[i].val.TECH1_PROCESS_STATUS;
+                                    TECH2_PROCESS_STATUS = data.Getdata[i].val.TECH2_PROCESS_STATUS;
+                                    TECH2_ANLYS_STATUS = data.Getdata[i].val.TECH2_ANLYS_STATUS;
+                                    PM_PROCESS_STATUS = data.Getdata[i].val.PM_PROCESS_STATUS;
+                                    CLM_STATUS = data.Getdata[i].val.CLM_STATUS;
+                                    _BtnApp = data.Getdata[i].val.F_BtnApp;
+                                    SM_PROCESS_STATUS = data.Getdata[i].val.SM_PROCESS_STATUS;
+                                    GM_PROCESS_STATUS = data.Getdata[i].val.GM_PROCESS_STATUS;
+                                    //alert(_BtnApp)
+                                    SubmithtmlPage = '<tr   fax="1"   cmno="' + data.Getdata[i].val.CLM_ID + '"  foc="' + data.Getdata[i].val.CLM_FOC + '"  tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '"  cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_REQQTY + '" worktimeup="' + data.Getdata[i].val.CLM_USEDAY + '"invoicenoeup="' + data.Getdata[i].val.CLM_INVNO + '" invoicedete = "' + data.Getdata[i].val.CLM_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '">';
+                                    if (_BtnApp == "2") {
+                                        SubmithtmlPage += '<td style="color: blue;text-decoration: underline;font-weight: bold;cursor:pointer;" id="xxx" fax="1" cmno="' + data.Getdata[i].val.CLM_ID + '" foc="' + data.Getdata[i].val.CLM_FOC + '" tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '"  perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '"  cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_REQQTY + '" worktimeup="' + data.Getdata[i].val.CLM_USEDAY + '"invoicenoeup="' + data.Getdata[i].val.CLM_INVNO + '" invoicedete = "' + data.Getdata[i].val.CLM_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '" rcvdate= "' + data.Getdata[i].val.CLM_RCVDATE + '"rcvby= "' + data.Getdata[i].val.CLM_RCVBY + '">' + data.Getdata[i].val.CLM_NO_SUB + '</td>';
+                                    } else {
+                                        SubmithtmlPage += '<td style="color: blue;text-decoration: underline;font-weight: bold;cursor:pointer;" id="xxx" fax="1" cmno="' + data.Getdata[i].val.CLM_ID + '" foc="' + data.Getdata[i].val.CLM_FOC + '" tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '"  perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '"  cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_REQQTY + '" worktimeup="' + data.Getdata[i].val.CLM_USEDAY + '"invoicenoeup="' + data.Getdata[i].val.CLM_INVNO + '" invoicedete = "' + data.Getdata[i].val.CLM_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '" rcvdate= "' + data.Getdata[i].val.CLM_RCVDATE + '"rcvby= "' + data.Getdata[i].val.CLM_RCVBY + '">' + data.Getdata[i].val.CLM_NO_SUB + '   <span class="fa fa-edit gi-3x"></span></td>';
+                                    }
+                                    // SubmithtmlPage += '<td><button type="reset" id="delclmtemp" style="min-width: 50px;"  clmID="' + data.Getdata[0].val.CLM_ID + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '">X</button></td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_Ref + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + "<br>" + data.Getdata[i].val.STKDES + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UOM + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.STKGRP + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_REQQTY + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_ORG + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_PASS + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_REJECT + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CUSCOD + "/<br>" + data.Getdata[i].val.CUSNAM + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.SLMCOD + "/<br>" + data.Getdata[i].val.SLMNAM + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_INVNO + "<br>" + data.Getdata[i].val.CLM_INVDATE + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.Requestdatecus + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_DATE + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.Requestdate + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_CAUSE + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.PERFORMDESCRIPTION + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.TECH1ANLYSSTATUDESCRIPTION + '</td>';
+                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_USEDAY + '</td>';
+                                    // SubmithtmlPage += '<td>xxxxx</td>';
+                                    //SubmithtmlPage += '<td>' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '</td>';
+                                    //alert(TECH2_ANLYS_STATUS)
 
-                                if (CLM_STATUS != "7") {
-                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '</td>';
-                                    if (ADMIN_ANLYS_STATUS == "0") {
-                                        SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รอการตรวจรับสินค้า"></span></td>';
-                                    } else if (ADMIN_ANLYS_STATUS == "1") {
-                                        SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="ตรวจรับสินค้าเรียบร้อย"></span></td>';
-                                    }
-                                    if (TECH1_PROCESS_STATUS == "0") {
-                                        SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รอการตรวจสอบ"></span></td>';
-                                    } else if (TECH1_PROCESS_STATUS == "1") {
-                                        SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="ตรวจสอบเรียบร้อย"></span></td>';
-                                    }
-                                    if (TECH2_ANLYS_STATUS == "0") {
-                                        SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รอการพิจารณา"></span></td>';
-                                    } else if (TECH2_ANLYS_STATUS == "1") {
-                                        SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="พิจารณาเรียบร้อย"></span></td>';
-                                    }
-                                    else if (TECH2_ANLYS_STATUS == "2") {
-                                        SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่ผ่านการพิจารณา"></span></td>';
-                                    }
-                                    else if (TECH2_ANLYS_STATUS == "3") {
-                                        SubmithtmlPage += '<td><span class="fa fa-hourglass-half gi-4x" style="color: blue;" title="รอประสานงานกับsupplier"></span></td>';
-                                    }
-                                    if (PM_PROCESS_STATUS == "0") {
-                                        SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
-                                    } else if (PM_PROCESS_STATUS == "1") {
-                                        SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
-
-                                    } else if (PM_PROCESS_STATUS == "2") {
-                                        SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
-                                    }
-                                    else if (PM_PROCESS_STATUS == "3") {
-                                        SubmithtmlPage += '<td><span class="fa fa-refresh gi-4x" style="color: red;"title="ตรวจสอบใหม่"></span></td>';
-                                    }
-                                    //TAM
-                                    if (company == 'TAM') {
-                                        //SM
-                                        if (SM_PROCESS_STATUS == "") {
+                                    if (CLM_STATUS != "7") {
+                                        SubmithtmlPage += '<td>' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '</td>';
+                                        if (ADMIN_ANLYS_STATUS == "0") {
+                                            SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รอการตรวจรับสินค้า"></span></td>';
+                                        } else if (ADMIN_ANLYS_STATUS == "1") {
+                                            SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="ตรวจรับสินค้าเรียบร้อย"></span></td>';
+                                        }
+                                        if (TECH1_PROCESS_STATUS == "0") {
+                                            SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รอการตรวจสอบ"></span></td>';
+                                        } else if (TECH1_PROCESS_STATUS == "1") {
+                                            SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="ตรวจสอบเรียบร้อย"></span></td>';
+                                        }
+                                        if (TECH2_ANLYS_STATUS == "0") {
+                                            SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รอการพิจารณา"></span></td>';
+                                        } else if (TECH2_ANLYS_STATUS == "1") {
+                                            SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="พิจารณาเรียบร้อย"></span></td>';
+                                        }
+                                        else if (TECH2_ANLYS_STATUS == "2") {
+                                            SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่ผ่านการพิจารณา"></span></td>';
+                                        }
+                                        else if (TECH2_ANLYS_STATUS == "3") {
+                                            SubmithtmlPage += '<td><span class="fa fa-hourglass-half gi-4x" style="color: blue;" title="รอประสานงานกับsupplier"></span></td>';
+                                        }
+                                        if (PM_PROCESS_STATUS == "0") {
                                             SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
-                                        } else {
-                                            if (SM_PROCESS_STATUS == "1") {
-                                                SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
-                                            } else if (SM_PROCESS_STATUS == "2") {
-                                                SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                        } else if (PM_PROCESS_STATUS == "1") {
+                                            SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
+
+                                        } else if (PM_PROCESS_STATUS == "2") {
+                                            SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                        }
+                                        else if (PM_PROCESS_STATUS == "3") {
+                                            SubmithtmlPage += '<td><span class="fa fa-refresh gi-4x" style="color: red;"title="ตรวจสอบใหม่"></span></td>';
+                                        }
+                                        //TAM
+                                        if (company == 'TAM') {
+                                            //SM
+                                            if (SM_PROCESS_STATUS == "") {
+                                                SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                            } else {
+                                                if (SM_PROCESS_STATUS == "1") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
+                                                } else if (SM_PROCESS_STATUS == "2") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                                }
+                                            }
+                                            //GM
+                                            if (GM_PROCESS_STATUS == "") {
+                                                SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
+                                            } else {
+                                                if (GM_PROCESS_STATUS == "1") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
+                                                } else if (GM_PROCESS_STATUS == "2") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
+                                                }
                                             }
                                         }
-                                        //GM
-                                        if (GM_PROCESS_STATUS == "") {
-                                            SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รออนุมัติ"></span></td>';
-                                        } else {
-                                            if (GM_PROCESS_STATUS == "1") {
-                                                SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>'
-                                            } else if (GM_PROCESS_STATUS == "2") {
-                                                SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
-                                            }
-                                        }
                                     }
+                                    else {
+
+                                        SubmithtmlPage += '<td style="color:red;">ยกเลิกการเคลม</td>';
+                                        SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
+                                        SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
+                                        SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
+                                        SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
+                                    }
+                                    SubmithtmlPage += '</tr>';
+                                    //$('table #_tbclmline  tbody:last-child').append(SubmithtmlPage);
+                                    // $('#_tbclmline  tbody:last-child').append(SubmithtmlPage
+
+                                    SubmithtmlPage += '</tr>';
+                                    $('#fixed-table-container-2  tbody:last-child').append(SubmithtmlPage);
+
                                 }
-                                else {
-
-                                    SubmithtmlPage += '<td style="color:red;">ยกเลิกการเคลม</td>';
-                                    SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
-                                    SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
-                                    SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
-                                    SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
-                                }
-                                SubmithtmlPage += '</tr>';
-                                //$('table #_tbclmline  tbody:last-child').append(SubmithtmlPage);
-                                // $('#_tbclmline  tbody:last-child').append(SubmithtmlPage
-
-                                SubmithtmlPage += '</tr>';
-                                $('#fixed-table-container-2  tbody:last-child').append(SubmithtmlPage);
-
+                            } else {
+                                $("#textAlertWarning").empty();
+                                $("#textAlertWarning").text("No List approval");
+                                $("#myModalWarning").modal();
+                                //  location.reload();
                             }
-                        } else {
-                            $("#textAlertWarning").empty();
-                            $("#textAlertWarning").text("No List approval");
-                            $("#myModalWarning").modal();
-                            //  location.reload();
-                        }
-                        var fixedTable2 = fixTable(document.getElementById('fixed-table-container-2'));
+                            var fixedTable2 = fixTable(document.getElementById('fixed-table-container-2'));
 
-                    }, complete: function(){
-                        LoadingHide();
-                    },
-                });
+                        }, complete: function(){
+                            LoadingHide();
+                        },
+                    });
+                }, 3000);
             }
 
             $('#_anlysafterprotecpm').change(function () {
@@ -2569,8 +2624,8 @@
 
                 var cusno = $("#_cusno").text();
                 var nokey = $(this).attr('cmno');
-                // $("#_company").attr('disabled', 'disabled');
-                $("#slmcod").attr('disabled', 'disabled');
+                //$("#_company").attr('disabled', 'disabled');
+                //$("#slmcod").attr('disabled', 'disabled');
                 $("#requestby").attr('disabled', 'disabled');
                 $("#requestdate").attr('disabled', 'disabled');
                 $("#_cusno").attr('disabled', 'disabled');
@@ -2607,7 +2662,7 @@
                 //var CLM_RCVDATE = $(this).attr('itemup');
                 $("#_cusno").text(CUSCOD);
                 $("#_cusname").text(CUSNAM);
-                $("#slmcod").text(SLMCOD);
+                //$("#slmcod").text(SLMCOD);
                 $("#sslmnam").text(SLMNAM);
                 //$("#requestby").text(data.Getdata[0].val.CLM_RCVBY);
                 // $("#requestdate").text(data.Getdata[0].val.CLM_RCVDATE);
@@ -3594,7 +3649,7 @@
                             //msg += '<br>' + error + '. Please specify additional notes.';
                             $("#textAlertWarning").empty();
                             $("#textAlertWarning").text("Please specify additional note.");
-                            $("#myModalWarning").modal(); 
+                            $("#myModalWarning").modal();
                             $("#myModalSucces").click(function () {
                                 var select = $("#_PM");
                                 select.children().remove();
@@ -3665,7 +3720,7 @@
                 $("#_cusno").text("");
                 $("#_cusname").text("");
                 $("#requestby").text("");
-                $("#slmcod").text("");
+               // $("#slmcod").text("");
                 $("#sslmnam").text("");
                 $("#requestdate").text("");
                 $("#_itemno").text("");

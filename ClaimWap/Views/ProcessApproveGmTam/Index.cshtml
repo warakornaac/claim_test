@@ -2433,7 +2433,7 @@
                     success: function (data) {
                         // console.log(data);
                         $('#fixed-table-container-2  tbody:last-child').html("");
-                        if (data.Getdata.length > 0) {
+                        if (data.length > 0) {
 
                             var SubmithtmlPage = '';
                             var ADMIN_ANLYS_STATUS = '';
@@ -2443,48 +2443,48 @@
                             var PM_PROCESS_STATUS = '';
                             var CLM_STATUS = '';
                             var _BtnApp = '';
-                            for (var i = 0; i < data.Getdata.length; i++) {
-                                ADMIN_ANLYS_STATUS = data.Getdata[i].val.ADMIN_ANLYS_STATUS;
-                                TECH1_PROCESS_STATUS = data.Getdata[i].val.TECH1_PROCESS_STATUS;
-                                TECH2_PROCESS_STATUS = data.Getdata[i].val.TECH2_PROCESS_STATUS;
-                                TECH2_ANLYS_STATUS = data.Getdata[i].val.TECH2_ANLYS_STATUS;
-                                PM_PROCESS_STATUS = data.Getdata[i].val.PM_PROCESS_STATUS;
-                                CLM_STATUS = data.Getdata[i].val.CLM_STATUS;
-                                _BtnApp = data.Getdata[i].val.F_BtnApp;
-                                SM_PROCESS_STATUS = data.Getdata[i].val.SM_PROCESS_STATUS;
-                                GM_PROCESS_STATUS = data.Getdata[i].val.GM_PROCESS_STATUS;
+                            for (var i = 0; i < data.length; i++) {
+                                ADMIN_ANLYS_STATUS = data[i].val.ADMIN_ANLYS_STATUS;
+                                TECH1_PROCESS_STATUS = data[i].val.TECH1_PROCESS_STATUS;
+                                TECH2_PROCESS_STATUS = data[i].val.TECH2_PROCESS_STATUS;
+                                TECH2_ANLYS_STATUS = data[i].val.TECH2_ANLYS_STATUS;
+                                PM_PROCESS_STATUS = data[i].val.PM_PROCESS_STATUS;
+                                CLM_STATUS = data[i].val.CLM_STATUS;
+                                _BtnApp = data[i].val.F_BtnApp;
+                                SM_PROCESS_STATUS = data[i].val.SM_PROCESS_STATUS;
+                                GM_PROCESS_STATUS = data[i].val.GM_PROCESS_STATUS;
                                 //alert(_BtnApp)
-                                SubmithtmlPage = '<tr   fax="1"   cmno="' + data.Getdata[i].val.CLM_ID + '"  foc="' + data.Getdata[i].val.CLM_FOC + '"  tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '" perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '"  cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_REQQTY + '" worktimeup="' + data.Getdata[i].val.CLM_USEDAY + '"invoicenoeup="' + data.Getdata[i].val.CLM_INVNO + '" invoicedete = "' + data.Getdata[i].val.CLM_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '">';
+                                SubmithtmlPage = '<tr   fax="1"   cmno="' + data[i].val.CLM_ID + '"  foc="' + data[i].val.CLM_FOC + '"  tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '" perfromdes="' + data[i].val.PERFORMDESCRIPTION + '" recstades="' + data[i].val.RCVSTATUSDESCRIPTION + '"  cuscod="' + data[i].val.CUSCOD + '" cusnam="' + data[i].val.CUSNAM + '" slmcod="' + data[i].val.SLMCOD + '"slmnam="' + data[i].val.SLMNAM + '" comup="' + data[i].val.CLM_COMPANY + '" clmnoup="' + data[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data[i].val.CLM_PERFORM + '"  statusclaimup = "' + data[i].val.CLM_RCVSTATUS + '" itemup="' + data[i].val.STKCOD + '"stkdes="' + data[i].val.STKDES + '" uomup="' + data[i].val.CLM_UOM + '" claimqtyup="' + data[i].val.CLM_REQQTY + '" worktimeup="' + data[i].val.CLM_USEDAY + '"invoicenoeup="' + data[i].val.CLM_INVNO + '" invoicedete = "' + data[i].val.CLM_INVDATE + '" causeclaimup = "' + data[i].val.CLM_CAUSE + '">';
                                 if (_BtnApp == "2") {
-                                    SubmithtmlPage += '<td style="color: blue;text-decoration: underline;font-weight: bold;cursor:pointer;" id="xxx" fax="1" cmno="' + data.Getdata[i].val.CLM_ID + '" foc="' + data.Getdata[i].val.CLM_FOC + '" tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '"  perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '"  cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_REQQTY + '" worktimeup="' + data.Getdata[i].val.CLM_USEDAY + '"invoicenoeup="' + data.Getdata[i].val.CLM_INVNO + '" invoicedete = "' + data.Getdata[i].val.CLM_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '" rcvdate= "' + data.Getdata[i].val.CLM_RCVDATE + '"rcvby= "' + data.Getdata[i].val.CLM_RCVBY + '">' + data.Getdata[i].val.CLM_NO_SUB + '</td>';
+                                    SubmithtmlPage += '<td style="color: blue;text-decoration: underline;font-weight: bold;cursor:pointer;" id="xxx" fax="1" cmno="' + data[i].val.CLM_ID + '" foc="' + data[i].val.CLM_FOC + '" tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '"  perfromdes="' + data[i].val.PERFORMDESCRIPTION + '" recstades="' + data[i].val.RCVSTATUSDESCRIPTION + '"  cuscod="' + data[i].val.CUSCOD + '" cusnam="' + data[i].val.CUSNAM + '" slmcod="' + data[i].val.SLMCOD + '"slmnam="' + data[i].val.SLMNAM + '" comup="' + data[i].val.CLM_COMPANY + '" clmnoup="' + data[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data[i].val.CLM_PERFORM + '"  statusclaimup = "' + data[i].val.CLM_RCVSTATUS + '" itemup="' + data[i].val.STKCOD + '"stkdes="' + data[i].val.STKDES + '" uomup="' + data[i].val.CLM_UOM + '" claimqtyup="' + data[i].val.CLM_REQQTY + '" worktimeup="' + data[i].val.CLM_USEDAY + '"invoicenoeup="' + data[i].val.CLM_INVNO + '" invoicedete = "' + data[i].val.CLM_INVDATE + '" causeclaimup = "' + data[i].val.CLM_CAUSE + '" rcvdate= "' + data[i].val.CLM_RCVDATE + '"rcvby= "' + data[i].val.CLM_RCVBY + '">' + data[i].val.CLM_NO_SUB + '</td>';
                                 } else {
-                                    SubmithtmlPage += '<td style="color: blue;text-decoration: underline;font-weight: bold;cursor:pointer;" id="xxx" fax="1" cmno="' + data.Getdata[i].val.CLM_ID + '" foc="' + data.Getdata[i].val.CLM_FOC + '" tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '"  perfromdes="' + data.Getdata[i].val.PERFORMDESCRIPTION + '" recstades="' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '"  cuscod="' + data.Getdata[i].val.CUSCOD + '" cusnam="' + data.Getdata[i].val.CUSNAM + '" slmcod="' + data.Getdata[i].val.SLMCOD + '"slmnam="' + data.Getdata[i].val.SLMNAM + '" comup="' + data.Getdata[i].val.CLM_COMPANY + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data.Getdata[i].val.CLM_PERFORM + '"  statusclaimup = "' + data.Getdata[i].val.CLM_RCVSTATUS + '" itemup="' + data.Getdata[i].val.STKCOD + '"stkdes="' + data.Getdata[i].val.STKDES + '" uomup="' + data.Getdata[i].val.CLM_UOM + '" claimqtyup="' + data.Getdata[i].val.CLM_REQQTY + '" worktimeup="' + data.Getdata[i].val.CLM_USEDAY + '"invoicenoeup="' + data.Getdata[i].val.CLM_INVNO + '" invoicedete = "' + data.Getdata[i].val.CLM_INVDATE + '" causeclaimup = "' + data.Getdata[i].val.CLM_CAUSE + '" rcvdate= "' + data.Getdata[i].val.CLM_RCVDATE + '"rcvby= "' + data.Getdata[i].val.CLM_RCVBY + '">' + data.Getdata[i].val.CLM_NO_SUB + '   <span class="fa fa-edit gi-3x"></span></td>';
+                                    SubmithtmlPage += '<td style="color: blue;text-decoration: underline;font-weight: bold;cursor:pointer;" id="xxx" fax="1" cmno="' + data[i].val.CLM_ID + '" foc="' + data[i].val.CLM_FOC + '" tec1status="' + TECH1_PROCESS_STATUS + '" tec2status="' + TECH2_PROCESS_STATUS + '" pmstatus="' + PM_PROCESS_STATUS + '"  perfromdes="' + data[i].val.PERFORMDESCRIPTION + '" recstades="' + data[i].val.RCVSTATUSDESCRIPTION + '"  cuscod="' + data[i].val.CUSCOD + '" cusnam="' + data[i].val.CUSNAM + '" slmcod="' + data[i].val.SLMCOD + '"slmnam="' + data[i].val.SLMNAM + '" comup="' + data[i].val.CLM_COMPANY + '" clmnoup="' + data[i].val.CLM_NO_SUB + '"  proceedtoup = "' + data[i].val.CLM_PERFORM + '"  statusclaimup = "' + data[i].val.CLM_RCVSTATUS + '" itemup="' + data[i].val.STKCOD + '"stkdes="' + data[i].val.STKDES + '" uomup="' + data[i].val.CLM_UOM + '" claimqtyup="' + data[i].val.CLM_REQQTY + '" worktimeup="' + data[i].val.CLM_USEDAY + '"invoicenoeup="' + data[i].val.CLM_INVNO + '" invoicedete = "' + data[i].val.CLM_INVDATE + '" causeclaimup = "' + data[i].val.CLM_CAUSE + '" rcvdate= "' + data[i].val.CLM_RCVDATE + '"rcvby= "' + data[i].val.CLM_RCVBY + '">' + data[i].val.CLM_NO_SUB + '   <span class="fa fa-edit gi-3x"></span></td>';
                                 }
-                                // SubmithtmlPage += '<td><button type="reset" id="delclmtemp" style="min-width: 50px;"  clmID="' + data.Getdata[0].val.CLM_ID + '" clmnoup="' + data.Getdata[i].val.CLM_NO_SUB + '">X</button></td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_Ref + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.STKCOD + "<br>" + data.Getdata[i].val.STKDES + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_UOM + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.STKGRP + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_REQQTY + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_ORG + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_PASS + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_QTY_REJECT + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CUSCOD + "/<br>" + data.Getdata[i].val.CUSNAM + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.SLMCOD + "/<br>" + data.Getdata[i].val.SLMNAM + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_INVNO + "<br>" + data.Getdata[i].val.CLM_INVDATE + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.Requestdatecus + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_DATE + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.Requestdate + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_CAUSE + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.PERFORMDESCRIPTION + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.TECH1ANLYSSTATUDESCRIPTION + '</td>';
-                                SubmithtmlPage += '<td>' + data.Getdata[i].val.CLM_USEDAY + '</td>';
+                                // SubmithtmlPage += '<td><button type="reset" id="delclmtemp" style="min-width: 50px;"  clmID="' + data.Getdata[0].val.CLM_ID + '" clmnoup="' + data[i].val.CLM_NO_SUB + '">X</button></td>';
+                                SubmithtmlPage += '<td>' + data[i].val.CLM_Ref + '</td>';
+                                SubmithtmlPage += '<td>' + data[i].val.STKCOD + "<br>" + data[i].val.STKDES + '</td>';
+                                SubmithtmlPage += '<td>' + data[i].val.CLM_UOM + '</td>';
+                                SubmithtmlPage += '<td>' + data[i].val.STKGRP + '</td>';
+                                SubmithtmlPage += '<td>' + data[i].val.CLM_REQQTY + '</td>';
+                                SubmithtmlPage += '<td>' + data[i].val.CLM_QTY_ORG + '</td>';
+                                SubmithtmlPage += '<td>' + data[i].val.CLM_QTY_PASS + '</td>';
+                                SubmithtmlPage += '<td>' + data[i].val.CLM_QTY_REJECT + '</td>';
+                                SubmithtmlPage += '<td>' + data[i].val.CUSCOD + "/<br>" + data[i].val.CUSNAM + '</td>';
+                                SubmithtmlPage += '<td>' + data[i].val.SLMCOD + "/<br>" + data[i].val.SLMNAM + '</td>';
+                                SubmithtmlPage += '<td>' + data[i].val.CLM_INVNO + "<br>" + data[i].val.CLM_INVDATE + '</td>';
+                                SubmithtmlPage += '<td>' + data[i].val.Requestdatecus + '</td>';
+                                SubmithtmlPage += '<td>' + data[i].val.CLM_DATE + '</td>';
+                                SubmithtmlPage += '<td>' + data[i].val.Requestdate + '</td>';
+                                SubmithtmlPage += '<td>' + data[i].val.CLM_CAUSE + '</td>';
+                                SubmithtmlPage += '<td>' + data[i].val.PERFORMDESCRIPTION + '</td>';
+                                SubmithtmlPage += '<td>' + data[i].val.TECH1ANLYSSTATUDESCRIPTION + '</td>';
+                                SubmithtmlPage += '<td>' + data[i].val.CLM_USEDAY + '</td>';
                                 // SubmithtmlPage += '<td>xxxxx</td>';
-                                //SubmithtmlPage += '<td>' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '</td>';
+                                //SubmithtmlPage += '<td>' + data[i].val.RCVSTATUSDESCRIPTION + '</td>';
                                 //alert(TECH2_ANLYS_STATUS)
 
                                 if (CLM_STATUS != "7") {
-                                    SubmithtmlPage += '<td>' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '</td>';
+                                    SubmithtmlPage += '<td>' + data[i].val.RCVSTATUSDESCRIPTION + '</td>';
                                     if (ADMIN_ANLYS_STATUS == "0") {
                                         SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: blue;" title="รอการตรวจรับสินค้า"></span></td>';
                                     } else if (ADMIN_ANLYS_STATUS == "1") {

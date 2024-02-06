@@ -1968,7 +1968,12 @@ namespace ClaimWap.Models
             dr.Dispose();
             command.Dispose();
             Connection.Close();
-            return Json(new { Getdata }, JsonRequestBehavior.AllowGet);
+            //return Json(new { Getdata }, JsonRequestBehavior.AllowGet);
+
+            return new JsonResult() { Data = Getdata, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
+            //var jsonResult = Json(Getdata, JsonRequestBehavior.AllowGet);
+            //jsonResult.MaxJsonLength = int.MaxValue;
+            // return jsonResult;
 
 
         }
@@ -2139,7 +2144,8 @@ namespace ClaimWap.Models
             dr.Dispose();
             command.Dispose();
             Connection.Close();
-            return Json(new { Getdata }, JsonRequestBehavior.AllowGet);
+            //return Json(new { Getdata }, JsonRequestBehavior.AllowGet);
+            return new JsonResult() { Data = Getdata, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = Int32.MaxValue };
         }
 
         public JsonResult GetClimWHdataPm(string inPM, string inDOC, string inCOM, string inSTATS, string instkgrp, string instatdate, string inenddate, string instatdatecus, string inenddatecus, string initem)

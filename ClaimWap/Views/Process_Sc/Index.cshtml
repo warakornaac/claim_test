@@ -2775,6 +2775,7 @@
                     statusclaimup = 1;
                 }
 
+                console.log("fax = " + fax);
                 if (fax == "1") {
                     $.ajax({
                         url: '@Url.Action("GetdataInvoiceByTech", "GetdataCenter")',
@@ -2791,10 +2792,14 @@
                         type: "POST",
                         dataType: "JSON",
                         success: function (data) {
-                            console.log(data);
+                            LoadingHide();
+
+                            //console.log("Bug1 = 2794");
+                            //console.log("data.Getdata.length = " + data.Getdata.length);
                             // $("#Nospankey").text(nokey);
                             //  $("#subNospan").text(clmnoup);
                             if (data.Getdata.length > 0) {
+                                console.log("Bug2 = 2799");
                                 $("#_itemno").text(data.Getdata[0].val.STKCOD);
                                 $("#_description").text(data.Getdata[0].val.STKDES);
                                 $("#_uom").text(data.Getdata[0].val.Uom);
@@ -3409,21 +3414,23 @@
                         type: "POST",
                         dataType: "JSON",
                         success: function (result) {
-                            console.log(result.videolist)
+                            console.log("videolist = " + result.videolist)
                             if (result.videolist.length > 0) {
                                 $(".pip").remove();
-                                $("<span class=\"pip\">" +
-                                "<video controls='controls' style='width: 600px; max-width: 100%;'>" +
-                                "<source src=" + result.videolist[0].FilePath + ".mp4" + " type='video/mp4' videomode='720p' />" +
-                                " </video>" +
-                                 "<br/><span class=\"removevideo\"  remoimage=" + result.videolist[0].Name + " img=" + result.videolist[0].Name + " >Remove image</span>" +
-                                 "</span>").insertAfter("#appvideo");
-                                $(".removevideo").click(function () {
-                                    $(this).parent(".pip").remove();
-                                    $("#ststus").text("");
+                                for (var i = 0; i < result.videolist.length; i++) {
+                                    console.log("videolist i = " + i)
+                                    $("<span class=\"pip\">" +
+                                        "<video controls='controls' style='width: 600px; max-width: 100%;'>" +
+                                        "<source src=" + result.videolist[i].FilePath + ".mp4" + " type='video/mp4' videomode='720p' />" +
+                                        " </video>" +
+                                        "<br/><span class=\"removevideo\"  remoimage=" + result.videolist[i].Name + " img=" + result.videolist[i].Name + " >Remove Video</span>" +
+                                        "</span>").insertAfter("#appvideo");
+                                    $(".removevideo").click(function () {
+                                        $(this).parent(".pip").remove();
+                                        $("#ststus").text("");
 
-                                });
-
+                                    });
+                                }
                             } else {
                                 $(".pip").remove();
                                 $("#ststus").text("");
@@ -3442,6 +3449,7 @@
                         type: "POST",
                         dataType: "JSON",
                         success: function (result) {
+                            //LoadingHide();
                             $('#boximage').html("");
                             var SubmithtmlPage = "";
                             if (result.Getdata.length > 0) {

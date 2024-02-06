@@ -304,7 +304,7 @@
                 </div>
 
             </div>
-            @if (usertype == "1")
+            @if (usertype == "1" || user == "nawaporn.nga")
             {
                 <div class="row">
                     <div class="col-md-4">
@@ -384,9 +384,8 @@
                             <th>สถานะรับของเคลม/Pick mode</th>
                             @*<th>Claim<br /> supplier</th>*@
                             <th>สินค้าหลังเคลม/Status after claim</th>
-
                             @*<th>Edit</th>
-        <th>Tech staff</th>*@
+                            <th>Tech staff</th>*@
                             <th>ตรวจสอบรับสินค้า<br />Check receive</th>
                             <th>Tech1</th>
                             <th>Tech2</th>
@@ -2038,7 +2037,9 @@
                 var stkgrp = $("#_stkgrp").val();
                 var proceedtofter = $("#_proceedtofter").val();
                 var statusprint = $("#_statusprint").val();
-                if (cktyp == "1") {
+                var Userlogin = $("#_uderlogin").val();
+                if (cktyp == "1" || Userlogin == "nawaporn.nga") {
+                //if (cktyp == "1") {
                     if (status == "1" && statusrec != "1" && statusrec != "0" && statusrec != "4") {
 
                         $("#_btnprint").css("display", "block");
@@ -3511,14 +3512,11 @@
                             $('#appvideotech').html("");
                             for (var i = 0; i < result.videolist.length; i++) {
                                 SubmithtmlPage = '<video controls="controls" style="width: 600px; max-width: 100%;">';
-                                SubmithtmlPage += '<source src="' + result.videolist[0].FilePath + '.mp4" + " type="video/mp4" videomode="720p"/>';
-
+                                SubmithtmlPage += '<source src="' + result.videolist[i].FilePath + '.mp4" + " type="video/mp4" videomode="720p"/>';
                                 SubmithtmlPage += '</video>';
                                 $('#appvideotech').append(SubmithtmlPage);
                                 // HTMLbuilder = HTMLbuilder + imgHtml;
                             }
-
-
                         } else {
 
                         }

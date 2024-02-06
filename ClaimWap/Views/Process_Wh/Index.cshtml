@@ -1512,6 +1512,7 @@
                                             }
                                         });
                                     }
+                                    alert(data.UsrClmStaff);
                                     if (data.UsrClmStaff == "1") {
                                         $("#_admintec").val(userlog);
                                         $("#_nametec1").val(userlog);
@@ -3627,6 +3628,8 @@
                                 $("#textAlertWarning").text("กรุณาระบุ Doc transfer No");
                                 $("#myModalWarning").modal(); return false;
                             }
+                            alert();
+                            return false;
                             $.ajax({
                                 url: '@Url.Action("SaveProcessClaimDetailAdmin", "Process_Wh")',
                                 data: {

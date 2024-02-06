@@ -2720,7 +2720,6 @@
                     $('#qtyboxsend').val("0");
                 })
                 $("#btnok").on("click", function () {
-
                     var claimno = $("#_claimno").val();
                     var RCVBY = $("#requestby").val();
                     var data = $('#receclaim').find('tbody').find('tr').length
@@ -2772,7 +2771,6 @@
                         imgsignature = "";
                         imgsignatureman = "";
                     }
-
 
                     if (req == "2") {
                         if (qtybox == "0") {
@@ -3046,12 +3044,8 @@
                 });
 
                 //APS//
-
-
                 //$('#fileInput').on("change", previewImages);
-
-
-
+                //action ตอนเลือกรูป เช็คขนานไฟล์
                 var formdata = new FormData();
                 var dataimage = [];
                 $("#fileInput").on("change", function () {
@@ -3066,7 +3060,6 @@
 
                         var flagImgFail = 0;
                         var imageFailArr = 0;
-
 
                         var imageSizeArr = 0;
                         var imageSizeOver = 0;
@@ -3125,7 +3118,7 @@
                             formdata.append(sfilename, fileInput.files[i]);
                             var markup = "<tr id='" + srandomid + "' data-name='" + sfilename + "' data-check='" + imageSizeArr + "' data-size='" + imageSizeOver.toFixed(2) + "'> <td style=''><img src='" + src + "' style='width: 30%;' id='myImg'> <br>  <span style='font-size: 13px;font-weight: bold; text-decoration: underline;'>" + imageName + ' (' + imageSizeOver.toFixed(1) + imageType + ') </span> &nbsp;' + "</span> </td>\
                                         <td style='vertical-align: middle;'>\
-                                        <button type='button' style='float: right;' class='delimagsal' faxdel=1 id=" + srandomid + " name=" + sfilename + ">Cancel</button></td>\
+                                        <button type='button' style='float: right;' class='delimagsal' faxdel=1 id=" + srandomid + " name='" + sfilename + "'>Cancel</button></td>\
                                         </tr>"; // Binding the file name
                             $("#FilesList tbody").append(markup);
                         }
@@ -3141,9 +3134,6 @@
                         })
                     }
 
-
-
-
                     //var ItemList = {
                     //    Img: clm_no_supplier,
                     //    inCim_NoSub: clm_no_sub,
@@ -3156,6 +3146,7 @@
                     $('#fileInput').val('');
                 });
 
+
                 function IsImageLoadable(URL) {
                     var check = false;
                     var imageObj = new Image();
@@ -3166,30 +3157,6 @@
                         return check;
                     }
                 }
-
-                //async function checkImage(url) {
-                //    return new Promise(resolve => {
-                //        const image = new Image()
-                //        image.onload = () => resolve(!!image.width)
-                //        image.onerror = () => resolve(false)
-                //        image.src = url
-                //    })
-                //}
-
-                //function testImage(URL) {
-                //    var flagCheck = '99';
-                //    var tester = new Image();
-                //    tester.onload = function () {
-                //        flagCheck = '11';
-                //        return flagCheck;
-                //    };
-                //    tester.onerror = function () {
-                //        flagCheck = '99';
-                //        return flagCheck;
-                //    };
-                //    tester.src = URL;
-                //    //return flagCheck;
-                //}
 
                 $("#FilesList").on("click", "tr .delimagsal", function () {
                     var Fileid = $(this).attr("id");
@@ -3484,9 +3451,10 @@
                     LoadingHide();
                 });
                 function DeleteFile(Fileid, FileName) {
+                    console.log("Fileid = " + Fileid + " FileName = " + FileName);
                     formdata.delete(FileName)
                     $("#" + Fileid).remove();
-                    $("#" + Fileid).delete();
+                   // $("#" + Fileid).delete();
                     chkatchtbl();
                 }
                 function chkatchtbl() {
@@ -3522,7 +3490,7 @@
                             if (result != "") {
                                 alert(result);
                                 $("#FilesList tr .delimagsal").trigger("click");
-
+                               
                             }
                         },
                         error: function (err) {
@@ -3885,6 +3853,9 @@
 
                                         var BatchCode = $("#_batcod").val();
                                         var _cqty = $('#_hqty').val();
+                                        if (_cqty != 0 && _cqty != '' && typeof (_cqty) !== "undefined" && _cqty !== null) {
+                                            _cqty = _cqty.replace(',', '');
+                                        }
                                         var customer_claim_note = $('#customer_claim_note').val();
                                         var valfoc = $('#_foc').val();
                                         var sefoc;
@@ -3895,7 +3866,13 @@
                                         }
                                         var reminqtyold = $('#_reminqty').val();
                                         var reminqtynew = parseInt(reminqtyold) - parseInt(claimqty)
-
+                                        if (claimqty != 0 && claimqty != '' && typeof (claimqty) !== "undefined" && claimqty !== null) {
+                                            claimqty = claimqty.replace(',', '');
+                                        }
+                                        console.log("_cqty = " + _cqty);
+                                        console.log("claimqty = " + claimqty);
+                                        console.log("reminqtynew = " + reminqtynew);
+                                        //return false;
                                         $.ajax({
                                             url: '@Url.Action("SaveClimtemp", "Createclaim_Sc")',
                                             data: {
@@ -4343,8 +4320,14 @@
                         txtQty = ' Qty more than can be claimed : ';
                     }
                     var ids = $(this).val();
+                    if (ids != 0 && ids != '' && typeof (ids) !== "undefined" && ids !== null) {
+                        ids = ids.replace(',', '');
+                    }
                     // var _cqty = $('#_hqty').val();
                     var _cqty = $('#_reminqty').val();
+                    if (_cqty != 0 && _cqty != '' && typeof (_cqty) !== "undefined" && _cqty !== null) {
+                        _cqty = _cqty.replace(',', '');
+                    }
                     if (parseInt(ids) > parseInt(_cqty)) {
                         $(this).val("");
                         $("#textAlertWarningmes").empty();
