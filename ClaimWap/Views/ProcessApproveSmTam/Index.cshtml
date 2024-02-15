@@ -582,6 +582,12 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Unit Price.:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_unitPrice"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
                                 <span> <i class="fa fa-pencil"></i> Line amount.:</span>
                                 <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoicelineamt"></span>
                             </div>
@@ -593,15 +599,20 @@
                                 <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoicelinedis"></span>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <span> <i class="fa fa-pencil"></i> Line discount Amount:</span>
                                 <span style="color: blue;text-decoration: underline;font-weight: bold" id="_invoicelinedisamt"></span>
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-md-4">
                             <div class="form-group">
-
+                            </div>
+                        </div>  
+                        <div class="col-md-4">
+                            <div class="form-group">
                             </div>
                         </div>
                     </div>
@@ -2281,6 +2292,7 @@
                 $("#_invoiceno").text("");
                 $("#_psdate").text("");
                 $("#_invoiceqty").text("");
+                $("#_unitPrice").text("");
                 $("#_invoicelineamt").text("");
                 $("#_invoicelinedis").text("");
                 $("#_invoicelinedisamt").text("");
@@ -2690,6 +2702,7 @@
                             $("#_invoiceno").text(data.Getdata[0].val.DOCNUM);
                             $("#_psdate").text(data.Getdata[0].val.PSTDAT);
                             $("#_invoiceqty").text(addCommas(data.Getdata[0].val.Qty));
+                            $("#_unitPrice").text(addCommas(data.Getdata[0].val.Price));
                             $("#_invoicelineamt").text(addCommas(parseFloat(data.Getdata[0].val.Amt).toFixed(2)));
                             $("#_invoicelinedis").text(addCommas(parseFloat(data.Getdata[0].val.DiscountPer).toFixed(2)));
                             $("#_invoicelinedisamt").text(addCommas(parseFloat(data.Getdata[0].val.DiscountAmt).toFixed(2)));
@@ -3729,6 +3742,7 @@
                 $("#_invoiceno").text("");
                 $("#_psdate").text("");
                 $("#_invoiceqty").text("");
+                $("#_unitPrice").text("");
                 $("#_invoicelineamt").text("");
                 $("#_invoicelinedis").text("");
                 $("#_invoicelinedisamt").text("");
