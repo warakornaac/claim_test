@@ -164,6 +164,7 @@
     <Compile Include="Controllers\ProcessApproveController.cs" />
     <Compile Include="Controllers\ProcessApproveGmTamController.cs" />
     <Compile Include="Controllers\ProcessApproveRTController.cs" />
+    <Compile Include="Controllers\ProcessApproveSalesreturnMdController.cs" />
     <Compile Include="Controllers\ProcessApproveSmSupController.cs" />
     <Compile Include="Controllers\ProcessApproveSmTamController.cs" />
     <Compile Include="Controllers\ProcessApproveWHController.cs" />
@@ -2075,6 +2076,7 @@
     <Content Include="vendor\jquery\jquery.min.js" />
     <Content Include="vendor\popper\popper.js" />
     <Content Include="vendor\popper\popper.min.js" />
+    <Content Include="Views\ProcessApproveSalesreturnMd\index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2528,6 +2530,7 @@
     <Content Include="Views\Account\LogIn.cshtml" />
     <Content Include="Views\ProcessApproveGmTam\Index.cshtml" />
     <Content Include="Views\ProcessApprovSM\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutindexRTMD.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

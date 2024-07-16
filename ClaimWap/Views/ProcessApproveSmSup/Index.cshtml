@@ -466,6 +466,7 @@
                             <th style="text-align:center">สถานะ<br />รับสินค้า</th>
                             <th>Sales<br />Manager</th>
                             <th>PM</th>
+                            <th>Management</th>
                             <th>Admin</th>
                             <th>CS</th>
                         </tr>
@@ -963,7 +964,6 @@
                     //  var CUSCODt = $("#CUSCOD option:selected").text();
                 }
             });
-
             $.ajax({
                 url: '@Url.Action("GetdateslmapproveSalesreturn", "GetdataCenter")',
                 data: {
@@ -975,10 +975,12 @@
                 success: function (data) {
                     console.log(data)
                     var _tpy = $("#_udertype").val();
+                    //alert(_tpy);
                     var select = $("#slmcod");
 
                     select.children().remove();
                     if (_tpy == "4") {
+                        alert(Userlogin);
                         select.append($("<option>").val("").text("เลือก Sales Man ALL"));
                         $(data).each(function (index, item) {
                             select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
@@ -1364,7 +1366,7 @@
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.STMP_CAUSE + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.PERFORMDESCRIPTION + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '</td>';
-                                if (stascenter != "6") {
+                                if (stascenter != "7") { //ไม่ยกเลิก
                                     if (stasmsup == "0") {
                                         SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
                                     } else if (stasmsup != "0") {
@@ -1373,8 +1375,9 @@
 
                                     SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
                                     SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
+                                    SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
                                     SubmithtmlPage += '<td></td>';
-                                } else if (stascenter == "6") {
+                                } else if (stascenter == "7") { //ยกเลิก
                                     if (stasmsup == "2") {
                                         SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"></span></td>';
                                     } else if (stasmsup == "1") {
@@ -1382,6 +1385,7 @@
                                     }
 
                                     //SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"></span></td>';
+                                    SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"></span></td>';
                                     SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"></span></td>';
                                     SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"></span></td>';
                                     SubmithtmlPage += '<td></td>';
@@ -1434,6 +1438,8 @@
 
                             for (var i = 0; i < data.Getdata.length; i++) {
                                 var stasmsup = data.Getdata[i].val.SMSUP_APPRV_STATUS;
+                                var staspm = data.Getdata[i].val.PM_APPRV_STATUS;
+                                var stasmd = data.Getdata[i].val.MD_APPRV_STATUS;
                                 var stascenter = data.Getdata[i].val.STMP_STATUS;
 
                                 SubmithtmlPage = '<tr   fax="1" cmno="' + data.Getdata[i].val.STMP_ID + '"  foc="' + data.Getdata[i].val.STMP_ID_SUB + '" >';
@@ -1462,24 +1468,35 @@
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.STMP_CAUSE + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.PERFORMDESCRIPTION + '</td>';
                                 SubmithtmlPage += '<td>' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '</td>';
-                                if (stascenter != "6"){
+                                if (stascenter != "7") { //ไม่ยกเลิก
+                                    //sup
                                     if (stasmsup == "0") {
                                         SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
                                     } else if (stasmsup != "0") {
                                         SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
                                     }
-
+                                    //pm
+                                    if (staspm == "0") {
+                                        SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
+                                    } else if (staspm == "1") {
+                                        SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
+                                    }
+                                    //md
+                                    if (stasmd == "0") {
+                                        SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
+                                    } else if (stasmd == "1") {
+                                        SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
+                                    }
                                     SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
                                     SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
                                     SubmithtmlPage += '<td></td>';
-                                } else if (stascenter == "6"){
+                                } else if (stascenter == "7") { //ยกเลิก
                                     if (stasmsup == "2") {
                                         SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"></span></td>';
                                     } else if (stasmsup == "1") {
                                         SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
                                     }
-
-                                    //SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"></span></td>';
+                                    SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"></span></td>';
                                     SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"></span></td>';
                                     SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"></span></td>';
                                     SubmithtmlPage += '<td></td>';

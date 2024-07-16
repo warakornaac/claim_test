@@ -1,8 +1,13 @@
 ﻿@{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutindexRT.cshtml";
     var user = ViewBag.UserId;
     var usertype = ViewBag.UserType;
+    if (user.ToUpper() != "PSA" && user.ToUpper() != "PPTM")
+    {
+        Layout = "~/Views/Shared/_LayoutindexRT.cshtml";
+    } else {
+        Layout = "~/Views/Shared/_LayoutindexRTMD.cshtml";
+    }
 
 }
 <html>
@@ -211,9 +216,6 @@
                             <div class="form-group">
                                 <span> <i class="fa fa-pencil"></i>SlmCod:</span>
                                 <select class="bar" id="slmcod"></select>
-
-
-
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -268,7 +270,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <span> <i class="fa fa-pencil"></i>Request start date:</span>
-                                <span><input type="date"  data-date-format="dd/mm/yyyy" id="_statdate"></span>
+                                <span><input type="date" data-date-format="dd/mm/yyyy" id="_statdate"></span>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -392,7 +394,6 @@
                     <table>
                         <thead>
                             <tr>
-
                                 <th style="width: 134px">Document No.</th>
                                 <th>Print from</th>
                                 <th>Ref No.</th>
@@ -410,9 +411,9 @@
                                 <th style="text-align:center">สถานะ<br />รับสินค้า</th>
                                 <th>สถานะ<br /> Sales Return</th>
                                 <th>ยกเลิกSales<br />Return</th>
-
                                 <th>Sales<br /> Managers</th>
                                 <th>PM</th>
+                                <th>Management</th>
                                 <th>WH <br />Admin</th>
                                 <th>CS</th>
                             </tr>
@@ -687,7 +688,7 @@
                         <div class="form-group">
                             <span> <i class="fa fa-calendar"></i> วันที่PM พิจารณา:</span>
                             <span>
-                                <input type="text" id="_pmdate" disabled/>
+                                <input type="text" id="_pmdate" disabled />
                             </span>
                         </div>
                     </div>
@@ -700,7 +701,45 @@
                     </div>
                 </div>
             </div>
+            @*md approve*@
+        <div class="card-header">
+            <i class="fa fa-table"></i> Management Approval <li id="clickme2" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
+        </div>
+            <div class="col-md-12" id="myDIV2" style="display:block">
+                <div class="row">
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-sort-down"></i>Status</span>
+                            <span>
+                                <select class="bar" id="_mdtstus" disabled></select>
+                            </span>
+                        </div>
+                    </div>
 
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span> <i class="fa fa-calendar"></i> วันที่ MD พิจารณา:</span>
+                            <span>
+                                <input type="text" id="_mddate" disabled />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                        </div>
+                    </div>
+                </div>
+                <div class="row"> </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <span><textarea class="form-control" rows="6" cols="100" id="remakemd" placeholder="หมายเหตุ" disabled></textarea></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="card-header">
                 <i class="fa fa-table"></i>Admin WH ตรวจสอบรับสินค้า: <li id="clickme1" class="fa fa-fw fa-angle-down" style="font-size:larger;font-weight:bold"></li>
             </div>
@@ -1041,7 +1080,7 @@
                                 select.append($("<option>").val(item.SLMCOD).text(item.SLMCOD + "/" + item.SLMNAM));
                             });
                             var slmcod = $("#slmcod").val();
-                            GetRtline(slmcod, "", "TAC", "", "", "ALL", "", "", "10", "", "", "99", "99", "3", "99", "", "", _tpy)
+                            GetRtline(slmcod, "", "TAC", "", "", "ALL", "", "", "10", "", "", "99", "99", "4", "99", "", "", _tpy)
                         } else if (_tpy == "11") {
                             select.append($("<option>").val("ALL").text("ALL"));
                             $(data).each(function (index, item) {
@@ -1182,12 +1221,12 @@
                         });
 
                         if (selectudertype == "10") {
-                            $("#_status").val("3");
+                            $("#_status").val("4");
                         } else if (selectudertype == "4") {
                             $("#_status").val("1");
 
                         } else if (selectudertype == "11") {
-                            $("#_status").val("4");
+                            $("#_status").val("5");
 
                         }
 
@@ -1239,6 +1278,26 @@
                     dataType: "JSON",
                     success: function (data) {
                         var select = $("#_pmtstus");
+                        select.children().remove();
+                        select.append($("<option>").val("99").text("เลือกสถานะอนุมัติ/Final judgement"));
+                        $(data).each(function (index, item) {
+                            if (item.CODE != '0' && item.CODE != '3') {
+                                select.append($("<option custyp=" + item.CODE + ">").val(item.CODE).text(item.DESCRIPTION_TH));
+                            }
+                        });
+                        //  var CUSCODt = $("#CUSCOD option:selected").text();
+                    }
+                });
+                //สถานะ MD
+                 $.ajax({
+                    url: '@Url.Action("GetdateStatusClm", "GetdataCenter")',
+                    data: {
+                        Name: 28
+                    },
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        var select = $("#_mdtstus");
                         select.children().remove();
                         select.append($("<option>").val("99").text("เลือกสถานะอนุมัติ/Final judgement"));
                         $(data).each(function (index, item) {
@@ -1381,10 +1440,11 @@
                                 for (var i = 0; i < data.Getdata.length; i++) {
                                     var stasmsup = data.Getdata[i].val.SMSUP_APPRV_STATUS;
                                     var staspm = data.Getdata[i].val.PM_APPRV_STATUS;
+                                    var stasmd = data.Getdata[i].val.MD_APPRV_STATUS;
                                     var stasadmin = data.Getdata[i].val.STMP_ADMIN;
                                     var sta = data.Getdata[i].val.STMP_STATUS;
 
-                                    if (sta != "5") {
+                                    if (sta != "6") {
                                         SubmithtmlPage = '<tr   fax="1" statuscenter="' + sta + '" cmno="' + data.Getdata[i].val.STMP_ID + '"  foc="' + data.Getdata[i].val.STMP_ID_SUB + '" >';
                                     } else {
 
@@ -1411,64 +1471,77 @@
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.PERFORMDESCRIPTION + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '</td>';
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.STMP_STATUSDES + '</td>';
-                                    if(sta != "5" ){
+                                    if(sta != "6" ){ //ไม่ยกเลิก
                                         if (ustyp != "10") {
-                                            if (sta == "1" || sta == "2") {
+                                            if (sta == "1" || sta == "2" || sta == "3") {
                                                 SubmithtmlPage += '<td>  <button type="button" id="_btndelclaim" class="btn btn-warning"  statuscenter="' + sta + '" req_no="' + data.Getdata[i].val.STMP_ID + '"  clm_no_sub="' + data.Getdata[i].val.STMP_ID_SUB + '">ยกเลิก</button></td>';
                                             } else {
                                                 SubmithtmlPage += '<td>  <button type="button" id="_btndelclaim" disabled="disabled" class="btn btn-light"  statuscenter="' + sta + '" req_no="' + data.Getdata[i].val.STMP_ID + '"  clm_no_sub="' + data.Getdata[i].val.STMP_ID_SUB + '">ยกเลิก</button></td>';
                                             }
-                                        } else if (ustyp == "10") { //adminwh//
-                                            if (sta == "3") {
+                                        } else if (ustyp == "5" || ustyp == "10") { //user:adminwh, adminwh
+                                            if (sta == "4") {
                                                 SubmithtmlPage += '<td>  <button type="button" id="_btndelclaimwh" class="btn btn-warning"  statuscenter="' + sta + '" req_no="' + data.Getdata[i].val.STMP_ID + '"  clm_no_sub="' + data.Getdata[i].val.STMP_ID_SUB + '">ยกเลิก</button></td>';
                                             } else {
                                                 SubmithtmlPage += '<td>  <button type="button" id="_btndelclaimwh" disabled="disabled" class="btn btn-light"  statuscenter="' + sta + '" req_no="' + data.Getdata[i].val.STMP_ID + '"  clm_no_sub="' + data.Getdata[i].val.STMP_ID_SUB + '">ยกเลิก</button></td>';
                                             }
                                         }
-                                        if (sta != "6"){
+
+                                        if (sta != "7") { //ผ่านอนุมัติ ไม่ยกเลิก
+                                            //sup
                                             if (stasmsup != "1"){
                                                 SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
                                             } else if (stasmsup == "1") {
                                                 SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
-                                                }
+                                            }
+                                            //pm
                                             if (staspm != "1") {
                                                 SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
                                             } else if (staspm == "1") {
                                                 SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
                                             }
+                                            //md admin รับแล้ว | สถานะรอ wh รับสินค้า
+                                            if (stasadmin == "1" || sta == "4") {
+                                                SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
+                                            } else if (stasadmin != "1") {
+                                                if (stasmd != "1") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
+                                                } else if (stasmd == "1") {
+                                                    SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
+                                                }
+                                            }
+                                            //admin
                                             if (stasadmin != "1") {
                                                 SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
                                             } else if (stasadmin == "1") {
                                                 SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
                                             }
                                             SubmithtmlPage += '<td>' + data.Getdata[i].val.CN_No + '</td>';
-                                        } else if (sta == "6") {
-                                            if (stasmsup == "1"){
-                                                if (staspm == "1") {
+                                        } else if (sta == "7") { //ยกเลิก
+                                            if (stasmsup == "1"){ //sup อนุมัติ
+                                                if (staspm == "1") { //pm อนุมัติ
                                                     SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
                                                     SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
-                                                } else if (staspm == "2") {
+                                                } else if (staspm == "2") { //pm ไม่อนุมัติ
                                                     SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
                                                     SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;" title="ไม่อนุมัติ"></span></td>';
                                                 }
-
-                                            } else if (stasmsup == "2") {
+                                            } else if (stasmsup == "2") { //sup ไม่อนุมัติ
+                                                SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;" title="ไม่อนุมัติ"></span></td>';
                                                 SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;" title="ไม่อนุมัติ"></span></td>';
                                                 SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;" title="ไม่อนุมัติ"></span></td>';
                                             }
-
+                                            SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"></span></td>';
                                             SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"></span></td>';
                                             SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"></span></td>';
                                         }
-                                    }else if(sta == "5"){
+                                    } else if(sta == "6"){ //ยกเลิก
                                         SubmithtmlPage += '<td>  <button type="button" id="_btndelclaim" disabled="disabled" class="btn btn-default"  req_no="' + data.Getdata[i].val.STMP_ID + '"  clm_no_sub="' + data.Getdata[i].val.STMP_ID_SUB + '">ยกเลิก</button></td>';
                                         SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
                                         SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
                                         SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
                                         SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
+                                        SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
                                     }
-
-                                  //  SubmithtmlPage += '</tr>';
                                     SubmithtmlPage += '</tr>';
                                     $('#fixed-table-container-2  tbody:last-child').append(SubmithtmlPage);
                                 }
@@ -1676,7 +1749,7 @@
                                     //alert("xxxx");
                                     var wi = window.open("../Report/frmRequestRT.aspx?ClmNUM=" + btoa(strin));
                                     wi.focus();
-                                    GetRtline(slmcod, "", "TAC", "", "", "ALL", "", "", "10", "", "", "99", "99", "3", "99", "", "", _tpy)
+                                    GetRtline(slmcod, "", "TAC", "", "", "ALL", "", "", "10", "", "", "99", "99", "4", "99", "", "", _tpy)
                                     //dateafterprint()
                                 }
                             }
@@ -1723,7 +1796,6 @@
                     var clm_no_sub = $(this).attr('clm_no_sub');
                     var _reasonwh = $("#reasonwh").val();
                     if (_reasonwh == "99") {
-
                         $("#textAlertWarning").empty();
                         $("#textAlertWarning").text("กรุณาเลือกเหตุผลที่ต้องการยกเลิก");
                         $("#confirm-cancal").modal('hide');
@@ -1747,7 +1819,7 @@
                                     $("#textAlertSucces").empty();
                                     $("#textAlertSucces").text("ยกเลิกรายการสำเร็จ");
                                     $("#myModalSucces").modal();
-                                    GetRtline("ALL", "", "TAC", "", "", "ALL", "", "", "10", "", "", "99", "99", "3", "99", "", "", _tpy)
+                                    GetRtline("ALL", "", "TAC", "", "", "ALL", "", "", "10", "", "", "99", "99", "5", "99", "", "", _tpy)
                                     // $("#_btnsearch").click();
                                 } else {
                                     $("#textAlertWarning").empty();
@@ -1779,7 +1851,7 @@
                                 $("#textAlertSucces").empty();
                                 $("#textAlertSucces").text("ยกเลิกรายการสำเร็จ");
                                 $("#myModalSucces").modal();
-                                GetRtline("ALL", "", "TAC", "", "", "ALL", "", "", "10", "", "", "99", "99", "3", "99", "", "", _tpy)
+                                GetRtline("ALL", "", "TAC", "", "", "ALL", "", "", "10", "", "", "99", "99", "4", "99", "", "", _tpy)
                                // $("#_btnsearch").click();
                             } else {
                                 $("#textAlertSucces").empty();
@@ -1837,6 +1909,7 @@
                     var instaspm = $(this).attr('staspm');
                     var statuscenter = $(this).attr('statuscenter');
                     var statuspm = "";
+                    var statusmd = "";
                     $('#spinnerModal').modal('show');
                   if (usetyp == "10") {
                         $.ajax({
@@ -1855,7 +1928,7 @@
                                     return false;
                                 } else {
                                     $('#spinnerModal').modal('hide');
-                                    if (statuscenter == "3") {
+                                    if (statuscenter == "4") {
                                         // modal()
                                         $('#modalconfirmProcess').modal('show');
                                     }
@@ -1899,6 +1972,7 @@
                                 $("#_produc").text(data.Getdata[0].val.PROD + '/' + data.Getdata[0].val.PRODNAM);
                                 statussup = data.Getdata[0].val.SMSUP_APPRV_STATUS;
                                 statuspm = data.Getdata[0].val.PM_APPRV_STATUS;
+                                statusmd = data.Getdata[0].val.MD_APPRV_STATUS;
                                 if (statussup == "1") {
                                     // $("#_pmtstus").val(data.Getdata[0].val.SMSUP_APPRV_STATUS)
                                     $("#_pmtstus").val("1");
@@ -1913,6 +1987,12 @@
                                     $("#_pmtstus").val(data.Getdata[0].val.PM_APPRV_STATUS);
                                     $("#_pmdate").val(data.Getdata[0].val.PM_APPRV_DATE);
                                     $("#remakepm").val(data.Getdata[0].val.PM_REMARK);
+                                }
+                                //สถานะ MD อนุมัติ
+                                if (statusmd != 0) {
+                                    $("#_mdtstus").val(data.Getdata[0].val.MD_APPRV_STATUS);
+                                    $("#_mddate").val(data.Getdata[0].val.MD_APPRV_DATE);
+                                    $("#remakemd").val(data.Getdata[0].val.MD_REMARK);
                                 }
 
                                 $.ajax({

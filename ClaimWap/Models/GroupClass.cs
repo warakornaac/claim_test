@@ -680,6 +680,10 @@ namespace ClaimWap.Models
           public string PM_APPRV_STATUS { get; set; }
           public string PM_PROCESS_STATUS { get; set; }
           public string PM_REMARK { get; set; }
+          public string MD_APPRV_DATE { get; set; }
+          public string MD_APPRV_STATUS { get; set; }
+          public string MD_PROCESS_STATUS { get; set; }
+          public string MD_REMARK { get; set; }
           public string STMP_STATUS { get; set; }
           public string STMP_STATUSDES { get; set; }
           public string STMP_ADMIN { get; set; }
@@ -689,6 +693,56 @@ namespace ClaimWap.Models
           public string ResonDes { get; set; }
           public string CN_No { get; set; }
           public string Statisallbill { get; set; }
+    }
+
+    public class SalesreturnMD
+    {
+        public string REQ_ID { get; set; }
+        public string STMP_ID { get; set; }
+        public string STMP_ID_SUB { get; set; }
+        public string STMP_COMPANY { get; set; }
+        public string STKCOD { get; set; }
+        public string STKDES { get; set; }
+        public string STKGRP { get; set; }
+        public string STMP_REQQTY { get; set; }
+        public string STMP_INVNO { get; set; }
+        public string STMP_INVDATE { get; set; }
+        public string STMP_CAUSE { get; set; }
+        public string STMP_PERFORM { get; set; }
+        public string STMP_RCVSTATUS { get; set; }
+        public string STMP_REQUESTBY { get; set; }
+        public string STMP_RCVDATE { get; set; }
+        public string REQ_DATE { get; set; }
+        public string STMP_LineAMT { get; set; }
+        public string CUSNAM { get; set; }
+        public string CUSCOD { get; set; }
+        public string SMSUP_APPRV_STATUS { get; set; }
+        public string SLMCOD { get; set; }
+        public string SLMNAM { get; set; }
+        public string PERFORMDESCRIPTION { get; set; }
+        public string RCVSTATUSDESCRIPTION { get; set; }
+        public string PM_APPRV_DATE { get; set; }
+        public string PM_APPRV_STATUS { get; set; }
+        public string PM_PROCESS_STATUS { get; set; }
+        public string PM_REMARK { get; set; }
+        public string MD_APPRV_DATE { get; set; }
+        public string MD_APPRV_STATUS { get; set; }
+        public string MD_PROCESS_STATUS { get; set; }
+        public string MD_REMARK { get; set; }
+        public string STMP_STATUS { get; set; }
+        public string STMP_STATUSDES { get; set; }
+        public string STMP_ADMIN { get; set; }
+        public string STMP_ADMIN_REQQTY { get; set; }
+        public string STMP_ADMIN_REQ_DATE { get; set; }
+        public string SMSUP_APPRV_DATE { get; set; }
+        public string ResonDes { get; set; }
+        public string CN_No { get; set; }
+        public string Statisallbill { get; set; }
+    }
+    public class SalesreturnsupperListDetailMD
+    {
+        public SalesreturnMD val { get; set; }
+
     }
     public class SalesreturnsupperListDetail
     {
@@ -741,6 +795,11 @@ namespace ClaimWap.Models
         public string PM_APPRV_STATUS { get; set; }
         public string PM_PROCESS_STATUS { get; set; }
         public string PM_REMARK { get; set; }
+        public string MD_NAME { get; set; }
+        public string MD_APPRV_DATE { get; set; }
+        public string MD_APPRV_STATUS { get; set; }
+        public string MD_PROCESS_STATUS { get; set; }
+        public string MD_REMARK { get; set; }
         public string STMP_STATUS { get; set; }
         public string STMP_STATUS_CENTER { get; set; }
         public string Remake_Admin { get; set; }

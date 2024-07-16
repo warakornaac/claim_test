@@ -420,7 +420,7 @@
                             STMP_STATUS = data.Getdata[i].val.STMP_STATUS_CENTER;
                            // STMP_STATUS_PM=  data.Getdata[i].val.STMP_STATUS_CENTER;
                             SubmithtmlPage += '<tr>';
-                            if (STMP_STATUS == "3") {
+                            if (STMP_STATUS == "4") { //wh รับเรียบร้อย
                                 SubmithtmlPage += '<td ><div class="rownoid">' + data.Getdata[i].val.STMP_ID_SUB + '</div></td>';
                                 SubmithtmlPage += '<td ><div class="rowstock">' + data.Getdata[i].val.STKCOD + '</div></td>';
                                 SubmithtmlPage += '<td ><div class="rowstkdes">' + data.Getdata[i].val.STKDES + '</div></td>';
@@ -442,8 +442,6 @@
                             SubmithtmlPage += '</tr>';
                         }
                         $('#fixed-table-container-3  tbody:last-child').append(SubmithtmlPage);
-
-                        
                     } else {
                         waitingDialog.hide();
                         $('#myDIV').css('display', 'block');

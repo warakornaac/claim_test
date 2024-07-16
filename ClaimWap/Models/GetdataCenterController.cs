@@ -841,12 +841,22 @@ namespace ClaimWap.Models
         }
         public JsonResult GetPathImage(string inCLM_ID, string CLM_NO)
         {
-
+            string flagClaimBat = string.Empty;
+            string getClaimBat = string.Empty;
+            if (!string.IsNullOrEmpty(inCLM_ID)) { 
+                getClaimBat = inCLM_ID.Substring(0, 1);
+                if (!string.IsNullOrEmpty(getClaimBat)) {
+                    if (getClaimBat.ToUpper() == "E") {
+                        flagClaimBat = "Y";
+                    }
+                }
+            }
             var connectionString = ConfigurationManager.ConnectionStrings["CLAIM_ConnectionString"].ConnectionString;
             SqlConnection Connection = new SqlConnection(connectionString);
             List<ImageFilesListDetail> Getdata = new List<ImageFilesListDetail>();
             ImageFiles model = null;
-            // var root = @"\Warranty\ImgUpload\";
+            //var root = @"..\..\e-Warranty_test\UploadedImage\";
+            //path claim std
             var root = @"..\ImgUpload\";
             var command = new SqlCommand("P_GetPathImage", Connection);
             command.CommandType = CommandType.StoredProcedure;
@@ -862,10 +872,20 @@ namespace ClaimWap.Models
                 model.CLM_NO_SUB = dr["CLM_NO_SUB"].ToString();
                 model.IMAGE_NO = dr["IMAGE_NO"].ToString();
                 model.IMAGE_NAME = dr["IMAGE_NAME"].ToString();
-                //model.PATH = dr["PATH"].ToString();
-                //  model.PATH = Server.MapPath(@"~\ImgUpload\" + dr["IMAGE_NAME"].ToString());
-                model.PATH = Path.Combine(root, dr["IMAGE_NAME"].ToString());
+                //check path std, ewarranty
+                if (string.IsNullOrEmpty(flagClaimBat)) {
+                    model.PATH = Path.Combine(root, dr["IMAGE_NAME"].ToString());
+                } else { 
+                    model.PATH = dr["IMAGE_NAME"].ToString();
+                }
                 //model.PATH = "D:\\Projects\\work spaces\\ClaimWap\\ClaimWap\\ImgUpload\\CM18110012-GDB7224YO-CM18110012-01-01.png";
+                //ex. combile path server
+                //string serverPath = @"D:\eWarranty_Test\";
+                //string filePath = "\\UploadedImage\\155-0.png";
+                //Uri serverUri = new Uri(serverPath + filePath);
+                //string finalPath = serverUri.LocalPath;
+                //model.PATH = finalPath;
+                //model.PATH = Path.Combine(root, dr["IMAGE_NAME"].ToString());
                 Getdata.Add(new ImageFilesListDetail { val = model });
             }
             dr.Close();
@@ -2636,6 +2656,10 @@ namespace ClaimWap.Models
                 model.PM_APPRV_STATUS = dr["PM_APPRV_STATUS"].ToString();
                 model.PM_PROCESS_STATUS = dr["PM_PROCESS_STATUS"].ToString();
                 model.PM_REMARK = dr["PM_REMARK"].ToString();
+                model.MD_APPRV_DATE = dr["MD_APPRV_DATE"].ToString();
+                model.MD_APPRV_STATUS = dr["MD_APPRV_STATUS"].ToString();
+                model.MD_PROCESS_STATUS = dr["MD_PROCESS_STATUS"].ToString();
+                model.MD_REMARK = dr["MD_REMARK"].ToString();
                 model.STMP_STATUS = dr["STMP_STATUS"].ToString();
                 Getdata.Add(new SalesreturnsupperListDetail { val = model });
             }
@@ -2709,6 +2733,11 @@ namespace ClaimWap.Models
                 model.PM_APPRV_STATUS = dr["PM_APPRV_STATUS"].ToString();
                 model.PM_PROCESS_STATUS = dr["PM_PROCESS_STATUS"].ToString();
                 model.PM_REMARK = dr["PM_REMARK"].ToString();
+                model.MD_NAME = dr["MD_NAME"].ToString();
+                model.MD_APPRV_DATE = dr["MD_APPRV_DATE"].ToString();
+                model.MD_APPRV_STATUS = dr["MD_APPRV_STATUS"].ToString();
+                model.MD_PROCESS_STATUS = dr["MD_PROCESS_STATUS"].ToString();
+                model.MD_REMARK = dr["MD_REMARK"].ToString();
                 model.STMP_STATUS = dr["STMP_STATUS"].ToString();
 
                 Getdata.Add(new SalesreturnDetailList { val = model });
@@ -2757,6 +2786,72 @@ namespace ClaimWap.Models
                 model.STMP_INVNO = dr["STMP_INVNO"].ToString();
                 model.STMP_INVDATE = dr["STMP_INVDATE"].ToString();
                 model.STMP_CAUSE = dr["STMP_CAUSE"].ToString();
+                model.STMP_PERFORM = dr["STMP_PERFORM"].ToString();;
+                model.STMP_RCVSTATUS = dr["STMP_RCVSTATUS"].ToString();
+                model.STMP_REQUESTBY = dr["STMP_REQUESTBY"].ToString();
+                model.STMP_RCVDATE = dr["STMP_REQUESTDATE"].ToString();
+                model.REQ_DATE = dr["REQ_DATE"].ToString();
+                model.STMP_LineAMT = dr["STMP_LineAMT"].ToString();
+                model.CUSNAM = dr["CUSNAM"].ToString();
+                model.CUSCOD = dr["CUSCOD"].ToString();
+                model.SMSUP_APPRV_STATUS = dr["SMSUP_APPRV_STATUS"].ToString();
+                model.SLMCOD = dr["SLMCOD"].ToString();
+                model.SLMNAM = dr["SLMNAM"].ToString();
+                model.PERFORMDESCRIPTION = dr["PERFORMDESCRIPTION"].ToString();
+                model.RCVSTATUSDESCRIPTION = dr["RCVSTATUSDESCRIPTION"].ToString();
+                model.PM_APPRV_DATE = dr["PM_APPRV_DATE"].ToString();
+                model.PM_APPRV_STATUS = dr["PM_APPRV_STATUS"].ToString();
+                model.PM_PROCESS_STATUS = dr["PM_PROCESS_STATUS"].ToString();
+                model.MD_APPRV_DATE = dr["MD_APPRV_DATE"].ToString();
+                model.MD_APPRV_STATUS = dr["MD_APPRV_STATUS"].ToString();
+                model.MD_PROCESS_STATUS = dr["MD_PROCESS_STATUS"].ToString();
+                model.SMSUP_APPRV_DATE = dr["SMSUP_APPRV_DATE"].ToString();
+                model.STMP_STATUS = dr["STMP_STATUS"].ToString();
+                model.Statisallbill = dr["Statusallbill"].ToString();
+                Getdata.Add(new SalesreturnsupperListDetail { val = model });
+            }
+            dr.Close();
+            dr.Dispose();
+            command.Dispose();
+            Connection.Close();
+            return Json(new { Getdata }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetClimdataMdRT(string inPM, string inDOC, string inCOM, string inSTATS, string instkgrp, string instatdate, string inenddate, string instatdatecus, string inenddatecus, string initem, string inUserLogin)
+        {
+            string message = string.Empty;
+            SalesreturnMD model = null;
+            List<SalesreturnsupperListDetailMD> Getdata = new List<SalesreturnsupperListDetailMD>();
+            var connectionString = ConfigurationManager.ConnectionStrings["CLAIM_ConnectionString"].ConnectionString;
+            SqlConnection Connection = new SqlConnection(connectionString);
+            var command = new SqlCommand("P_Search_ProcessReturn_Md", Connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@inPM", inPM);
+            command.Parameters.AddWithValue("@inDOC", inDOC);
+            command.Parameters.AddWithValue("@inCOM", inCOM);
+            command.Parameters.AddWithValue("@inSTATS", inSTATS);
+            command.Parameters.AddWithValue("@instkgrp", instkgrp);
+            command.Parameters.AddWithValue("@instatdate", instatdate);
+            command.Parameters.AddWithValue("@inenddatecus", inenddatecus);
+            command.Parameters.AddWithValue("@instatdatecus", instatdatecus);
+            command.Parameters.AddWithValue("@inenddate", inenddate);
+            command.Parameters.AddWithValue("@initem", initem);
+            command.Parameters.AddWithValue("@inUserLogin", inUserLogin);
+            Connection.Open();
+            SqlDataReader dr = command.ExecuteReader();
+            while (dr.Read())
+            {
+                model = new SalesreturnMD();
+                model.REQ_ID = dr["REQ_ID"].ToString();
+                model.STMP_ID = dr["STMP_ID"].ToString();
+                model.STMP_ID_SUB = dr["STMP_ID_SUB"].ToString();
+                model.STMP_COMPANY = dr["STMP_COMPANY"].ToString();
+                model.STKCOD = dr["STKCOD"].ToString();
+                model.STKDES = dr["STKDES"].ToString();
+                model.STKGRP = dr["STKGRP"].ToString();
+                model.STMP_REQQTY = dr["STMP_REQQTY"].ToString();
+                model.STMP_INVNO = dr["STMP_INVNO"].ToString();
+                model.STMP_INVDATE = dr["STMP_INVDATE"].ToString();
+                model.STMP_CAUSE = dr["STMP_CAUSE"].ToString();
                 model.STMP_PERFORM = dr["STMP_PERFORM"].ToString();
                 model.STMP_RCVSTATUS = dr["STMP_RCVSTATUS"].ToString();
                 model.STMP_REQUESTBY = dr["STMP_REQUESTBY"].ToString();
@@ -2773,18 +2868,20 @@ namespace ClaimWap.Models
                 model.PM_APPRV_DATE = dr["PM_APPRV_DATE"].ToString();
                 model.PM_APPRV_STATUS = dr["PM_APPRV_STATUS"].ToString();
                 model.PM_PROCESS_STATUS = dr["PM_PROCESS_STATUS"].ToString();
+                model.MD_APPRV_DATE = dr["MD_APPRV_DATE"].ToString();
+                model.MD_APPRV_STATUS = dr["MD_APPRV_STATUS"].ToString();
+                model.MD_PROCESS_STATUS = dr["MD_PROCESS_STATUS"].ToString();
+                model.MD_REMARK = dr["MD_REMARK"].ToString();
                 model.SMSUP_APPRV_DATE = dr["SMSUP_APPRV_DATE"].ToString();
                 model.STMP_STATUS = dr["STMP_STATUS"].ToString();
                 model.Statisallbill = dr["Statusallbill"].ToString();
-                Getdata.Add(new SalesreturnsupperListDetail { val = model });
+                Getdata.Add(new SalesreturnsupperListDetailMD { val = model });
             }
             dr.Close();
             dr.Dispose();
             command.Dispose();
             Connection.Close();
             return Json(new { Getdata }, JsonRequestBehavior.AllowGet);
-
-
         }
 
         public JsonResult GetfileVideoWH(string inCLM_ID, string CLM_NO, string Im_No)
