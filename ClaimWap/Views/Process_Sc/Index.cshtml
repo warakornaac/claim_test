@@ -403,7 +403,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="row">
-                       
+
                         <div class="col-sm-12">
                             @*<span class="text-left" style="color: red;"> System resize image to 1 MB </span>*@
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
@@ -648,24 +648,24 @@
                         </div>
                     </div>
                     <div class="row">
-                         <div class="col-md-4">
-                                <div class="form-group">
-                                    <span> <i class="fa fa-pencil"></i> Request Qty:</span>
-                                    <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty"></span>
-                                </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Request Qty:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty"></span>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <span> <i class="fa fa-pencil"></i> Accept Qty:</span>
-                                    <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty_pass"></span>
-                                </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Accept Qty:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty_pass"></span>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <span> <i class="fa fa-pencil"></i> Rejecy Qty:</span>
-                                    <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty_reject"></span>
-                                </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span> <i class="fa fa-pencil"></i> Rejecy Qty:</span>
+                                <span style="color: blue;text-decoration: underline;font-weight: bold" id="_claimqty_reject"></span>
                             </div>
+                        </div>
 
                         <div class="col-md-4">
                             <div class="form-group">
@@ -828,7 +828,7 @@
                                             ชม.:<input type="time" id="_worktime" style="width: 70px;height: 31px;" />
                                         </div>
                                     </td>
-                                    <td style="background: white;">12.รหัสการผลิต Batch Code:<input type="text" id="_batcod"/></td>
+                                    <td style="background: white;">12.รหัสการผลิต Batch Code:<input type="text" id="_batcod" /></td>
                                 </tr>
                                 <tr>
                                     <td style="background: white;">13.วันที่ติดตั้ง/Installation date: <input type="date" id="_installdate" /></td>
@@ -3437,7 +3437,7 @@
                             }
                         },
                     });
-                    //  } 
+                    //  }
                     //Getimage// CMM23020008-01-R1
                     var _cktype = $("#_udertype").val();
                     $.ajax({
@@ -3458,20 +3458,59 @@
                                     resultObj = eval(result.Getdata);
                                     var str = resultObj[i].val.IMAGE_NO;
                                     var res = str.substring(0, 3);
-                                    if (res != "TEC") {
-                                        SubmithtmlPage = '<div class="col-sm-3">';
-                                        SubmithtmlPage += '<img src="' + resultObj[i].val.PATH + '"  class="img-responsive img-thumbnail" id="myImg">';
-                                        SubmithtmlPage += '</div>';
-                                        $('#boximage').append(SubmithtmlPage);
-                                    } else if (res == "TEC") {
-                                        var markup = "<tr id='" + resultObj[i].val.IMAGE_ID + "'> <td><img src='" + resultObj[i].val.PATH + "' id='myImg' style='width: 30%'></td>\
-                                          <td style='vertical-align: middle;'>\
-                                         <button type='button' style='float: right;' class='delimagsalsccess'  faxdel=2 ic=" + resultObj[i].val.IMAGE_ID + " name=" + resultObj[i].val.IMAGE_NAME + " remoimage=" + resultObj[i].val.IMAGE_ID + " img=" + resultObj[i].val.IMAGE_NAME + " >Cancel</button></td>\
-                                          </tr>";
-                                        $("#FilesList tbody").append(markup);
-                                    }
+                                    var imagePath = resultObj[i].val.PATH;
+
+
+                                    //if (res != "TEC") {
+                                    //    SubmithtmlPage = '<div class="col-sm-3">';
+                                    //    SubmithtmlPage += '<img src="' + resultObj[i].val.PATH + '"  class="img-responsive img-thumbnail" id="myImg">';
+                                    //    SubmithtmlPage += '</div>';
+                                    //    $('#boximage').append(SubmithtmlPage);
+                                    //} else if (res == "TEC") {
+                                    //    var markup = "<tr id='" + resultObj[i].val.IMAGE_ID + "'> <td><img src='" + resultObj[i].val.PATH + "' id='myImg' style='width: 30%'></td>\
+                                    //      <td style='vertical-align: middle;'>\
+                                    //     <button type='button' style='float: right;' class='delimagsalsccess'  faxdel=2 ic=" + resultObj[i].val.IMAGE_ID + " name=" + resultObj[i].val.IMAGE_NAME + " remoimage=" + resultObj[i].val.IMAGE_ID + " img=" + resultObj[i].val.IMAGE_NAME + " >Cancel</button></td>\
+                                    //      </tr>";
+                                    //    $("#FilesList tbody").append(markup);
+                                    //}
                                     //var sfilename = resultObj[i].val.IMAGE_NAME;
                                     //formdata.append(sfilename, resultObj[i]);
+                                    if (true) {
+                                        fetch(imagePath)
+                                            .then(response => response.blob())
+                                            .then(blob => heic2any({ blob, toType: "image/png" }))
+                                            .then(conversionResult => {
+                                                var url = URL.createObjectURL(conversionResult);
+
+                                                if (res != "TEC") {
+                                                    SubmithtmlPage = '<div class="col-sm-3">';
+                                                    SubmithtmlPage += '<img src="' + url + '" class="img-responsive img-thumbnail" id="myImg">';
+                                                    SubmithtmlPage += '</div>';
+                                                    $('#boximage').append(SubmithtmlPage);
+                                                } else if (res == "TEC") {
+                                                    var markup = "<tr id='" + resultObj[i].val.IMAGE_ID + "'> <td><img src='" + url + "' id='myImg' style='width: 30%'></td>\
+                                        <td style='vertical-align: middle;'>\
+                                        <button type='button' style='float: right;' class='delimagsalsccess' faxdel=2 ic=" + resultObj[i].val.IMAGE_ID + " name=" + resultObj[i].val.IMAGE_NAME + " remoimage=" + resultObj[i].val.IMAGE_ID + " img=" + resultObj[i].val.IMAGE_NAME + " >Cancel</button></td>\
+                                        </tr>";
+                                                    $("#FilesList tbody").append(markup);
+                                                }
+                                            })
+                                            .catch(error => console.error(error));
+                                    }
+                                    else {
+                                        if (res != "TEC") {
+                                            SubmithtmlPage = '<div class="col-sm-3">';
+                                            SubmithtmlPage += '<img src="' + imagePath + '" class="img-responsive img-thumbnail" id="myImg">';
+                                            SubmithtmlPage += '</div>';
+                                            $('#boximage').append(SubmithtmlPage);
+                                        } else if (res == "TEC") {
+                                            var markup = "<tr id='" + resultObj[i].val.IMAGE_ID + "'> <td><img src='" + imagePath + "' id='myImg' style='width: 30%'></td>\
+                                <td style='vertical-align: middle;'>\
+                                <button type='button' style='float: right;' class='delimagsalsccess' faxdel=2 ic=" + resultObj[i].val.IMAGE_ID + " name=" + resultObj[i].val.IMAGE_NAME + " remoimage=" + resultObj[i].val.IMAGE_ID + " img=" + resultObj[i].val.IMAGE_NAME + " >Cancel</button></td>\
+                                </tr>";
+                                            $("#FilesList tbody").append(markup);
+                                        }
+                                    }
                                 }
 
                                 chkatchtbl();
@@ -3541,7 +3580,7 @@
                     });
 
                 }
-               
+
             });
             // Get the modal
 
@@ -5156,7 +5195,7 @@
                 var qty_pass = $("#tec2_clm_qty_pass").val();      //จำนวนเคลมได้
                 var qty_reject = $("#tec2_clm_qty_reject").val();  //จำนวนเคลมไม่ได้
                 var sumQty = 0;
-                 
+
                 var favorite = [];
                 $.each($("input[name='vehicle']:checked"), function () {
                     favorite.push($(this).val());

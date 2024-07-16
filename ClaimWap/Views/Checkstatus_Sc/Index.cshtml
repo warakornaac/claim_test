@@ -385,7 +385,7 @@
                             @*<th>Claim<br /> supplier</th>*@
                             <th>สินค้าหลังเคลม/Status after claim</th>
                             @*<th>Edit</th>
-                            <th>Tech staff</th>*@
+                                <th>Tech staff</th>*@
                             <th>ตรวจสอบรับสินค้า<br />Check receive</th>
                             <th>Tech1</th>
                             <th>Tech2</th>
@@ -433,7 +433,7 @@
                             <th>สินค้าหลังเคลม/Status after claim</th>
                             <th>ยกเลิกเคลม/Claim cancel</th>
                             @*<th>Edit</th>
-        <th>Tech staff</th>*@
+                                <th>Tech staff</th>*@
                             <th>ตรวจสอบรับสินค้า<br />Check receive</th>
                             <th>Tech1</th>
                             <th>Tech2</th>
@@ -489,7 +489,7 @@
                             <th>สินค้าหลังเคลม/Status after claim</th>
                             <th>ยกเลิกเคลม/Claim cancel</th>
                             @*<th>Edit</th>
-        <th>Tech staff</th>*@
+                                <th>Tech staff</th>*@
                             <th>ตรวจสอบรับสินค้า<br />Check receive</th>
                             <th>Tech1</th>
                             <th>Tech2</th>
@@ -1123,7 +1123,7 @@
                             <div class="form-group">
                                 <span> <i class="fa fa-bars"></i> Receive Qty.:</span>
                                 <span>
-                                    <input type="text" id="tec2_clm_qty" disabled/>
+                                    <input type="text" id="tec2_clm_qty" disabled />
                                 </span>
                             </div>
                         </div>
@@ -1131,7 +1131,7 @@
                             <div class="form-group">
                                 <span> <i class="fa fa-check-square-o"></i> Accept Qty.</span>
                                 <span>
-                                    <input type="number" id="tec2_clm_qty_pass" disabled/>
+                                    <input type="number" id="tec2_clm_qty_pass" disabled />
                                 </span>
                             </div>
                         </div>
@@ -1139,7 +1139,7 @@
                             <div class="form-group">
                                 <span> <i class="fa fa-window-close-o"></i> Reject Qty.:</span>
                                 <span>
-                                    <input type="number" id="tec2_clm_qty_reject" value="0" disabled/>
+                                    <input type="number" id="tec2_clm_qty_reject" value="0" disabled />
                                 </span>
                             </div>
                         </div>
@@ -3257,7 +3257,7 @@
                         console.log(data);
                         if (data.Getdata.length > 0) {
                             //จำนวนเคลมทั้งหมด
-                            $("#tec2_clm_qty").val(data.Getdata[0].val.CLM_QTY_ORG);    
+                            $("#tec2_clm_qty").val(data.Getdata[0].val.CLM_QTY_ORG);
                             $("#tec2_clm_qty_pass").val(data.Getdata[0].val.CLM_QTY_PASS);
                             $("#tec2_clm_qty_reject").val(data.Getdata[0].val.CLM_QTY_REJECT);
                             ////Get input display ///////
@@ -3562,12 +3562,34 @@
                                 for (var i = 0; i < resultObj.length; i++) {
                                     var str = resultObj[i].val.IMAGE_NO;
                                     var res = str.substring(0, 3);
+                                    //if (res != "TEC") {
+                                    //    SubmithtmlPage = '<div class="col-sm-3">';
+                                    //    SubmithtmlPage += '<img src="' + resultObj[i].val.PATH + '"  class="img-responsive img-thumbnail" id="myImg">';
+                                    //    SubmithtmlPage += '</div>';
+                                    //    $('#boximage').append(SubmithtmlPage);
+                                    //    // HTMLbuilder = HTMLbuilder + imgHtml;
+                                    //}
                                     if (res != "TEC") {
-                                        SubmithtmlPage = '<div class="col-sm-3">';
-                                        SubmithtmlPage += '<img src="' + resultObj[i].val.PATH + '"  class="img-responsive img-thumbnail" id="myImg">';
-                                        SubmithtmlPage += '</div>';
-                                        $('#boximage').append(SubmithtmlPage);
-                                        // HTMLbuilder = HTMLbuilder + imgHtml;
+                                        var imagePath = resultObj[i].val.PATH;
+
+                                        if (true) {
+                                            fetch(imagePath)
+                                                .then(response => response.blob())
+                                                .then(blob => heic2any({ blob, toType: "image/png" }))
+                                                .then(conversionResult => {
+                                                    var url = URL.createObjectURL(conversionResult);
+                                                    SubmithtmlPage = '<div class="col-sm-3">';
+                                                    SubmithtmlPage += '<img src="' + url + '" class="img-responsive img-thumbnail" id="myImg">';
+                                                    SubmithtmlPage += '</div>';
+                                                    $('#boximage').append(SubmithtmlPage);
+                                                })
+                                                .catch(error => console.error(error));
+                                        } else {
+                                            SubmithtmlPage = '<div class="col-sm-3">';
+                                            SubmithtmlPage += '<img src="' + imagePath + '" class="img-responsive img-thumbnail" id="myImg">';
+                                            SubmithtmlPage += '</div>';
+                                            $('#boximage').append(SubmithtmlPage);
+                                        }
                                     }
                                 }
                             } else {
@@ -3603,17 +3625,40 @@
                                 for (var i = 0; i < resultObj.length; i++) {
                                     var str = resultObj[i].val.IMAGE_NO;
                                     var res = str.substring(0, 3);
-                                    if (res == "TEC") {
-                                        SubmithtmlPage = '<div class="col-sm-3">';
-                                        SubmithtmlPage += '<img src="' + resultObj[i].val.PATH + '"  class="img-responsive img-thumbnail" id="myImg">';
-                                        SubmithtmlPage += '</div>';
-                                        $('#boximagetechnic').append(SubmithtmlPage);
+                                    //if (res == "TEC") {
+                                    //    SubmithtmlPage = '<div class="col-sm-3">';
+                                    //    SubmithtmlPage += '<img src="' + resultObj[i].val.PATH + '"  class="img-responsive img-thumbnail" id="myImg">';
+                                    //    SubmithtmlPage += '</div>';
+                                    //    $('#boximagetechnic').append(SubmithtmlPage);
+                                    //}
+                                    if (res != "TEC") {
+                                        var imagePath = resultObj[i].val.PATH;
+
+                                        if (true) {
+                                            fetch(imagePath)
+                                                .then(response => response.blob())
+                                                .then(blob => heic2any({ blob, toType: "image/png" }))
+                                                .then(conversionResult => {
+                                                    var url = URL.createObjectURL(conversionResult);
+                                                    SubmithtmlPage = '<div class="col-sm-3">';
+                                                    SubmithtmlPage += '<img src="' + url + '" class="img-responsive img-thumbnail" id="myImg">';
+                                                    SubmithtmlPage += '</div>';
+                                                    $('#boximagetechnic').append(SubmithtmlPage);
+                                                })
+                                                .catch(error => console.error(error));
+                                        } else {
+                                            SubmithtmlPage = '<div class="col-sm-3">';
+                                            SubmithtmlPage += '<img src="' + imagePath + '" class="img-responsive img-thumbnail" id="myImg">';
+                                            SubmithtmlPage += '</div>';
+                                            $('#boximagetechnic').append(SubmithtmlPage);
+                                        }
                                     }
                                     // HTMLbuilder = HTMLbuilder + imgHtml;
                                 }
                             } else {
 
                                 //  $("#myModalimage").modal();
+
                             }
                         }
                     }
