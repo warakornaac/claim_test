@@ -115,6 +115,9 @@ namespace ClaimWap.Controllers
                 model.PM_APPRV_DATE = dr["PM_APPRV_DATE"].ToString();
                 model.PM_APPRV_STATUS = dr["PM_APPRV_STATUS"].ToString();
                 model.PM_PROCESS_STATUS = dr["PM_PROCESS_STATUS"].ToString();
+                model.MD_APPRV_DATE = dr["MD_APPRV_DATE"].ToString();
+                model.MD_APPRV_STATUS = dr["MD_APPRV_STATUS"].ToString();
+                model.MD_PROCESS_STATUS = dr["MD_PROCESS_STATUS"].ToString();
                 model.STMP_STATUS = dr["STMP_STATUS"].ToString();
                 model.STMP_STATUSDES = dr["STMP_STATUSDES"].ToString();
                 model.STMP_ADMIN = dr["STMP_ADMIN"].ToString();

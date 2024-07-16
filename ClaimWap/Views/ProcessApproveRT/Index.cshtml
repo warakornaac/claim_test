@@ -482,6 +482,7 @@
                             <th style="text-align:center">สถานะ<br />รับสินค้า</th>
                             <th>Sales<br /> Manager</th>
                             <th>PM</th>
+                            <th>Management</th>
                             <th>Admin</th>
                             <th>CS</th>
                         </tr>
@@ -1639,6 +1640,7 @@
                         for (var i = 0; i < data.Getdata.length; i++) {
                             var stasmsup = data.Getdata[i].val.SMSUP_APPRV_STATUS;
                             var stasmpm = data.Getdata[i].val.PM_APPRV_STATUS;
+                            var stasmd = data.Getdata[i].val.MD_APPRV_STATUS;
                             var stachrck = data.Getdata[i].val.STMP_STATUS;
 
                             SubmithtmlPage = '<tr   fax="1" cmno="' + data.Getdata[i].val.STMP_ID + '"  foc="' + data.Getdata[i].val.STMP_ID_SUB + '" >';
@@ -1671,17 +1673,17 @@
                             SubmithtmlPage += '<td>' + data.Getdata[i].val.STMP_CAUSE + '</td>';
                             SubmithtmlPage += '<td>' + data.Getdata[i].val.PERFORMDESCRIPTION + '</td>';
                             SubmithtmlPage += '<td>' + data.Getdata[i].val.RCVSTATUSDESCRIPTION + '</td>';
-                            if (stachrck != "5") {
+                            if (stachrck != "6") {//ไม่ยกเลิก
+                                //sup
                                 if (stasmsup == "0") {
                                     SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
-
                                 } else if (stasmsup == "1") {
                                     SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
-                                }
-                                else if (stasmsup == "2") {
+                                } else if (stasmsup == "2") {
                                     SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
                                 }
-                                if (stachrck != "6") {
+                                //pm
+                                if (stachrck != "7") { //ผ่านอนุมัติ
                                     if (stasmpm == "0") {
                                         SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color:#868e96;"></span></td>';
                                     } else if (stasmpm == "1") {
@@ -1689,10 +1691,10 @@
                                     } else if (stasmpm == "2") {
                                         SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
                                     }
-                                } else if (stachrck == "6") {
-
+                                } else if (stachrck == "7") { //ไม่ผ่านอนุมัติ
                                     SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
                                 }
+                                //md
                                 if (stachrck == "1") {
                                     SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
                                 } else if (stachrck == "2") {
@@ -1702,10 +1704,13 @@
                                 } else if (stachrck == "4") {
                                     SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
                                 } else if (stachrck == "5") {
-                                    SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
+                                    SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
                                 } else if (stachrck == "6") {
+                                    SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
+                                } else if (stachrck == "7") {
                                     SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;" title="ไม่อนุมัติ"></span></td>';
                                 }
+                                //admin
                                 if (stachrck == "1") {
                                     SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
                                 } else if (stachrck == "2") {
@@ -1713,23 +1718,38 @@
                                 } else if (stachrck == "3") {
                                     SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
                                 } else if (stachrck == "4") {
-                                    SubmithtmlPage += '<td></td>';
+                                    SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
                                 } else if (stachrck == "5") {
-                                    SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
+                                    SubmithtmlPage += '<td><span class="fa fa-check-circle gi-4x" style="color: #09b709;"title="อนุมัติเรียบร้อย"></span></td>';
                                 } else if (stachrck == "6") {
+                                    SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
+                                } else if (stachrck == "7") {
+                                    SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;" title="ไม่อนุมัติ"></span></td>';
+                                }
+                                //cs
+                                if (stachrck == "1") {
+                                    SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
+                                } else if (stachrck == "2") {
+                                    SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
+                                } else if (stachrck == "3") {
+                                    SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
+                                } else if (stachrck == "4") {
+                                    SubmithtmlPage += '<td><span class="fa fa-lock gi-4x" style="color: #868e96;"></span></td>';
+                                } else if (stachrck == "5") {
+                                    SubmithtmlPage += '<td></td>';
+                                } else if (stachrck == "6") {
+                                    SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
+                                } else if (stachrck == "7") {
                                     SubmithtmlPage += '<td><span class="fa fa-times-circle gi-4x" style="color: red;"title="ไม่อนุมัติ"></span></td>';
                                 }
-                            } else if (stachrck == "5") {
+                            } else if (stachrck == "6") {//ยกเลิก
+                                SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
                                 SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
                                 SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
                                 SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
                                 SubmithtmlPage += '<td><span class="fa fa-minus gi-4x" style="color: red;"></span></td>';
                             }
                             SubmithtmlPage += '</tr>';
-                            //$('table #_tbclmline  tbody:last-child').append(SubmithtmlPage);
-                            // $('#_tbclmline  tbody:last-child').append(SubmithtmlPage);
-
-
                             $('#fixed-table-container-2  tbody:last-child').append(SubmithtmlPage);
                         }
                     } else {

@@ -35,19 +35,21 @@
             <div class="row">
                 @if (usertype == "4" || usertype == "5")
                 {
-                    <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
-
-                        <a href="~/Checkstatus_Sc/index" class="after-loop-item card border-0 card-templates shadow-lg">
-                            <div class="card-body d-flex align-items-end flex-column text-right">
-                                <h4>Claim System</h4>
-                                <p class="w-75">Choose your menu to access </p>
-                                <i class="fa fa-amazon-pay"></i>
-                            </div>
-                        </a>
-                    </div>
+                    if (user.ToUpper() != "PPTM")
+                    {
+                        <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
+                            <a href="~/Checkstatus_Sc/index" class="after-loop-item card border-0 card-templates shadow-lg">
+                                <div class="card-body d-flex align-items-end flex-column text-right">
+                                    <h4>Claim System</h4>
+                                    <p class="w-75">Choose your menu to access </p>
+                                    <i class="fa fa-amazon-pay"></i>
+                                </div>
+                            </a>
+                        </div>
+                    }
                     if (company != "TAM")
                     {
-                        if (user != "PSA")
+                        if (user.ToUpper() != "PSA" && user.ToUpper() != "PPTM")
                         {
                             <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
                             </div>
@@ -60,11 +62,9 @@
                                     </div>
                                 </a>
                             </div>
-                        }
-                        else
-                        {
+                        } else {
                             <div class="col-lg-4 col-md-8 mx-auto">
-                                <a href="~/ProcessApproveSmSup/index" class="after-loop-item card border-0 card-guides shadow-lg">
+                                <a href="~/ProcessApproveSalesreturnMd/index" class="after-loop-item card border-0 card-guides shadow-lg">
                                     <div class="card-body d-flex align-items-end flex-column text-right">
                                         <h4>Sales Return</h4>
                                         <p class="w-75">Choose your menu to access</p>
@@ -100,8 +100,6 @@
                 }
                 else if (usertype == "6")
                 {
-
-
                     <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
                         <a href="~/Checkstatus_Wh/index" class="after-loop-item card border-0  card-templates shadow-lg" style="background-color: #802e82;">
                             <div class="card-body d-flex align-items-end flex-column text-right">
@@ -163,7 +161,6 @@
                     </div>
                     <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
                     </div>
-
                     <div class="col-lg-4 col-md-8 mx-auto">
                         <a href="~/CheckstatusRt/index" class="after-loop-item card border-0 card-guides shadow-lg">
                             <div class="card-body d-flex align-items-end flex-column text-right">
@@ -173,8 +170,6 @@
                             </div>
                         </a>
                     </div>
-
-
                 }
             </div>
         </div>

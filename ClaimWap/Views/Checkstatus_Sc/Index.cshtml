@@ -2477,7 +2477,9 @@
                     dataType: "JSON",
                     success: function (data) {
                         //console.log('GetClimline = ' + data.Getdata.length);
-                        waitingDialog.hide();
+                        setTimeout(function () {
+                            waitingDialog.hide();
+                        }, 2000);
                         $('#fixed-table-container-1 tbody:last-child').html("");
                         if (data.Getdata.length > 0) {
                             waitingDialog.hide();
@@ -2758,13 +2760,17 @@
                                     SubmithtmlPage += '<td>' + data.Getdata[i].val.Log_No + '</td>';
                                     SubmithtmlPage += '</tr>';
                                     $('#fixed-table-container-2  tbody:last-child').append(SubmithtmlPage);
-                                    waitingDialog.hide();
+                                    setTimeout(function () {
+                                        waitingDialog.hide();
+                                    }, 2000);
                                 }
 
                             }
 
                         } else {
-                            waitingDialog.hide(); //hide loading
+                            setTimeout(function () {
+                                waitingDialog.hide();
+                            }, 2000);
                             var _status = $("#_status :selected").text();
                             $("#textAlertWarningmes").empty();
                             $("#textAlertWarningmes").text("ไม่มีข้อมูล" + _status);
@@ -3913,7 +3919,11 @@
                             $("#textAlertSucces").empty();
                             $("#textAlertSucces").text("ยกเลิกรายการเคลมสำเร็จ");
                             $("#myModalSucces").modal();
-                            GetClimline("", company, "4", "", "", "", "", slmcod, "0", "0", "ALL")
+                            $("#myModalSucces").modal('hide');
+                            setTimeout(function () {
+                                var slmcod = $("#slmcod").val();
+                                GetClimline("", company, "1", "", "", "", "", slmcod, "0", "0", "ALL", "0", "2")
+                            }, 2000);
                             //$("#_btnsearch").click();
                         } else {
                             $("#textAlertSucces").empty();
